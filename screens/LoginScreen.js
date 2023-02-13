@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
-import { Platform, View, Text, StyleSheet, TouchableOpacity, Modal, Button, TextInput } from 'react-native';
+import { Platform, View, Text, StyleSheet, Pressable, Modal, Button, TextInput } from 'react-native';
 import Constants from 'expo-constants';
 import HomeScreen from './HomeScreen';
 
-const LoginScreen = () => {
-    return (
-        <View style={styles.container}>
-            <Text>ProTracker</Text>
-            <Button
-                title="Login"
-                onPress={() => LoginModal}
-            />
-        </View>
-    );
-};
 
 const LoginModal = () => {
     const [username, setUsername] = useState('');
@@ -53,10 +42,21 @@ const LoginModal = () => {
                 Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
         }}>
             <Modal animationType="slide" transparent={false} visible={modalVisible}>
-                <View style={styles.modalContainer}>
-                    <Text style={styles.header}>{isRegister ? 'Register' : 'Login'}</Text>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: 'white',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <Text style={{
+                        color: 'white',
+                        borderColor: 'Blue',
+                        backgroundColor: 'black'
+                    }}>{isRegister ? 'Register' : 'Login'}
+                    </Text>
                     <TextInput
-                        style={styles.input}
+                        style={{
+                        }}
                         placeholder="Username"
                         onChangeText={setUsername}
                         value={username}
@@ -69,19 +69,20 @@ const LoginModal = () => {
                         value={password}
                     />
                     {isRegister ? (
-                        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-                            <Text style={styles.buttonText}>Register</Text>
-                        </TouchableOpacity>
+                        <Pressable style={styles.button} onPress={handleRegister}>
+                            <Text style={styles.text}>Register</Text>
+                        </Pressable>
                     ) : (
-                        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                            <Text style={styles.buttonText}>Login</Text>
-                        </TouchableOpacity>
+                        <Button
+                            title="Login"
+                            onPress={handleLogin}
+                        />
                     )}
-                    <TouchableOpacity style={styles.toggleButton} onPress={toggleForm}>
+                    <Pressable style={styles.toggleButton} onPress={toggleForm}>
                         <Text style={styles.toggleButtonText}>
                             {isRegister ? 'Login' : 'Register'}
                         </Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
             </Modal>
             <Text>ProTracker</Text>
@@ -99,7 +100,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 5,
+        paddingHorizontal: 7,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: 'red',
+    },
+    text: {
+        fontWeight: 'bold',
+        color: 'white',
+    },
 });
-
 
 export default LoginModal;
