@@ -1,20 +1,10 @@
-import { StyleSheet, View } from 'react-native';
-import LoginScreen from './screens/LoginScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import Main from './screens/MainComponent';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <LoginScreen />
-    </View>
+    <NavigationContainer>
+      <Main />
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightgreen',
-    alignItems: 'center',
-    justifyContent: 'center',
-
-  },
-});
+};

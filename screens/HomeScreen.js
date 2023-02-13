@@ -1,9 +1,9 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text } from 'react-native'
 
-const AboutScreen = () => {
+const HomeScreen = () => {
     return (
         <View style={styles.container}>
-            <Text>AboutScreen</Text>
+            <Text>Products, Tracking, charts, and snapshot report</Text>
         </View>
     );
 };
@@ -11,11 +11,11 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'beige',
+        backgroundColor: 'orange',
         alignItems: 'center',
         justifyContent: 'center',
 
     },
 });
 
-export default AboutScreen;
+export default HomeScreen;
