@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
-import LoginModal from './LoginScreen';
+import LoginScreen from './LoginScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,7 +19,7 @@ const LoginNavigator = () => {
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
                 name='Login'
-                component={LoginModal}
+                component={LoginScreen}
                 options={{ title: 'Login/Register' }}
             />
         </Stack.Navigator>
