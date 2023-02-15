@@ -1,10 +1,20 @@
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import SplashScreen from './screens/components/SplashScreen';
 import Main from './screens/MainComponent';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
     <NavigationContainer>
-      <Main />
+      <Stack.Navigator initialRouteName="Splash" headerMode="none">
+        <Stack.Screen name="Splash" component={SplashScreen} />
+        <Stack.Screen name="Main" component={Main} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
+
+export default App;
