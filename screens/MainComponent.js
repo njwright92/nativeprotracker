@@ -118,11 +118,8 @@ const Main = ({ navigation }) => {
                     component={HomeNavigator}
                     options={{
                         title: 'Home',
-                        drawerIcon: ({ size }) => (
-                            <Image
-                                source={require('../assets/img/block.jpg')}
-                                style={{ width: size, height: size }}
-                            />
+                        drawerIcon: ({ name, color, size }) => (
+                            <MaterialCommunityIcons name='home' size={24} color='#fff' />
                         ),
                         ...screenOptions
                     }}
@@ -132,11 +129,8 @@ const Main = ({ navigation }) => {
                     component={LoginNavigator}
                     options={{
                         title: 'Login/Register',
-                        drawerIcon: ({ size }) => (
-                            <Image
-                                source={require('../assets/img/block.jpg')}
-                                style={{ width: size, height: size }}
-                            />
+                        drawerIcon: ({ name, size }) => (
+                            <MaterialCommunityIcons name="login" size={24} />
                         ),
                         ...screenOptions
                     }}
@@ -145,12 +139,10 @@ const Main = ({ navigation }) => {
                     name='Contact'
                     component={AboutNavigator}
                     options={{
-                        title: 'About',
-                        drawerIcon: ({ size }) => (
-                            <Image
-                                source={require('../assets/img/block.jpg')}
-                                style={{ width: size, height: size }}
-                            />
+                        title: 'Support',
+                        drawerIcon: ({ size, name }) => (
+                            <MaterialCommunityIcons name="account-multiple-outline" size={24} />
+
                         ),
                         ...screenOptions
                     }}
