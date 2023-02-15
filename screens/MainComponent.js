@@ -5,17 +5,31 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
+import { Image } from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
 const screenOptions = {
     headerTintColor: '#fff',
-    headerStyle: { backgroundColor: 'darkslategray' }
+    headerStyle: { backgroundColor: 'darkslategray' },
+    headerTitle: 'ProTracker',
+    headerTitleAlign: 'center',
+    headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
+    headerLeft: () => (
+        <Image
+            source={require('../assets/img/block.jpg')}
+            style={{ width: 30, height: 30, marginLeft: 10 }}
+        />
+    )
 };
 
 const LoginNavigator = () => {
     const Stack = createStackNavigator();
     return (
+
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
                 name='Login'
@@ -73,24 +87,48 @@ const Main = () => {
                     inactiveTintColor: 'black',
                     inactiveBackgroundColor: 'white',
                     labelStyle: {
-                        fontSize: 15,
-                        marginLeft: 5
+                        fontSize: 10,
+                        marginLeft: 2
                     }
                 }}>
                 <Drawer.Screen
                     name='Home'
                     component={HomeNavigator}
-                    options={{ title: 'Home' }}
-                />
-                <Drawer.Screen
-                    name='Contact'
-                    component={AboutNavigator}
-                    options={{ title: 'About' }}
+                    options={{
+                        title: 'Home',
+                        drawerIcon: ({ focused, color, size }) => (
+                            <Image
+                                source={require('../assets/img/block.jpg')}
+                                style={{ width: size, height: size }}
+                            />
+                        ),
+                    }}
                 />
                 <Drawer.Screen
                     name='Login'
                     component={LoginNavigator}
-                    options={{ title: 'Login/Register' }}
+                    options={{
+                        title: 'Login/Register',
+                        drawerIcon: ({ focused, color, size }) => (
+                            <Image
+                                source={require('../assets/img/block.jpg')}
+                                style={{ width: size, height: size }}
+                            />
+                        ),
+                    }}
+                />
+                <Drawer.Screen
+                    name='Contact'
+                    component={AboutNavigator}
+                    options={{
+                        title: 'About',
+                        drawerIcon: ({ focused, color, size }) => (
+                            <Image
+                                source={require('../assets/img/block.jpg')}
+                                style={{ width: size, height: size }}
+                            />
+                        ),
+                    }}
                 />
             </Drawer.Navigator>
         </View>
