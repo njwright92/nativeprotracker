@@ -10,7 +10,7 @@ const SplashScreen = ({ navigation }) => {
 
     return (
         <View style={styles.viewStyles}>
-            <Image source={require('../../assets/img/block.jpg')} style={styles.imageStyles} />
+            <Image source={require('../assets/img/block.jpg')} style={styles.imageStyles} />
             <Text style={styles.textStyles}>
                 Welcome to ProTracker
             </Text>
