@@ -1,4 +1,4 @@
-import { Platform, View } from 'react-native';
+import { Platform, View, Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -6,10 +6,12 @@ import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
 import { Image } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { withNavigation } from 'react-navigation';
 
 const Drawer = createDrawerNavigator();
 
-const screenOptions = {
+const screenOptions = ({ navigation }) => ({
     headerTintColor: '#fff',
     headerStyle: { backgroundColor: 'darkslategray' },
     headerTitle: 'ProTracker',
@@ -18,23 +20,34 @@ const screenOptions = {
         fontWeight: 'bold',
         fontSize: 18,
     },
-    headerLeft: () => (
+    headerRight: () => (
         <Image
             source={require('../assets/img/block.jpg')}
             style={{ width: 30, height: 30, marginLeft: 10 }}
         />
-    )
-};
+    ),
+    headerLeft: () => (
+        <Pressable
+            onPress={() => navigation.toggleDrawer()}
+            style={{ marginLeft: 5 }}
+        >
+            <MaterialCommunityIcons name='menu' size={24} color='#fff' />
+        </Pressable>
+    ),
+});
+
 
 const LoginNavigator = () => {
     const Stack = createStackNavigator();
     return (
-
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
                 name='Login'
                 component={LoginScreen}
-                options={{ title: 'Login/Register' }}
+                options={{
+                    title: 'Login/Register',
+                    ...screenOptions
+                }}
             />
         </Stack.Navigator>
     );
@@ -47,7 +60,10 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
-                options={{ title: 'Home' }}
+                options={{
+                    title: 'Home',
+                    ...screenOptions
+                }}
             />
         </Stack.Navigator>
     );
@@ -63,13 +79,18 @@ const AboutNavigator = () => {
             <Stack.Screen
                 name='Contact'
                 component={AboutScreen}
-                options={{ title: 'Contact Me' }}
+                options={{
+                    title: 'Contact Me',
+                    ...screenOptions
+                }}
             />
         </Stack.Navigator>
     );
 };
 
-const Main = () => {
+const HomeWithNavigation = withNavigation(props => <HomeScreen {...props} />);
+
+const Main = ({ navigation }) => {
     return (
         <View
             style={{
@@ -89,19 +110,21 @@ const Main = () => {
                     labelStyle: {
                         fontSize: 10,
                         marginLeft: 2
-                    }
-                }}>
+                    },
+                }}
+            >
                 <Drawer.Screen
                     name='Home'
                     component={HomeNavigator}
                     options={{
                         title: 'Home',
-                        drawerIcon: ({ focused, color, size }) => (
+                        drawerIcon: ({ size }) => (
                             <Image
                                 source={require('../assets/img/block.jpg')}
                                 style={{ width: size, height: size }}
                             />
                         ),
+                        ...screenOptions
                     }}
                 />
                 <Drawer.Screen
@@ -109,12 +132,13 @@ const Main = () => {
                     component={LoginNavigator}
                     options={{
                         title: 'Login/Register',
-                        drawerIcon: ({ focused, color, size }) => (
+                        drawerIcon: ({ size }) => (
                             <Image
                                 source={require('../assets/img/block.jpg')}
                                 style={{ width: size, height: size }}
                             />
                         ),
+                        ...screenOptions
                     }}
                 />
                 <Drawer.Screen
@@ -122,12 +146,13 @@ const Main = () => {
                     component={AboutNavigator}
                     options={{
                         title: 'About',
-                        drawerIcon: ({ focused, color, size }) => (
+                        drawerIcon: ({ size }) => (
                             <Image
                                 source={require('../assets/img/block.jpg')}
                                 style={{ width: size, height: size }}
                             />
                         ),
+                        ...screenOptions
                     }}
                 />
             </Drawer.Navigator>
