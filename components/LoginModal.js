@@ -24,7 +24,7 @@ const LoginModal = ({ visible, setVisible }) => {
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View style={styles.modalContainer}>
-                        <TextInput styles={styles.input}
+                        <TextInput style={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
@@ -32,7 +32,7 @@ const LoginModal = ({ visible, setVisible }) => {
 
                         />
                         {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
-                        <TextInput styles={styles.input}
+                        <TextInput style={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -57,16 +57,10 @@ const styles = StyleSheet.create({
     modalContainer: {
         backgroundColor: '#fff',
         padding: 20,
+        borderRadius: 10,
     },
     blueButton: {
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    redButton: {
-        backgroundColor: 'red',
+        backgroundColor: '#61dafb',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
@@ -77,10 +71,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     input: {
-        borderWidth: 5,
-        borderColor: '#2F4F4F',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 5,
         padding: 10,
         marginBottom: 10,
+    },
+    label: {
+        marginBottom: 5,
+    },
+    error: {
+        color: 'red',
+        marginBottom: 5,
     },
 });
 

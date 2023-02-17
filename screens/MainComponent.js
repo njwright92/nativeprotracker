@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
+import RegisterUserScreen from './RegisterUserScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -87,6 +88,23 @@ const AboutNavigator = () => {
     );
 };
 
+const RegisterNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='Register'
+                component={RegisterUserScreen}
+                options={{
+                    title: 'Register',
+                    ...screenOptions,
+                }}
+            />
+        </Stack.Navigator>
+    );
+};
+
+
 const Main = () => {
     return (
         <View
@@ -142,6 +160,17 @@ const Main = () => {
 
                         ),
                         ...screenOptions
+                    }}
+                />
+                <Drawer.Screen
+                    name='Register'
+                    component={RegisterNavigator}
+                    options={{
+                        title: 'Register',
+                        drawerIcon: () => (
+                            <MaterialCommunityIcons name='account-plus' size={24} />
+                        ),
+                        ...screenOptions,
                     }}
                 />
             </Drawer.Navigator>

@@ -27,21 +27,21 @@ const RegisterModal = ({ visible, setVisible }) => {
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View styles={styles.modalContainer}>
-                        <TextInput styles={styles.input}
+                        <TextInput style={styles.input}
                             placeholder="Name"
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
                         />
-                        {errors.name && touched.name && <Text style={{ color: 'red' }}>{errors.name}</Text>}
-                        <TextInput styles={styles.input}
+                        {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}
+                        <TextInput style={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
                         />
-                        {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
-                        <TextInput styles={styles.input}
+                        {errors.email && touched.email && <Text style={styles.errorText}>{errors.email}</Text>}
+                        <TextInput style={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -49,9 +49,9 @@ const RegisterModal = ({ visible, setVisible }) => {
                             secureTextEntry
                         />
                         {errors.password && touched.password && (
-                            <Text style={{ color: 'red' }}>{errors.password}</Text>
+                            <Text style={styles.errorText}>{errors.password}</Text>
                         )}
-                        <Pressable onPress={handleSubmit} style={styles.redButton}>
+                        <Pressable onPress={handleSubmit} style={styles.submitButton}>
                             <Text style={styles.buttonText}>Submit</Text>
                         </Pressable>
                     </View>
@@ -66,29 +66,26 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 20,
     },
-    blueButton: {
-        backgroundColor: 'blue',
-        padding: 10,
+    input: {
+        borderStyle: 'solid',
+        borderWidth: 1,
         borderRadius: 5,
-        alignItems: 'center',
-        marginTop: 20,
+        padding: 10,
+        marginBottom: 10,
     },
-    redButton: {
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+    },
+    submitButton: {
         backgroundColor: 'red',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
-        marginTop: 20,
     },
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
-    },
-    input: {
-        borderWidth: 5,
-        borderColor: '#2F4F4F',
-        padding: 10,
-        marginBottom: 10,
     },
 });
 
