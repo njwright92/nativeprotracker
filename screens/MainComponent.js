@@ -7,7 +7,6 @@ import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { withNavigation } from 'react-navigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -88,9 +87,7 @@ const AboutNavigator = () => {
     );
 };
 
-const HomeWithNavigation = withNavigation(props => <HomeScreen {...props} />);
-
-const Main = ({ navigation }) => {
+const Main = () => {
     return (
         <View
             style={{
@@ -118,8 +115,8 @@ const Main = ({ navigation }) => {
                     component={HomeNavigator}
                     options={{
                         title: 'Home',
-                        drawerIcon: ({ name, color, size }) => (
-                            <MaterialCommunityIcons name='home' size={24} color='#fff' />
+                        drawerIcon: () => (
+                            <MaterialCommunityIcons name='home' size={24} />
                         ),
                         ...screenOptions
                     }}
@@ -129,7 +126,7 @@ const Main = ({ navigation }) => {
                     component={LoginNavigator}
                     options={{
                         title: 'Login/Register',
-                        drawerIcon: ({ name, size }) => (
+                        drawerIcon: () => (
                             <MaterialCommunityIcons name="login" size={24} />
                         ),
                         ...screenOptions
@@ -140,7 +137,7 @@ const Main = ({ navigation }) => {
                     component={AboutNavigator}
                     options={{
                         title: 'Support',
-                        drawerIcon: ({ size, name }) => (
+                        drawerIcon: () => (
                             <MaterialCommunityIcons name="account-multiple-outline" size={24} />
 
                         ),
