@@ -12,7 +12,7 @@ const LoginScreen = () => {
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'darkblue',
+            backgroundColor: '#00008B',
         }}>
             <Text onPress={() => setLoginModalVisible(true)} style={styles.container}>Login</Text>
             <Text onPress={() => setRegisterModalVisible(true)} style={styles.container}>Register</Text>

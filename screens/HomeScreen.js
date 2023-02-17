@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native'
 const HomeScreen = () => {
     return (
         <View style={styles.container}>
-            <Text>Products, Tracking, charts, and snapshot report</Text>
+            <Text style={styles.text}>Products, Tracking, charts, and snapshot report</Text>
         </View>
     );
 };
@@ -11,10 +11,13 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'orange',
+        backgroundColor: '#00008B',
         alignItems: 'center',
         justifyContent: 'center',
     },
+    text: {
+        color: 'white'
+    }
 });
 
 export default HomeScreen;

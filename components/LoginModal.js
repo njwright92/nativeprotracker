@@ -24,7 +24,7 @@ const LoginModal = ({ visible, setVisible }) => {
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View style={styles.modalContainer}>
-                        <TextInput
+                        <TextInput styles={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
@@ -32,7 +32,7 @@ const LoginModal = ({ visible, setVisible }) => {
 
                         />
                         {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
-                        <TextInput
+                        <TextInput styles={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -75,6 +75,12 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
+    },
+    input: {
+        borderWidth: 5,
+        borderColor: '#2F4F4F',
+        padding: 10,
+        marginBottom: 10,
     },
 });
 

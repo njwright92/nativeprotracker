@@ -27,21 +27,21 @@ const RegisterModal = ({ visible, setVisible }) => {
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View styles={styles.modalContainer}>
-                        <TextInput
+                        <TextInput styles={styles.input}
                             placeholder="Name"
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
                         />
                         {errors.name && touched.name && <Text style={{ color: 'red' }}>{errors.name}</Text>}
-                        <TextInput
+                        <TextInput styles={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
                         />
                         {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
-                        <TextInput
+                        <TextInput styles={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -64,8 +64,6 @@ const RegisterModal = ({ visible, setVisible }) => {
 const styles = StyleSheet.create({
     modalContainer: {
         backgroundColor: '#fff',
-        borderColor: 'black',
-        border: 'solid',
         padding: 20,
     },
     blueButton: {
@@ -85,6 +83,12 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
+    },
+    input: {
+        borderWidth: 5,
+        borderColor: '#2F4F4F',
+        padding: 10,
+        marginBottom: 10,
     },
 });
 
