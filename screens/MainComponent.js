@@ -8,6 +8,7 @@ import LoginScreen from './LoginScreen';
 import RegisterUserScreen from './RegisterUserScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Drawer = createDrawerNavigator();
 
@@ -168,7 +169,7 @@ const Main = () => {
                     options={{
                         title: 'Register',
                         drawerIcon: () => (
-                            <MaterialCommunityIcons name='account-plus' size={24} />
+                            <Icon name="account-plus" size={24} />
                         ),
                         ...screenOptions,
                     }}
