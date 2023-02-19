@@ -1,7 +1,11 @@
-import { Platform, View, Pressable } from 'react-native';
+import { Platform, View, Pressable, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import {
+    createDrawerNavigator,
+    DrawerContentScrollView,
+    DrawerItemList
+} from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
@@ -19,7 +23,7 @@ const screenOptions = ({ navigation }) => ({
     headerTitleAlign: 'center',
     headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 28,
     },
     headerRight: () => (
         <Image
@@ -105,6 +109,16 @@ const RegisterNavigator = () => {
     );
 };
 
+const CustomDrawerContent = (props) => (
+    <DrawerContentScrollView {...props}>
+        <View style={styles.drawerHeader}>
+            <View style={{ flex: 2 }}>
+                <Text style={styles.drawerHeaderText}>ProTracker</Text>
+            </View>
+        </View>
+        <DrawerItemList {...props} labelStyle={{ fontWeight: 'bold' }} />
+    </DrawerContentScrollView>
+);
 
 const Main = () => {
     return (
@@ -118,6 +132,7 @@ const Main = () => {
             <Drawer.Navigator
                 initialRouteName='Home'
                 drawerStyle={{ backgroundColor: 'slategray' }}
+                drawerContent={CustomDrawerContent}
                 drawerContentOptions={{
                     activeTintColor: 'white',
                     activeBackgroundColor: 'blue',
@@ -178,5 +193,18 @@ const Main = () => {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    drawerHeader: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    drawerHeaderText: {
+        color: 'black',
+        fontSize: 30,
+        fontWeight: 'bold',
+        alignItems: 'center'
+    }
+})
 
 export default Main;
