@@ -4,15 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from './components/SplashScreen';
 import Main from './screens/MainComponent';
-import { createStore, combineReducers } from 'redux';
-import userReducer from './reducers/userReducer';
-
-const rootReducer = combineReducers({
-  user: userReducer,
-  // add other reducers here
-});
-
-const store = createStore(rootReducer);
+import store from './store';
 
 const Stack = createStackNavigator();
 
@@ -30,5 +22,3 @@ const App = () => {
 };
 
 export default App;
-
-

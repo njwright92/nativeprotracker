@@ -1,36 +1,20 @@
 import React from 'react';
-import { LineChart } from 'react-native-chart-kit';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, Pressable, ScrollView } from 'react-native';
 
-const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    datasets: [
-        {
-            data: [50, 10, 150, 80, 120, 70],
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`, // optional
-            strokeWidth: 2 // optional
-        }
-    ]
-};
-
-const chartConfig = {
-    backgroundGradientFrom: '#fff',
-    backgroundGradientTo: '#fff',
-    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-    strokeWidth: 2 // optional, default 3
-};
-
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Products, Tracking, charts, and snapshot report</Text>
-            <LineChart
-                data={data}
-                width={300}
-                height={200}
-                chartConfig={chartConfig}
-            />
-        </View>
+        <ScrollView style={styles.container}>
+            <Text style={styles.text}>Products, Tracking, Charts, and Snapshot Reports</Text>
+            <Pressable style={styles.card} onPress={() => navigation.navigate('ChartStack')}>
+                <Text style={styles.cardTitle}>Charts</Text>
+                <Text style={styles.cardDescription}>View production tracking charts</Text>
+            </Pressable>
+
+            <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
+                <Text style={styles.cardTitle}>Add Item</Text>
+                <Text style={styles.cardDescription}>Add a new item to the production tracking system</Text>
+            </Pressable>
+        </ScrollView>
     );
 };
 
@@ -38,12 +22,35 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#00008B',
-        alignItems: 'center',
-        justifyContent: 'center'
+        paddingHorizontal: 20,
+        paddingTop: 40,
     },
     text: {
-        color: 'white'
-    }
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    card: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        marginBottom: 20,
+    },
+    cardImage: {
+        width: 50,
+        height: 50,
+        marginBottom: 10,
+    },
+    cardTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+    cardDescription: {
+        fontSize: 16,
+        color: 'gray',
+    },
 });
 
 export default HomeScreen;

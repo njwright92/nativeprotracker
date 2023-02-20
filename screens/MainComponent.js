@@ -1,3 +1,4 @@
+import React from 'react';
 import { Platform, View, Pressable, StyleSheet, Text } from 'react-native';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,6 +11,8 @@ import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
 import RegisterUserScreen from './RegisterUserScreen';
+import ChartScreen from './ChartScreen';
+import AddItemScreen from './AddItemScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -41,7 +44,6 @@ const screenOptions = ({ navigation }) => ({
     ),
 });
 
-
 const LoginNavigator = () => {
     const Stack = createStackNavigator();
     return (
@@ -58,6 +60,25 @@ const LoginNavigator = () => {
     );
 };
 
+const ChartNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='Chart' component={ChartScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const AddItemNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='Add Item' component={AddItemScreen} />
+        </Stack.Navigator>
+    );
+};
+
+
 const HomeNavigator = () => {
     const Stack = createStackNavigator();
     return (
@@ -65,14 +86,24 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
+            />
+            <Stack.Screen
+                name='ChartStack'
+                component={ChartNavigator}
                 options={{
-                    title: 'Home',
-                    ...screenOptions
+                    title: 'Chart',
+                }}
+            />
+            <Stack.Screen
+                name='AddItemStack'
+                component={AddItemNavigator}
+                options={{
+                    title: 'Add Item',
                 }}
             />
         </Stack.Navigator>
     );
-};
+}
 
 const AboutNavigator = () => {
     const Stack = createStackNavigator();
@@ -116,6 +147,7 @@ const CustomDrawerContent = (props) => (
                 <Text style={styles.drawerHeaderText}>ProTracker</Text>
             </View>
         </View>
+
         <DrawerItemList {...props} labelStyle={{ fontWeight: 'bold' }} />
     </DrawerContentScrollView>
 );
@@ -167,32 +199,43 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen
+                    name='AddItem'
+                    component={AddItemNavigator}
+                    options={{
+                        title: 'Add Item',
+                        drawerIcon: () => (
+                            <MaterialCommunityIcons name="plus-circle-outline" size={24} />
+                        ),
+                        ...screenOptions
+                    }}
+                />
+                <Drawer.Screen
+                    name='Chart'
+                    component={ChartNavigator}
+                    options={{
+                        title: 'Chart',
+                        drawerIcon: () => (
+                            <MaterialCommunityIcons name="chart-areaspline" size={24} />
+                        ),
+                        ...screenOptions
+                    }}
+                />
+                <Drawer.Screen
                     name='Contact'
                     component={AboutNavigator}
                     options={{
                         title: 'Support',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name="account-multiple-outline" size={24} />
-
                         ),
                         ...screenOptions
-                    }}
-                />
-                <Drawer.Screen
-                    name='Register'
-                    component={RegisterNavigator}
-                    options={{
-                        title: 'Register',
-                        drawerIcon: () => (
-                            <Icon name="account-plus" size={24} />
-                        ),
-                        ...screenOptions,
                     }}
                 />
             </Drawer.Navigator>
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     drawerHeader: {
