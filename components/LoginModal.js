@@ -59,6 +59,17 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
     },
+    input: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 10,
+        marginBottom: 10,
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+    },
     blueButton: {
         backgroundColor: '#61dafb',
         padding: 10,
@@ -69,20 +80,6 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
-    },
-    input: {
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderRadius: 5,
-        padding: 10,
-        marginBottom: 10,
-    },
-    label: {
-        marginBottom: 5,
-    },
-    error: {
-        color: 'red',
-        marginBottom: 5,
     },
 });
 

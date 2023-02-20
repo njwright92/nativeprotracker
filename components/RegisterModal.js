@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
     modalContainer: {
         backgroundColor: '#fff',
         padding: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%'
     },
     input: {
         borderStyle: 'solid',
@@ -72,21 +75,27 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         padding: 10,
         marginBottom: 10,
+        width: '100%',
+        fontSize: 16
     },
     errorText: {
         color: 'red',
         marginBottom: 10,
+        textAlign: 'center'
     },
     submitButton: {
         backgroundColor: 'red',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
+        marginTop: 20,
+        width: '100%'
     },
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
-    },
+        fontSize: 16
+    }
 });
 
 export default RegisterModal;
