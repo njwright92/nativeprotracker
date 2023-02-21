@@ -2,12 +2,21 @@ import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../actions/items';
 
-const AddItemForm = ({ onSubmit }) => {
+const AddItemForm = () => {
+    const dispatch = useDispatch();
+
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         quantity: Yup.number().required('Quantity is required'),
     });
+
+    const onSubmit = (values) => {
+        const item = { name: values.name, quantity: parseInt(values.quantity) };
+        dispatch(addItem(item));
+    };
 
     return (
         <Formik

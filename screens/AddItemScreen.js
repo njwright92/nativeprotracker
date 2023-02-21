@@ -10,7 +10,9 @@ const AddItemScreen = () => {
 
     return (
         <View style={styles.container}>
-            <AddItemForm onAddItem={handleAddItem} />
+            <View style={styles.formContainer}>
+                <AddItemForm onAddItem={handleAddItem} />
+            </View>
         </View>
     );
 };
@@ -18,9 +20,16 @@ const AddItemScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#778899',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    formContainer: {
+        backgroundColor: '#fff',
+        padding: 20,
+        margin: 20,
+        borderRadius: 10,
+        alignSelf: 'stretch',
     },
 });
 
