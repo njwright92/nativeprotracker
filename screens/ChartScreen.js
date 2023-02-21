@@ -35,15 +35,6 @@ const monthlyData = {
     ],
 };
 
-const yearlyData = {
-    labels: ['2019', '2020', '2021', '2022'],
-    datasets: [
-        {
-            data: [500, 800, 1000, 1200],
-            color: (opacity = 1) => `rgba(128, 0, 128, ${opacity})`,
-        },
-    ],
-};
 
 const ChartScreen = () => {
     return (
@@ -55,10 +46,6 @@ const ChartScreen = () => {
             <View style={styles.card}>
                 <Text style={styles.title}>Monthly Production Tracking</Text>
                 <Chart data={monthlyData} />
-            </View>
-            <View style={styles.card}>
-                <Text style={styles.title}>Yearly Production Tracking</Text>
-                <Chart data={yearlyData} />
             </View>
         </ScrollView>
     );
