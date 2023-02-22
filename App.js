@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AddItemForm from '../components/AddItemForm';
+import ItemsList from '../components/ItemsList';
 
 const AddItemScreen = () => {
     const handleAddItem = (item) => {
@@ -13,6 +14,9 @@ const AddItemScreen = () => {
             <View style={styles.formContainer}>
                 <AddItemForm onAddItem={handleAddItem} />
             </View>
+            <View style={styles.listContainer}>
+                <ItemsList />
+            </View>
         </View>
     );
 };
@@ -20,15 +24,22 @@ const AddItemScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#778899',
+        backgroundColor: '#2F4F4F',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 20,
     },
     formContainer: {
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
+        borderColor: 'blue',
+        borderWidth: 2,
         padding: 20,
-        margin: 20,
         borderRadius: 10,
+        marginBottom: 20,
+    },
+    listContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
         alignSelf: 'stretch',
     },
 });
