@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItemAsync, updateItemAsync } from '../actions/items';
@@ -8,9 +8,9 @@ import DeleteItemForm from './DeleteItemForm';
 const ItemsList = () => {
   const items = useSelector(state => state.items);
   const dispatch = useDispatch();
-  const [editingItemId, setEditingItemId] = React.useState(null);
+  const [editingItemId, setEditingItemId] = useState(null);
 
-  const renderItem = ({ item }) => {
+  const renderItem = useMemo(() => ({ item }) => {
     if (item.id === editingItemId) {
       return (
         <UpdateItemForm
@@ -42,7 +42,7 @@ const ItemsList = () => {
         </View>
       );
     }
-  };
+  }, [editingItemId]);
 
   return (
     <View style={styles.container}>
@@ -60,7 +60,7 @@ const ItemsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFA500', // Change background color to burnt safety orange
     alignItems: 'stretch',
     justifyContent: 'center',
     paddingHorizontal: 20,

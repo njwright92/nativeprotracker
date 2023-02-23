@@ -5,11 +5,13 @@ import { updateItemAsync } from '../actions/items';
 
 const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const dispatch = useDispatch();
-    const item = listItems.find((item) => item.id === itemId);
-    const [quantity, setQuantity] = useState(item.quantity);
+    const item = listItems ? listItems.find((item) => item.id === itemId) : null;
+    const [quantity, setQuantity] = useState(item ? item.quantity : 0);
 
     const handleUpdateItem = () => {
-        dispatch(updateItemAsync({ id: item.id, quantity }));
+        if (item) {
+            dispatch(updateItemAsync({ id: item.id, quantity }));
+        }
         onCancel();
     };
 
