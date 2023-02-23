@@ -1,23 +1,44 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Provider } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import store from '../store';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
+import { addItemAsync, updateItem, deleteItem } from '../actions/items';
 
 const AddItemScreen = () => {
+    const dispatch = useDispatch();
+
     const handleAddItem = (item) => {
-        // handle adding new item here
-        console.log('New item:', item);
+        // dispatch an action to add the new item to the store
+        dispatch(addItemAsync(item));
+    };
+
+    const handleUpdateItem = (id, quantity) => {
+        // dispatch an action to update the item in the store
+        dispatch(updateItem(id, quantity));
+    };
+
+    const handleDeleteItem = (id) => {
+        // dispatch an action to delete the item from the store
+        dispatch(deleteItem(id));
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <AddItemForm onAddItem={handleAddItem} />
+        <Provider store={store}>
+            <View style={styles.container}>
+                <View style={styles.formContainer}>
+                    <AddItemForm onAddItem={handleAddItem} />
+                </View>
+                <View style={styles.listContainer}>
+                    <ItemsList
+                        onUpdateItem={handleUpdateItem}
+                        onDeleteItem={handleDeleteItem}
+                    />
+                </View>
             </View>
-            <View style={styles.listContainer}>
-                <ItemsList />
-            </View>
-        </View>
+        </Provider>
     );
 };
 
