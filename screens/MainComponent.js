@@ -208,7 +208,7 @@ const Main = () => {
                     name='Contact'
                     component={AboutNavigator}
                     options={{
-                        title: 'Support',
+                        title: 'About & Support',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name="account-multiple-outline" size={24} />
                         ),
