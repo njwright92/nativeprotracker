@@ -52,7 +52,7 @@ const RegisterModal = ({ visible, setVisible }) => {
                             <Text style={styles.errorText}>{errors.password}</Text>
                         )}
                         <Pressable onPress={handleSubmit} style={styles.submitButton}>
-                            <Text style={styles.buttonText}>Submit</Text>
+                            <Text style={styles.buttonText}>Register</Text>
                         </Pressable>
                     </View>
                 )}
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%'
+        height: '100%',
     },
     input: {
         borderStyle: 'solid',

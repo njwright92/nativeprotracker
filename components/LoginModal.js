@@ -44,7 +44,7 @@ const LoginModal = ({ visible, setVisible }) => {
                             <Text style={{ color: 'red' }}>{errors.password}</Text>
                         )}
                         <Pressable onPress={handleSubmit} style={styles.blueButton}>
-                            <Text style={styles.buttonText}>Submit</Text>
+                            <Text style={styles.buttonText}>Login</Text>
                         </Pressable>
                     </View>
                 )}
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 20,
         borderRadius: 10,
+        borderColor: 'black',
+        borderWidth: 1,
     },
     input: {
         borderStyle: 'solid',

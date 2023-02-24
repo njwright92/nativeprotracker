@@ -124,22 +124,6 @@ const AboutNavigator = () => {
     );
 };
 
-const RegisterNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator screenOptions={screenOptions}>
-            <Stack.Screen
-                name='Register'
-                component={RegisterUserScreen}
-                options={{
-                    title: 'Register',
-                    ...screenOptions,
-                }}
-            />
-        </Stack.Navigator>
-    );
-};
-
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>

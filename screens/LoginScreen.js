@@ -24,7 +24,7 @@ const LoginScreen = () => {
 
     return (
         <TouchableWithoutFeedback onPress={hideModals}>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00008B' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFA500' }}>
                 <Text onPress={toggleLoginModal} style={styles.container}>Login</Text>
                 <Text onPress={toggleRegisterModal} style={styles.container}>Register</Text>
                 <LoginModal visible={isLoginModalVisible} setVisible={setLoginModalVisible} />
@@ -37,7 +37,8 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     container: {
         fontSize: 30,
-        color: 'white'
+        color: 'black'
+
     }
 });
 

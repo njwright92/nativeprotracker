@@ -54,7 +54,7 @@ const ChartScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F0F8FF',
+        backgroundColor: '#FFA500',
         padding: 10,
     },
     card: {
