@@ -4,18 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addItem } from '../actions/items';
-
-const addItemAsync = createAsyncThunk('items/addItemAsync', async (item) => {
-    // You can add your API call or any async operation here
-    const response = await fetch('https://your-api.com/items', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(item),
-    });
-    const data = await response.json();
-    return data;
-});
+import { addItem } from '../actions/AddItem';
 
 const AddItemForm = () => {
     const dispatch = useDispatch();

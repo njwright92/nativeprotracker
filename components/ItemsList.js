@@ -1,21 +1,42 @@
 import React, { useMemo, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteItemAsync, updateItemAsync } from '../actions/items';
+import { deleteItem } from '../actions/DeleteItem'
+import { updateItem } from '../actions/UpdateItem'
+import { addItem } from '../actions/AddItem';
 import UpdateItemForm from './UpdateItemForm';
 import DeleteItemForm from './DeleteItemForm';
+
 
 const ItemsList = () => {
   const items = useSelector(state => state.items);
   const dispatch = useDispatch();
   const [editingItemId, setEditingItemId] = useState(null);
 
+  const handleAddItem = (name, quantity) => {
+    dispatch(addItem({ name, quantity }));
+  };
+
+  const handleUpdateItem = (id, name, quantity) => {
+    const updatedItem = { id, name, quantity };
+    const updatedItems = items.map(item => item.id === id ? updatedItem : item);
+    dispatch(updateItem(updatedItems));
+    setEditingItemId(null);
+  };
+
+
+  const handleDeleteItem = (id) => {
+    dispatch(deleteItem(id));
+  };
+
   const renderItem = useMemo(() => ({ item }) => {
     if (item.id === editingItemId) {
       return (
         <UpdateItemForm
           itemId={item.id}
+          listItems={items} // Pass the items array here
           onCancel={() => setEditingItemId(null)}
+          onSubmit={handleUpdateItem}
         />
       );
     } else {
@@ -24,7 +45,7 @@ const ItemsList = () => {
           <Text style={styles.itemName}>{item.name}</Text>
           <Text style={styles.itemQuantity}>{item.quantity}</Text>
           <View style={{ flexDirection: 'row' }}>
-            <DeleteItemForm id={item.id} />
+            <DeleteItemForm id={item.id} onDelete={handleDeleteItem} />
             <Pressable
               style={({ pressed }) => [
                 {
@@ -43,6 +64,7 @@ const ItemsList = () => {
       );
     }
   }, [editingItemId]);
+
 
   return (
     <View style={styles.container}>

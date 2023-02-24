@@ -5,7 +5,9 @@ import { useDispatch } from 'react-redux';
 import store from '../store';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
-import { addItemAsync, updateItem, deleteItem } from '../actions/items';
+import { addItemAsync } from '../actions/AddItem';
+import { updateItemAsync } from '../actions/UpdateItem';
+import { deleteItemAsync } from '../actions/DeleteItem';
 
 const AddItemScreen = () => {
     const dispatch = useDispatch();
@@ -17,12 +19,12 @@ const AddItemScreen = () => {
 
     const handleUpdateItem = (id, quantity) => {
         // dispatch an action to update the item in the store
-        dispatch(updateItem(id, quantity));
+        dispatch(updateItemAsync(id, quantity));
     };
 
     const handleDeleteItem = (id) => {
         // dispatch an action to delete the item from the store
-        dispatch(deleteItem(id));
+        dispatch(deleteItemAsync(id));
     };
 
     return (
@@ -45,7 +47,7 @@ const AddItemScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2F4F4F',
+        backgroundColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,

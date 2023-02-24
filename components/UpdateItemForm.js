@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { updateItemAsync } from '../actions/items';
+import { updateItem } from '../actions/UpdateItem';
 
 const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const dispatch = useDispatch();
     const item = listItems ? listItems.find((item) => item.id === itemId) : null;
-    const [quantity, setQuantity] = useState(item ? item.quantity : 0);
+    const [quantity, setQuantity] = useState(item ? item.quantity.toString() : '');
 
     const handleUpdateItem = () => {
         if (item) {
-            dispatch(updateItemAsync({ id: item.id, quantity }));
+            dispatch(updateItem({
+                id: itemId,
+                name: item.name,
+                quantity: parseInt(quantity),
+            }));
         }
         onCancel();
     };
@@ -19,9 +23,10 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
         <View style={styles.container}>
             <Text style={styles.title}>Update Item</Text>
             <View style={styles.inputContainer}>
+                <Text style={styles.label}>Quantity:</Text>
                 <TextInput
                     style={styles.input}
-                    value={quantity.toString()}
+                    value={quantity}
                     onChangeText={setQuantity}
                     keyboardType="numeric"
                 />
@@ -53,6 +58,10 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginBottom: 10,
+    },
+    label: {
+        fontWeight: 'bold',
+        marginBottom: 5,
     },
     input: {
         height: 40,
