@@ -15,9 +15,19 @@ const AddItemForm = () => {
     });
 
     const onSubmit = async (values) => {
-        const item = { name: values.name, quantity: parseInt(values.quantity) };
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString('en-US', {
+            month: '2-digit',
+            day: '2-digit',
+            year: 'numeric',
+        });
+        const item = {
+            name: `${values.name} (${formattedDate})`,
+            quantity: parseInt(values.quantity),
+        };
         await dispatch(addItem(item)).unwrap();
     };
+    
 
     return (
         <Formik

@@ -10,14 +10,22 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
 
     const handleUpdateItem = () => {
         if (item) {
-            dispatch(updateItem({
-                id: itemId,
-                name: item.name,
-                quantity: parseInt(quantity),
-            }));
+            const now = new Date();
+            dispatch(
+                updateItem({
+                    id: itemId,
+                    name: `${item.name} (${now.toLocaleDateString('en-US', {
+                        month: '2-digit',
+                        day: '2-digit',
+                        year: 'numeric',
+                    })})`,
+                    quantity: parseInt(quantity),
+                })
+            );
         }
         onCancel();
     };
+
 
     return (
         <View style={styles.container}>
