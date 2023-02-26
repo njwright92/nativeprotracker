@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addItem } from '../actions/AddItem';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const AddItemForm = () => {
     const dispatch = useDispatch();
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [date, setDate] = useState(new Date());
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
@@ -15,8 +18,7 @@ const AddItemForm = () => {
     });
 
     const onSubmit = async (values) => {
-        const now = new Date();
-        const formattedDate = now.toLocaleDateString('en-US', {
+        const formattedDate = date.toLocaleDateString('en-US', {
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
@@ -27,7 +29,12 @@ const AddItemForm = () => {
         };
         await dispatch(addItem(item)).unwrap();
     };
-    
+
+    const onDateChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShowDatePicker(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
 
     return (
         <Formik
@@ -60,6 +67,20 @@ const AddItemForm = () => {
                     />
                     {errors.quantity && touched.quantity && (
                         <Text>{errors.quantity}</Text>
+                    )}
+                    <Button
+                        onPress={() => setShowDatePicker(true)}
+                        title={date.toLocaleDateString('en-US')}
+                        color='#5637DD'
+                        accessibilityLabel='Tap me to select a date'
+                    />
+                    {showDatePicker && (
+                        <DateTimePicker
+                            value={date}
+                            mode='date'
+                            display='default'
+                            onChange={onDateChange}
+                        />
                     )}
                     <Button onPress={handleSubmit} title="Submit" />
                 </View>
