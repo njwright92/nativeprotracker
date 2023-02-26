@@ -31,14 +31,13 @@ License
 This app is licensed under the MIT License.
 
 Credits
-This app was built by [Your Name Here] using the following libraries:
+This app was built by [Nate Wright] using the following libraries:
 
 React Native
 Expo
 Redux
 Formik
 Yup
-Axios
 React Navigation
 React Native Paper
-If you have any questions or feedback about this app, please contact [Your Name Here] at [Your Email Here].
+If you have any questions or feedback about this app, please contact [Me, Nate] at [njwright92@gmail.com].
