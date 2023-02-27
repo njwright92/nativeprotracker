@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import { StyleSheet, View, Text, FlatList, Pressable } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem } from '../actions/DeleteItem'
 import { updateItem } from '../actions/UpdateItem'
 import { addItem } from '../actions/AddItem';
 import UpdateItemForm from './UpdateItemForm';
-import DeleteItemForm from './DeleteItemForm';
-
+import { Swipeable } from 'react-native-gesture-handler';
 
 const ItemsList = () => {
   const items = useSelector(state => state.items);
@@ -24,9 +23,29 @@ const ItemsList = () => {
     setEditingItemId(null);
   };
 
-
   const handleDeleteItem = (id) => {
     dispatch(deleteItem(id));
+  };
+
+  const renderRightActions = (progress, dragX, item) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100],
+      outputRange: [0, -20, -100],
+    });
+
+    const onPressDelete = () => {
+      handleDeleteItem(item.id);
+    };
+
+    return (
+      <View style={styles.rightActions}>
+        <View style={styles.deleteContainer}>
+          <TouchableOpacity style={styles.deleteButton} onPress={onPressDelete}>
+            <Text style={styles.deleteText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   };
 
   const renderItem = useMemo(() => ({ item }) => {
@@ -41,11 +60,10 @@ const ItemsList = () => {
       );
     } else {
       return (
-        <View style={styles.item}>
-          <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemQuantity}>{item.quantity}</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <DeleteItemForm id={item.id} onDelete={handleDeleteItem} />
+        <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item)}>
+          <View style={styles.item}>
+            <Text style={styles.itemName}>{item.name}</Text>
+            <Text style={styles.itemQuantity}>{item.quantity}</Text>
             <Pressable
               style={({ pressed }) => [
                 {
@@ -60,11 +78,10 @@ const ItemsList = () => {
               <Text style={styles.buttonText}>Update</Text>
             </Pressable>
           </View>
-        </View>
+        </Swipeable>
       );
     }
   }, [editingItemId]);
-
 
   return (
     <View style={styles.container}>
@@ -116,6 +133,25 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
     marginTop: 50,
+  },
+  deleteContainer: {
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: '100%',
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: '100%',
+  },
+  deleteText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
