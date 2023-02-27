@@ -1,6 +1,5 @@
 import { ADD_ITEM } from './types';
 import { v4 as uuidv4 } from 'uuid';
-import { addItemAsync } from '../components/AddItemForm';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const formatDate = (date) => {
@@ -11,13 +10,21 @@ const formatDate = (date) => {
     });
 };
 
+const addItemAsync = createAsyncThunk('items/addItemAsync', async (item) => {
+    // Simulating an asynchronous API call with setTimeout
+    return new Promise((resolve) =>
+        setTimeout(() => {
+            resolve(item);
+        }, 1000)
+    );
+});
 
 export const addItem = (item) => {
     return async (dispatch) => {
         const newItem = {
             id: uuidv4(),
             ...item,
-            date: formatDate(new Date()) // assuming formatDate is a function that formats the current date
+            date: formatDate(new Date()),
         };
         dispatch({
             type: ADD_ITEM,

@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, FlatList, Pressable, TouchableOpacity } from 'r
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem } from '../actions/DeleteItem'
 import { updateItem } from '../actions/UpdateItem'
-import { addItem } from '../actions/AddItem';
 import UpdateItemForm from './UpdateItemForm';
 import { Swipeable } from 'react-native-gesture-handler';
 
@@ -11,10 +10,6 @@ const ItemsList = () => {
   const items = useSelector(state => state.items);
   const dispatch = useDispatch();
   const [editingItemId, setEditingItemId] = useState(null);
-
-  const handleAddItem = (name, quantity) => {
-    dispatch(addItem({ name, quantity }));
-  };
 
   const handleUpdateItem = (id, name, quantity) => {
     const updatedItem = { id, name, quantity };

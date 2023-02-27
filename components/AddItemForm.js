@@ -3,7 +3,6 @@ import { View, Text, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addItem } from '../actions/AddItem';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -17,12 +16,17 @@ const AddItemForm = () => {
         quantity: Yup.number().required('Quantity is required'),
     });
 
-    const onSubmit = async (values) => {
-        const formattedDate = date.toLocaleDateString('en-US', {
+    const formatDate = (date) => {
+        return date.toLocaleDateString('en-US', {
             month: '2-digit',
             day: '2-digit',
             year: 'numeric',
         });
+    };
+
+
+    const onSubmit = async (values) => {
+        const formattedDate = formatDate(date);
         const item = {
             name: `${values.name} (${formattedDate})`,
             quantity: parseInt(values.quantity),
