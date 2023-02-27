@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { View, Text, Pressable } from 'react-native';
 import { deleteItem } from '../actions/DeleteItem';
 
-const DeleteItem = ({ id }) => {
+const DeleteItemForm = ({ id }) => {
     const dispatch = useDispatch();
 
     const handleDelete = () => {
@@ -20,13 +20,4 @@ const DeleteItem = ({ id }) => {
     );
 };
 
-export const deleteItemAsync = (id) => {
-    return new Promise((resolve) => {
-        // Simulate a delay of 1 second
-        setTimeout(() => {
-            resolve(id);
-        }, 1000);
-    });
-};
-
-export default DeleteItem;
+export default DeleteItemForm;

@@ -1,5 +1,13 @@
 import { DELETE_ITEM } from './types';
-import { deleteItemAsync } from '../components/DeleteItemForm';
+
+export const deleteItemAsync = (id) => {
+    return new Promise((resolve) => {
+        // Simulate a delay of 1 second
+        setTimeout(() => {
+            resolve(id);
+        }, 1000);
+    });
+};
 
 export const deleteItem = (id) => {
     return async (dispatch) => {
