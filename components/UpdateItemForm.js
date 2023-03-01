@@ -3,6 +3,10 @@ import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateItem } from '../actions/UpdateItem';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import moment from 'moment';
+
 
 const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const dispatch = useDispatch();
@@ -12,17 +16,20 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     console.log('UDPATE INIT', item)
     const [date, setDate] = useState(item.date);
 
+    const validationSchema = Yup.object().shape({
+        quantity: Yup.number().required('Quantity is required'),
+    });
 
     const handleUpdateItem = () => {
         if (item) {
-            console.log('handleUpdateItem', date)
+            console.log('handleUpdateItem', date);
             dispatch(
                 updateItem({
                     id: itemId,
-                    name: `${item.name.split('(')[0]}`, // (${formattedDate})
-                    date: date,
+                    name: `${item.name.split('(')[0]}`,
+                    date: moment(date).toDate(),
                     quantity: parseInt(quantity),
-                })
+                }),
             );
         }
         onCancel();
@@ -35,46 +42,54 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Update Item</Text>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Quantity:</Text>
-                <TextInput
-                    style={styles.input}
-                    value={quantity}
-                    onChangeText={setQuantity}
-                    keyboardType="numeric"
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Date:</Text>
-                <Pressable onPress={() => setShowDatePicker(true)}>
-                    <Text style={styles.date}>
-                        {date.toLocaleDateString('en-US', {
-                            month: '2-digit',
-                            day: '2-digit',
-                            year: 'numeric',
-                        })}
-                    </Text>
-                </Pressable>
-            </View>
-            {showDatePicker && (
-                <DateTimePicker
-                    value={date}
-                    mode="date"
-                    display="default"
-                    onChange={onDateChange}
-                />
+        <Formik
+            initialValues={{ quantity }}
+            validationSchema={validationSchema}
+            onSubmit={handleUpdateItem}
+        >
+            {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+                <View style={styles.container}>
+                    <Text style={styles.title}>Update Item</Text>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.label}>Quantity:</Text>
+                        <TextInput
+                            style={styles.input}
+                            value={quantity}
+                            onChangeText={(text) => setQuantity(text)}
+                            onBlur={handleBlur('quantity')}
+                            keyboardType="numeric"
+                        />
+                        {touched.quantity && errors.quantity && (
+                            <Text style={styles.errorText}>{errors.quantity}</Text>
+                        )}
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <Text style={styles.label}>Date:</Text>
+                        <Pressable onPress={() => setShowDatePicker(true)}>
+                            <Text style={styles.date}>
+                                {moment(date).format('MM/DD/YYYY')}
+                            </Text>
+                        </Pressable>
+                    </View>
+                    {showDatePicker && (
+                        <DateTimePicker
+                            value={date}
+                            mode="date"
+                            display="default"
+                            onChange={onDateChange}
+                        />
+                    )}
+                    <View style={styles.buttonContainer}>
+                        <Pressable style={styles.button} onPress={handleSubmit}>
+                            <Text style={styles.buttonText}>Update</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={onCancel}>
+                            <Text style={styles.buttonText}>Cancel</Text>
+                        </Pressable>
+                    </View>
+                </View>
             )}
-            <View style={styles.buttonContainer}>
-                <Pressable style={styles.button} onPress={handleUpdateItem}>
-                    <Text style={styles.buttonText}>Update</Text>
-                </Pressable>
-                <Pressable style={styles.button} onPress={onCancel}>
-                    <Text style={styles.buttonText}>Cancel</Text>
-                </Pressable>
-            </View>
-        </View>
+        </Formik>
     );
 };
 

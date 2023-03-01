@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../actions/AddItem';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import formatDate from '../utils/formatDate';
+import moment from 'moment';
 
 const AddItemForm = () => {
     const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const AddItemForm = () => {
                     )}
                     <Button
                         onPress={() => setShowDatePicker(true)}
-                        title={formatDate(date)}
+                        title={moment(date).format('MM/DD/YYYY')}
                         color='#5637DD'
                         accessibilityLabel='Tap me to select a date'
                     />

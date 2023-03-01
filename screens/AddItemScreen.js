@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
 import { useDispatch } from 'react-redux';
-
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
 import { addItemAsync } from '../actions/AddItem';
