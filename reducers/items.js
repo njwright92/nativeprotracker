@@ -13,7 +13,7 @@ const itemsReducer = (state = initialState, action) => {
         case UPDATE_ITEM:
             console.log('UPDATE_ITEM:', action.payload);
             return state.map((item) =>
-                item.id === action.payload.id ? { ...item, quantity: action.payload.quantity } : item
+                item.id === action.payload.id ? { ...item, ...action.payload } : item
             );
         default:
             return state;

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../actions/AddItem';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import formatDate from '../utils/formatDate';
 
 const AddItemForm = () => {
     const dispatch = useDispatch();
@@ -14,23 +15,15 @@ const AddItemForm = () => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Name is required'),
         quantity: Yup.number().required('Quantity is required'),
+        // date: Yup.date().required('You must include a date'),
     });
 
-    const formatDate = (date) => {
-        return date.toLocaleDateString('en-US', {
-            month: '2-digit',
-            day: '2-digit',
-            year: 'numeric',
-        });
-    };
-
-
     const onSubmit = async (values) => {
-        const formattedDate = formatDate(date);
-        const item = {
-            name: `${values.name} (${formattedDate})`,
-            quantity: parseInt(values.quantity),
-        };
+        console.log('onSubmit', values, validationSchema.cast(values));
+
+        let item = validationSchema.cast(values);
+        item.date = date;
+        console.log('addItem', item);
         await dispatch(addItem(item)).unwrap();
     };
 
@@ -38,11 +31,12 @@ const AddItemForm = () => {
         const currentDate = selectedDate || date;
         setShowDatePicker(Platform.OS === 'ios');
         setDate(currentDate);
+        console.log('on Date Change', currentDate, event, date);
     };
 
     return (
         <Formik
-            initialValues={{ name: '', quantity: '' }}
+            initialValues={{ name: '', quantity: '', date: new Date() }}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
         >
@@ -74,13 +68,13 @@ const AddItemForm = () => {
                     )}
                     <Button
                         onPress={() => setShowDatePicker(true)}
-                        title={date.toLocaleDateString('en-US')}
+                        title={formatDate(date)}
                         color='#5637DD'
                         accessibilityLabel='Tap me to select a date'
                     />
                     {showDatePicker && (
                         <DateTimePicker
-                            value={date}
+                            value={values.date}
                             mode='date'
                             display='default'
                             onChange={onDateChange}

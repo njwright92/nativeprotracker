@@ -24,7 +24,7 @@ export const addItem = (item) => {
         const newItem = {
             id: uuidv4(),
             ...item,
-            date: formatDate(new Date()),
+            // date: formatDate(new Date()), // this would always be today
         };
         dispatch({
             type: ADD_ITEM,
