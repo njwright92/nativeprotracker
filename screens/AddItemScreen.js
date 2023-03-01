@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Provider } from 'react-redux';
+
 import { useDispatch } from 'react-redux';
-import store from '../store';
+
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
 import { addItemAsync } from '../actions/AddItem';
@@ -28,7 +28,7 @@ const AddItemScreen = () => {
     };
 
     return (
-        <Provider store={store}>
+      
             <View style={styles.container}>
                 <View style={styles.formContainer}>
                     <AddItemForm onAddItem={handleAddItem} />
@@ -40,7 +40,7 @@ const AddItemScreen = () => {
                     />
                 </View>
             </View>
-        </Provider>
+
     );
 };
 
