@@ -5,7 +5,7 @@ import { deleteItem } from '../actions/DeleteItem'
 import { updateItem } from '../actions/UpdateItem'
 import UpdateItemForm from './UpdateItemForm';
 import { Swipeable } from 'react-native-gesture-handler';
-import formatDate from '../utils/formatDate';
+import moment from 'moment';
 
 const ItemsList = () => {
   const items = useSelector(state => state.items);
@@ -58,7 +58,7 @@ const ItemsList = () => {
       return (
         <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item)}>
           <View style={styles.item}>
-            <Text style={styles.itemName}>{item.name} ({formatDate(item.date)})</Text>
+            <Text style={styles.itemName}>{item.name} ({moment(item.date).format('MM/DD/YYYY')})</Text>
             <Text style={styles.itemQuantity}>{item.quantity}</Text>
             <Pressable
               style={({ pressed }) => [
