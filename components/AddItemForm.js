@@ -24,7 +24,7 @@ const AddItemForm = () => {
         let item = validationSchema.cast(values);
         item.date = date;
         console.log('addItem', item);
-        await dispatch(addItem(item)).unwrap();
+        await dispatch(addItem(item));
     };
 
     const onDateChange = (event, selectedDate) => {

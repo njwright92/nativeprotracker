@@ -82,7 +82,7 @@ const ItemsList = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         data={items}
         renderItem={renderItem}
         extraData={items} // Add this line to force re-render on state change
