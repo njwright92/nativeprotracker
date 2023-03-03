@@ -1,12 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const SplashScreen = ({ navigation }) => {
-    useEffect(() => {
-        setTimeout(() => {
-            navigation.replace('Main');
-        }, 2000);
-    }, []);
+const SplashScreen = () => {
 
     return (
         <View style={styles.viewStyles}>
