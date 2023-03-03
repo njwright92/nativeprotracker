@@ -95,7 +95,7 @@ const ItemsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFA500', // Change background color to burnt safety orange
+    backgroundColor: '#E68A00', // Change background color to burnt safety orange
     alignItems: 'stretch',
     justifyContent: 'center',
     paddingHorizontal: 20,
@@ -105,8 +105,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomWidth: 2,
+    borderBottomColor: '#2F4F4F',
+
   },
   itemName: {
     fontSize: 18,
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
   },
   itemQuantity: {
     fontSize: 18,
+    fontWeight: 'bold'
   },
   button: {
     padding: 10,
@@ -124,7 +126,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold'
   },
   emptyList: {
     fontSize: 20,

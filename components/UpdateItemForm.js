@@ -43,18 +43,18 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
 
     return (
         <Formik
-            initialValues={{ quantity }}
+            initialValues={{ quantity: item ? parseFloat(item.quantity) : '' }}
             validationSchema={validationSchema}
             onSubmit={handleUpdateItem}
         >
-            {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+            {({ handleBlur, handleSubmit, values, errors, touched }) => (
                 <View style={styles.container}>
                     <Text style={styles.title}>Update Item</Text>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Quantity:</Text>
                         <TextInput
                             style={styles.input}
-                            value={quantity}
+                            value={values.quantity}
                             onChangeText={(text) => setQuantity(text)}
                             onBlur={handleBlur('quantity')}
                             keyboardType="numeric"
