@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateItem } from '../actions/UpdateItem';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -38,7 +38,7 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const onDateChange = async (event, selectedDate) => {
         setShowDatePicker(Platform.OS === 'ios');
         await setDate(selectedDate || date);
-        console.log('onDaateChange', event, selectedDate, date);
+        console.log('onDateChange', event, selectedDate, date);
     };
 
     return (
@@ -65,11 +65,12 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
                     </View>
                     <View style={styles.inputContainer}>
                         <Text style={styles.label}>Date:</Text>
-                        <Pressable onPress={() => setShowDatePicker(true)}>
-                            <Text style={styles.date}>
-                                {moment(date).format('MM/DD/YYYY')}
-                            </Text>
-                        </Pressable>
+                        <Button
+                            color='#5637DD'
+                            title={moment(date).format('MM/DD/YYYY')}
+                            onPress={() => setShowDatePicker(true)}
+                            accessibilityLabel='Tap me to select a date'
+                        />
                     </View>
                     {showDatePicker && (
                         <DateTimePicker
@@ -80,12 +81,16 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
                         />
                     )}
                     <View style={styles.buttonContainer}>
-                        <Pressable style={styles.button} onPress={handleSubmit}>
-                            <Text style={styles.buttonText}>Update</Text>
-                        </Pressable>
-                        <Pressable style={styles.button} onPress={onCancel}>
-                            <Text style={styles.buttonText}>Cancel</Text>
-                        </Pressable>
+                        <Button
+                            color='#556B2F'
+                            title="Update"
+                            onPress={handleSubmit}
+                        />
+                        <Button
+                            color='maroon'
+                            title="Cancel"
+                            onPress={onCancel}
+                        />
                     </View>
                 </View>
             )}
@@ -124,16 +129,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    button: {
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
-        width: '48%',
-    },
-    buttonText: {
-        color: 'white',
-        textAlign: 'center',
-    },
     date: {
         backgroundColor: 'blue',
         padding: 10,
@@ -141,7 +136,11 @@ const styles = StyleSheet.create({
         width: '48%',
         color: 'white',
         textAlign: 'center',
-    }
+    },
+    errorText: {
+        color: 'red',
+        marginBottom: 5,
+    },
 });
 
 export default UpdateItemForm;

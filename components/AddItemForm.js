@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -55,7 +55,7 @@ const AddItemForm = () => {
                         value={values.name}
                         placeholder="Name"
                     />
-                    {errors.name && touched.name && <Text>{errors.name}</Text>}
+                    {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}
                     <TextInput
                         onChangeText={handleChange('quantity')}
                         onBlur={handleBlur('quantity')}
@@ -64,7 +64,7 @@ const AddItemForm = () => {
                         keyboardType="numeric"
                     />
                     {errors.quantity && touched.quantity && (
-                        <Text>{errors.quantity}</Text>
+                        <Text style={styles.errorText}>{errors.quantity}</Text>
                     )}
                     <Button
                         onPress={() => setShowDatePicker(true)}
@@ -80,11 +80,24 @@ const AddItemForm = () => {
                             onChange={onDateChange}
                         />
                     )}
-                    <Button onPress={handleSubmit} title="Submit" />
+                    <Button
+                        color='#556B2F'
+                        onPress={handleSubmit}
+                        title="Submit"
+                        accessibilityLabel='Tap me to submit item'
+                    />
                 </View>
             )}
         </Formik>
     );
 };
+
+const styles = StyleSheet.create({
+    errorText: {
+        color: 'red',
+        marginBottom: 10,
+        marginTop: 5,
+    },
+});
 
 export default AddItemForm;

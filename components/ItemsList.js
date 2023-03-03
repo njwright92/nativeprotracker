@@ -63,7 +63,7 @@ const ItemsList = () => {
             <Pressable
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? 'lightgray' : 'white',
+                  backgroundColor: pressed ? 'slategray' : 'gray',
                 },
                 styles.button,
               ]}
@@ -119,11 +119,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: 'black',
     marginLeft: 10,
   },
   buttonText: {
-    fontSize: 16,
+    color: 'white',
+    fontSize: 16
   },
   emptyList: {
     fontSize: 20,
