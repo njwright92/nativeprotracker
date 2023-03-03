@@ -14,7 +14,7 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const [quantity, setQuantity] = useState(item ? item.quantity.toString() : '');
     const [showDatePicker, setShowDatePicker] = useState(false);
     console.log('UDPATE INIT', item)
-    const [date, setDate] = useState(item.date);
+    const [date, setDate] = useState(new Date());
 
     const validationSchema = Yup.object().shape({
         quantity: Yup.number().required('Quantity is required'),
@@ -37,7 +37,7 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
 
     const onDateChange = async (event, selectedDate) => {
         setShowDatePicker(Platform.OS === 'ios');
-        await setDate(selectedDate);
+        await setDate(selectedDate || date);
         console.log('onDaateChange', event, selectedDate, date);
     };
 
