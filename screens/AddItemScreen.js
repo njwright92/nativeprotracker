@@ -11,33 +11,29 @@ const AddItemScreen = () => {
     const dispatch = useDispatch();
 
     const handleAddItem = (item) => {
-        // dispatch an action to add the new item to the store
         dispatch(addItemAsync(item));
     };
 
     const handleUpdateItem = (id, quantity) => {
-        // dispatch an action to update the item in the store
         dispatch(updateItemAsync(id, quantity));
     };
 
     const handleDeleteItem = (id) => {
-        // dispatch an action to delete the item from the store
         dispatch(deleteItemAsync(id));
     };
 
     return (
-      
-            <View style={styles.container}>
-                <View style={styles.formContainer}>
-                    <AddItemForm onAddItem={handleAddItem} />
-                </View>
-                <View style={styles.listContainer}>
-                    <ItemsList
-                        onUpdateItem={handleUpdateItem}
-                        onDeleteItem={handleDeleteItem}
-                    />
-                </View>
+        <View style={styles.container}>
+            <View style={styles.formContainer}>
+                <AddItemForm onAddItem={handleAddItem} />
             </View>
+            <View style={styles.listContainer}>
+                <ItemsList
+                    onUpdateItem={handleUpdateItem}
+                    onDeleteItem={handleDeleteItem}
+                />
+            </View>
+        </View>
 
     );
 };

@@ -18,13 +18,14 @@ const AddItemForm = () => {
         // date: Yup.date().required('You must include a date'),
     });
 
-    const onSubmit = async (values) => {
+    const onSubmit = async (values, { resetForm }) => {
         console.log('onSubmit', values, validationSchema.cast(values));
 
         let item = validationSchema.cast(values);
         item.date = date;
         console.log('addItem', item);
         await dispatch(addItem(item));
+        resetForm();
     };
 
     const onDateChange = (event, selectedDate) => {
@@ -34,9 +35,15 @@ const AddItemForm = () => {
         console.log('on Date Change', currentDate, event, date);
     };
 
+    const initialValues = {
+        name: '',
+        quantity: '',
+        date: new Date()
+    }
+
     return (
         <Formik
-            initialValues={{ name: '', quantity: '', date: new Date() }}
+            initialValues={initialValues}
             onSubmit={onSubmit}
             validationSchema={validationSchema}
         >
@@ -62,6 +69,7 @@ const AddItemForm = () => {
                         value={values.quantity}
                         placeholder="Quantity"
                         keyboardType="numeric"
+                        name='quantity'
                     />
                     {errors.quantity && touched.quantity && (
                         <Text style={styles.errorText}>{errors.quantity}</Text>
@@ -84,7 +92,7 @@ const AddItemForm = () => {
                         color='#556B2F'
                         onPress={handleSubmit}
                         title="Submit"
-                        accessibilityLabel='Tap me to submit item'
+                        accessibilityLabel='Tap me to submit an item'
                     />
                 </View>
             )}
@@ -94,10 +102,9 @@ const AddItemForm = () => {
 
 const styles = StyleSheet.create({
     errorText: {
-        color: 'red',
-        marginBottom: 10,
-        marginTop: 5,
-    },
+        color: 'red'
+    }
 });
 
 export default AddItemForm;
+
