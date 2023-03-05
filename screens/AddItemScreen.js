@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
@@ -10,8 +10,11 @@ import { deleteItemAsync } from '../actions/DeleteItem';
 const AddItemScreen = () => {
     const dispatch = useDispatch();
 
+    const [shouldShowForm, setShouldShowForm] = useState(true);
+
     const handleAddItem = (item) => {
         dispatch(addItemAsync(item));
+        setShouldShowForm(false); // hide the form after adding an item
     };
 
     const handleUpdateItem = (id, quantity) => {
@@ -24,17 +27,19 @@ const AddItemScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.formContainer}>
-                <AddItemForm onAddItem={handleAddItem} />
-            </View>
+            {shouldShowForm ? (
+                <View style={styles.formContainer}>
+                    <AddItemForm onAddItem={handleAddItem} />
+                </View>
+            ) : null}
             <View style={styles.listContainer}>
-                <ItemsList
-                    onUpdateItem={handleUpdateItem}
-                    onDeleteItem={handleDeleteItem}
-                />
+                <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
+            <Button
+                title={shouldShowForm ? "Hide Form" : "Show Form"}
+                onPress={() => setShouldShowForm(!shouldShowForm)}
+            />
         </View>
-
     );
 };
 
