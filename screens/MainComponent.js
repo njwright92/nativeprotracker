@@ -10,12 +10,12 @@ import {
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
-import RegisterUserScreen from './RegisterUserScreen';
+import RegisterScreen from './RegisterScreen';
 import ChartScreen from './ChartScreen';
 import AddItemScreen from './AddItemScreen';
+import ProfileScreen from './ProfileScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Drawer = createDrawerNavigator();
 
@@ -47,18 +47,49 @@ const screenOptions = ({ navigation }) => ({
 const LoginNavigator = () => {
     const Stack = createStackNavigator();
     return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='login' component={LoginScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const RegisterNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='register' component={RegisterScreen} />
+        </Stack.Navigator>
+    );
+};
+
+
+
+const profileNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
-                name='Login'
-                component={LoginScreen}
+                name='Profile'
+                component={ProfileScreen}
+            />
+            <Stack.Screen
+                name='LoginStack'
+                component={LoginNavigator}
                 options={{
-                    title: 'Login/Register',
-                    ...screenOptions
+                    title: 'Login',
+                }}
+            />
+            <Stack.Screen
+                name='RegisterStack'
+                component={RegisterNavigator}
+                options={{
+                    title: 'Register',
                 }}
             />
         </Stack.Navigator>
     );
-};
+}
+
 
 const ChartNavigator = () => {
     const Stack = createStackNavigator();
@@ -172,8 +203,8 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen
-                    name='Login'
-                    component={LoginNavigator}
+                    name='profile'
+                    component={profileNavigator}
                     options={{
                         title: 'Login/Register',
                         drawerIcon: () => (

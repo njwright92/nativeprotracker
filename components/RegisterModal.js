@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Pressable } from 'react-native';
+import React from 'react';
+import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { registerUser } from '../actions/userActions';
 
-const RegisterModal = ({ visible, setVisible }) => {
+const RegisterModal = ({ visible, onClose, error }) => {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (values) => {
+        try {
+            await dispatch(registerUser(values));
+            navigation.navigate('ProfileScreen');
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <View style={{ backgroundColor: 'white', padding: 20, display: visible ? 'flex' : 'none' }}>
@@ -20,28 +32,28 @@ const RegisterModal = ({ visible, setVisible }) => {
                         .required('Password is required')
                         .min(6, 'Password must be at least 6 characters')
                 })}
-                onSubmit={values => {
-                    console.log(values);
-                    navigation.navigate('Home');
-                }}
+                onSubmit={handleSubmit}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-                    <View styles={styles.modalContainer}>
-                        <TextInput style={styles.input}
+                    <View>
+                        <TextInput
+                            style={styles.input}
                             placeholder="Name"
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
                         />
                         {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}
-                        <TextInput style={styles.input}
+                        <TextInput
+                            style={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
                         />
                         {errors.email && touched.email && <Text style={styles.errorText}>{errors.email}</Text>}
-                        <TextInput style={styles.input}
+                        <TextInput
+                            style={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
@@ -51,9 +63,10 @@ const RegisterModal = ({ visible, setVisible }) => {
                         {errors.password && touched.password && (
                             <Text style={styles.errorText}>{errors.password}</Text>
                         )}
-                        <Pressable onPress={handleSubmit} style={styles.submitButton}>
-                            <Text style={styles.buttonText}>Register</Text>
-                        </Pressable>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Register" onPress={handleSubmit} color="#1C1C4D" />
+                            <Button title="Cancel" onPress={onClose} color="red" />
+                        </View>
                     </View>
                 )}
             </Formik>
@@ -62,13 +75,6 @@ const RegisterModal = ({ visible, setVisible }) => {
 };
 
 const styles = StyleSheet.create({
-    modalContainer: {
-        backgroundColor: '#fff',
-        padding: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-    },
     input: {
         borderStyle: 'solid',
         borderWidth: 1,
@@ -83,18 +89,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center'
     },
-    submitButton: {
-        backgroundColor: 'red',
-        padding: 10,
-        borderRadius: 5,
-        alignItems: 'center',
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         marginTop: 20,
-        width: '100%'
-    },
-    buttonText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16
     }
 });
 

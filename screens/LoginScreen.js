@@ -1,34 +1,31 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import LoginModal from '../components/LoginModal';
-import RegisterModal from '../components/RegisterModal';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions/userActions';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
     const [isLoginModalVisible, setLoginModalVisible] = useState(false);
-    const [isRegisterModalVisible, setRegisterModalVisible] = useState(false);
+    const dispatch = useDispatch();
 
     const hideModals = () => {
         setLoginModalVisible(false);
-        setRegisterModalVisible(false);
     };
 
     const toggleLoginModal = () => {
         setLoginModalVisible(!isLoginModalVisible);
-        setRegisterModalVisible(false);
     };
 
-    const toggleRegisterModal = () => {
-        setRegisterModalVisible(!isRegisterModalVisible);
-        setLoginModalVisible(false);
+    const handleLogin = (email, password) => {
+        dispatch(loginUser(email, password));
+        navigation.navigate('Profile');
     };
 
     return (
         <TouchableWithoutFeedback onPress={hideModals}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFA500' }}>
                 <Text onPress={toggleLoginModal} style={styles.container}>Login</Text>
-                <Text onPress={toggleRegisterModal} style={styles.container}>Register</Text>
-                <LoginModal visible={isLoginModalVisible} setVisible={setLoginModalVisible} />
-                <RegisterModal visible={isRegisterModalVisible} setVisible={setRegisterModalVisible} />
+                <LoginModal visible={isLoginModalVisible} setVisible={setLoginModalVisible} onLogin={handleLogin} />
             </View>
         </TouchableWithoutFeedback>
     );
@@ -38,7 +35,6 @@ const styles = StyleSheet.create({
     container: {
         fontSize: 30,
         color: 'black'
-
     }
 });
 

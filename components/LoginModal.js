@@ -2,43 +2,48 @@ import React from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions/userActions';
 
-const LoginModal = ({ visible, setVisible }) => {
-    const navigation = useNavigation();
+const LoginModal = ({ visible, setVisible, onLogin }) => {
+    const dispatch = useDispatch();
 
     return (
         <View style={{ backgroundColor: 'white', padding: 20, display: visible ? 'flex' : 'none' }}>
             <Formik
                 initialValues={{ email: '', password: '' }}
                 validationSchema={Yup.object().shape({
-                    email: Yup.string()
-                        .email('Invalid email address')
-                        .required('Email is required'),
-                    password: Yup.string().required('Password is required')
+                    email: Yup.string().email('Invalid email address').required('Email is required'),
+                    password: Yup.string().required('Password is required'),
                 })}
-                onSubmit={values => {
-                    console.log(values);
-                    navigation.navigate('Home');
+                onSubmit={(values) => {
+                    dispatch(loginUser(values.email, values.password))
+                        .then(() => {
+                            onLogin();
+                            setVisible(false);
+                        })
+                        .catch((error) => {
+                            console.log('Error logging in: ', error);
+                        });
                 }}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
                     <View style={styles.modalContainer}>
-                        <TextInput style={styles.input}
+                        <TextInput
+                            style={styles.input}
                             placeholder="Email"
                             onChangeText={handleChange('email')}
                             onBlur={handleBlur('email')}
                             value={values.email}
-
                         />
                         {errors.email && touched.email && <Text style={{ color: 'red' }}>{errors.email}</Text>}
-                        <TextInput style={styles.input}
+                        <TextInput
+                            style={styles.input}
                             placeholder="Password"
                             onChangeText={handleChange('password')}
                             onBlur={handleBlur('password')}
                             value={values.password}
                             secureTextEntry
-
                         />
                         {errors.password && touched.password && (
                             <Text style={{ color: 'red' }}>{errors.password}</Text>
