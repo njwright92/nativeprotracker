@@ -1,4 +1,9 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Linking } from "react-native";
+
+
+const handleEmailPress = () => {
+    Linking.openURL('mailto:njwright92@gmail.com');
+};
 
 const AboutScreen = () => {
     return (
@@ -8,8 +13,14 @@ const AboutScreen = () => {
                 <Text style={styles.aboutText}>Our production tracking system allows you to easily add, update, and delete items from your products list. You can view the production progress over time on weekly and monthly charts.</Text>
             </View>
             <View style={styles.contactSection}>
-                <Text style={styles.heading}>Support/Contact Me</Text>
-                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to contact me via email at njwright92@gmail.com.</Text>
+                <Text style={styles.heading}>Support/Contact Me
+                </Text>
+                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to contact me via email at
+                </Text>
+                <TouchableOpacity onPress={handleEmailPress}>
+                    <Text style={{ textDecorationLine: 'underline' }}>njwright92@gmail.com
+                    </Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
