@@ -1,11 +1,15 @@
-import { StyleSheet, View, Text, TouchableOpacity, Linking } from "react-native";
-
-
-const handleEmailPress = () => {
-    Linking.openURL('mailto:njwright92@gmail.com');
-};
+import { StyleSheet, View, Text } from "react-native";
+import { Button, Icon } from 'react-native-elements';
+import * as MailComposer from 'expo-mail-composer';
 
 const AboutScreen = () => {
+    const sendMail = () => {
+        MailComposer.composeAsync({
+            recipients: ['njwright92@gmail.com'],
+            subject: 'Inquiry',
+            body: 'To whom it may concern:'
+        });
+    }
     return (
         <View style={styles.container}>
             <View style={styles.aboutSection}>
@@ -15,12 +19,21 @@ const AboutScreen = () => {
             <View style={styles.contactSection}>
                 <Text style={styles.heading}>Support/Contact Me
                 </Text>
-                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to contact me via email at
+                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to contact me via email
                 </Text>
-                <TouchableOpacity onPress={handleEmailPress}>
-                    <Text style={{ textDecorationLine: 'underline' }}>njwright92@gmail.com
-                    </Text>
-                </TouchableOpacity>
+                <Button
+                    title='Send Email'
+                    buttonStyle={{ backgroundColor: '#5637DD', margin: 40 }}
+                    icon={
+                        <Icon
+                            name='envelope-o'
+                            type='font-awesome'
+                            color='#fff'
+                            iconStyle={{ marginRight: 10 }}
+                        />
+                    }
+                    onPress={() => sendMail()}
+                />
             </View>
         </View>
     );
