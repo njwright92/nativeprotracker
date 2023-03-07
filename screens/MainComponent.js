@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, View, Pressable, StyleSheet, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
@@ -10,12 +11,11 @@ import {
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
-import RegisterScreen from './RegisterScreen';
 import ChartScreen from './ChartScreen';
 import AddItemScreen from './AddItemScreen';
-import ProfileScreen from './ProfileScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,51 +44,35 @@ const screenOptions = ({ navigation }) => ({
     ),
 });
 
+
 const LoginNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='login' component={LoginScreen} />
-        </Stack.Navigator>
-    );
-};
-
-const RegisterNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='register' component={RegisterScreen} />
-        </Stack.Navigator>
-    );
-};
-
-
-
-const profileNavigator = () => {
     const Stack = createStackNavigator();
     return (
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
-                name='Profile'
-                component={ProfileScreen}
-            />
-            <Stack.Screen
-                name='LoginStack'
-                component={LoginNavigator}
-                options={{
-                    title: 'Login',
-                }}
-            />
-            <Stack.Screen
-                name='RegisterStack'
-                component={RegisterNavigator}
-                options={{
-                    title: 'Register',
-                }}
+                name='Login'
+                component={LoginScreen}
+                options={({ navigation, route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route),
+                    headerLeft: () => (
+                        <Icon
+                            name={
+                                getFocusedRouteNameFromRoute(route) ===
+                                    'Register'
+                                    ? 'user-plus'
+                                    : 'sign-in'
+                            }
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
             />
         </Stack.Navigator>
     );
-}
+};
+
 
 
 const ChartNavigator = () => {
@@ -192,23 +176,23 @@ const Main = () => {
                 }}
             >
                 <Drawer.Screen
+                    name='Login'
+                    component={LoginNavigator}
+                    options={{
+                        title: 'Login/Register',
+                        drawerIcon: () => (
+                            <MaterialCommunityIcons name="login" size={24} />
+                        ),
+                        ...screenOptions
+                    }}
+                />
+                <Drawer.Screen
                     name='Home'
                     component={HomeNavigator}
                     options={{
                         title: 'Home',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name='home' size={24} />
-                        ),
-                        ...screenOptions
-                    }}
-                />
-                <Drawer.Screen
-                    name='profile'
-                    component={profileNavigator}
-                    options={{
-                        title: 'Login/Register',
-                        drawerIcon: () => (
-                            <MaterialCommunityIcons name="login" size={24} />
                         ),
                         ...screenOptions
                     }}
