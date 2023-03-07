@@ -10,19 +10,20 @@ const Chart = ({ data, title }) => {
         strokeWidth: 2,
     };
 
+    if (!data?.labels || !data?.datasets?.length) {
+        return null; // or show an error message or default chart
+    }
+
+
+    if (!chartData.labels.length || !chartData.datasets[0].data.length) {
+        return null; // or show an error message or default chart
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             <LineChart
-                data={{
-                    labels: data.labels,
-                    datasets: [
-                        {
-                            data: data.datasets[0].data,
-                            color: (opacity = 1) => `rgba(128, 0, 128, ${opacity})`,
-                        },
-                    ],
-                }}
+                data={chartData}
                 width={350}
                 height={300}
                 chartConfig={chartConfig}

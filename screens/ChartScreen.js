@@ -9,16 +9,17 @@ import Animated, {
     withTiming,
 } from 'react-native-reanimated';
 import Chart from '../components/Chart';
+import { formatChartData } from '../data/formattedData';
 
-const weeklyData = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    datasets: [
-        {
-            data: [50, 10, 150, 80, 120, 70, 90],
-            color: (opacity = 1) => `rgba(128, 0, 128, ${opacity})`,
-        },
-    ],
-};
+const weeklyData = formatChartData([
+    { date: '2022-02-28', quantity: 50 },
+    { date: '2022-03-01', quantity: 10 },
+    { date: '2022-03-02', quantity: 150 },
+    { date: '2022-03-03', quantity: 80 },
+    { date: '2022-03-04', quantity: 120 },
+    { date: '2022-03-05', quantity: 70 },
+    { date: '2022-03-06', quantity: 90 },
+]);
 
 const ChartScreen = () => {
     const scrollViewRef = useRef(null);
@@ -86,7 +87,7 @@ const ChartScreen = () => {
                             onGestureEvent={onGestureEvent}
                             shouldCancelWhenOutside={true}>
                             <Animated.View>
-                                <Chart data={weeklyData} />
+                                <Chart data={weeklyData} title="Weekly Production Tracking" />
                             </Animated.View>
                         </PanGestureHandler>
                     </Animated.View>
