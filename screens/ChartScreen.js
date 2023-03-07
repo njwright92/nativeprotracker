@@ -20,29 +20,6 @@ const weeklyData = {
     ],
 };
 
-const monthlyData = {
-    labels: [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-    ],
-    datasets: [
-        {
-            data: [100, 120, 80, 150, 90, 110, 140, 70, 130, 60, 100, 120],
-            color: (opacity = 1) => `rgba(128, 0, 128, ${opacity})`,
-        },
-    ],
-};
-
 const ChartScreen = () => {
     const scrollViewRef = useRef(null);
     const translateX = useSharedValue(0);
@@ -115,51 +92,35 @@ const ChartScreen = () => {
                     </Animated.View>
                 </PinchGestureHandler>
             </View>
-            <View style={styles.card}>
-                <Text style={styles.title}>Monthly Production Tracking</Text>
-                <PinchGestureHandler
-                    onGestureEvent={onPinchGestureEvent}
-                    onHandlerStateChange={onPinchHandlerStateChange}>
-                    <Animated.View style={[chartContainerStyle, { transform: [{ scale: scale }] }]}>
-                        <PanGestureHandler
-                            onGestureEvent={onGestureEvent}
-                            shouldCancelWhenOutside={true}>
-                            <Animated.View>
-                                <Chart data={monthlyData} />
-                            </Animated.View>
-                        </PanGestureHandler>
-                    </Animated.View>
-                </PinchGestureHandler>
-            </View>
         </ScrollView>
     );
-    }
+}
 
-    const styles = StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: '#FFA500',
-            padding: 10,
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#FFA500',
+        padding: 10,
+    },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 20,
+        marginBottom: 20,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
         },
-        card: {
-            backgroundColor: '#fff',
-            borderRadius: 5,
-            padding: 20,
-            marginBottom: 20,
-            shadowColor: '#000',
-            shadowOffset: {
-                width: 0,
-                height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-            elevation: 3,
-        },
-        title: {
-            fontSize: 20,
-            fontWeight: 'bold',
-            marginBottom: 10,
-        },
-    });
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        elevation: 3,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
+});
 
-    export default ChartScreen;
+export default ChartScreen;
