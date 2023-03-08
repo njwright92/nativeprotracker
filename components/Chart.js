@@ -1,23 +1,47 @@
 import React from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
+import moment from 'moment';
 
-const Chart = ({ data, title }) => {
+export const formatChartData = (items) => {
+    return items.map((item) => {
+        return {
+            date: moment(item.date).format('MM/DD/YYYY'),
+            quantity: item.quantity,
+        };
+    });
+};
+
+const Chart = ({ title, items }) => {
+    if (!Array.isArray(items) || items.length === 0) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>{title}</Text>
+                <Text>No data to display</Text>
+            </View>
+        );
+    }
+
+    const chartData = {
+        labels: items.map((item) => item.date),
+        datasets: [
+            {
+                data: items.map((item) => item.quantity),
+                label: 'Quantity',
+                color: () => `rgba(0, 0, 0, 1)`,
+                strokeWidth: 2,
+            },
+        ],
+    };
+
+    console.log(chartData); // log the chartData object
+
     const chartConfig = {
         backgroundGradientFrom: '#fff',
         backgroundGradientTo: '#fff',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
         strokeWidth: 2,
     };
-
-    if (!data?.labels || !data?.datasets?.length) {
-        return null; // or show an error message or default chart
-    }
-
-
-    if (!chartData.labels.length || !chartData.datasets[0].data.length) {
-        return null; // or show an error message or default chart
-    }
 
     return (
         <View style={styles.container}>
