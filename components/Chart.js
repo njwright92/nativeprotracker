@@ -1,16 +1,7 @@
 import React from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
-import moment from 'moment';
 
-export const formatChartData = (items) => {
-    return items.map((item) => {
-        return {
-            date: moment(item.date).format('MM/DD/YYYY'),
-            quantity: item.quantity,
-        };
-    });
-};
 
 const Chart = ({ title, items }) => {
     if (!Array.isArray(items) || items.length === 0) {
