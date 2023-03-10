@@ -3,11 +3,10 @@ import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
 
 
-const Chart = ({ title, items }) => {
+const Chart = ({ items }) => {
     if (!Array.isArray(items) || items.length === 0) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{title}</Text>
                 <Text>No data to display</Text>
             </View>
         );
@@ -19,7 +18,8 @@ const Chart = ({ title, items }) => {
             {
                 data: items.map((item) => item.quantity),
                 label: 'Quantity',
-                color: () => `rgba(0, 0, 0, 1)`,
+                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                strokeWidth: 2,
                 strokeWidth: 2,
             },
         ],
@@ -36,7 +36,6 @@ const Chart = ({ title, items }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{title}</Text>
             <LineChart
                 data={chartData}
                 width={350}
