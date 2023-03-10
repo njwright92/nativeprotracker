@@ -18,7 +18,7 @@ const ChartScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.card}>
-                <Text style={styles.title}>Quantity over time</Text>
+                <Text style={styles.title}>Production Tracking</Text>
                 <Chart items={formatChartData(items)} />
             </View>
         </View>

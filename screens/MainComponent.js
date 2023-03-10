@@ -105,16 +105,16 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='ChartStack'
                 component={ChartNavigator}
-                options={{
-                    title: 'Chart',
-                }}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Chart'
+                })}
             />
             <Stack.Screen
                 name='AddItemStack'
                 component={AddItemNavigator}
-                options={{
-                    title: 'Add Item',
-                }}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Items'
+                })}
             />
         </Stack.Navigator>
     );
@@ -201,7 +201,7 @@ const Main = () => {
                     name='AddItem'
                     component={AddItemNavigator}
                     options={{
-                        title: 'Add Item',
+                        title: 'Items',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name="plus-circle-outline" size={24} />
                         ),
