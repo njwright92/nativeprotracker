@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
-import { CheckBox, Input, Button, Icon } from 'react-native-elements';
+import { CheckBox, Input, Button } from 'react-native-elements';
 import * as SecureStore from 'expo-secure-store';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as ImagePicker from 'expo-image-picker';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as ImageManipulator from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
 
 const LoginTab = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -43,23 +46,37 @@ const LoginTab = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Input
-                placeholder='Username'
-                leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                placeholder="Username"
+                leftIcon={
+                    <MaterialCommunityIcons
+                        name="account"
+                        size={24}
+                        color="black"
+                        style={styles.icon}
+                    />
+                }
                 onChangeText={(text) => setUsername(text)}
                 value={username}
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
             />
             <Input
-                placeholder='Password'
-                leftIcon={{ type: 'font-awesome', name: 'key' }}
+                placeholder="Password"
+                leftIcon={
+                    <MaterialCommunityIcons
+                        name="key"
+                        size={24}
+                        color="black"
+                        style={styles.icon}
+                    />
+                }
                 onChangeText={(text) => setPassword(text)}
                 value={password}
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
             />
             <CheckBox
-                title='Remember Me'
+                title="Remember Me"
                 center
                 checked={remember}
                 onPress={() => setRemember(!remember)}
@@ -68,14 +85,13 @@ const LoginTab = ({ navigation }) => {
             <View style={styles.formButton}>
                 <Button
                     onPress={() => handleLogin()}
-                    title='Login'
-                    color='#5637DD'
+                    title="Login"
                     icon={
-                        <Icon
-                            name='sign-in'
-                            type='font-awesome'
-                            color='#fff'
-                            iconStyle={{ marginRight: 10 }}
+                        <MaterialCommunityIcons
+                            name="login"
+                            size={24}
+                            color="white"
+                            style={styles.icon}
                         />
                     }
                     buttonStyle={{ backgroundColor: '#5637DD' }}
@@ -84,14 +100,14 @@ const LoginTab = ({ navigation }) => {
             <View style={styles.formButton}>
                 <Button
                     onPress={() => navigation.navigate('Register')}
-                    title='Register'
-                    type='clear'
+                    title="Register"
+                    type="clear"
                     icon={
-                        <Icon
-                            name='user-plus'
-                            type='font-awesome'
-                            color='blue'
-                            iconStyle={{ marginRight: 10 }}
+                        <MaterialCommunityIcons
+                            name="account-plus"
+                            size={24}
+                            color="blue"
+                            style={styles.icon}
                         />
                     }
                     titleStyle={{ color: 'blue' }}
@@ -146,11 +162,34 @@ const RegisterTab = () => {
             });
             if (!capturedImage.cancelled) {
                 console.log(capturedImage);
-                setImageUrl(capturedImage.uri);
+                processImage(capturedImage.uri);
             }
-            if (capturedImage.assets) {
-                console.log(capturedImage.assets[0]);
-                setImageUrl(capturedImage.assets[0].uri);
+        }
+    };
+
+    const processImage = async (imgUri) => {
+        const processedImage = await ImageManipulator.manipulateAsync(
+            imgUri,
+            [{ resize: { width: 400 } }],
+            { format: ImageManipulator.SaveFormat.PNG }
+        );
+        await MediaLibrary.saveToLibraryAsync(processedImage.uri);
+        console.log(processedImage);
+        setImageUrl(processedImage.uri);
+    };
+
+
+
+    const getImageFromGallery = async () => {
+        const mediaLibraryPermissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (mediaLibraryPermissions.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: true,
+                aspect: [1, 1]
+            });
+            if (!capturedImage.cancelled) {
+                console.log(capturedImage);
+                processImage(capturedImage.uri);
             }
         }
     };
@@ -159,15 +198,13 @@ const RegisterTab = () => {
         <ScrollView>
             <View style={styles.container}>
                 <View style={styles.imageContainer}>
-                    <Image
-                        source={{ uri: imageUrl }}
-                        style={styles.image}
-                    />
+                    <Image source={{ uri: imageUrl }} style={styles.image} />
                     <Button title='Camera' onPress={getImageFromCamera} />
+                    <Button title="Gallery" onPress={getImageFromGallery} />
                 </View>
                 <Input
                     placeholder='Username'
-                    leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
                     onChangeText={(text) => setUsername(text)}
                     value={username}
                     containerStyle={styles.formInput}
@@ -175,7 +212,7 @@ const RegisterTab = () => {
                 />
                 <Input
                     placeholder='Password'
-                    leftIcon={{ type: 'font-awesome', name: 'key' }}
+                    leftIcon={<MaterialCommunityIcons name='lock' size={24} color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     containerStyle={styles.formInput}
@@ -183,7 +220,7 @@ const RegisterTab = () => {
                 />
                 <Input
                     placeholder='First Name'
-                    leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
                     onChangeText={(text) => setFirstName(text)}
                     value={firstName}
                     containerStyle={styles.formInput}
@@ -191,7 +228,7 @@ const RegisterTab = () => {
                 />
                 <Input
                     placeholder='Last Name'
-                    leftIcon={{ type: 'font-awesome', name: 'user-o' }}
+                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
                     onChangeText={(text) => setLastName(text)}
                     value={lastName}
                     containerStyle={styles.formInput}
@@ -199,7 +236,7 @@ const RegisterTab = () => {
                 />
                 <Input
                     placeholder='Email'
-                    leftIcon={{ type: 'font-awesome', name: 'envelope-o' }}
+                    leftIcon={<MaterialCommunityIcons name='email' size={24} color='black' />}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     containerStyle={styles.formInput}
@@ -218,11 +255,10 @@ const RegisterTab = () => {
                         title='Register'
                         color='#5637DD'
                         icon={
-                            <Icon
-                                name='user-plus'
-                                type='font-awesome'
+                            <MaterialCommunityIcons
+                                name='account-plus-outline'
                                 color='#fff'
-                                iconStyle={{ marginRight: 10 }}
+                                size={24}
                             />
                         }
                         buttonStyle={{ backgroundColor: '#5637DD' }}
@@ -252,9 +288,9 @@ const LoginScreen = () => {
                 options={{
                     tabBarIcon: (props) => {
                         return (
-                            <Icon
-                                name='sign-in'
-                                type='font-awesome'
+                            <MaterialCommunityIcons
+                                name='login-variant'
+                                size={26}
                                 color={props.color}
                             />
                         );
@@ -267,9 +303,9 @@ const LoginScreen = () => {
                 options={{
                     tabBarIcon: (props) => {
                         return (
-                            <Icon
-                                name='user-plus'
-                                type='font-awesome'
+                            <MaterialCommunityIcons
+                                name='account-plus-outline'
+                                size={26}
                                 color={props.color}
                             />
                         );

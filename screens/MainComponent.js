@@ -1,6 +1,5 @@
 import React from 'react';
 import { Platform, View, Pressable, StyleSheet, Text } from 'react-native';
-import { Icon } from 'react-native-elements';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
@@ -55,15 +54,15 @@ const LoginNavigator = () => {
                 options={({ navigation, route }) => ({
                     headerTitle: getFocusedRouteNameFromRoute(route),
                     headerLeft: () => (
-                        <Icon
+                        <MaterialCommunityIcons
                             name={
-                                getFocusedRouteNameFromRoute(route) ===
-                                    'Register'
-                                    ? 'user-plus'
-                                    : 'sign-in'
+                                getFocusedRouteNameFromRoute(route) === 'Register'
+                                    ? 'account-plus-outline'
+                                    : 'login-variant'
                             }
-                            type='font-awesome'
-                            iconStyle={styles.stackIcon}
+                            size={24}
+                            color='white'
+                            style={styles.stackIcon}
                             onPress={() => navigation.toggleDrawer()}
                         />
                     )
