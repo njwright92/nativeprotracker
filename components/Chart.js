@@ -20,7 +20,6 @@ const Chart = ({ items }) => {
                 label: 'Quantity',
                 color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
                 strokeWidth: 2,
-                strokeWidth: 2,
             },
         ],
     };
