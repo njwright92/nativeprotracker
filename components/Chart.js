@@ -13,38 +13,25 @@ const Chart = ({ items }) => {
         );
     }
 
-    const chartData =
-    {
+    const chartData = {
         labels: items.map((item) => moment(item.date).format('MM/DD/YYYY')),
         datasets: [
             {
-                data: items.filter((item) => item.name === items[0].name).map((item) => item.quantity),
-                label: items[0].name,
+                data: items.map((item) => item.quantity),
+                label: items.map((item) => item.name),
                 color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
                 strokeWidth: 2,
             },
-            {
-                data: items.filter((item) => item.name === items[1].name).map((item) => item.quantity),
-                label: items[1].name,
-                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
-                strokeWidth: 2,
-            },
-            {
-                data: items.filter((item) => item.name === items[2].name).map((item) => item.quantity),
-                label: items[2].name,
-                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
-                strokeWidth: 2,
-            },
-        ]
+        ],
     };
 
     console.log(chartData);
 
     const chartConfig = {
         backgroundGradientFrom: '#fff',
-        backgroundGradientTo: '#fff',
+        backgroundGradientTo: '#f2f2f2',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        strokeWidth: 2,
+        strokeWidth: 3,
     };
 
     return (
