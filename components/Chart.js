@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
-
+import moment from 'moment';
 
 const Chart = ({ items }) => {
     if (!Array.isArray(items) || items.length === 0) {
@@ -12,19 +12,32 @@ const Chart = ({ items }) => {
         );
     }
 
-    const chartData = {
-        labels: items.map((item) => item.date),
+    const chartData =
+    {
+        labels: items.map((item) => moment(item.date).format('MM/DD/YYYY')),
         datasets: [
             {
-                data: items.map((item) => item.quantity),
-                label: 'Quantity',
+                data: items.filter((item) => item.name === items[0].name).map((item) => item.quantity),
+                label: items[0].name,
                 color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
                 strokeWidth: 2,
             },
-        ],
+            {
+                data: items.filter((item) => item.name === items[1].name).map((item) => item.quantity),
+                label: items[1].name,
+                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                strokeWidth: 2,
+            },
+            {
+                data: items.filter((item) => item.name === items[2].name).map((item) => item.quantity),
+                label: items[2].name,
+                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                strokeWidth: 2,
+            },
+        ]
     };
 
-    console.log(chartData); // log the chartData object
+    console.log(chartData);
 
     const chartConfig = {
         backgroundGradientFrom: '#fff',
@@ -41,7 +54,7 @@ const Chart = ({ items }) => {
                 height={300}
                 chartConfig={chartConfig}
                 withDots={true}
-                withInnerLines={false}
+                withInnerLines={true}
                 withOuterLines={false}
                 bezier
                 style={styles.chart}
