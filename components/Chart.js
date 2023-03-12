@@ -2,6 +2,7 @@ import React from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
 import moment from 'moment';
+import { ScreenWidth } from 'react-native-elements/dist/helpers';
 
 const Chart = ({ items }) => {
     if (!Array.isArray(items) || items.length === 0) {
@@ -50,7 +51,7 @@ const Chart = ({ items }) => {
         <View style={styles.container}>
             <LineChart
                 data={chartData}
-                width={350}
+                width={ScreenWidth}
                 height={300}
                 chartConfig={chartConfig}
                 withDots={true}
