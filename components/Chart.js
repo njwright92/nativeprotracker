@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
 import moment from 'moment';
@@ -13,25 +13,66 @@ const Chart = ({ items }) => {
         );
     }
 
+    const [weeklyData, setWeeklyData] = useState([
+        { date: moment().startOf('week').add(1, 'day'), quantity: items.quantity || 0 },
+        { date: moment().startOf('week').add(2, 'day'), quantity: items.quantity || 0 },
+        { date: moment().startOf('week').add(3, 'day'), quantity: items.quantity || 0 },
+        { date: moment().startOf('week').add(4, 'day'), quantity: items.quantity || 0 },
+        { date: moment().startOf('week').add(5, 'day'), quantity: items.quantity || 0 },
+    ]);
+
+    useEffect(() => {
+        const startOfWeek = moment().startOf('week').add(1, 'day'); // Monday
+        const endOfWeek = moment().endOf('week').subtract(1, 'day'); // Friday
+
+        // Filter the items array to only keep data points within the current week
+        const weeklyItems = items.filter(item => {
+            const itemDate = moment(item.date);
+            return itemDate.isSameOrAfter(startOfWeek) && itemDate.isSameOrBefore(endOfWeek);
+        });
+
+        // Update the weeklyData state to include the quantities for each date in the current week
+        let updatedWeeklyData = [...weeklyData];
+        weeklyItems.forEach(item => {
+            const itemDate = moment(item.date);
+            const dataPointIndex = updatedWeeklyData.findIndex(dataPoint =>
+                dataPoint.date.isSame(itemDate, 'day')
+            );
+            if (dataPointIndex === -1) {
+                updatedWeeklyData.push({
+                    date: itemDate,
+                    quantity: item.quantity,
+                    prevQuantity: 0,
+                });
+            } else {
+                updatedWeeklyData[dataPointIndex] = {
+                    ...updatedWeeklyData[dataPointIndex],
+                    prevQuantity: updatedWeeklyData[dataPointIndex].quantity,
+                    quantity: item.quantity,
+                };
+            }
+        });
+
+        setWeeklyData(updatedWeeklyData.sort((a, b) => a.date.diff(b.date)));
+    }, [items]);
+
+
     const chartData = {
-        labels: items.map((item) => moment(item.date).format('MM/DD/YYYY')),
+        labels: weeklyData.map(dataPoint => dataPoint.date.format('MM/DD')),
         datasets: [
             {
-                data: items.map((item) => item.quantity),
-                label: items.map((item) => item.name),
+                data: weeklyData.map(dataPoint => dataPoint.quantity),
                 color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
                 strokeWidth: 2,
             },
         ],
     };
 
-    console.log(chartData);
 
     const chartConfig = {
         backgroundGradientFrom: '#fff',
         backgroundGradientTo: '#f2f2f2',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-        strokeWidth: 3,
     };
 
     return (
@@ -43,8 +84,9 @@ const Chart = ({ items }) => {
                 chartConfig={chartConfig}
                 withDots={true}
                 withInnerLines={true}
-                withOuterLines={false}
+                withOuterLines={true}
                 bezier
+                fromZero={true}
                 style={styles.chart}
                 contentInset={{ top: 20, bottom: 20 }}
             />
@@ -59,11 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginVertical: 20,
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
     },
     chart: {
         marginVertical: 8,
