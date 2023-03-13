@@ -2,23 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { LineChart } from 'react-native-chart-kit';
 import { View, Text, StyleSheet } from 'react-native';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 
-const Chart = ({ items }) => {
-    if (!Array.isArray(items) || items.length === 0) {
-        return (
-            <View style={styles.container}>
-                <Text>No data to display</Text>
-            </View>
-        );
-    }
+const Chart = () => {
+    const items = useSelector(state => state.items);
 
     const [weeklyData, setWeeklyData] = useState([
-        { date: moment().startOf('week').add(1, 'day'), quantity: items.quantity || 0 },
-        { date: moment().startOf('week').add(2, 'day'), quantity: items.quantity || 0 },
-        { date: moment().startOf('week').add(3, 'day'), quantity: items.quantity || 0 },
-        { date: moment().startOf('week').add(4, 'day'), quantity: items.quantity || 0 },
-        { date: moment().startOf('week').add(5, 'day'), quantity: items.quantity || 0 },
+        { date: moment().startOf('week').add(1, 'day'), quantity: 0 },
+        { date: moment().startOf('week').add(2, 'day'), quantity: 0 },
+        { date: moment().startOf('week').add(3, 'day'), quantity: 0 },
+        { date: moment().startOf('week').add(4, 'day'), quantity: 0 },
+        { date: moment().startOf('week').add(5, 'day'), quantity: 0 },
     ]);
 
     useEffect(() => {
@@ -53,9 +48,27 @@ const Chart = ({ items }) => {
             }
         });
 
+        updatedWeeklyData.forEach(dataPoint => {
+            if (dataPoint.quantity === 0) {
+                const itemForDate = items.find(item => moment(item.date).isSame(dataPoint.date, 'day'));
+                if (itemForDate) {
+                    dataPoint.quantity = dataPoint.quantity;
+                    dataPoint.quantity = itemForDate.quantity;
+                }
+            }
+        });
+
+
         setWeeklyData(updatedWeeklyData.sort((a, b) => a.date.diff(b.date)));
     }, [items]);
 
+    if (!Array.isArray(items) || items.length === 0) {
+        return (
+            <View style={styles.container}>
+                <Text>No data to display</Text>
+            </View>
+        );
+    }
 
     const chartData = {
         labels: weeklyData.map(dataPoint => dataPoint.date.format('MM/DD')),
@@ -68,11 +81,11 @@ const Chart = ({ items }) => {
         ],
     };
 
-
     const chartConfig = {
         backgroundGradientFrom: '#fff',
         backgroundGradientTo: '#f2f2f2',
         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+        decimalPlaces: 0,
     };
 
     return (
