@@ -11,6 +11,7 @@ import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
 import ChartScreen from './ChartScreen';
+import ItemDetailScreen from './ItemDetailScreen';
 import AddItemScreen from './AddItemScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -88,6 +89,7 @@ const AddItemNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Add Item' component={AddItemScreen} />
+            <Stack.Screen name='ItemDetail' component={ItemDetailScreen} />
         </Stack.Navigator>
     );
 };

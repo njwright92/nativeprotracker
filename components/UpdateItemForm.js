@@ -2,48 +2,33 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { updateItem } from '../actions/UpdateItem';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import moment from 'moment';
-
 
 const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
     const dispatch = useDispatch();
     const item = listItems ? listItems.find((item) => item.id === itemId) : null;
-    const [quantity, setQuantity] = useState(item ? item.quantity.toString() : '');
-    const [showDatePicker, setShowDatePicker] = useState(false);
-    console.log('UDPATE INIT', item)
-    const [date, setDate] = useState(new Date());
+    const [name, setName] = useState(item ? item.name : '');
 
     const validationSchema = Yup.object().shape({
-        quantity: Yup.number().required('Quantity is required'),
+        name: Yup.string().required('Name is required'),
     });
 
     const handleUpdateItem = () => {
         if (item) {
-            console.log('handleUpdateItem', date);
             dispatch(
                 updateItem({
                     id: itemId,
-                    name: `${item.name.split('(')[0]}`,
-                    date: moment(date).toDate(),
-                    quantity: parseInt(quantity),
+                    name: name,
                 }),
             );
         }
         onCancel();
     };
 
-    const onDateChange = async (event, selectedDate) => {
-        setShowDatePicker(Platform.OS === 'ios');
-        await setDate(selectedDate || date);
-        console.log('onDateChange', event, selectedDate, date);
-    };
-
     return (
         <Formik
-            initialValues={{ quantity: item ? parseFloat(item.quantity) : '' }}
+            initialValues={{ name: item ? item.name : '' }}
             validationSchema={validationSchema}
             onSubmit={handleUpdateItem}
         >
@@ -51,39 +36,21 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
                 <View style={styles.container}>
                     <Text style={styles.title}>Update Item</Text>
                     <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Quantity:</Text>
+                        <Text style={styles.label}>Name:</Text>
                         <TextInput
                             style={styles.input}
-                            value={values.quantity}
-                            onChangeText={(text) => setQuantity(text)}
-                            onBlur={handleBlur('quantity')}
-                            keyboardType="numeric"
+                            value={name}
+                            onChangeText={(text) => setName(text)}
+                            onBlur={handleBlur('name')}
                         />
-                        {touched.quantity && errors.quantity && (
-                            <Text style={styles.errorText}>{errors.quantity}</Text>
+                        {touched.name && errors.name && (
+                            <Text style={styles.errorText}>{errors.name}</Text>
                         )}
                     </View>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.label}>Date:</Text>
-                        <Button
-                            color='#5637DD'
-                            title={moment(date).format('MM/DD/YYYY')}
-                            onPress={() => setShowDatePicker(true)}
-                            accessibilityLabel='Tap me to select a date'
-                        />
-                    </View>
-                    {showDatePicker && (
-                        <DateTimePicker
-                            value={date}
-                            mode="date"
-                            display="default"
-                            onChange={onDateChange}
-                        />
-                    )}
                     <View style={styles.buttonContainer}>
                         <Button
                             color='#556B2F'
-                            title="Update"
+                            title="submit"
                             onPress={handleSubmit}
                         />
                         <Button
@@ -128,14 +95,6 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    date: {
-        backgroundColor: 'blue',
-        padding: 10,
-        borderRadius: 5,
-        width: '48%',
-        color: 'white',
-        textAlign: 'center',
     },
     errorText: {
         color: 'red',

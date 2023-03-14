@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM } from '../actions/types';
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY } from '../actions/types';
 
 const initialState = [];
 
@@ -15,6 +15,15 @@ const itemsReducer = (state = initialState, action) => {
             return state.map((item) =>
                 item.id === action.payload.id ? { ...item, ...action.payload } : item
             );
+        case ADD_ENTRY:
+            console.log('ADD_ENTRY:', action.payload)
+            const { itemId, quantity, date, name } = action.payload;
+            const item = state.find((item) => item.id === itemId);
+            if (item) {
+                item.entries.push({ quantity, date });
+                item.name = name;
+            }
+            return [...state];
         default:
             return state;
     }
