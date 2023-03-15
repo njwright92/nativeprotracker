@@ -102,14 +102,14 @@ const ItemDetailScreen = ({ route }) => {
                     onPress={handleAddEntry}
                 />
             </View>
-
             <FlatList
-                data={entries}
+                data={entries.reverse()}
                 keyExtractor={(entry) => entry.id}
                 renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
-                ListEmptyComponent={<Text>No Entries Found</Text>}
+                ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
                 contentContainerStyle={styles.entriesContainer}
             />
+
         </View>
     );
 };
