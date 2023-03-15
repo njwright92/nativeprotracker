@@ -10,7 +10,6 @@ import {
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
-import ChartScreen from './ChartScreen';
 import ItemDetailScreen from './ItemDetailScreen';
 import AddItemScreen from './AddItemScreen';
 import LineChartScreen from './LineChartScreen';
@@ -74,17 +73,6 @@ const LoginNavigator = () => {
     );
 };
 
-
-
-const ChartNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Chart' component={ChartScreen} />
-        </Stack.Navigator>
-    );
-};
-
 const AddItemNavigator = () => {
     const Stack = createStackNavigator();
     return (
@@ -104,13 +92,6 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
-            />
-            <Stack.Screen
-                name='ChartStack'
-                component={ChartNavigator}
-                options={({ route }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Chart'
-                })}
             />
             <Stack.Screen
                 name='AddItemStack'
@@ -207,17 +188,6 @@ const Main = () => {
                         title: 'Items',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name="plus-circle-outline" size={24} />
-                        ),
-                        ...screenOptions
-                    }}
-                />
-                <Drawer.Screen
-                    name='Chart'
-                    component={ChartNavigator}
-                    options={{
-                        title: 'Chart',
-                        drawerIcon: () => (
-                            <MaterialCommunityIcons name="chart-areaspline" size={24} />
                         ),
                         ...screenOptions
                     }}
