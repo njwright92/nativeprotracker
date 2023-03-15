@@ -6,8 +6,10 @@ import { deleteEntry } from '../actions/deleteEntry.js';
 import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Swipeable } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
 const ItemDetailScreen = ({ route }) => {
+    const navigation = useNavigation();
     const { itemId } = route.params;
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items);
@@ -70,46 +72,74 @@ const ItemDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{item.name}</Text>
-            <Text>ID: {itemId}</Text>
-            <TextInput
-                style={styles.input}
-                onChangeText={handleQuantityChange}
-                value={quantity}
-                placeholder="Quantity"
-                keyboardType="numeric"
-            />
-            <Button
-                color='#5637DD'
-                title={buttonTitle}
-                onPress={() => {
-                    setShowDatePicker(true);
-                }}
-                accessibilityLabel='Tap me to select a date'
-            />
-            {showDatePicker && (
-                <DateTimePicker
-                    value={date}
-                    mode="date"
-                    display="default"
-                    onChange={handleDateChange}
+            <View style={styles.inputContainer}>
+                <Text style={styles.title}>{item.name}</Text>
+                <Text>ID: {itemId}</Text>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={handleQuantityChange}
+                    value={quantity}
+                    placeholder="Quantity"
+                    keyboardType="numeric"
                 />
-            )}
-            <View style={{ marginTop: 6 }}>
-                <Button
-                    color='#8BC34A'
-                    title="Add Entry"
-                    onPress={handleAddEntry}
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#5637DD',
+                        borderRadius: 10,
+                        paddingVertical: 10,
+                        paddingHorizontal: '10%',
+                        alignSelf: 'center',
+                        width: '80%'
+                    }}
+                    onPress={() => setShowDatePicker(true)}
+                >
+                    <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}>{buttonTitle}</Text>
+                </TouchableOpacity>
+                {showDatePicker && (
+                    <DateTimePicker
+                        value={date}
+                        mode="date"
+                        display="default"
+                        onChange={handleDateChange}
+                    />
+                )}
+                <View style={{ marginTop: 6 }}>
+                    <Button
+                        color='#8BC34A'
+                        title="Add Entry"
+                        onPress={handleAddEntry}
+                    />
+                </View>
+            </View>
+
+            <View style={styles.chartContainer}>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'black',
+                        borderRadius: 10,
+                        paddingVertical: 12,
+                        paddingHorizontal: 18,
+                        width: '80%',
+                        alignSelf: 'center',
+                        marginTop: 20,
+                    }}
+                    onPress={() => {
+                        navigation.navigate('LineChart', { itemId: item.id, name: item.name });
+                    }}
+                >
+                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Line Chart</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.listContainer}>
+                <FlatList
+                    data={entries.reverse()}
+                    keyExtractor={(entry) => entry.id}
+                    renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
+                    ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
+                    contentContainerStyle={styles.entriesContainer}
                 />
             </View>
-            <FlatList
-                data={entries.reverse()}
-                keyExtractor={(entry) => entry.id}
-                renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
-                ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
-                contentContainerStyle={styles.entriesContainer}
-            />
-
         </View>
     );
 };
@@ -117,14 +147,29 @@ const ItemDetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
         justifyContent: 'center',
-        backgroundColor: '#e6e6e6',
+    },
+    inputContainer: {
+        flex: 1,
+        padding: 16,
+        marginBottom: 16,
+    },
+    chartContainer: {
+        alignItems: 'center',
+        padding: 16,
+        marginBottom: 16,
+    },
+    listContainer: {
+        flex: 2,
+        padding: 16,
+        marginTop: 16,
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
-        marginVertical: 16,
+        textAlign: 'center',
+        marginBottom: 16,
     },
     input: {
         borderWidth: 1,
@@ -137,12 +182,10 @@ const styles = StyleSheet.create({
     },
     entriesContainer: {
         flexGrow: 1,
-        justifyContent: 'center',
     },
     entryContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
         padding: 7,
         borderWidth: 2,
         borderColor: 'rgba(0, 0, 0, 0.4)',
@@ -152,7 +195,6 @@ const styles = StyleSheet.create({
     },
     entryText: {
         fontSize: 18,
-        marginHorizontal: 8,
     },
     deleteContainer: {
         backgroundColor: 'red',

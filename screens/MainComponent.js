@@ -13,6 +13,7 @@ import LoginScreen from './LoginScreen';
 import ChartScreen from './ChartScreen';
 import ItemDetailScreen from './ItemDetailScreen';
 import AddItemScreen from './AddItemScreen';
+import LineChartScreen from './LineChartScreen';
 import { Image } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
@@ -90,6 +91,7 @@ const AddItemNavigator = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Add Item' component={AddItemScreen} />
             <Stack.Screen name='ItemDetail' component={ItemDetailScreen} />
+            <Stack.Screen name="LineChart" component={LineChartScreen} />
         </Stack.Navigator>
     );
 };
