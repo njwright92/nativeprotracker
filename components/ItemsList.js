@@ -89,7 +89,7 @@ const ItemsList = () => {
             <Pressable
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? ' #00FF00' : '#00cc66',
+                  backgroundColor: pressed ? '#8BC34A' : '#00cc66',
                 },
                 styles.button,
               ]}

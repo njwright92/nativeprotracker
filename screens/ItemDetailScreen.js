@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addEntry } from '../actions/addEntry.js';
+import { deleteEntry } from '../actions/deleteEntry.js';
 import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Swipeable } from 'react-native-gesture-handler';
 
 const ItemDetailScreen = ({ route }) => {
     const { itemId } = route.params;
@@ -35,12 +37,34 @@ const ItemDetailScreen = ({ route }) => {
         setQuantity('');
     };
 
+    const handleDeleteEntry = (entryId) => {
+        console.log('Delete', item.id);
+        dispatch(deleteEntry(itemId, entryId));
+    };
+
     const renderEntry = ({ item, formattedDate }) => {
+        const renderRightActions = (progress, dragX) => {
+            // Define the action to be performed when the user swipes right (i.e. delete)
+
+            return (
+                <View style={styles.deleteContainer}>
+                    <TouchableOpacity
+                        onPress={() => handleDeleteEntry(item.id)}
+                        style={styles.deleteButton}
+                    >
+                        <Text style={styles.deleteText}>Delete</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        };
+
         return (
-            <View style={styles.entryContainer}>
-                <Text style={styles.entryText}>{item.quantity}</Text>
-                <Text style={styles.entryText}>{formattedDate}</Text>
-            </View>
+            <Swipeable renderRightActions={renderRightActions}>
+                <View style={styles.entryContainer}>
+                    <Text style={styles.entryText}>{item.quantity}</Text>
+                    <Text style={styles.entryText}>{formattedDate}</Text>
+                </View>
+            </Swipeable>
         );
     };
 
@@ -71,7 +95,14 @@ const ItemDetailScreen = ({ route }) => {
                     onChange={handleDateChange}
                 />
             )}
-            <Button title="Add Entry" onPress={handleAddEntry} />
+            <View style={{ marginTop: 6 }}>
+                <Button
+                    color='#8BC34A'
+                    title="Add Entry"
+                    onPress={handleAddEntry}
+                />
+            </View>
+
             <FlatList
                 data={entries}
                 keyExtractor={(entry) => entry.id}
@@ -88,7 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#e6e6e6',
     },
     title: {
         fontSize: 24,
@@ -112,29 +143,35 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 8,
-        borderWidth: 1,
-        borderColor: '#ccc',
+        padding: 7,
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.4)',
         marginVertical: 4,
         borderRadius: 4,
-        backgroundColor: '#fff',
+        backgroundColor: '#F7F7F7',
     },
     entryText: {
-        fontSize: 16,
+        fontSize: 18,
         marginHorizontal: 8,
     },
-    addButton: {
-        backgroundColor: '#0066cc',
-        padding: 12,
-        borderRadius: 4,
-        marginVertical: 16,
-        width: '80%',
+    deleteContainer: {
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        height: '80%',
     },
-    addButtonText: {
-        color: '#fff',
-        fontSize: 18,
+    deleteButton: {
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        height: '80%',
+    },
+    deleteText: {
+        color: 'white',
+        fontSize: 17,
         fontWeight: 'bold',
-        textAlign: 'center',
     },
 });
 
