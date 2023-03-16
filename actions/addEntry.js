@@ -8,7 +8,7 @@ export const addEntryAsync = createAsyncThunk(
         return new Promise((resolve) =>
             setTimeout(() => {
                 resolve({ itemId, quantity, date, name, entryId });
-            }, 1000)
+            }, 300)
         );
     }
 );

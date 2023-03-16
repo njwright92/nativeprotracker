@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>Production Tracking</Text>
             <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
                 <Text style={styles.cardTitle}>Products</Text>
-                <Text style={styles.cardDescription}>Add products to this dynamic list by name. Then you can select individual products to add a quantity and date entry. Also View the production over time on a line chart.</Text>
+                <Text style={styles.cardDescription}>This card takes you to the products page where you can add items to your list. To remove an item, swipe left. To edit, swipe right. Start by entering the name of a product and then select it to add a quantity and date entry. The line chart displays your production over time. Simply select a product to add an entry and follow the link to view the line chart.</Text>
             </Pressable>
         </ScrollView>
     );

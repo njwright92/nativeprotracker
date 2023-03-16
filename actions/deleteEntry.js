@@ -5,7 +5,7 @@ export const deleteEntryAsync = (itemId, entryId) => {
         // Simulate a delay of 1 second
         setTimeout(() => {
             resolve({ itemId, entryId });
-        }, 1000);
+        }, 300);
     });
 };
 

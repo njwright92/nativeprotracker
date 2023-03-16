@@ -6,7 +6,7 @@ const addItemAsync = createAsyncThunk('items/addItemAsync', async (item) => {
     return new Promise((resolve) =>
         setTimeout(() => {
             resolve(item);
-        }, 1000)
+        }, 400)
     );
 });
 

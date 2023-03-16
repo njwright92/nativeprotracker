@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addEntry } from '../actions/addEntry.js';
 import { deleteEntry } from '../actions/deleteEntry.js';
@@ -44,9 +44,8 @@ const ItemDetailScreen = ({ route }) => {
         dispatch(deleteEntry(itemId, entryId));
     };
 
-    const renderEntry = ({ item, formattedDate }) => {
+    const renderEntry = useMemo(() => ({ item, formattedDate }) => {
         const renderRightActions = (progress, dragX) => {
-            // Define the action to be performed when the user swipes right (i.e. delete)
 
             return (
                 <View style={styles.deleteContainer}>
@@ -68,91 +67,104 @@ const ItemDetailScreen = ({ route }) => {
                 </View>
             </Swipeable>
         );
-    };
+    }, []);
 
     return (
-        <View style={styles.container}>
-            <View style={styles.inputContainer}>
-                <Text style={styles.title}>{item.name}</Text>
-                <Text>ID: {itemId}</Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={handleQuantityChange}
-                    value={quantity}
-                    placeholder="Quantity"
-                    keyboardType="numeric"
-                />
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: '#5637DD',
-                        borderRadius: 10,
-                        paddingVertical: 10,
-                        paddingHorizontal: '10%',
-                        alignSelf: 'center',
-                        width: '80%'
-                    }}
-                    onPress={() => setShowDatePicker(true)}
-                >
-                    <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center', fontSize: 18 }}>{buttonTitle}</Text>
-                </TouchableOpacity>
-                {showDatePicker && (
-                    <DateTimePicker
-                        value={date}
-                        mode="date"
-                        display="default"
-                        onChange={handleDateChange}
+        <ScrollView style={styles.scroll}>
+            <View style={styles.container}>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.title}>{item.name}</Text>
+                    <Text style={{ fontStyle: 'italic' }}>ID: {itemId}</Text>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={handleQuantityChange}
+                        value={quantity}
+                        placeholder="Quantity"
+                        keyboardType="numeric"
                     />
-                )}
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: '#8BC34A',
-                        padding: 10,
-                        borderRadius: 5,
-                        alignItems: 'center',
-                        marginVertical: 5,
-                    }}
-                    onPress={handleAddEntry}
-                >
-                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Add Entry</Text>
-                </TouchableOpacity>
-            </View>
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: '#5637DD',
+                            borderRadius: 10,
+                            paddingVertical: 10,
+                            paddingHorizontal: '10%',
+                            alignSelf: 'center',
+                            width: '80%'
+                        }}
+                        onPress={() => setShowDatePicker(true)}
+                    >
+                        <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center', fontSize: 18 }}>{buttonTitle}</Text>
+                    </TouchableOpacity>
+                    {showDatePicker && (
+                        <DateTimePicker
+                            value={date}
+                            mode="date"
+                            display="default"
+                            onChange={handleDateChange}
+                        />
+                    )}
+                    <TouchableOpacity
+                        style={{
+                            backgroundColor: '#8BC34A',
+                            padding: 10,
+                            borderRadius: 5,
+                            alignItems: 'center',
+                            marginVertical: 3,
+                        }}
+                        onPress={handleAddEntry}
+                    >
+                        <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Add Entry</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <View style={styles.chartContainer}>
 
-            <View style={styles.chartContainer}>
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: 'black',
-                        borderRadius: 10,
-                        paddingVertical: 12,
-                        paddingHorizontal: 18,
-                        width: '80%',
-                        alignSelf: 'center',
-                        marginTop: 20,
-                        marginVertical: 10,
-                    }}
-                    onPress={() => {
-                        navigation.navigate('LineChart', { itemId: item.id, name: item.name });
-                    }}
-                >
-                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 18 }}>Line Chart</Text>
-                </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: 'black',
+                                borderRadius: 10,
+                                paddingVertical: 12,
+                                paddingHorizontal: 18,
+                                width: '80%',
+                                alignSelf: 'center',
+                                marginTop: 20,
+                                marginVertical: 10,
+                            }}
+                            onPress={() => {
+                                navigation.navigate('LineChart', { itemId: item.id, name: item.name });
+                            }}
+                        >
+                            <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 18 }}>Line Chart</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <View style={styles.listContainer}>
+                    <View style={{ borderBottomWidth: 2, borderBottomColor: 'black' }}>
+                        <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#2F4F4F', textAlign: 'center' }}>Product Entries
+                        </Text>
+                    </View>
+
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#708090', textAlign: 'center' }}>
+                        Quantity{'               '}&&{'            '}Date
+                    </Text>
+                    <FlatList
+                        data={entries.sort((a, b) => new Date(b.date) - new Date(a.date))}
+                        keyExtractor={(entry) => entry.id}
+                        renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
+                        ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
+                        contentContainerStyle={styles.entriesContainer}
+                    />
+                </View>
             </View>
-            <View style={styles.listContainer}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'DarkSlateGray', textAlign: 'center' }}>
-                    Quantity{'   '}&&{'   '}Date
-                </Text>
-                <FlatList
-                    data={entries.reverse()}
-                    keyExtractor={(entry) => entry.id}
-                    renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
-                    ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
-                    contentContainerStyle={styles.entriesContainer}
-                />
-            </View>
-        </View>
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
+    scroll: {
+        padding: 1
+    },
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
@@ -160,19 +172,17 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         flex: 1,
-        padding: 16,
-        marginBottom: 16,
+        padding: 10,
         alignItems: 'center',
     },
     chartContainer: {
         alignItems: 'center',
-        padding: 16,
-        marginTop: 16,
+        justifyContent: 'center',
     },
     listContainer: {
-        flex: 2,
+        flex: 1,
         padding: 16,
-        marginTop: 16,
+        marginTop: 12,
     },
     title: {
         fontSize: 28,
@@ -184,8 +194,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#ccc',
         borderRadius: 4,
-        padding: 8,
-        marginVertical: 8,
+        padding: 10,
+        marginVertical: 10,
         width: '80%',
         backgroundColor: '#fff',
     },
@@ -195,15 +205,18 @@ const styles = StyleSheet.create({
     entryContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: 7,
+        padding: 10,
         borderWidth: 2,
         borderColor: 'rgba(0, 0, 0, 0.4)',
-        marginVertical: 4,
+        marginVertical: 5,
         borderRadius: 4,
         backgroundColor: '#F7F7F7',
     },
     entryText: {
-        fontSize: 18,
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontStyle: 'italic'
     },
     deleteContainer: {
         backgroundColor: 'red',
