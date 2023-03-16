@@ -93,7 +93,7 @@ const ItemDetailScreen = ({ route }) => {
                     }}
                     onPress={() => setShowDatePicker(true)}
                 >
-                    <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}>{buttonTitle}</Text>
+                    <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center', fontSize: 18 }}>{buttonTitle}</Text>
                 </TouchableOpacity>
                 {showDatePicker && (
                     <DateTimePicker
@@ -103,13 +103,18 @@ const ItemDetailScreen = ({ route }) => {
                         onChange={handleDateChange}
                     />
                 )}
-                <View style={{ marginTop: 6 }}>
-                    <Button
-                        color='#8BC34A'
-                        title="Add Entry"
-                        onPress={handleAddEntry}
-                    />
-                </View>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: '#8BC34A',
+                        padding: 10,
+                        borderRadius: 5,
+                        alignItems: 'center',
+                        marginVertical: 5,
+                    }}
+                    onPress={handleAddEntry}
+                >
+                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Add Entry</Text>
+                </TouchableOpacity>
             </View>
 
             <View style={styles.chartContainer}>
@@ -122,16 +127,19 @@ const ItemDetailScreen = ({ route }) => {
                         width: '80%',
                         alignSelf: 'center',
                         marginTop: 20,
+                        marginVertical: 10,
                     }}
                     onPress={() => {
                         navigation.navigate('LineChart', { itemId: item.id, name: item.name });
                     }}
                 >
-                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>Line Chart</Text>
+                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 18 }}>Line Chart</Text>
                 </TouchableOpacity>
             </View>
-
             <View style={styles.listContainer}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'DarkSlateGray', textAlign: 'center' }}>
+                    Quantity{'   '}&&{'   '}Date
+                </Text>
                 <FlatList
                     data={entries.reverse()}
                     keyExtractor={(entry) => entry.id}
@@ -154,11 +162,12 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         marginBottom: 16,
+        alignItems: 'center',
     },
     chartContainer: {
         alignItems: 'center',
         padding: 16,
-        marginBottom: 16,
+        marginTop: 16,
     },
     listContainer: {
         flex: 2,
@@ -172,7 +181,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
     },
     input: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: '#ccc',
         borderRadius: 4,
         padding: 8,

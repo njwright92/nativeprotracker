@@ -94,7 +94,7 @@ const ItemsList = () => {
                 styles.button,
               ]}
               onPress={() => {
-                navigation.navigate('ItemDetail', { itemId: item.id, name: item.name });
+                navigation.navigate('Product Detail', { itemId: item.id, name: item.name });
               }}
             >
               <Text style={styles.buttonText}>Add Entry</Text>

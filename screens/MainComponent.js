@@ -77,8 +77,8 @@ const AddItemNavigator = () => {
     const Stack = createStackNavigator();
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Add Item' component={AddItemScreen} />
-            <Stack.Screen name='ItemDetail' component={ItemDetailScreen} />
+            <Stack.Screen name='Add Product' component={AddItemScreen} />
+            <Stack.Screen name='Product Detail' component={ItemDetailScreen} />
             <Stack.Screen name="LineChart" component={LineChartScreen} />
         </Stack.Navigator>
     );
@@ -97,7 +97,7 @@ const HomeNavigator = () => {
                 name='AddItemStack'
                 component={AddItemNavigator}
                 options={({ route }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Items'
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Products'
                 })}
             />
         </Stack.Navigator>
@@ -185,7 +185,7 @@ const Main = () => {
                     name='AddItem'
                     component={AddItemNavigator}
                     options={{
-                        title: 'Items',
+                        title: 'Products',
                         drawerIcon: () => (
                             <MaterialCommunityIcons name="plus-circle-outline" size={24} />
                         ),

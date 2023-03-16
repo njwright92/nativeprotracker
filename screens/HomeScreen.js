@@ -8,7 +8,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>Production Tracking</Text>
             <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
                 <Text style={styles.cardTitle}>Products</Text>
-                <Text style={styles.cardDescription}>Add items to track by name date and quantity. Easily view, delete, or update items quantity on this dynamic list.</Text>
+                <Text style={styles.cardDescription}>Add products to this dynamic list by name. Then you can select individual products to add a quantity and date entry. Also View the production over time on a line chart.</Text>
             </Pressable>
         </ScrollView>
     );
@@ -41,8 +41,6 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     cardDescription: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 2,
         fontSize: 16,
         color: 'white',
         marginBottom: 10
