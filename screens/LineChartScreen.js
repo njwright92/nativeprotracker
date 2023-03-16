@@ -23,21 +23,21 @@ const LineChartScreen = ({ route }) => {
     if (!Array.isArray(weeklyEntries) || weeklyEntries.length === 0) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>No data to display</Text>
+                <Text style={styles.title}>No data to display.</Text>
             </View>
         );
     }
     if (!Array.isArray(monthlyEntries) || monthlyEntries.length === 0) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>No data to display</Text>
+                <Text style={styles.title}>No data to display.</Text>
             </View>
         );
     }
     if (!Array.isArray(yearlyEntries) || yearlyEntries.length === 0) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>No data to display</Text>
+                <Text style={styles.title}>No data to display.</Text>
             </View>
         );
     }
