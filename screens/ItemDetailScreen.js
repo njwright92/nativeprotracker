@@ -70,8 +70,8 @@ const ItemDetailScreen = ({ route }) => {
     }, []);
 
     return (
-        <ScrollView style={styles.scroll}>
-            <View style={styles.container}>
+        <ScrollView contentContainerstyle={styles.scroll}>
+            <ScrollView style={styles.container}>
                 <View style={styles.inputContainer}>
                     <Text style={styles.title}>{item.name}</Text>
                     <Text style={{ fontStyle: 'italic' }}>ID: {itemId}</Text>
@@ -156,19 +156,20 @@ const ItemDetailScreen = ({ route }) => {
                         contentContainerStyle={styles.entriesContainer}
                     />
                 </View>
-            </View>
+            </ScrollView>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
+
     scroll: {
-        padding: 1
+        flex: 1,
+        justifyContent: 'center',
     },
     container: {
-        flex: 1,
+        padding: 1,
         backgroundColor: '#F5FCFF',
-        justifyContent: 'center',
     },
     inputContainer: {
         flex: 1,

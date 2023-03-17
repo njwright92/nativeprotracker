@@ -47,7 +47,7 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: weeklyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                color: (opacity = 1) => `rgba(91, 44, 141, ${opacity})`,
                 strokeWidth: 2,
             },
         ],
@@ -58,7 +58,7 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: monthlyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                color: (opacity = 1) => `rgba(107, 63, 160, ${opacity})`,
                 strokeWidth: 2,
             },
         ],
@@ -69,15 +69,15 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: yearlyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: () => `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 1)`,
+                color: (opacity = 1) => `rgba(107, 63, 160, ${opacity})`,
                 strokeWidth: 2,
             },
         ],
     };
 
     return (
-        <ScrollView style={styles.scroll}>
-            <View style={styles.container}>
+        <ScrollView contentContainerstyle={styles.scroll}>
+            <ScrollView style={styles.scrollContent}>
                 <Text style={styles.title}>{item.name}</Text>
                 <Text style={{
                     fontSize: 24,
@@ -105,7 +105,7 @@ const LineChartScreen = ({ route }) => {
                         borderRadius: 16,
                     }}
                     withInnerLines={true}
-                    withOuterLines={true}
+                    withOuterLines={false}
                     fromZero={true}
                     contentInset={{ top: 20, bottom: 20 }}
                     withVerticalLabels={true}
@@ -178,19 +178,19 @@ const LineChartScreen = ({ route }) => {
                     withHorizontalLabels={true}
                 />
                 <Text style={styles.id}>ID: {itemId}</Text>
-            </View>
+            </ScrollView>
         </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     scroll: {
-        padding: 1
-    },
-    container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: '#0b2d5c',
+    },
+    scrollContent: {
+        backgroundColor: 'rgba(65,105,225,0.8)',
+        padding: 1,
     },
     title: {
         fontSize: 30,
