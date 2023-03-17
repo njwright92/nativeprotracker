@@ -20,15 +20,19 @@ This app is licensed under the MIT License.
 
 # Libraries
 
-React,
-React Navigation,
-React Native,
-Expo,
-Redux,
-Formik,
-Yup,
-moment, 
-and UUID.
+
+React: A JavaScript library used for building user interfaces.
+React Navigation: A library used for routing and navigation in React Native apps.
+React Native: A framework used for building native mobile apps using JavaScript and React.
+Expo: A set of tools and services used for developing and deploying React Native apps.
+Redux: A state management library used for managing application state in JavaScript apps.
+Formik: A library used for building forms in React and React Native apps.
+Yup: A JavaScript schema validation library used for validating form inputs.
+moment: A JavaScript library used for parsing, validating, manipulating, and formatting dates and times.
+UUID: A library used for generating unique identifiers.
+@react-native-community: A community-maintained set of React Native libraries and tools.
+redux-logger: A middleware for Redux that logs actions and state changes in the console.
+@reduxjs/toolkit: A library that provides a set of tools and best practices for efficient Redux development.
 
 # Acknowledgments 
 
