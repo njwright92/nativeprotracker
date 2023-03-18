@@ -37,13 +37,13 @@ const ItemsList = () => {
     };
 
     return (
-      <View style={styles.rightActions}>
-        <View style={styles.deleteContainer}>
-          <TouchableOpacity style={styles.deleteButton} onPress={onPressDelete}>
-            <Text style={styles.deleteText}>Delete</Text>
-          </TouchableOpacity>
-        </View>
+
+      <View style={styles.deleteContainer}>
+        <TouchableOpacity style={styles.deleteButton} onPress={onPressDelete}>
+          <Text style={styles.deleteText}>Delete</Text>
+        </TouchableOpacity>
       </View>
+
     );
   };
 
@@ -58,13 +58,13 @@ const ItemsList = () => {
     };
 
     return (
-      <View style={styles.leftActions}>
-        <View style={styles.updateContainer}>
-          <TouchableOpacity style={styles.updateButton} onPress={onPressUpdate}>
-            <Text style={styles.updateText}>Edit</Text>
-          </TouchableOpacity>
-        </View>
+
+      <View style={styles.updateContainer}>
+        <TouchableOpacity style={styles.updateButton} onPress={onPressUpdate}>
+          <Text style={styles.updateText}>Edit</Text>
+        </TouchableOpacity>
       </View>
+
     );
   };
 

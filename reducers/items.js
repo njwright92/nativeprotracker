@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY } from '../actions/types';
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY, EDIT_ENTRY } from '../actions/types';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -27,7 +27,6 @@ const itemsReducer = (state = initialState, action) => {
                 item.name = name;
             }
             return [...state];
-
         case DELETE_ENTRY:
             console.log('DELETE_ENTRY:', action.payload)
             const { itemId: deleteItemId, entryId } = action.payload;
@@ -36,6 +35,18 @@ const itemsReducer = (state = initialState, action) => {
                 deleteItem.entries = deleteItem.entries.filter((entry) => entry.id !== entryId);
             }
             return [...state];
+        case EDIT_ENTRY:
+            console.log('EDIT_ENTRY:', action.payload)
+            const { itemId: editItemId, entryId: editEntryId, quantity: editQuantity } = action.payload;
+            const editItem = state.find((item) => item.id === editItemId);
+            if (editItem) {
+                const editEntry = editItem.entries.find((entry) => entry.id === editEntryId);
+                if (editEntry) {
+                    editEntry.quantity = editQuantity;
+                }
+            }
+            return [...state];
+
         default:
             return state;
     }

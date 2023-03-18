@@ -3,6 +3,8 @@ import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollVi
 import { useSelector, useDispatch } from 'react-redux';
 import { addEntry } from '../actions/addEntry.js';
 import { deleteEntry } from '../actions/deleteEntry.js';
+import { editEntry } from '../actions/editEntry.js';
+import EditEntryForm from '../components/EditEntryForm.js';
 import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Swipeable } from 'react-native-gesture-handler';
@@ -14,12 +16,14 @@ const ItemDetailScreen = ({ route }) => {
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items);
     const item = items.find((item) => item.id === itemId);
-    const entries = item.entries;
+    const entries = item ? item.entries : [];
+
 
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
     const [quantity, setQuantity] = useState('');
     const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/YYYY'));
+    const [editingEntryId, setEditingEntryId] = useState(null);
 
     const handleQuantityChange = (text) => {
         setQuantity(text);
@@ -44,7 +48,17 @@ const ItemDetailScreen = ({ route }) => {
         dispatch(deleteEntry(itemId, entryId));
     };
 
-    const renderEntry = useMemo(() => ({ item, formattedDate }) => {
+    const handleUpdateEntry = (entryId, newQuantity) => {
+        const updatedEntry = { id: entryId, quantity: newQuantity };
+        const updatedEntries = entries.map(entry => entry.id === entryId ? updatedEntry : entry);
+        dispatch(editEntry(itemId, updatedEntries));
+        setEditingEntryId(null);
+    };
+
+
+    const renderEntry = useMemo(() => ({ item }) => {
+        const formattedDate = moment(item.date).format('MM/DD/YYYY');
+
         const renderRightActions = (progress, dragX) => {
 
             return (
@@ -60,8 +74,45 @@ const ItemDetailScreen = ({ route }) => {
             );
         };
 
+        const renderLeftActions = (progress, dragX) => {
+            const trans = dragX.interpolate({
+                inputRange: [-100, 0],
+                outputRange: [1, 0],
+            });
+
+            const onPressEdit = () => {
+                setEditingEntryId(item.id);
+            };
+
+            const onFormSubmit = (newQuantity) => {
+                handleUpdateEntry(item.id, newQuantity);
+              };
+
+            return (
+
+                <View style={styles.updateContainer}>
+                    <TouchableOpacity style={styles.updateButton} onPress={onPressEdit}>
+                        <Text style={styles.updateText}>Edit</Text>
+                    </TouchableOpacity>
+                </View>
+
+            );
+        };
+
+        if (editingEntryId === item.id) {
+            return (
+                <EditEntryForm
+                    entry={item}
+                    quantity={item.quantity}
+                    onSubmit={handleUpdateEntry}
+                    onCancel={() => setEditingEntryId(null)}
+                />
+            );
+        }
+
         return (
-            <Swipeable renderRightActions={renderRightActions}>
+            <Swipeable renderRightActions={renderRightActions}
+                renderLeftActions={renderLeftActions}>
                 <View style={styles.entryContainer}>
                     <Text style={styles.entryText}>{item.quantity}
                     </Text>
@@ -70,7 +121,7 @@ const ItemDetailScreen = ({ route }) => {
                 </View>
             </Swipeable>
         );
-    }, []);
+    }, [entries, editingEntryId]);
 
     return (
         <View style={styles.container}>
@@ -220,19 +271,38 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
-        height: '80%',
+        height: '75%',
     },
     deleteButton: {
         backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
-        height: '80%',
+        height: '75%',
     },
     deleteText: {
         color: 'white',
         fontSize: 17,
         fontWeight: 'bold',
+    },
+    updateButton: {
+        backgroundColor: 'gray',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        height: '75%',
+    },
+    updateText: {
+        color: 'white',
+        fontSize: 17,
+        fontWeight: 'bold',
+    },
+    updateContainer: {
+        backgroundColor: 'gray',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        height: '75%',
     },
 });
 
