@@ -2,7 +2,7 @@ import { ADD_ITEM } from './types';
 import { v4 as uuidv4 } from 'uuid';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const addItemAsync = createAsyncThunk('items/addItemAsync', async (item) => {
+export const addItemAsync = createAsyncThunk('items/addItemAsync', async (item) => {
     return new Promise((resolve) =>
         setTimeout(() => {
             resolve(item);
