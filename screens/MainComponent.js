@@ -77,9 +77,21 @@ const AddItemNavigator = () => {
     const Stack = createStackNavigator();
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Add Product' component={AddItemScreen} />
-            <Stack.Screen name='Product Detail' component={ItemDetailScreen} />
-            <Stack.Screen name="LineChart" component={LineChartScreen} />
+            <Stack.Screen name='Add Product'
+                component={AddItemScreen}
+            />
+            <Stack.Screen name='Product Detail'
+                component={ItemDetailScreen}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Add Product'
+                })}
+            />
+            <Stack.Screen name="LineChart"
+                component={LineChartScreen}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Charts'
+                })}
+            />
         </Stack.Navigator>
     );
 };
@@ -114,10 +126,9 @@ const AboutNavigator = () => {
             <Stack.Screen
                 name='Contact'
                 component={AboutScreen}
-                options={{
-                    title: 'Contact Me',
-                    ...screenOptions
-                }}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'support'
+                })}
             />
         </Stack.Navigator>
     );

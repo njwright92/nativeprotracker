@@ -23,7 +23,7 @@ const AboutScreen = () => {
                 </Text>
                 <Button
                     title='Send Email'
-                    buttonStyle={{ backgroundColor: 'olive', margin: 10 }}
+                    buttonStyle={{ backgroundColor: 'blue', margin: 10 }}
                     icon={
                         <Icon
                             name='envelope-o'
@@ -42,7 +42,7 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#dcdcdc',
+        backgroundColor: '#778899',
         paddingHorizontal: 20,
         paddingVertical: 30,
     },
@@ -57,17 +57,19 @@ const styles = StyleSheet.create({
     aboutText: {
         fontSize: 16,
         lineHeight: 24,
-        color: '#505050',
+        color: 'black',
+        fontWeight: 'bold'
     },
     contactSection: {
         borderTopWidth: 1,
-        borderTopColor: '#DDDDDD',
+        borderTopColor: 'black',
         paddingTop: 30,
     },
     contactText: {
         fontSize: 16,
         lineHeight: 24,
-        color: '#505050',
+        color: 'black',
+        fontWeight: 'bold'
     },
 });
 

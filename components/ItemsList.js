@@ -121,7 +121,7 @@ const ItemsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E68A00',
+    backgroundColor: '#cc7f2c',
     alignItems: 'stretch',
     justifyContent: 'center',
     paddingHorizontal: 20
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 2,
-    borderBottomColor: '#2F4F4F',
+    borderBottomColor: 'black',
     minHeight: 40
   },
   itemName: {
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: 'black',
     marginLeft: 10,
   },
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   updateButton: {
-    backgroundColor: 'gray',
+    backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   updateContainer: {
-    backgroundColor: 'gray',
+    backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,

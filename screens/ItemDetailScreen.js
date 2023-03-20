@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { addEntry } from '../actions/addEntry.js';
 import { deleteEntry } from '../actions/deleteEntry.js';
@@ -83,10 +83,6 @@ const ItemDetailScreen = ({ route }) => {
             const onPressEdit = () => {
                 setEditingEntryId(item.id);
             };
-
-            const onFormSubmit = (newQuantity) => {
-                handleUpdateEntry(item.id, newQuantity);
-              };
 
             return (
 
@@ -176,25 +172,23 @@ const ItemDetailScreen = ({ route }) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={{
-                        marginTop: 24,
-                        backgroundColor: 'black',
-                        borderRadius: 10,
-                        padding: 20,
-                        width: '75%',
-                        alignSelf: 'center'
-                    }}
+                    style={styles.card}
                     onPress={() => {
                         navigation.navigate('LineChart', { itemId: item.id, name: item.name });
                     }}
                 >
-                    <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 22 }}>Line Chart</Text>
+                    <View style={styles.imageContainer}>
+                        <Image source={require('../assets/img/chart.png')} style={styles.image} />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.text}>Line Chart</Text>
+                    </View>
                 </TouchableOpacity>
             </ScrollView>
 
             <View style={styles.listContainer}>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: 'black' }}>
-                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#2F4F4F', textAlign: 'center' }}>Product Entries
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>Product Entries
                     </Text>
                 </View>
 
@@ -218,7 +212,7 @@ const ItemDetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#D5E4F5',
+        backgroundColor: '#778899',
         alignItems: 'center'
     },
     inputContainer: {
@@ -238,7 +232,7 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 2,
-        borderColor: '#ccc',
+        borderColor: 'black',
         borderRadius: 4,
         padding: 5,
         marginVertical: 5,
@@ -253,7 +247,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
         borderWidth: 2,
-        borderColor: 'rgba(0, 0, 0, 0.4)',
+        borderColor: 'black',
         marginVertical: 5,
         borderRadius: 4,
         backgroundColor: '#F7F7F7',
@@ -286,7 +280,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     updateButton: {
-        backgroundColor: 'gray',
+        backgroundColor: 'blue',
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
@@ -298,11 +292,45 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     updateContainer: {
-        backgroundColor: 'gray',
+        backgroundColor: 'blue',
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
         height: '75%',
+    },
+    card: {
+        marginTop: 24,
+        backgroundColor: 'black',
+        borderRadius: 10,
+        width: '90%',
+        alignSelf: 'center',
+        overflow: 'hidden',
+    },
+    imageContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        resizeMode: 'cover',
+    },
+    textContainer: {
+        marginTop: 24,
+        paddingHorizontal: 20,
+        paddingVertical: 16,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    text: {
+        color: 'white',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 22,
     },
 });
 

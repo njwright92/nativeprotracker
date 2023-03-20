@@ -47,7 +47,7 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: weeklyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: (opacity = 1) => `rgba(91, 44, 141, ${opacity})`,
+                color: () => `rgba(204, 127, 44, 1)`,
                 strokeWidth: 2,
             },
         ],
@@ -58,7 +58,7 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: monthlyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: (opacity = 1) => `rgba(107, 63, 160, ${opacity})`,
+                color: () => `rgba(204, 127, 44, 1)`,
                 strokeWidth: 2,
             },
         ],
@@ -69,7 +69,7 @@ const LineChartScreen = ({ route }) => {
         datasets: [
             {
                 data: yearlyEntries.map(entry => Number(entry.quantity)).reverse(),
-                color: (opacity = 1) => `rgba(107, 63, 160, ${opacity})`,
+                color: () => `rgba(204, 127, 44, 1)`,
                 strokeWidth: 2,
             },
         ],
@@ -83,7 +83,7 @@ const LineChartScreen = ({ route }) => {
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#dcdcdc'
+                    color: '#333333'
                 }}>Weekly</Text>
                 <LineChart
                     data={weeklyData}
@@ -116,7 +116,7 @@ const LineChartScreen = ({ route }) => {
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#dcdcdc'
+                    color: '#333333'
                 }}>Monthly</Text>
                 <LineChart
                     data={monthlyData}
@@ -149,7 +149,7 @@ const LineChartScreen = ({ route }) => {
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#dcdcdc'
+                    color: '#333333'
                 }}>Yearly</Text>
                 <LineChart
                     data={yearlyData}
@@ -189,14 +189,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     scrollContent: {
-        backgroundColor: 'rgba(65,105,225,0.8)',
+        backgroundColor: '#778899',
         padding: 1,
     },
     title: {
         fontSize: 30,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#f8f8f8'
+        color: 'black'
     },
     id: {
         color: '#dcdcdc',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
@@ -14,7 +14,6 @@ const AddItemScreen = () => {
 
     const handleAddItem = (item) => {
         dispatch(addItemAsync(item));
-        setShouldShowForm(false); // hide the form after adding an item
     };
 
     const handleUpdateItem = (id, quantity) => {
@@ -27,18 +26,20 @@ const AddItemScreen = () => {
 
     return (
         <View style={styles.container}>
-            {shouldShowForm ? (
+            {shouldShowForm && (
                 <View style={styles.formContainer}>
                     <AddItemForm onAddItem={handleAddItem} />
                 </View>
-            ) : null}
+            )}
             <View style={styles.listContainer}>
                 <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
-            <Button
-                title={shouldShowForm ? "Hide Form" : "Show Form"}
+            <Pressable
+                style={({ pressed }) => [{ backgroundColor: pressed ? '#0D47A1' : '#0A3D6E', borderRadius: 20, padding: 16, width: '85%', alignItems: 'center', marginTop: 10, }]}
                 onPress={() => setShouldShowForm(!shouldShowForm)}
-            />
+            >
+                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
+            </Pressable>
         </View>
     );
 };
@@ -46,22 +47,23 @@ const AddItemScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#778899',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 20,
+        padding: 10,
     },
     formContainer: {
         backgroundColor: 'white',
-        borderColor: 'blue',
+        borderColor: 'black',
         borderWidth: 2,
-        padding: 20,
+        padding: 10,
         borderRadius: 10,
         marginBottom: 20,
+        width: '90%',
     },
     listContainer: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         alignSelf: 'stretch',
     },
 });

@@ -39,17 +39,21 @@ const AddItemForm = () => {
                 errors,
                 touched,
             }) => (
-                <View>
-                    <TextInput
-                        onChangeText={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        value={values.name}
-                        placeholder="Name"
-                    />
+                <View style={styles.container}>
+                    <Text style={styles.textInputTitle}>Add Product</Text>
+                    <View style={styles.textInputContainer}>
+                        <TextInput
+                            style={styles.textInput}
+                            onChangeText={handleChange('name')}
+                            onBlur={handleBlur('name')}
+                            value={values.name}
+                            placeholder="Name"
+                        />
+                    </View>
                     {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}
 
                     <Button
-                        color='#556B2F'
+                        color='blue'
                         onPress={handleSubmit}
                         title="Submit"
                         accessibilityLabel='Tap me to submit an item'
@@ -61,10 +65,31 @@ const AddItemForm = () => {
 };
 
 const styles = StyleSheet.create({
+    container: {
+        alignItems: 'center'
+    },
+    textInputContainer: {
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'black',
+        marginBottom: 10,
+        marginTop: 10,
+        alignItems: 'center'
+    },
+    textInputTitle: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginVertical: 5
+    },
+    textInput: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        width: 300,
+    },
     errorText: {
         color: 'red'
     }
 });
 
 export default AddItemForm;
-

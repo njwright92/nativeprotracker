@@ -49,12 +49,12 @@ const UpdateItemForm = ({ itemId, listItems, onCancel }) => {
                     </View>
                     <View style={styles.buttonContainer}>
                         <Button
-                            color='#556B2F'
+                            color='blue'
                             title="submit"
                             onPress={handleSubmit}
                         />
                         <Button
-                            color='maroon'
+                            color='red'
                             title="Cancel"
                             onPress={onCancel}
                         />

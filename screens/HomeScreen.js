@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FFA500',
+        backgroundColor: '#778899',
         paddingHorizontal: 20,
         paddingTop: 30
     },
@@ -29,21 +29,21 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     card: {
-        backgroundColor: '#778899',
+        backgroundColor: '#cc7f2c',
         borderRadius: 10,
         padding: 20,
         marginBottom: 15
     },
     cardTitle: {
         textAlign: 'center',
-        fontSize: 22,
+        fontSize: 23,
         fontWeight: 'bold',
-        marginBottom: 5
+        marginBottom: 10
     },
     cardDescription: {
-        fontSize: 16,
-        color: 'white',
-        marginBottom: 10
+        fontSize: 18,
+        color: '#333333',
+       padding: 4
     },
 });
 
