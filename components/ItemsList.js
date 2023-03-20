@@ -121,7 +121,7 @@ const ItemsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#cc7f2c',
+    backgroundColor: '#FFFFF0',
     alignItems: 'stretch',
     justifyContent: 'center',
     paddingHorizontal: 20
