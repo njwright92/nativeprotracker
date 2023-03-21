@@ -56,15 +56,15 @@ const ItemDetailScreen = ({ route }) => {
     };
 
 
-    const renderEntry = useMemo(() => ({ item }) => {
-        const formattedDate = moment(item.date).format('MM/DD/YYYY');
+    const renderEntry = useMemo(() => ({ entry }) => {
+        const formattedDate = moment(entry.date).format('MM/DD/YYYY');
 
         const renderRightActions = (progress, dragX) => {
 
             return (
                 <View style={styles.deleteContainer}>
                     <TouchableOpacity
-                        onPress={() => handleDeleteEntry(item.id)}
+                        onPress={() => handleDeleteEntry(entry.id)}
                         style={styles.deleteButton}
                     >
                         <Text style={styles.deleteText}>Delete
@@ -81,7 +81,7 @@ const ItemDetailScreen = ({ route }) => {
             });
 
             const onPressEdit = () => {
-                setEditingEntryId(item.id);
+                setEditingEntryId(entry.id);
             };
 
             return (
@@ -95,11 +95,12 @@ const ItemDetailScreen = ({ route }) => {
             );
         };
 
-        if (editingEntryId === item.id) {
+        if (editingEntryId === entry.id) {
             return (
                 <EditEntryForm
-                    entry={item}
-                    quantity={item.quantity}
+                    entry={entry}
+                    item={item}
+                    quantity={entry.quantity}
                     onSubmit={handleUpdateEntry}
                     onCancel={() => setEditingEntryId(null)}
                 />
@@ -110,7 +111,7 @@ const ItemDetailScreen = ({ route }) => {
             <Swipeable renderRightActions={renderRightActions}
                 renderLeftActions={renderLeftActions}>
                 <View style={styles.entryContainer}>
-                    <Text style={styles.entryText}>{item.quantity}
+                    <Text style={styles.entryText}>{entry.quantity}
                     </Text>
                     <Text style={styles.entryText}>{formattedDate
                     }</Text>
@@ -198,7 +199,7 @@ const ItemDetailScreen = ({ route }) => {
                 <FlatList
                     data={entries.sort((a, b) => new Date(b.date) - new Date(a.date))}
                     keyExtractor={(entry) => entry.id}
-                    renderItem={({ item }) => renderEntry({ item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
+                    renderItem={({ item }) => renderEntry({ entry: item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
                     ListEmptyComponent={<Text style={styles.entryText}>No Entries Found
                     </Text>}
                     contentContainerStyle={styles.entriesContainer}

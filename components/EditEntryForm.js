@@ -3,22 +3,21 @@ import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { editEntry } from '../actions/editEntry';
 
-const EditEntryForm = ({ itemId, entryId, onCancel }) => {
+const EditEntryForm = ( { entry, item, onSubmit, onCancel } ) => {
+    console.log('MY ARGS', entry, item);
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.items);
-    const item = items.find((item) => item.id === itemId);
-    const entry = item ? item.entries.find((entry) => entry.id === entryId) : null;
+    // const items = useSelector((state) => state.items);
+    // const item = items.find((item) => item.id === itemId);
+    // const entry = item ? item.entries.find((entry) => entry.id === entryId) : null;
     const [quantity, setQuantity] = useState(entry ? entry.quantity : '');
 
     const handleUpdateEntry = () => {
-        console.log('Updating entry...', itemId, entryId, quantity);
+        console.log('Updating entry...', item.id, entry.id, quantity);
         if (item && entry) {
             dispatch(
-                editEntry({
-                    id: itemId,
-                    entryId,
-                    quantity: quantity
-                })
+                editEntry(item.id,
+                    entry.id,
+                    quantity)
             );
         }
         onCancel();
