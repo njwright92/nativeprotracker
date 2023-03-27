@@ -1,9 +1,9 @@
 # ProTracker
-This mobile App is a simple but effective tool that allows users to add and track products. It can be used on a phone, laptop, or computer, making it a versatile option for workers who need to stay organized on the go.
+This mobile App is a simple but powerful tool that enables users to easily add and track products. With its full-stack CRUD functionality, users can create new products, view existing ones, update their details, and delete them if needed. It's a versatile option that can be accessed from any device, whether it's a phone, laptop, or computer, making it an ideal choice for workers who need to stay organized on the go.
 
 # Features
 Add products by name to the dynamic list
-Edit or delete products as needed, add and delete entries for quantity and date.
+Edit or delete products as needed, add edit and delete entries for quantity and date.
 Track the production on line Charts
 Set up a snapshot to give you a report weekly, monthly, and yearly report of your production.
 
@@ -19,7 +19,6 @@ Use the Expo app on your device to scan the QR code and open the app
 This app is licensed under the MIT License.
 
 # Libraries
-
 
 React: A JavaScript library used for building user interfaces.
 React Navigation: A library used for routing and navigation in React Native apps.
