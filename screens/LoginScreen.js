@@ -30,7 +30,7 @@ const LoginTab = ({ navigation }) => {
                 console.log('Could not delete user info', error)
             );
         }
-        navigation.navigate('Home');
+        navigation.navigate('Main');
     };
 
     useEffect(() => {
@@ -150,7 +150,7 @@ const RegisterTab = ({ navigation }) => {
                 console.log('Could not delete user info', error)
             );
         }
-        navigation.navigate('Home');
+        navigation.navigate('Main');
     };
 
     const getImageFromCamera = async () => {
