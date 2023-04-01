@@ -1,48 +1,39 @@
-import { useEffect, useState } from 'react';
+import react, { useEffect, useState } from 'react';
 import { View, StyleSheet, ScrollView, Image } from 'react-native';
 import { CheckBox, Input, Button } from 'react-native-elements';
-import * as SecureStore from 'expo-secure-store';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImageManipulator from 'expo-image-manipulator';
 import * as MediaLibrary from 'expo-media-library';
+import { useDispatch } from 'react-redux';
+import { login } from '../actions/login';
 
 const LoginTab = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [remember, setRemember] = useState(false);
+    const dispatch = useDispatch();
 
     const handleLogin = () => {
         console.log('username:', username);
         console.log('password:', password);
         console.log('remember:', remember);
+
+        const user = {
+            username,
+            password,
+            remember,
+        };
+
         if (remember) {
-            SecureStore.setItemAsync(
-                'userinfo',
-                JSON.stringify({
-                    username,
-                    password
-                })
-            ).catch((error) => console.log('Could not save user info', error));
+            dispatch(login(user));
         } else {
-            SecureStore.deleteItemAsync('userinfo').catch((error) =>
-                console.log('Could not delete user info', error)
-            );
+            dispatch(login(user));
         }
+
         navigation.navigate('Main');
     };
-
-    useEffect(() => {
-        SecureStore.getItemAsync('userinfo').then((userdata) => {
-            const userinfo = JSON.parse(userdata);
-            if (userinfo) {
-                setUsername(userinfo.username);
-                setPassword(userinfo.password);
-                setRemember(true);
-            }
-        });
-    }, []);
 
     return (
         <View style={styles.container}>
@@ -126,6 +117,13 @@ const RegisterTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [remember, setRemember] = useState(false);
     const [imageUrl, setImageUrl] = useState(false)
+    const dispatch = useDispatch();
+
+    const user = {
+        username,
+        password,
+        remember,
+    };
 
     const handleRegister = () => {
         const userInfo = {
@@ -137,19 +135,13 @@ const RegisterTab = ({ navigation }) => {
             remember
         };
         console.log(JSON.stringify(userInfo));
+
         if (remember) {
-            SecureStore.setItemAsync(
-                'userinfo',
-                JSON.stringify({
-                    username,
-                    password
-                })
-            ).catch((error) => console.log('Could not save user info', error));
+            dispatch(login(user));
         } else {
-            SecureStore.deleteItemAsync('userinfo').catch((error) =>
-                console.log('Could not delete user info', error)
-            );
+            dispatch(login(user));
         }
+
         navigation.navigate('Main');
     };
 
