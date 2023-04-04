@@ -134,6 +134,24 @@ const AboutNavigator = () => {
     );
 };
 
+const UserNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator
+            initialRouteName="Profile"
+            screenOptions={screenOptions}
+        >
+            <Stack.Screen
+                name='Profile'
+                component={UserInfoScreen}
+                options={({ route }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Profile'
+                })}
+            />
+        </Stack.Navigator>
+    );
+};
+
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
@@ -170,17 +188,6 @@ const Main = () => {
                     },
                 }}
             >
-                <Drawer.Screen
-                    name='Login'
-                    component={LoginNavigator}
-                    options={{
-                        title: 'Login/Register',
-                        drawerIcon: () => (
-                            <MaterialCommunityIcons name="login" size={24} />
-                        ),
-                        ...screenOptions
-                    }}
-                />
                 <Drawer.Screen
                     name='Home'
                     component={HomeNavigator}

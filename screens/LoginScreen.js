@@ -1,11 +1,8 @@
-import react, { useEffect, useState } from 'react';
-import { View, StyleSheet, ScrollView, Image } from 'react-native';
+import react, { useState } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { CheckBox, Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as ImagePicker from 'expo-image-picker';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as ImageManipulator from 'expo-image-manipulator';
-import * as MediaLibrary from 'expo-media-library';
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/login';
 
@@ -112,90 +109,29 @@ const LoginTab = ({ navigation }) => {
 const RegisterTab = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [remember, setRemember] = useState(false);
-    const [imageUrl, setImageUrl] = useState(false)
     const dispatch = useDispatch();
 
     const user = {
         username,
         password,
-        remember,
     };
 
     const handleRegister = () => {
         const userInfo = {
             username,
             password,
-            firstName,
-            lastName,
-            email,
-            remember
+
         };
         console.log(JSON.stringify(userInfo));
 
-        if (remember) {
-            dispatch(login(user));
-        } else {
-            dispatch(login(user));
-        }
+        dispatch(login(user));
 
         navigation.navigate('Main');
-    };
-
-    const getImageFromCamera = async () => {
-        const cameraPermission =
-            await ImagePicker.requestCameraPermissionsAsync();
-
-        if (cameraPermission.status === 'granted') {
-            const capturedImage = await ImagePicker.launchCameraAsync({
-                allowsEditing: true,
-                aspect: [1, 1]
-            });
-            if (!capturedImage.cancelled) {
-                console.log(capturedImage);
-                processImage(capturedImage.uri);
-            }
-        }
-    };
-
-    const processImage = async (imgUri) => {
-        const processedImage = await ImageManipulator.manipulateAsync(
-            imgUri,
-            [{ resize: { width: 400 } }],
-            { format: ImageManipulator.SaveFormat.PNG }
-        );
-        await MediaLibrary.saveToLibraryAsync(processedImage.uri);
-        console.log(processedImage);
-        setImageUrl(processedImage.uri);
-    };
-
-
-
-    const getImageFromGallery = async () => {
-        const mediaLibraryPermissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (mediaLibraryPermissions.status === 'granted') {
-            const capturedImage = await ImagePicker.launchImageLibraryAsync({
-                allowsEditing: true,
-                aspect: [1, 1]
-            });
-            if (!capturedImage.cancelled) {
-                console.log(capturedImage);
-                processImage(capturedImage.uri);
-            }
-        }
     };
 
     return (
         <ScrollView>
             <View style={styles.container}>
-                <View style={styles.imageContainer}>
-                    <Image source={{ uri: imageUrl }} style={styles.image} />
-                    <Button title='Camera' onPress={getImageFromCamera} />
-                    <Button title="Gallery" onPress={getImageFromGallery} />
-                </View>
                 <Input
                     placeholder='Username'
                     leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
@@ -211,37 +147,6 @@ const RegisterTab = ({ navigation }) => {
                     value={password}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
-                />
-                <Input
-                    placeholder='First Name'
-                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
-                    onChangeText={(text) => setFirstName(text)}
-                    value={firstName}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
-                <Input
-                    placeholder='Last Name'
-                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
-                    onChangeText={(text) => setLastName(text)}
-                    value={lastName}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
-                <Input
-                    placeholder='Email'
-                    leftIcon={<MaterialCommunityIcons name='email' size={24} color='black' />}
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
-                <CheckBox
-                    title='Remember Me'
-                    center
-                    checked={remember}
-                    onPress={() => setRemember(!remember)}
-                    containerStyle={styles.formCheckbox}
                 />
                 <View style={styles.formButton}>
                     <Button
@@ -331,17 +236,6 @@ const styles = StyleSheet.create({
         marginRight: 40,
         marginLeft: 40
     },
-    imageContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-        margin: 10
-    },
-    image: {
-        width: 60,
-        height: 60
-    }
 });
 
 export default LoginScreen;
