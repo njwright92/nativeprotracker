@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -12,10 +12,15 @@ const LoginTab = ({ navigation }) => {
     const auth = getAuth();
 
     const handleLogin = () => {
+        if (!email || !password) {
+            setError('Please enter a valid email and password');
+            return;
+        }
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
+                navigation.navigate('Main');
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -23,13 +28,29 @@ const LoginTab = ({ navigation }) => {
                 console.log(errorCode, errorMessage);
             });
 
-        navigation.navigate('Main');
+    };
+
+    const handleResetPassword = () => {
+        if (!email) {
+            setError('Please enter your email address');
+            return;
+        }
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                alert('Password reset email sent. Please check your inbox.');
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                alert(errorMessage);
+            });
     };
 
     return (
         <View style={styles.container}>
             <Input
-                placeholder="email"
+                placeholder="Email"
                 leftIcon={
                     <MaterialCommunityIcons
                         name="email"
@@ -55,11 +76,11 @@ const LoginTab = ({ navigation }) => {
                 }
                 onChangeText={(text) => setPassword(text)}
                 value={password}
-                secureTextEntry
+                secureTextEntry={true}
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
             />
-            <View style={styles.formButton}>
+            <View>
                 <Button
                     onPress={() => handleLogin()}
                     title="Login"
@@ -74,7 +95,23 @@ const LoginTab = ({ navigation }) => {
                     buttonStyle={{ backgroundColor: '#5637DD' }}
                 />
             </View>
-            <View style={styles.formButton}>
+            <View>
+                <Button
+                    onPress={() => handleResetPassword()}
+                    title="Reset Password"
+                    type="clear"
+                    icon={
+                        <MaterialCommunityIcons
+                            name="lock-reset"
+                            size={24}
+                            color="red"
+                            style={styles.icon}
+                        />
+                    }
+                    titleStyle={{ color: 'red' }}
+                />
+            </View>
+            <View>
                 <Button
                     onPress={() => navigation.navigate('Register')}
                     title="Register"
@@ -83,11 +120,11 @@ const LoginTab = ({ navigation }) => {
                         <MaterialCommunityIcons
                             name="account-plus"
                             size={24}
-                            color="blue"
+                            color="black"
                             style={styles.icon}
                         />
                     }
-                    titleStyle={{ color: 'blue' }}
+                    titleStyle={{ color: 'green', fontWeight: 'bold' }}
                 />
             </View>
         </View>
@@ -101,6 +138,16 @@ const RegisterTab = ({ navigation }) => {
     const auth = getAuth();
 
     const handleRegister = () => {
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long');
+            return;
+        }
+
+
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -110,6 +157,11 @@ const RegisterTab = ({ navigation }) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+                if (errorCode === 'auth/email-already-in-use') {
+                    alert('Email address is already in use');
+                } else {
+                    console.log(errorCode, errorMessage);
+                }
             });
 
         navigation.navigate('Main');
@@ -128,14 +180,14 @@ const RegisterTab = ({ navigation }) => {
                 />
                 <Input
                     placeholder='Password'
-                    leftIcon={<MaterialCommunityIcons name='lock' size={24} color='black' />}
+                    leftIcon={<MaterialCommunityIcons name='key' size={24} color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                    secureTextEntry
+                    secureTextEntry={true}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />
-                <View style={styles.formButton}>
+                <View>
                     <Button
                         onPress={() => handleRegister()}
                         title='Register'
@@ -207,22 +259,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 10,
     },
-    formIcon: {
-        marginRight: 10
-    },
-    formInput: {
-        padding: 8,
-        height: 60
-    },
-    formCheckbox: {
-        margin: 8,
-        backgroundColor: null
-    },
-    formButton: {
-        margin: 20,
-        marginRight: 40,
-        marginLeft: 40
-    },
+
 });
 
 export default LoginScreen;

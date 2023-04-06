@@ -22,12 +22,16 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>Production Tracking</Text>
             <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
                 <Text style={styles.cardTitle}>Products</Text>
-                <Text style={styles.cardDescription}>click to view products page, add items to your list. swipe left to delete, right to edit. Add quantity and date entries to your products. Track the production on the line charts.</Text>
+                <Text style={styles.cardDescription}>Click to view products page, add items to your list. Swipe left to delete, right to edit. Add quantity, and date entries to your products. Track the production on Line Charts.</Text>
             </Pressable>
             <View style={styles.signoutContainer}>
                 <Pressable onPress={handleSignOut}>
-                    <Ionicons name="exit-outline" size={30} color="black" />
+                    <Ionicons name="exit-outline"
+                        size={28}
+                        color="#FFFFF0"
+                    />
                 </Pressable>
+
             </View>
         </ScrollView>
     )
@@ -43,7 +47,7 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         color: 'black',
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 20
     },
@@ -55,7 +59,7 @@ const styles = StyleSheet.create({
     },
     cardTitle: {
         textAlign: 'center',
-        fontSize: 23,
+        fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 10
     },
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
         padding: 4
     },
     signoutContainer: {
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#8B0000',
         padding: 10,
         borderRadius: 5,
         alignSelf: 'flex-end'
