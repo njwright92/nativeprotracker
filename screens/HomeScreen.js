@@ -1,20 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, Pressable, ScrollView } from 'react-native';
+import { StyleSheet, Text, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
+import { getAuth, signOut } from "firebase/auth";
 
 const HomeScreen = ({ navigation }) => {
+
+    const handleSignOut = () => {
+        const auth = getAuth();
+        signOut(auth)
+            .then(() => {
+                console.log('User signed out successfully.');
+                navigation.navigate('Login');
+            })
+            .catch((error) => {
+                console.log('Error signing out:', error);
+            });
+    };
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.text}>Production Tracking</Text>
             <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
                 <Text style={styles.cardTitle}>Products</Text>
-                <Text style={styles.cardDescription}>This card takes you to the products page where you can add items to your list. To remove an item, swipe left. To edit, swipe right. Start by entering the name of a product and then select it to add a quantity and date entry. The line chart displays your production over time. Simply select a product to add an entry and follow the link to view the line chart.</Text>
+                <Text style={styles.cardDescription}>click to view products page, add items to your list. swipe left to delete, right to edit. Add quantity and date entries to your products. Track the production on the line charts.</Text>
             </Pressable>
-            <Pressable>
-                <Ionicons name="exit-outline" size={30} color="black" />
-            </Pressable>
+            <View style={styles.signoutContainer}>
+                <Pressable onPress={handleSignOut}>
+                    <Ionicons name="exit-outline" size={30} color="black" />
+                </Pressable>
+            </View>
         </ScrollView>
     )
 };
@@ -50,6 +64,12 @@ const styles = StyleSheet.create({
         color: '#333333',
         padding: 4
     },
+    signoutContainer: {
+        backgroundColor: '#FFFFFF',
+        padding: 10,
+        borderRadius: 5,
+        alignSelf: 'flex-end'
+    }
 });
 
 export default HomeScreen;

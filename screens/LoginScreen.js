@@ -1,33 +1,27 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { CheckBox, Input, Button } from 'react-native-elements';
+import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
-import { login } from '../actions/login';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const LoginTab = ({ navigation }) => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [remember, setRemember] = useState(false);
-    const dispatch = useDispatch();
+
+    const auth = getAuth();
 
     const handleLogin = () => {
-        console.log('username:', username);
-        console.log('password:', password);
-        console.log('remember:', remember);
-
-        const user = {
-            username,
-            password,
-            remember,
-        };
-
-        if (remember) {
-            dispatch(login(user));
-        } else {
-            dispatch(login(user));
-        }
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
 
         navigation.navigate('Main');
     };
@@ -35,17 +29,17 @@ const LoginTab = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Input
-                placeholder="Username"
+                placeholder="email"
                 leftIcon={
                     <MaterialCommunityIcons
-                        name="account"
+                        name="email"
                         size={24}
                         color="black"
                         style={styles.icon}
                     />
                 }
-                onChangeText={(text) => setUsername(text)}
-                value={username}
+                onChangeText={(text) => setEmail(text)}
+                value={email}
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
             />
@@ -61,15 +55,9 @@ const LoginTab = ({ navigation }) => {
                 }
                 onChangeText={(text) => setPassword(text)}
                 value={password}
+                secureTextEntry
                 containerStyle={styles.formInput}
                 leftIconContainerStyle={styles.formIcon}
-            />
-            <CheckBox
-                title="Remember Me"
-                center
-                checked={remember}
-                onPress={() => setRemember(!remember)}
-                containerStyle={styles.formCheckbox}
             />
             <View style={styles.formButton}>
                 <Button
@@ -107,24 +95,22 @@ const LoginTab = ({ navigation }) => {
 };
 
 const RegisterTab = ({ navigation }) => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch();
 
-    const user = {
-        username,
-        password,
-    };
+    const auth = getAuth();
 
     const handleRegister = () => {
-        const userInfo = {
-            username,
-            password,
-
-        };
-        console.log(JSON.stringify(userInfo));
-
-        dispatch(login(user));
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
 
         navigation.navigate('Main');
     };
@@ -133,10 +119,10 @@ const RegisterTab = ({ navigation }) => {
         <ScrollView>
             <View style={styles.container}>
                 <Input
-                    placeholder='Username'
-                    leftIcon={<MaterialCommunityIcons name='account' size={24} color='black' />}
-                    onChangeText={(text) => setUsername(text)}
-                    value={username}
+                    placeholder='Email'
+                    leftIcon={<MaterialCommunityIcons name='email' size={24} color='black' />}
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />
@@ -145,6 +131,7 @@ const RegisterTab = ({ navigation }) => {
                     leftIcon={<MaterialCommunityIcons name='lock' size={24} color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
+                    secureTextEntry
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />

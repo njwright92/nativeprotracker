@@ -47,7 +47,7 @@ const AddItemForm = () => {
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
-                            placeholder="Name"
+                            placeholder="Product name"
                         />
                     </View>
                     {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}

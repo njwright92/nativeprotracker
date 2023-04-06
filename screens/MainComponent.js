@@ -52,22 +52,10 @@ const LoginNavigator = () => {
             <Stack.Screen
                 name='Login'
                 component={LoginScreen}
-                options={({ navigation, route }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route),
-                    headerLeft: () => (
-                        <MaterialCommunityIcons
-                            name={
-                                getFocusedRouteNameFromRoute(route) === 'Register'
-                                    ? 'account-plus-outline'
-                                    : 'login-variant'
-                            }
-                            size={24}
-                            color='white'
-                            style={styles.stackIcon}
-                            onPress={() => navigation.toggleDrawer()}
-                        />
-                    )
+                options={({ route }) => ({
+                    title: route.name
                 })}
+
             />
         </Stack.Navigator>
     );
