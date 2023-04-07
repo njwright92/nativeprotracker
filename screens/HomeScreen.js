@@ -19,19 +19,30 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <Text style={styles.text}>Production Tracking</Text>
-            <Pressable style={styles.card} onPress={() => navigation.navigate('AddItemStack')}>
-                <Text style={styles.cardTitle}>Products</Text>
-                <Text style={styles.cardDescription}>Click to view products page, add items to your list. Swipe left to delete, right to edit. Add quantity, and date entries to your products. Track the production on Line Charts.</Text>
+            <Text style={styles.text}>
+                Production Tracking
+            </Text>
+            <Pressable style={styles.card}
+                onPress={() => navigation.navigate('AddItemStack')}>
+                <Text style={styles.cardTitle}>
+                    Products
+                </Text>
+                <Text style={styles.cardDescription}>
+                    Click to view products page, add items to your list. Swipe left to delete, right to edit. Add quantity, and date entries to your products. Track the production on Line Charts.
+                </Text>
             </Pressable>
             <View style={styles.signoutContainer}>
-                <Pressable onPress={handleSignOut}>
-                    <Ionicons name="exit-outline"
-                        size={28}
-                        color="#FFFFF0"
-                    />
-                </Pressable>
+                <Pressable
+                    onPress={handleSignOut}>
 
+                    <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
+                        <Ionicons
+                            name="exit-outline"
+                            size={26}
+                            color="#FFFFF0"
+                        /> Logout
+                    </Text>
+                </Pressable>
             </View>
         </ScrollView>
     )
