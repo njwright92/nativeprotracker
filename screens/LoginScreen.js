@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged
+}
+    from "firebase/auth";
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -25,10 +32,21 @@ const LoginTab = ({ navigation }) => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                setError(errorMessage);
                 console.log(errorCode, errorMessage);
             });
 
     };
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigation.navigate('Main');
+            }
+        });
+
+        return unsubscribe;
+    }, []);
 
     const handleResetPassword = () => {
         if (!email) {

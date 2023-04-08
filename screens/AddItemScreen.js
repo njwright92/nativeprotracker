@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
 import { addItemAsync } from '../actions/AddItem';
-import { updateItemAsync } from '../actions/UpdateItem';
-import { deleteItemAsync } from '../actions/DeleteItem';
+import { updateItem } from '../actions/UpdateItem';
+import { deleteItem } from '../actions/DeleteItem';
 
 const AddItemScreen = () => {
     const dispatch = useDispatch();
@@ -16,12 +16,12 @@ const AddItemScreen = () => {
         dispatch(addItemAsync(item));
     };
 
-    const handleUpdateItem = (id, quantity) => {
-        dispatch(updateItemAsync(id, quantity));
+    const handleUpdateItem = (id, name) => {
+        dispatch(updateItem(id, name));
     };
 
     const handleDeleteItem = (id) => {
-        dispatch(deleteItemAsync(id));
+        dispatch(deleteItem(id));
     };
 
     return (
