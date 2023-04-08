@@ -1,12 +1,15 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
+import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
 
 const LineChartScreen = ({ route }) => {
     const { itemId } = route.params;
+    const navigation = useNavigation();
     const weeklyEntries = useSelector(state =>
         state?.items?.find(item => item.id === itemId)?.entries.slice(-7) || []
     );
@@ -78,6 +81,17 @@ const LineChartScreen = ({ route }) => {
     return (
         <ScrollView contentContainerstyle={styles.scroll}>
             <ScrollView style={styles.scrollContent}>
+                <TouchableOpacity
+                    style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
+                    onPress={() => navigation.goBack()}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Ionicons name="chevron-back" size={24} color='#fff' />
+                        <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+                            Back
+                        </Text>
+                    </View>
+                </TouchableOpacity>
                 <Text style={styles.title}>{item.name}</Text>
                 <Text style={{
                     fontSize: 24,

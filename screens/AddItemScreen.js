@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Pressable, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
 import { addItemAsync } from '../actions/AddItem';
 import { updateItem } from '../actions/UpdateItem';
 import { deleteItem } from '../actions/DeleteItem';
+import { Ionicons } from '@expo/vector-icons';
 
 const AddItemScreen = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const [shouldShowForm, setShouldShowForm] = useState(true);
 
@@ -26,6 +29,17 @@ const AddItemScreen = () => {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity
+                style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
+                onPress={() => navigation.goBack()}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Ionicons name="chevron-back" size={24} color='#fff' />
+                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+                        Back
+                    </Text>
+                </View>
+            </TouchableOpacity>
             {shouldShowForm && (
                 <View style={styles.formContainer}>
                     <AddItemForm onAddItem={handleAddItem} />

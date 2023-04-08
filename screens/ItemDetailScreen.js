@@ -9,6 +9,7 @@ import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const ItemDetailScreen = ({ route }) => {
     const navigation = useNavigation();
@@ -17,6 +18,7 @@ const ItemDetailScreen = ({ route }) => {
     const items = useSelector((state) => state.items);
     const item = items.find((item) => item.id === itemId);
     const entries = item ? item.entries : [];
+
 
 
     const [showDatePicker, setShowDatePicker] = useState(false);
@@ -122,6 +124,17 @@ const ItemDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
+            <TouchableOpacity
+                style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
+                onPress={() => navigation.goBack()}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Ionicons name="chevron-back" size={24} color='#fff' />
+                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+                        Back
+                    </Text>
+                </View>
+            </TouchableOpacity>
             <ScrollView style={styles.inputContainer}>
                 <Text style={styles.title}>{item.name}
                 </Text>

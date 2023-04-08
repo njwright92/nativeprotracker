@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
                     Products
                 </Text>
                 <Text style={styles.cardDescription}>
-                    Click to view products page, add items to your list. Swipe left to delete, right to edit. Add quantity, and date entries to your products. Track the production on Line Charts.
+                    Click to view products page, add products to your list. Swipe left to delete, right to edit. Add quantity, and Date entries to your products. Track the production on Line Charts.
                 </Text>
             </Pressable>
             <View style={styles.signoutContainer}>
