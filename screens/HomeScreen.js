@@ -1,21 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable, ScrollView, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { getAuth, signOut } from "firebase/auth";
+import AboutScreen from './AboutScreen';
 
 const HomeScreen = ({ navigation }) => {
-
-    const handleSignOut = () => {
-        const auth = getAuth();
-        signOut(auth)
-            .then(() => {
-                console.log('User signed out successfully.');
-                navigation.navigate('Login');
-            })
-            .catch((error) => {
-                console.log('Error signing out:', error);
-            });
-    };
 
     return (
         <ScrollView style={styles.container}>
@@ -28,21 +15,11 @@ const HomeScreen = ({ navigation }) => {
                     Products
                 </Text>
                 <Text style={styles.cardDescription}>
-                    Click to view products page, add products to your list. Swipe left to delete, right to edit. Add quantity, and Date entries to your products. Track the production on Line Charts.
+                    Click to view products page, manage all your products with ease swipe left to edit right to delete.
                 </Text>
             </Pressable>
-            <View style={styles.signoutContainer}>
-                <Pressable
-                    onPress={handleSignOut}>
-
-                    <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>
-                        <Ionicons
-                            name="exit-outline"
-                            size={26}
-                            color="#FFFFF0"
-                        /> Logout
-                    </Text>
-                </Pressable>
+            <View>
+                <AboutScreen />
             </View>
         </ScrollView>
     )
@@ -78,12 +55,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#333333',
         padding: 4
-    },
-    signoutContainer: {
-        backgroundColor: '#8B0000',
-        padding: 10,
-        borderRadius: 5,
-        alignSelf: 'flex-end'
     }
 });
 

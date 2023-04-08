@@ -1,11 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Button, Icon } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
 import * as MailComposer from 'expo-mail-composer';
 
 const AboutScreen = () => {
-    const navigation = useNavigation();
 
     const sendMail = () => {
         MailComposer.composeAsync({
@@ -16,20 +13,9 @@ const AboutScreen = () => {
     }
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
-                onPress={() => navigation.goBack()}
-            >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Ionicons name="chevron-back" size={24} color='#fff' />
-                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-                        Back
-                    </Text>
-                </View>
-            </TouchableOpacity>
             <View style={styles.aboutSection}>
                 <Text style={styles.heading}>About</Text>
-                <Text style={styles.aboutText}>Our production tracking system allows you to easily add, update, and delete items from your products list. You can view the production progress over time on weekly and monthly charts.</Text>
+                <Text style={styles.aboutText}>My production tracking system allows you to easily manage products on a dynamic list. Add entries for date and quantity for each product individually. Also you can view the production over time on weekly, monthly and yearly line charts.</Text>
             </View>
             <View style={styles.contactSection}>
                 <Text style={styles.heading}>Support/Contact Me

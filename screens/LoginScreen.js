@@ -49,10 +49,6 @@ const LoginTab = ({ navigation }) => {
     }, []);
 
     const handleResetPassword = () => {
-        if (!email) {
-            setError('Please enter your email address');
-            return;
-        }
         sendPasswordResetEmail(auth, email)
             .then(() => {
                 alert('Password reset email sent. Please check your inbox.');
