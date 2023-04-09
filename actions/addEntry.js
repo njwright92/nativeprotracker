@@ -1,9 +1,9 @@
-import { ADD_ENTRY } from './types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
-import { doc, onSnapshot, addDoc, collection } from 'firebase/firestore';
+import { doc, onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
+import { ADD_ENTRY } from './types';
 
 export const addEntryAsync = createAsyncThunk(
     'items/addEntryAsync',
@@ -16,18 +16,22 @@ export const addEntryAsync = createAsyncThunk(
             name: name,
             quantity: quantity,
             date: date,
-            uid: user.uid, // add user's UID to the entry document
+            uid: user.uid,
         };
 
         try {
             const docRef = doc(firestore, 'items', itemId);
             await addDoc(collection(docRef, 'entries'), entry);
             console.log('addEntry', entry);
+
+            // Get the updated document and its data
+            const docSnap = await getDoc(docRef);
+            const itemData = docSnap.data();
+
+            return { itemId, quantity, date, name, entryId, entries: itemData.entries };
         } catch (error) {
             console.error('Error adding document: ', error);
         }
-
-        return { itemId, quantity, date, name, entryId };
     }
 );
 

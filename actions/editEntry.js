@@ -1,5 +1,5 @@
 import { EDIT_ENTRY } from './types';
-import { setDoc, doc, getDoc, collection } from 'firebase/firestore';
+import { setDoc, doc, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 
 export const editEntry = (itemId, entryId, quantity) => {
@@ -17,6 +17,9 @@ export const editEntry = (itemId, entryId, quantity) => {
                 quantity: quantity.quantity || []
             });
 
+            const updatedEntryDoc = await getDoc(entryRef);
+            console.log(updatedEntryDoc);
+
             dispatch({
                 type: EDIT_ENTRY,
                 payload: {
@@ -24,6 +27,17 @@ export const editEntry = (itemId, entryId, quantity) => {
                     entryId,
                     quantity,
                 },
+            });
+
+            // Add a listener to the entry document to update the local state
+            onSnapshot(entryRef, (doc) => {
+                const updatedEntry = { ...doc.data(), id: doc.id };
+                console.log('editEntry snapshot', updatedEntry);
+                // Update local state with the updated entry
+                dispatch({
+                    type: 'items/updateItemEntry',
+                    payload: { itemId, updatedEntry },
+                });
             });
         } catch (error) {
             console.error('Error updating document: ', error);

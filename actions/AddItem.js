@@ -1,7 +1,7 @@
 import { ADD_ITEM } from './types';
 import { v4 as uuidv4 } from 'uuid';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { doc, onSnapshot, addDoc, collection } from 'firebase/firestore';
+import { doc, onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 
@@ -24,15 +24,22 @@ export const addItem = (item) => {
         try {
             const docRef = await addDoc(collection(firestore, "items"), newItem);
             console.log('addItem', newItem);
-            dispatch({
-                type: ADD_ITEM,
-                payload: { ...newItem, id: docRef.id },
-            });
 
-            // Add a listener to the newly created document to update the local state
-            onSnapshot(doc(firestore, "items", docRef.id), () => { });
+            // Get the newly created document and update the local state
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                dispatch({
+                    type: ADD_ITEM,
+                    payload: { ...docSnap.data(), id: docRef.id },
+                });
 
-            await dispatch(addItemAsync(newItem));
+                // Add a listener to the newly created document to update the local state
+                onSnapshot(doc(firestore, "items", docRef.id), () => { });
+
+                await dispatch(addItemAsync(docSnap.data()));
+            } else {
+                console.log("No such document!");
+            }
         } catch (error) {
             console.error('Error adding document: ', error);
         }

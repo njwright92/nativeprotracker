@@ -1,5 +1,5 @@
 import { UPDATE_ITEM } from './types';
-import { updateDoc, doc, onSnapshot } from 'firebase/firestore';
+import { updateDoc, doc, onSnapshot, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebaseConfig';
 
 export const updateItem = (item) => {
@@ -7,7 +7,11 @@ export const updateItem = (item) => {
         try {
             const itemRef = doc(firestore, "items", item.id);
 
-            
+            const docSnap = await getDoc(itemRef);
+            if (!docSnap.exists()) {
+                console.error('Item does not exist');
+                return;
+            }
 
             await updateDoc(itemRef, {
                 name: item.name,
