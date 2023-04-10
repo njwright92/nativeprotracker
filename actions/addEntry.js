@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import { doc, onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig';
+import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 import { ADD_ENTRY } from './types';
 
@@ -20,7 +20,7 @@ export const addEntryAsync = createAsyncThunk(
         };
 
         try {
-            const docRef = doc(firestore, 'items', itemId);
+            const docRef = doc(db, 'items', itemId);
             await addDoc(collection(docRef, 'entries'), entry);
             console.log('addEntry', entry);
 
@@ -36,7 +36,7 @@ export const addEntryAsync = createAsyncThunk(
 );
 
 export const addEntry = (itemId, quantity, date, name) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const entryId = uuidv4();
         dispatch({
             type: ADD_ENTRY,
@@ -44,17 +44,11 @@ export const addEntry = (itemId, quantity, date, name) => {
         });
         await dispatch(addEntryAsync({ itemId, quantity, date, name, entryId }));
 
-        // Add a listener to the entry subcollection to update the local state
         onSnapshot(
-            collection(firestore, 'items', itemId, 'entries'),
+            collection(db, 'items', itemId, 'entries'),
             (snapshot) => {
                 const entries = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
                 console.log('addEntry snapshot', entries);
-                // Update local state with the new entry
-                dispatch({
-                    type: 'items/updateItemEntries',
-                    payload: { itemId, entries },
-                });
             }
         );
     };

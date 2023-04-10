@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     cardDescription: {
         fontSize: 18,
         color: '#333333',
-        padding: 4
+        padding: 4,
+        textAlign: 'center'
     }
 });
 

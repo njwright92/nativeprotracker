@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     aboutSection: {
-        backgroundColor: '#F5DEB3',
+        backgroundColor: '#D3D3D3',
         borderColor: 'black',
         borderWidth: 1,
         marginBottom: 30,

@@ -1,11 +1,11 @@
 import { UPDATE_ITEM } from './types';
 import { updateDoc, doc, onSnapshot, getDoc } from 'firebase/firestore';
-import { firestore } from '../firebaseConfig';
+import { db } from '../firebaseConfig';
 
 export const updateItem = (item) => {
     return async (dispatch) => {
         try {
-            const itemRef = doc(firestore, "items", item.id);
+            const itemRef = doc(db, "items", item.id);
 
             const docSnap = await getDoc(itemRef);
             if (!docSnap.exists()) {
@@ -25,7 +25,6 @@ export const updateItem = (item) => {
                 },
             });
 
-            // Add a listener to the updated document to update the local state
             onSnapshot(itemRef, (doc) => {
                 const updatedItem = doc.data();
                 dispatch({

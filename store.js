@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import rootReducer from './reducers';
-import { firestore } from './firebaseConfig';
+import { db } from './firebaseConfig';
 
 const persistConfig = {
     key: 'root',
@@ -13,7 +13,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleware = [thunk.withExtraArgument({ firestore })];
+const middleware = [thunk.withExtraArgument({ db })];
 
 const store = createStore(persistedReducer, applyMiddleware(...middleware));
 
