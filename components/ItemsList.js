@@ -119,6 +119,7 @@ const ItemsList = () => {
         keyExtractor={(item) => item.id}
         data={items}
         renderItem={renderItem}
+        extraData={items}
         ListEmptyComponent={<Text style={styles.emptyList}>No items added yet</Text>}
       />
     </View>

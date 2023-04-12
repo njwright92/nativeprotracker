@@ -6,9 +6,9 @@ export const getAllEntriesByCurrentUser = async () => {
     const currentUser = getAuth().currentUser;
     const q = query(
         collectionGroup(db, 'entries'),
-        where('uid', '==', currentUser.uid)
+        where('uid', '==', currentUser.uid),
     );
-    
+
     const querySnapshot = await getDocs(q);
 
     const entries = [];
@@ -20,5 +20,12 @@ export const getAllEntriesByCurrentUser = async () => {
         console.log(entries)
     });
 
-    return entries;
+    const allEntries = await getDocs(collectionGroup(db, 'entries'));
+
+    const allEntriesByCurrentUser = allEntries.docs.filter(doc => doc.data().uid === currentUser.uid)
+        .map(doc => ({ id: doc.id, ...doc.data() }));
+
+    console.log(allEntriesByCurrentUser);
+
+    return allEntriesByCurrentUser;
 };

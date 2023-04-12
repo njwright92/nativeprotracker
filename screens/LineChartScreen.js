@@ -1,31 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 import { Ionicons } from '@expo/vector-icons';
+import { getAllEntriesByCurrentUser } from '../actions/getEntry';
 import moment from 'moment';
 
 const LineChartScreen = ({ route }) => {
-    const { itemId } = route.params;
+    const { itemId, itemName } = route.params;
     const navigation = useNavigation();
-    const weeklyEntries = useSelector(state =>
-        state?.items?.find(item => item.id === itemId)?.entries.slice(-7) || []
-    );
-    const monthlyEntries = useSelector(state =>
-        state?.items?.find(item => item.id === itemId)?.entries.slice(-28) || []
-    );
-    const yearlyEntries = useSelector(state =>
-        state?.items?.find(item => item.id === itemId)?.entries.slice(-270) || []
-    );
-    const item = useSelector(state =>
-        state?.items?.find(item => item.id === itemId)
-    );
+    const [weeklyEntries, setWeeklyEntries] = useState([]);
+    const [monthlyEntries, setMonthlyEntries] = useState([]);
+    const [yearlyEntries, setYearlyEntries] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchEntries = async () => {
+            try {
+                const entries = await getAllEntriesByCurrentUser();
+                const weekly = entries.slice(-7);
+                const monthly = entries.slice(-28);
+                const yearly = entries.slice(-270);
+                setWeeklyEntries(weekly);
+                setMonthlyEntries(monthly);
+                setYearlyEntries(yearly);
+                setLoading(false);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchEntries();
+    }, []);
+
+    if (loading) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>Loading...</Text>
+            </View>
+        );
+    }
+
 
     if (!Array.isArray(weeklyEntries) || weeklyEntries.length === 0) {
         return (
             <View style={styles.container}>
+                <TouchableOpacity
+                    style={({ pressed }) => [{ backgroundColor: pressed ? 'black' : 'darkSlateGray', borderRadius: 20, padding: 16, width: '85%', marginTop: 20, alignSelf: 'center' }]}
+                    onPress={() => navigation.goBack()}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Ionicons name="chevron-back" size={28} color='black' />
+                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 24 }}>
+                            Back
+                        </Text>
+                    </View>
+                </TouchableOpacity>
                 <Text style={styles.title}>No data to display.</Text>
             </View>
         );
@@ -46,7 +76,7 @@ const LineChartScreen = ({ route }) => {
     }
 
     const weeklyData = {
-        labels: weeklyEntries.map(entry => moment(entry.date).format('MM/DD')).reverse(),
+        labels: weeklyEntries.map(entry => moment(entry.date.toDate()).format('MM/DD')).reverse(),
         datasets: [
             {
                 data: weeklyEntries.map(entry => Number(entry.quantity)).reverse(),
@@ -57,7 +87,7 @@ const LineChartScreen = ({ route }) => {
     };
 
     const monthlyData = {
-        labels: monthlyEntries.map(entry => moment(entry.date).format('MM/DD')).reverse(),
+        labels: monthlyEntries.map(entry => moment(entry.date.toDate()).format('MM/DD')).reverse(),
         datasets: [
             {
                 data: monthlyEntries.map(entry => Number(entry.quantity)).reverse(),
@@ -68,7 +98,7 @@ const LineChartScreen = ({ route }) => {
     };
 
     const yearlyData = {
-        labels: yearlyEntries.map(entry => moment(entry.date).format('MM/DD')).reverse(),
+        labels: yearlyEntries.map(entry => moment(entry.date.toDate()).format('MM/DD')).reverse(),
         datasets: [
             {
                 data: yearlyEntries.map(entry => Number(entry.quantity)).reverse(),
@@ -92,7 +122,7 @@ const LineChartScreen = ({ route }) => {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.title}>{itemName}</Text>
                 <Text style={{
                     fontSize: 24,
                     fontWeight: 'bold',

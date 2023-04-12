@@ -67,8 +67,7 @@ const ItemDetailScreen = ({ route }) => {
 
     const renderEntry = ({ entry, date, quantity }) => {
         const formattedDate = moment(date.toDate()).format('MM/DD/YYYY')
-        // console.log(entry, date, quantity)
-        console.log(moment(date.toDate()).format('MM/DD/YYYY'));
+        
 
 
         const renderRightActions = (progress, dragX) => {
@@ -192,7 +191,7 @@ const ItemDetailScreen = ({ route }) => {
                 <TouchableOpacity
                     style={styles.card}
                     onPress={() => {
-                        navigation.navigate('LineChart', { itemId: item.id, name: itemParam.name });
+                        navigation.navigate('LineChart', { itemId: itemParam.id, name: itemParam.name });
                     }}
                 >
                     <View style={styles.imageContainer}>
@@ -217,6 +216,7 @@ const ItemDetailScreen = ({ route }) => {
                     data={entries}
                     keyExtractor={(entry) => entry.id}
                     renderItem={({ item }) => renderEntry({ entry: item, date: item.date })}
+                    extraData={entries}
                     ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
                     contentContainerStyle={styles.entriesContainer}
                 />
