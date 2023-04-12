@@ -7,6 +7,8 @@ import UpdateItemForm from './UpdateItemForm';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { getAllItemsByCurrentUser } from '../actions/getItems';
+import { onSnapshot, collection } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 
 
 const ItemsList = () => {
@@ -21,6 +23,13 @@ const ItemsList = () => {
       setItems(items);
     };
     fetchItems();
+
+    // subscribe to updates to the items collection
+    const unsubscribe = onSnapshot(collection(db, 'items'), () => {
+      fetchItems();
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleUpdateItem = (id, name, quantity) => {

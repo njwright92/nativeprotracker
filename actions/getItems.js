@@ -16,5 +16,7 @@ export const getAllItemsByCurrentUser = async () => {
         });
     });
 
-    return items;
+    const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
+
+    return sortedItems;
 };

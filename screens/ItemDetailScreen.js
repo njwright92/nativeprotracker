@@ -11,6 +11,8 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
+import { db } from '../firebaseConfig';
+import { collectionGroup, onSnapshot } from 'firebase/firestore';
 
 const ItemDetailScreen = ({ route }) => {
     const navigation = useNavigation();
@@ -31,7 +33,15 @@ const ItemDetailScreen = ({ route }) => {
             setEntries(entries);
         };
         fetchEntries();
+
+        // subscribe to updates to the entries collection group
+        const unsubscribe = onSnapshot(collectionGroup(db, 'entries'), () => {
+            fetchEntries();
+        });
+
+        return () => unsubscribe();
     }, []);
+
 
 
     const handleQuantityChange = (text) => {
@@ -67,7 +77,7 @@ const ItemDetailScreen = ({ route }) => {
 
     const renderEntry = ({ entry, date, quantity }) => {
         const formattedDate = moment(date.toDate()).format('MM/DD/YYYY')
-        
+
 
 
         const renderRightActions = (progress, dragX) => {
