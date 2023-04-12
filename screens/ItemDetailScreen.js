@@ -1,31 +1,38 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { addEntry } from '../actions/addEntry.js';
-import { deleteEntry } from '../actions/deleteEntry.js';
-import { editEntry } from '../actions/editEntry.js';
-import EditEntryForm from '../components/EditEntryForm.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { addEntry } from '../actions/addEntry';
+import { deleteEntry } from '../actions/deleteEntry';
+import { editEntry } from '../actions/editEntry';
+import EditEntryForm from '../components/EditEntryForm';
 import moment from 'moment';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { getAllEntriesByCurrentUser } from '../actions/getEntry';
 
 const ItemDetailScreen = ({ route }) => {
     const navigation = useNavigation();
-    const { itemId } = route.params;
+    const { item: itemParam } = route.params;
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items);
-    const item = items.find((item) => item.id === itemId);
-    const entries = item ? item.entries : [];
-
-
-
+    const item = items.find((item) => item.id === itemParam);
+    const [entries, setEntries] = useState([]);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
     const [quantity, setQuantity] = useState('');
     const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/YYYY'));
     const [editingEntryId, setEditingEntryId] = useState(null);
+
+    useEffect(() => {
+        const fetchEntries = async () => {
+            const entries = await getAllEntriesByCurrentUser();
+            setEntries(entries);
+        };
+        fetchEntries();
+    }, []);
+
 
     const handleQuantityChange = (text) => {
         setQuantity(text);
@@ -41,36 +48,37 @@ const ItemDetailScreen = ({ route }) => {
     };
 
     const handleAddEntry = () => {
-        dispatch(addEntry(itemId, quantity, date, item.name));
+        dispatch(addEntry(item, quantity, date, itemParam.name));
         setQuantity('');
     };
 
     const handleDeleteEntry = (entryId) => {
         console.log('Delete', item.id);
-        dispatch(deleteEntry(itemId, entryId));
+        dispatch(deleteEntry(item, entryId));
     };
 
     const handleUpdateEntry = (entryId, newQuantity) => {
         const updatedEntry = { id: entryId, quantity: newQuantity };
         const updatedEntries = entries.map(entry => entry.id === entryId ? updatedEntry : entry);
-        dispatch(editEntry(itemId, updatedEntries));
+        dispatch(editEntry(item, updatedEntries));
         setEditingEntryId(null);
     };
 
 
-    const renderEntry = useMemo(() => ({ entry }) => {
-        const formattedDate = moment(entry.date).format('MM/DD/YYYY');
+    const renderEntry = ({ entry, date, quantity }) => {
+        const formattedDate = moment(date.toDate()).format('MM/DD/YYYY')
+        // console.log(entry, date, quantity)
+        console.log(moment(date.toDate()).format('MM/DD/YYYY'));
+
 
         const renderRightActions = (progress, dragX) => {
-
             return (
                 <View style={styles.deleteContainer}>
                     <TouchableOpacity
                         onPress={() => handleDeleteEntry(entry.id)}
                         style={styles.deleteButton}
                     >
-                        <Text style={styles.deleteText}>Delete
-                        </Text>
+                        <Text style={styles.deleteText}>Delete</Text>
                     </TouchableOpacity>
                 </View>
             );
@@ -87,17 +95,15 @@ const ItemDetailScreen = ({ route }) => {
             };
 
             return (
-
                 <View style={styles.updateContainer}>
                     <TouchableOpacity style={styles.updateButton} onPress={onPressEdit}>
                         <Text style={styles.updateText}>Edit</Text>
                     </TouchableOpacity>
                 </View>
-
             );
         };
 
-        if (editingEntryId === entry.id) {
+        if (editingEntryId && entry && entry.id === editingEntryId) {
             return (
                 <EditEntryForm
                     entry={entry}
@@ -110,17 +116,15 @@ const ItemDetailScreen = ({ route }) => {
         }
 
         return (
-            <Swipeable renderRightActions={renderRightActions}
-                renderLeftActions={renderLeftActions}>
+            <Swipeable renderRightActions={renderRightActions} renderLeftActions={renderLeftActions}>
                 <View style={styles.entryContainer}>
-                    <Text style={styles.entryText}>{entry.quantity}
-                    </Text>
-                    <Text style={styles.entryText}>{formattedDate
-                    }</Text>
+                    <Text style={styles.entryText}>{entry.quantity}</Text>
+                    <Text style={styles.entryText}>{formattedDate}</Text>
                 </View>
             </Swipeable>
         );
-    }, [entries, editingEntryId]);
+    };
+
 
     return (
         <View style={styles.container}>
@@ -136,13 +140,13 @@ const ItemDetailScreen = ({ route }) => {
                 </View>
             </TouchableOpacity>
             <ScrollView style={styles.inputContainer}>
-                <Text style={styles.title}>{item.name}
+                <Text style={styles.title}>{itemParam.name}
                 </Text>
                 <Text style={{
                     fontStyle: 'italic',
                     borderBottomWidth: 2,
                     borderBottomColor: 'black'
-                }}>ID: {itemId}
+                }}>ID: {itemParam.id}
                 </Text>
                 <TextInput
                     style={styles.input}
@@ -188,7 +192,7 @@ const ItemDetailScreen = ({ route }) => {
                 <TouchableOpacity
                     style={styles.card}
                     onPress={() => {
-                        navigation.navigate('LineChart', { itemId: item.id, name: item.name });
+                        navigation.navigate('LineChart', { itemId: item.id, name: itemParam.name });
                     }}
                 >
                     <View style={styles.imageContainer}>
@@ -210,11 +214,10 @@ const ItemDetailScreen = ({ route }) => {
                     Quantity{'          '}&&{'          '}Date
                 </Text>
                 <FlatList
-                    data={entries.sort((a, b) => new Date(b.date) - new Date(a.date))}
+                    data={entries}
                     keyExtractor={(entry) => entry.id}
-                    renderItem={({ item }) => renderEntry({ entry: item, formattedDate: moment(item.date).format('MM/DD/YYYY') })}
-                    ListEmptyComponent={<Text style={styles.entryText}>No Entries Found
-                    </Text>}
+                    renderItem={({ item }) => renderEntry({ entry: item, date: item.date })}
+                    ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
                     contentContainerStyle={styles.entriesContainer}
                 />
             </View>

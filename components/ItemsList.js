@@ -1,19 +1,27 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Pressable } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteItem } from '../actions/DeleteItem'
 import { updateItem } from '../actions/UpdateItem'
 import UpdateItemForm from './UpdateItemForm';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { getAllItemsByCurrentUser } from '../actions/getItems';
 
 
 const ItemsList = () => {
-  const items = useSelector(state => state.items);
   const dispatch = useDispatch();
   const [editingItemId, setEditingItemId] = useState(null);
   const navigation = useNavigation();
+  const [items, setItems] = useState([]);
 
+  useEffect(() => {
+    const fetchItems = async () => {
+      const items = await getAllItemsByCurrentUser();
+      setItems(items);
+    };
+    fetchItems();
+  }, []);
 
   const handleUpdateItem = (id, name, quantity) => {
     const updatedItem = { id, name, quantity };
@@ -94,7 +102,7 @@ const ItemsList = () => {
                 styles.button,
               ]}
               onPress={() => {
-                navigation.navigate('Product Detail', { itemId: item.id, name: item.name });
+                navigation.navigate('Product Detail', { item });
               }}
             >
               <Text style={styles.buttonText}>Add Entry</Text>
@@ -111,7 +119,6 @@ const ItemsList = () => {
         keyExtractor={(item) => item.id}
         data={items}
         renderItem={renderItem}
-        extraData={items} // Add this line to force re-render on state change
         ListEmptyComponent={<Text style={styles.emptyList}>No items added yet</Text>}
       />
     </View>

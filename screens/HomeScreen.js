@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
                     Products
                 </Text>
                 <Text style={styles.cardDescription}>
-                    Click to view products page, manage all your products with ease swipe left to edit right to delete.
+                    Click to view products page, manage all your products with ease swipe left to delete right to edit.
                 </Text>
             </Pressable>
             <View>

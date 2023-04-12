@@ -4,7 +4,7 @@ import { StyleSheet, View, TouchableOpacity, Text, Pressable } from 'react-nativ
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
-import { addItemAsync } from '../actions/AddItem';
+import { addItem } from '../actions/AddItem';
 import { updateItem } from '../actions/UpdateItem';
 import { deleteItem } from '../actions/DeleteItem';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,7 +16,7 @@ const AddItemScreen = () => {
     const [shouldShowForm, setShouldShowForm] = useState(true);
 
     const handleAddItem = (item) => {
-        dispatch(addItemAsync(item));
+        dispatch(addItem(item));
     };
 
     const handleUpdateItem = (id, name) => {
