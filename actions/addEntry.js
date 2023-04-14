@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-import { onSnapshot, setDoc, collection, query, getDocs, doc } from 'firebase/firestore'; // import query and where
+import { setDoc, collection, query, getDocs, doc } from 'firebase/firestore'; // import query and where
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 import { ADD_ENTRY } from './types';
 
-export const addEntry = (itemId, quantity, date, name) => {
+export const addEntry = (itemId, quantity, date) => {
     return async (dispatch) => {
         const auth = getAuth();
         const user = auth.currentUser;
@@ -13,7 +13,6 @@ export const addEntry = (itemId, quantity, date, name) => {
 
         const entry = {
             id: entryId,
-            name: name,
             quantity: quantity,
             date: date,
             uid: user.uid,
@@ -23,7 +22,6 @@ export const addEntry = (itemId, quantity, date, name) => {
             // find the item doc that matches itemId and uid
             const itemQuery = query(collection(db, 'items'));
             const itemDocs = await getDocs(itemQuery);
-            console.log('itemDocs', itemDocs);
 
             // if there are no docs found, return
             if (itemDocs.length === 0) {
@@ -41,14 +39,10 @@ export const addEntry = (itemId, quantity, date, name) => {
 
             dispatch({
                 type: ADD_ENTRY,
-                payload: { quantity, date, name, entryId, uid: user.uid },
+                payload: { entryId, quantity, date, uid: user.uid },
             });
+            console.log('addEntry', entry);
 
-            // listen for updates to the 'entries' subcollection of the item doc
-            onSnapshot(collection(itemDoc.ref, 'entries'), (snapshot) => {
-                const entries = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-                console.log('addEntry snapshot', entries);
-            });
         } catch (error) {
             console.error('Error adding document: ', error);
         }

@@ -22,9 +22,16 @@ export const getAllEntriesByCurrentUser = async () => {
 
     const allEntries = await getDocs(collectionGroup(db, 'entries'));
 
-    const allEntriesByCurrentUser = allEntries.docs.filter(doc => doc.data().uid === currentUser.uid)
+    const allEntriesByCurrentUser = allEntries.docs
+        .filter(doc => doc.data().uid === currentUser.uid)
         .map(doc => ({ id: doc.id, ...doc.data() }))
-        .sort((a, b) => b.date.seconds - a.date.seconds);
+        .sort((a, b) => b.date.seconds - a.date.seconds)
+
+    const doc = entries[0]?.itemId;
+
+    const entriesWithDocId = allEntriesByCurrentUser.filter(entry => entry.itemId === doc);
+
+    console.log(entriesWithDocId);
 
     console.log(allEntriesByCurrentUser);
 

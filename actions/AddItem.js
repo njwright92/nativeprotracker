@@ -1,6 +1,6 @@
 import { ADD_ITEM } from './types';
 import { v4 as uuidv4 } from 'uuid';
-import { doc, onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
+import { onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 
@@ -33,8 +33,8 @@ export const addItem = (item, entries = []) => {
                     for (const entry of entries) {
                         const entryId = uuidv4();
                         const newEntry = {
+                            itemid: docRef.id,
                             id: entryId,
-                            name: entry.name,
                             quantity: entry.quantity,
                             date: entry.date,
                             uid: user.uid

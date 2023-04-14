@@ -19,12 +19,11 @@ const itemsReducer = (state = initialState, action) => {
             );
         case ADD_ENTRY:
             console.log('ADD_ENTRY:', action.payload)
-            const { itemId, quantity, date, name } = action.payload;
+            const { itemId, quantity, date } = action.payload;
             const item = state.find((item) => item.id === itemId);
             if (item) {
                 const entryId = uuidv4();
                 item.entries.push({ id: entryId, quantity, date });
-                item.name = name;
             }
             return [...state];
         case DELETE_ENTRY:
