@@ -6,7 +6,6 @@ export const updateItem = (item) => {
     return async (dispatch) => {
         try {
             const itemRef = doc(db, "items", item.id);
-
             const docSnap = await getDoc(itemRef);
             if (!docSnap.exists()) {
                 console.error('Item does not exist');
@@ -15,7 +14,6 @@ export const updateItem = (item) => {
 
             await updateDoc(itemRef, {
                 name: item.name,
-                entries: item.entries || [],
             });
 
             dispatch({

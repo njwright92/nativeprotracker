@@ -1,19 +1,17 @@
 import { ADD_ITEM } from './types';
-import { v4 as uuidv4 } from 'uuid';
-import { onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
+import { onSnapshot, addDoc, collection, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 
-export const addItem = (item, entries = []) => {
+export const addItem = (item) => {
     return async (dispatch) => {
         const auth = getAuth();
         const user = auth.currentUser;
 
         const newItem = {
-            id: uuidv4(),
             name: item.name,
-            entries: [],
-            uid: user.uid
+            uid: user.uid,
+            timestamp: serverTimestamp(),
         };
 
         try {
@@ -27,21 +25,6 @@ export const addItem = (item, entries = []) => {
                     type: ADD_ITEM,
                     payload: itemData,
                 });
-
-                if (entries.length > 0) {
-                    // add the entries to the newly created item
-                    for (const entry of entries) {
-                        const entryId = uuidv4();
-                        const newEntry = {
-                            itemid: docRef.id,
-                            id: entryId,
-                            quantity: entry.quantity,
-                            date: entry.date,
-                            uid: user.uid
-                        };
-                        await addDoc(collection(docRef, 'entries'), newEntry);
-                    }
-                }
 
                 // listen for updates to the 'items' collection
                 onSnapshot(collection(db, "items"), (snapshot) => {
