@@ -34,7 +34,7 @@ const ItemDetailScreen = ({ route }) => {
         const unsubscribe = getAllEntriesByCurrentUser(itemParam.id, handleEntriesUpdate);
 
         return () => {
-            unsubscribe(); // Clean up the listener when the component unmounts
+            unsubscribe; // Clean up the listener when the component unmounts
         };
     }, [itemParam.id]);
 

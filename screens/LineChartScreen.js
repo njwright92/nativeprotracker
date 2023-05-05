@@ -4,8 +4,11 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 import { Ionicons } from '@expo/vector-icons';
-import { getAllEntriesByCurrentUser } from '../actions/getEntry';
+import { collectionGroup, where, getDocs, query } from 'firebase/firestore';
 import moment from 'moment';
+import { db } from '../firebaseConfig';
+import { getAuth } from 'firebase/auth';
+
 
 const LineChartScreen = ({ route }) => {
     const { itemId, itemName } = route.params;
@@ -14,14 +17,26 @@ const LineChartScreen = ({ route }) => {
     const [monthlyEntries, setMonthlyEntries] = useState([]);
     const [yearlyEntries, setYearlyEntries] = useState([]);
     const [loading, setLoading] = useState(true);
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
 
     useEffect(() => {
         const fetchEntries = async () => {
             try {
-                const entries = await getAllEntriesByCurrentUser();
-                const weekly = entries.slice(-7);
-                const monthly = entries.slice(-28);
-                const yearly = entries.slice(-270);
+                const entriesQuery = query(
+                    collectionGroup(db, 'entries'),
+                    where('uid', '==', currentUser.uid),
+                    where('itemId', '==', itemId)
+                );
+                const entriesSnapshot = await getDocs(entriesQuery);
+                const entries = entriesSnapshot.docs.map((doc) => doc.data());
+                console.log('All Entries:', entries);
+                const weekly = entries.slice(-5);
+                const monthly = entries.slice(-25);
+                const yearly = entries.slice(-260);
+                console.log('Weekly Entries:', weekly);
+                console.log('Monthly Entries:', monthly);
+                console.log('Yearly Entries:', yearly);
                 setWeeklyEntries(weekly);
                 setMonthlyEntries(monthly);
                 setYearlyEntries(yearly);
@@ -36,7 +51,7 @@ const LineChartScreen = ({ route }) => {
     if (loading) {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Loading...</Text>
+                <Text style={styles.title}>Loading.....</Text>
             </View>
         );
     }
