@@ -1,5 +1,5 @@
 import { ADD_ENTRY } from './types';
-import { onSnapshot, addDoc, collection, getDoc, doc } from 'firebase/firestore';
+import { onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
 

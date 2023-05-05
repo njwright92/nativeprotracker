@@ -39,8 +39,8 @@ const ItemsList = () => {
     setEditingItemId(null);
   };
 
-  const handleDeleteItem = (id) => {
-    dispatch(deleteItem(id));
+  const handleDeleteItem = (items) => {
+    dispatch(deleteItem(items));
   };
 
   const renderRightActions = (progress, dragX, item) => {

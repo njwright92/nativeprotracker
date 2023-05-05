@@ -1,9 +1,12 @@
 import { EDIT_ENTRY } from './types';
 import { setDoc, doc, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { getAuth } from 'firebase/auth';
 
 export const editEntry = (itemId, entryId, quantity) => {
     return async (dispatch) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
         try {
             const entryRef = doc(
                 collection(db, "items", itemId, "entries"),
@@ -26,6 +29,7 @@ export const editEntry = (itemId, entryId, quantity) => {
                     itemId,
                     entryId,
                     quantity,
+                    uid: user.uid
                 },
             });
 
