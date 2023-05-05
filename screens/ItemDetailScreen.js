@@ -11,15 +11,14 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
-import { db } from '../firebaseConfig';
-import { collectionGroup, onSnapshot } from 'firebase/firestore';
 
 const ItemDetailScreen = ({ route }) => {
+    console.log('item: ', item);
     const navigation = useNavigation();
     const { item: itemParam } = route.params;
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items);
-    const item = items.find((item) => item.id === itemParam);
+    const item = items.find((item) => item.id === itemParam.id); //Updated to match the item by ID
     const [entries, setEntries] = useState([]);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
@@ -28,20 +27,16 @@ const ItemDetailScreen = ({ route }) => {
     const [editingEntryId, setEditingEntryId] = useState(null);
 
     useEffect(() => {
-        const fetchEntries = async () => {
-            const entries = await getAllEntriesByCurrentUser();
-            setEntries(entries);
+        const handleEntriesUpdate = (updatedEntries) => {
+            setEntries(updatedEntries);
         };
-        fetchEntries();
 
-        // subscribe to updates to the entries collection group
-        const unsubscribe = onSnapshot(collectionGroup(db, 'entries'), () => {
-            fetchEntries();
-        });
+        const unsubscribe = getAllEntriesByCurrentUser(itemParam.id, handleEntriesUpdate);
 
-        return () => unsubscribe();
-    }, []);
-
+        return () => {
+            unsubscribe(); // Clean up the listener when the component unmounts
+        };
+    }, [itemParam.id]);
 
 
     const handleQuantityChange = (text) => {
@@ -58,27 +53,33 @@ const ItemDetailScreen = ({ route }) => {
     };
 
     const handleAddEntry = () => {
-        dispatch(addEntry(item, quantity, date, itemParam.name));
+        dispatch(addEntry(itemParam.id, quantity, date));
         setQuantity('');
     };
 
     const handleDeleteEntry = (entryId) => {
-        console.log('Delete', item.id);
-        dispatch(deleteEntry(item, entryId));
+        dispatch(deleteEntry(itemParam.id, entryId));
     };
 
     const handleUpdateEntry = (entryId, newQuantity) => {
-        const updatedEntry = { id: entryId, quantity: newQuantity };
-        const updatedEntries = entries.map(entry => entry.id === entryId ? updatedEntry : entry);
-        dispatch(editEntry(item, updatedEntries));
+        dispatch(editEntry(item.id, entryId, { quantity: newQuantity }));
         setEditingEntryId(null);
     };
 
+    const renderEntry = ({ item: entry }) => {
+        const { date, quantity } = entry;
+        console.log(`Type of date: ${typeof date}, value: ${date}`);
+        let formattedDate = '';
 
-    const renderEntry = ({ entry, date, quantity }) => {
-        const formattedDate = moment(date.toDate()).format('MM/DD/YYYY')
-
-
+        if (date && typeof date.toDate === 'function') { // Firestore Timestamp
+            formattedDate = moment(date.toDate()).format('MM/DD/YYYY');
+        } else if (date instanceof Date) { // JavaScript Date object
+            formattedDate = moment(date).format('MM/DD/YYYY');
+        } else if (typeof date === 'string') { // Date as a string
+            formattedDate = date;
+        } else {
+            formattedDate = 'N/A'; // Default value if date is not defined or not recognized
+        }
 
         const renderRightActions = (progress, dragX) => {
             return (
@@ -117,7 +118,7 @@ const ItemDetailScreen = ({ route }) => {
                 <EditEntryForm
                     entry={entry}
                     item={item}
-                    quantity={entry.quantity}
+                    quantity={quantity}
                     onSubmit={handleUpdateEntry}
                     onCancel={() => setEditingEntryId(null)}
                 />
@@ -127,7 +128,7 @@ const ItemDetailScreen = ({ route }) => {
         return (
             <Swipeable renderRightActions={renderRightActions} renderLeftActions={renderLeftActions}>
                 <View style={styles.entryContainer}>
-                    <Text style={styles.entryText}>{entry.quantity}</Text>
+                    <Text style={styles.entryText}>{quantity}</Text>
                     <Text style={styles.entryText}>{formattedDate}</Text>
                 </View>
             </Swipeable>
@@ -219,13 +220,13 @@ const ItemDetailScreen = ({ route }) => {
                     </Text>
                 </View>
 
-                <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#708090', textAlign: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
                     Quantity{'          '}&&{'          '}Date
                 </Text>
                 <FlatList
                     data={entries}
                     keyExtractor={(entry) => entry.id}
-                    renderItem={({ item }) => renderEntry({ entry: item, date: item.date })}
+                    renderItem={({ item }) => renderEntry({ item })}
                     extraData={entries}
                     ListEmptyComponent={<Text style={styles.entryText}>No Entries Found</Text>}
                     contentContainerStyle={styles.entriesContainer}

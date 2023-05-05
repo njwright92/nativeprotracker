@@ -1,24 +1,23 @@
 import { DELETE_ENTRY } from './types';
-import { deleteDoc, doc, onSnapshot } from 'firebase/firestore';
+import { doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
+import { getAuth } from 'firebase/auth';
 
 export const deleteEntry = (itemId, entryId) => {
     return async (dispatch) => {
+        const auth = getAuth();
+        const user = auth.currentUser;
         try {
-            const entryRef = doc(db, 'items', itemId, 'entries', entryId);
-            await deleteDoc(entryRef);
+
+            await deleteDoc(doc(db, "items", itemId, "entries", entryId));
             dispatch({
                 type: DELETE_ENTRY,
-                payload: { itemId, entryId },
+                payload: {
+                    entryId,
+                    itemId,
+                    uid: user.uid
+                },
             });
-
-            // Add a listener to the entry subcollection to update the local state
-            onSnapshot(
-                doc(entryRef),
-                () => {
-                    console.log('deleteEntry snapshot');
-                }
-            );
         } catch (error) {
             console.error('Error deleting entry: ', error);
         }
