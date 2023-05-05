@@ -1,5 +1,5 @@
 import { DELETE_ENTRY } from './types';
-import { doc, deleteDoc, getDoc } from 'firebase/firestore';
+import { doc, deleteDoc, } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
 
