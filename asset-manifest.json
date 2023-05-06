@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/nativeprotracker/static/js/app.059a1110.chunk.js",
-    "app.js.map": "/nativeprotracker/static/js/app.059a1110.chunk.js.map",
+    "app.js": "/nativeprotracker/static/js/app.55c58932.chunk.js",
+    "app.js.map": "/nativeprotracker/static/js/app.55c58932.chunk.js.map",
     "runtime~app.js": "/nativeprotracker/static/js/runtime~app.85fe9626.js",
     "runtime~app.js.map": "/nativeprotracker/static/js/runtime~app.85fe9626.js.map",
-    "static/js/2.8e088ad6.chunk.js": "/nativeprotracker/static/js/2.8e088ad6.chunk.js",
-    "static/js/2.8e088ad6.chunk.js.map": "/nativeprotracker/static/js/2.8e088ad6.chunk.js.map",
+    "static/js/2.6960592b.chunk.js": "/nativeprotracker/static/js/2.6960592b.chunk.js",
+    "static/js/2.6960592b.chunk.js.map": "/nativeprotracker/static/js/2.6960592b.chunk.js.map",
     "fonts/AntDesign.ttf": "/nativeprotracker/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/nativeprotracker/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/nativeprotracker/./fonts/Feather.ttf",
@@ -24,7 +24,7 @@
     "index.html": "/nativeprotracker/index.html",
     "manifest.json": "/nativeprotracker/manifest.json",
     "serve.json": "/nativeprotracker/serve.json",
-    "static/js/2.8e088ad6.chunk.js.LICENSE.txt": "/nativeprotracker/static/js/2.8e088ad6.chunk.js.LICENSE.txt",
+    "static/js/2.6960592b.chunk.js.LICENSE.txt": "/nativeprotracker/static/js/2.6960592b.chunk.js.LICENSE.txt",
     "static/media/bell.png": "/nativeprotracker/static/media/bell.cf04af27.png",
     "static/media/block.jpg": "/nativeprotracker/static/media/block.599e43ab.jpg",
     "static/media/chart.png": "/nativeprotracker/static/media/chart.aced667c.png",
@@ -34,7 +34,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.85fe9626.js",
-    "static/js/2.8e088ad6.chunk.js",
-    "static/js/app.059a1110.chunk.js"
+    "static/js/2.6960592b.chunk.js",
+    "static/js/app.55c58932.chunk.js"
   ]
 }
