@@ -1,7 +1,7 @@
 # Native Pro Tracker
 
 <p>
-  <img src="../assets/img/gptLogo.png" width="30" height="30" alt="ChatGPT Logo">
+  <img src="./assets/img/gptLogo.png" width="30" height="30" alt="ChatGPT Logo">
 </p>
 
 [![Website Status](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://nativeprotracker.com/)
@@ -15,16 +15,16 @@ Whether you're keeping track of inventory, monitoring daily tasks, or managing p
 
 ## Features
 
-- Custom domain with Namecheap
-- Backend server hosted on GCP Firebase/Firestore
-- Frontend built with Expo-React Native and Redux
-- Real-time database and authentication with Firebase
-- Responsive design for mobile and web platforms
-- Data visualization with React Native Chart Kit
-- Dynamic list for adding, editing, and deleting products with quantity and date entries
+- Custom domain with Namecheap.
+- Backend server hosted on GCP Firebase/Firestore.
+- Frontend built with Expo-React Native and Redux.
+- Real-time database and authentication with Firebase.
+- Responsive design for mobile and web platforms.
+- Data visualization with React Native Chart Kit.
+- Dynamic list for adding, editing, and deleting products with quantity and date entries.
 - Track production progress with interactive line charts
-- Snapshot feature for generating weekly, monthly, and yearly production reports
-- Google Analytics integration for tracking user login and screen/page views
+- Snapshot feature for generating weekly, monthly, and yearly production reports.
+- Firebase Analytics integration for tracking user traffic.
 
 
 ## Installation

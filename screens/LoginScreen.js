@@ -11,6 +11,7 @@ import {
     onAuthStateChanged
 }
     from "firebase/auth";
+import { logEvent } from '@firebase/analytics';
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -27,6 +28,7 @@ const LoginTab = ({ navigation }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
+                logEvent;
                 navigation.navigate('Main');
             })
             .catch((error) => {
@@ -179,7 +181,7 @@ const RegisterTab = ({ navigation }) => {
                     console.log(errorCode, errorMessage);
                 }
             });
-
+        logEvent;
         navigation.navigate('Main');
     };
 

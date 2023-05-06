@@ -8,9 +8,12 @@ import { collectionGroup, where, getDocs, query } from 'firebase/firestore';
 import moment from 'moment';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
+import { logEvent } from '@firebase/analytics';
 
 
 const LineChartScreen = ({ route }) => {
+
+    logEvent;
     const { itemId, itemName } = route.params;
     const navigation = useNavigation();
     const [weeklyEntries, setWeeklyEntries] = useState([]);

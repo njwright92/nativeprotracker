@@ -11,8 +11,10 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
+import { logEvent } from '@firebase/analytics';
 
 const ItemDetailScreen = ({ route }) => {
+    logEvent;
     console.log('item: ', item);
     const navigation = useNavigation();
     const { item: itemParam } = route.params;

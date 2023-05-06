@@ -8,8 +8,11 @@ import { addItem } from '../actions/AddItem';
 import { updateItem } from '../actions/UpdateItem';
 import { deleteItem } from '../actions/DeleteItem';
 import { Ionicons } from '@expo/vector-icons';
+import { logEvent } from '@firebase/analytics';
 
 const AddItemScreen = () => {
+    logEvent;
+
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
