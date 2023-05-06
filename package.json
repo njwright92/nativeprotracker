@@ -1,4 +1,5 @@
 {
+  "homepage": "https://njwright92.githib.io/nativeprotracker",
   "name": "native-pro-tracker",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
@@ -7,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build": " npx expo export:web"
+    "predeploy": " npx expo export:web",
+    "deploy": "gh-pages -d web-build"
   },
   "dependencies": {
     "@babel/generator": "^7.20.7",
@@ -62,7 +64,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "@types/uuid": "^9.0.1"
+    "@types/uuid": "^9.0.1",
+    "gh-pages": "^5.0.0"
   },
   "private": true
 }
