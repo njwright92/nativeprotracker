@@ -1,6 +1,6 @@
 # Native Pro Tracker
 
-Native Pro Tracker is a powerful and user-friendly application built Native Pro Tracker is a powerful and user-friendly full-stack mobile app built with Expo-React Native, Redux, Firebase, and Firestore. The app is designed to provide a seamless experience for tracking and managing various tasks and activities, with a focus on tracking products, items, or anything else by name entered by the user, date, and quantity.
+Native Pro Tracker is a powerful and user-friendly full-stack mobile app built with Expo-React Native, Redux, Firebase, and Firestore. The app is designed to provide a seamless experience for tracking and managing various tasks and activities, with a focus on tracking products, items, or anything else by name entered by the user, date, and quantity.
 
 With its full-stack CRUD functionality, users can effortlessly create new products, view existing ones, update their details, and delete them if needed. The responsive design ensures compatibility with a wide range of devices, including phones, laptops, and computers, making it an ideal choice for individuals who need to stay organized on the go.
 
@@ -78,3 +78,4 @@ If you have any questions or feedback about this app, please send me an email at
 ###### License
 
 This app is licensed under the MIT License.
+&copy; Nate Wright
