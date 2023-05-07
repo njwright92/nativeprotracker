@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { ActivityIndicator } from 'react-native';
 import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
@@ -16,7 +17,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000); 
+    }, 1000);
   }, []);
 
   if (isLoading) {
@@ -26,10 +27,12 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <stack.Navigator initialRouteName="Login">
-          <stack.Screen name="Login" component={LoginScreen} />
-          <stack.Screen name="Main" component={Main} />
-        </stack.Navigator>
+        <Suspense fallback={<ActivityIndicator />}>
+          <stack.Navigator initialRouteName="Login">
+            <stack.Screen name="Login" component={LoginScreen} />
+            <stack.Screen name="Main" component={Main} />
+          </stack.Navigator>
+        </Suspense>
       </NavigationContainer>
     </Provider>
   );

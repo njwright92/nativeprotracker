@@ -77,7 +77,7 @@ A full list of dependencies can be found in the `package.json` file. Some of the
 
 ##### Acknowledgments 
 
-This app was developed bt me Nathan Wright. shoutout to Jeff, Delilah, Pat, Uriel, and Nick for the help.
+This app was developed by me Nathan Wright. shoutout to Jeff, Delilah, Pat, Uriel, and Nick for the help.
 If you have any questions or feedback about this app, please send me an email at [njwright92@gmail.com].
 
 

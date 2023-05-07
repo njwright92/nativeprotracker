@@ -78,7 +78,7 @@ const AddItemNavigator = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Add Product'
                 component={AddItemScreen}
-                options={{ title: "ProTracker", headerShown: false }}
+                options={{ title: "ProTracker" }}
             />
             <Stack.Screen name='Product Detail'
                 component={ItemDetailScreen}
@@ -104,7 +104,7 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
-                options={{ title: "ProTracker", headerShown: false }}
+                options={{ title: "ProTracker" }}
             />
             <Stack.Screen
                 name='AddItemStack'
@@ -123,7 +123,7 @@ const AboutNavigator = () => {
         <Stack.Navigator
             initialRouteName='Contact'
             screenOptions={screenOptions}
-            options={{ title: "ProTracker", headerShown: false }}
+            options={{ title: "ProTracker" }}
         >
             <Stack.Screen
                 name='Contact'
