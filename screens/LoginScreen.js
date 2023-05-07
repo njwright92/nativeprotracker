@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import {
     getAuth,
     createUserWithEmailAndPassword,
@@ -68,8 +68,8 @@ const LoginTab = ({ navigation }) => {
             <Input
                 placeholder="Email"
                 leftIcon={
-                    <MaterialCommunityIcons
-                        name="email"
+                    <Ionicons
+                        name="mail"
                         size={24}
                         color="black"
                         style={styles.icon}
@@ -83,7 +83,7 @@ const LoginTab = ({ navigation }) => {
             <Input
                 placeholder="Password"
                 leftIcon={
-                    <MaterialCommunityIcons
+                    <Ionicons
                         name="key"
                         size={24}
                         color="black"
@@ -101,8 +101,8 @@ const LoginTab = ({ navigation }) => {
                     onPress={() => handleLogin()}
                     title="Login"
                     icon={
-                        <MaterialCommunityIcons
-                            name="login"
+                        <Ionicons
+                            name="log-in-outline"
                             size={24}
                             color="white"
                             style={styles.icon}
@@ -117,8 +117,8 @@ const LoginTab = ({ navigation }) => {
                     title="Reset Password"
                     type="clear"
                     icon={
-                        <MaterialCommunityIcons
-                            name="lock-reset"
+                        <Ionicons
+                            name="lock-closed-outline"
                             size={24}
                             color="red"
                             style={styles.icon}
@@ -133,8 +133,8 @@ const LoginTab = ({ navigation }) => {
                     title="Register"
                     type="clear"
                     icon={
-                        <MaterialCommunityIcons
-                            name="account-plus"
+                        <Ionicons
+                            name="person-add-outline"
                             size={24}
                             color="black"
                             style={styles.icon}
@@ -190,7 +190,9 @@ const RegisterTab = ({ navigation }) => {
             <View style={styles.container}>
                 <Input
                     placeholder='Email'
-                    leftIcon={<MaterialCommunityIcons name='email' size={24} color='black' />}
+                    leftIcon={<Ionicons name='mail'
+                        size={24}
+                        color='black' />}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     containerStyle={styles.formInput}
@@ -198,7 +200,9 @@ const RegisterTab = ({ navigation }) => {
                 />
                 <Input
                     placeholder='Password'
-                    leftIcon={<MaterialCommunityIcons name='key' size={24} color='black' />}
+                    leftIcon={<Ionicons name='key'
+                        size={24}
+                        color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     secureTextEntry={true}
@@ -211,8 +215,8 @@ const RegisterTab = ({ navigation }) => {
                         title='Register'
                         color='#5637DD'
                         icon={
-                            <MaterialCommunityIcons
-                                name='account-plus-outline'
+                            <Ionicons
+                                name='person-add-outline'
                                 color='#fff'
                                 size={24}
                             />
@@ -244,8 +248,8 @@ const LoginScreen = () => {
                 options={{
                     tabBarIcon: (props) => {
                         return (
-                            <MaterialCommunityIcons
-                                name='login-variant'
+                            <Ionicons
+                                name='log-in-outline'
                                 size={26}
                                 color={props.color}
                             />
@@ -259,8 +263,8 @@ const LoginScreen = () => {
                 options={{
                     tabBarIcon: (props) => {
                         return (
-                            <MaterialCommunityIcons
-                                name='account-plus-outline'
+                            <Ionicons
+                                name='person-add-outline'
                                 size={26}
                                 color={props.color}
                             />

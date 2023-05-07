@@ -16,7 +16,6 @@ import { getAuth, signOut } from "firebase/auth";
 const screenOptions = ({ navigation }) => ({
     headerTintColor: '#fff',
     headerStyle: { backgroundColor: 'darkslategray' },
-    headerTitle: 'ProTracker',
     headerTitleAlign: 'center',
     headerTitleStyle: {
         fontWeight: 'bold',
@@ -79,10 +78,11 @@ const AddItemNavigator = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Add Product'
                 component={AddItemScreen}
+                options={{ title: "ProTracker", headerShown: false }}
             />
             <Stack.Screen name='Product Detail'
                 component={ItemDetailScreen}
-                options={({ route }) => ({
+                options={({ route, }) => ({
                     headerTitle: getFocusedRouteNameFromRoute(route) || 'Add Product'
                 })}
             />
@@ -104,6 +104,7 @@ const HomeNavigator = () => {
             <Stack.Screen
                 name='Home'
                 component={HomeScreen}
+                options={{ title: "ProTracker", headerShown: false }}
             />
             <Stack.Screen
                 name='AddItemStack'
@@ -122,6 +123,7 @@ const AboutNavigator = () => {
         <Stack.Navigator
             initialRouteName='Contact'
             screenOptions={screenOptions}
+            options={{ title: "ProTracker", headerShown: false }}
         >
             <Stack.Screen
                 name='Contact'
