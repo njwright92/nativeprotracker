@@ -7,5 +7,8 @@ service cloud.firestore {
     match /items/{itemId}/entries/{entryId} {
       allow read, write, create, update, delete: if request.auth != null;
     }
+    match /{path=**}/entries/{entryId} {
+      allow read, write, create, update, delete: if request.auth != null;
+    }
   }
 }

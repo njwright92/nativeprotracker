@@ -1,6 +1,4 @@
 import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY, EDIT_ENTRY } from '../actions/types';
-import { v4 as uuidv4 } from 'uuid';
-
 
 const initialState = [];
 
@@ -22,7 +20,6 @@ const itemsReducer = (state = initialState, action) => {
             const { itemId, quantity, date } = action.payload;
             const item = state.find((item) => item.id === itemId);
             if (item) {
-                const entryId = uuidv4();
                 item.entries.push({ id: entryId, quantity, date });
             }
             return [...state];
