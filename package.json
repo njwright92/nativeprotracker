@@ -8,9 +8,9 @@
     "android": "eas build -p android",
     "ios": "eas build -p ios",
     "web": "expo start --web",
-    "predeploy": " npx expo export:web",
+    "predeploy": "export NODE_ENV=production && npx expo export:web",
     "deploy": "gh-pages -d web-build",
-    "predeploy-firebase": "expo build:web",
+    "predeploy-firebase": "export NODE_ENV=production && npx expo build:web",
     "deploy-firebase": "firebase deploy"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/uuid": "^9.0.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "gh-pages": "^5.0.0"
   },
   "private": true
