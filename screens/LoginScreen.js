@@ -245,6 +245,25 @@ const RegisterTab = ({ navigation }) => {
                     />
                 </View>
             </View>
+
+            <View style={{ justifyContent: 'space-between' }}>
+                <Text style={{ margin: 10, fontWeight: 'bold' }}>Here are a couple examples of what you can do with this app after you register:</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                    <Image
+                        source={require('../assets/img/exChart.png')}
+                        style={{ width: 150, height: 150, margin: 10 }}
+                    />
+                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Line Chart</Text>
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                    <Image
+                        source={require('../assets/img/exlist.png')}
+                        style={{ width: 270, height: 100, margin: 10 }}
+                    />
+                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Dynamic List</Text>
+                </View>
+            </View>
+
         </ScrollView>
     );
 };
