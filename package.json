@@ -9,7 +9,9 @@
     "ios": "eas build -p ios",
     "web": "expo start --web",
     "predeploy": " npx expo export:web",
-    "deploy": "gh-pages -d web-build"
+    "deploy": "gh-pages -d web-build",
+    "predeploy-firebase": "expo build:web",
+    "deploy-firebase": "firebase deploy"
   },
   "dependencies": {
     "@babel/generator": "^7.20.7",
