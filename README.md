@@ -79,6 +79,7 @@ A full list of dependencies can be found in the `package.json` file. Some of the
 
 This app was developed by me Nathan Wright. shoutout to Jeff, Delilah, Pat, Uriel, and Nick for the help.
 If you have any questions or feedback about this app, please send me an email at [njwright92@gmail.com].
+P.S. NuCamp Coding Bootcamp gave me the structure needed, to learn the expo platform.
 
 
 ###### License
