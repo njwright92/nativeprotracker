@@ -177,11 +177,10 @@ const RegisterTab = ({ navigation }) => {
         if (!/^\S+@\S+\.\S+$/.test(email)) {
             alert('Please enter a valid email address');
             return;
-        }
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        } const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
 
         if (!passwordRegex.test(password)) {
-            alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)');
+            alert('Password must be at least 7 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)');
             return;
         }
 

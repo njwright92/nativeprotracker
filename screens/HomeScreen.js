@@ -11,9 +11,37 @@ const HomeScreen = ({ navigation }) => {
             </Text>
             <Pressable style={styles.card}
                 onPress={() => navigation.navigate('AddItemStack')}>
-                <Text style={styles.cardTitle}>
-                    Products
-                </Text>
+                <Pressable
+                    onPress={() => navigation.navigate('AddItemStack')}
+                    style={[
+                        styles.buttonContainer,
+                        {
+                            backgroundColor: '#2196F3',
+                            shadowColor: '#000',
+                            shadowOffset: {
+                                width: 0,
+                                height: 4,
+                            },
+                            shadowOpacity: 0.3,
+                            shadowRadius: 4,
+                            elevation: 8,
+                        },
+                    ]}
+                >
+                    <Text
+                        style={{
+                            color: '#FFFFFF',
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            fontSize: 22,
+                            textTransform: 'uppercase',
+                            color: 'black'
+                        }}
+                    >
+                        Products
+                    </Text>
+                </Pressable>
+
                 <Text style={styles.cardDescription}>
                     Click to view products page, manage all your products with ease swipe left to delete right to edit.
                 </Text>
@@ -56,7 +84,14 @@ const styles = StyleSheet.create({
         color: '#333333',
         padding: 4,
         textAlign: 'center'
-    }
+    },
+    buttonContainer: {
+        borderRadius: 4,
+        paddingVertical: 12,
+        paddingHorizontal: 24,
+        borderWidth: 2,
+        borderColor: 'black',
+    },
 });
 
 export default HomeScreen;
