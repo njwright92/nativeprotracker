@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, Pressable, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, ScrollView, View } from 'react-native';
+import { Button } from 'react-native-elements';
 import AboutScreen from './AboutScreen';
 
 const HomeScreen = ({ navigation }) => {
@@ -9,43 +10,40 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>
                 Production Tracking
             </Text>
-            <Pressable style={styles.card}
-                onPress={() => navigation.navigate('AddItemStack')}>
-                <Pressable
-                    onPress={() => navigation.navigate('AddItemStack')}
-                    style={[
-                        styles.buttonContainer,
-                        {
-                            backgroundColor: '#2196F3',
-                            shadowColor: '#000',
-                            shadowOffset: {
-                                width: 0,
-                                height: 4,
-                            },
-                            shadowOpacity: 0.3,
-                            shadowRadius: 4,
-                            elevation: 8,
-                        },
-                    ]}
-                >
-                    <Text
-                        style={{
-                            color: '#FFFFFF',
-                            fontWeight: 'bold',
-                            textAlign: 'center',
-                            fontSize: 22,
-                            textTransform: 'uppercase',
-                            color: 'black'
-                        }}
-                    >
-                        Products
-                    </Text>
-                </Pressable>
 
-                <Text style={styles.cardDescription}>
-                    Click to view products page, manage all your products with ease swipe left to delete right to edit.
-                </Text>
-            </Pressable>
+            <Button
+                title="Products"
+                buttonStyle={{
+                    backgroundColor: '#2196F3',
+                    shadowColor: '#000',
+                    shadowOffset: {
+                        width: 0,
+                        height: 4,
+                    },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 4,
+                    elevation: 8,
+                    borderRadius: 4,
+                    width: 'auto',
+                    alignSelf: 'center',
+                    justifyContent: 'center',
+                    paddingHorizontal: 12,
+                    borderWidth: 3,
+                    borderColor: '#2196F3',
+                }}
+                titleStyle={{
+                    color: '#FFFFFF',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    fontSize: 22,
+                    textTransform: 'uppercase',
+                }}
+                onPress={() => navigation.navigate('AddItemStack')}
+            />
+
+            <Text style={styles.cardDescription}>
+                Click to view products page, manage all your products with ease swipe left to delete right to edit.
+            </Text>
             <View>
                 <AboutScreen />
             </View>
@@ -58,7 +56,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#778899',
         paddingHorizontal: 20,
-        paddingTop: 30
+        paddingTop: 30,
+        alignSelf: 'center',
+        alignContent: 'center'
     },
     text: {
         textAlign: 'center',
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: '#FFFFF0',
-        borderRadius: 10,
+        borderRadius: 1,
         padding: 20,
         marginBottom: 15
     },
@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#333333',
         padding: 4,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'black'
     },
     buttonContainer: {
         borderRadius: 4,
