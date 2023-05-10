@@ -15,12 +15,12 @@ const AboutScreen = () => {
         <View style={styles.container}>
             <View style={styles.aboutSection}>
                 <Text style={styles.heading}>About</Text>
-                <Text style={styles.aboutText}>My production tracking system allows you to easily manage products on a dynamic list. Add entries for date and quantity for each product individually. Also you can view the production over time on weekly, monthly and yearly line charts.</Text>
+                <Text style={styles.aboutText}>This production tracking system allows you to easily manage products on a dynamic list. Add entries for date and quantity for each product individually. Also you can view the production over time on weekly, monthly and yearly line charts.</Text>
             </View>
             <View style={styles.contactSection}>
-                <Text style={styles.heading}>Support/Contact Me
+                <Text style={styles.heading}>Support/Contact
                 </Text>
-                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to contact me via email
+                <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to send an email with the details, clickable link below.
                 </Text>
                 <View style={{ width: '100%', alignItems: 'center', marginVertical: 10 }}>
                     <Button
