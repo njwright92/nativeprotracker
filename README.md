@@ -8,7 +8,7 @@
 
 Native Pro Tracker is a powerful and user-friendly full-stack mobile app built with Expo-React Native, Redux, Firebase, and Firestore. The app is designed to provide a seamless experience for tracking and managing various tasks and activities, with a focus on tracking products, items, or anything else by name entered by the user, date, and quantity.
 
-With its full-stack CRUD functionality, users can effortlessly create new products, view existing ones, update their details, and delete them if needed. The responsive design ensures compatibility with a wide range of devices, including phones, laptops, and computers, making it an ideal choice for individuals who need to stay organized on the go.
+With its full-stack CRUD functionality, users can effortlessly create new products, view existing ones, update their details, and delete them if needed. The responsive design ensures compatibility with a wide range of devices, including phones, tablets, laptops, and computers, making it an ideal choice for individuals who need to stay organized on the go.
 
 Whether you're keeping track of inventory, monitoring daily tasks, or managing personal projects, Native Pro Tracker offers a versatile and accessible solution for all your tracking needs.
 
@@ -24,7 +24,7 @@ Whether you're keeping track of inventory, monitoring daily tasks, or managing p
 - Dynamic list for adding, editing, and deleting products with quantity and date entries.
 - Track production progress with interactive line charts
 - Snapshot feature for generating weekly, monthly, and yearly production reports.
-- Firebase Analytics integration for tracking user traffic.
+- Google Analytics integration for tracking user traffic.
 
 
 ## Installation
@@ -52,7 +52,9 @@ npm run deploy
 
 ## Built With
 
-- [Expo-React Native](https://expo.dev/) - Cross-platform framework for mobile app development
+- [Expo](https://expo.dev/) - Cross-platform framework for mobile app development
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
+- {React-Native](https://reactnative.dev/) - A framework for building native mobile apps using React.
 - [Redux](https://redux.js.org/) - State management library
 - [Firebase](https://firebase.google.com/) - Backend services for authentication and real-time database
 - [Firestore](https://firebase.google.com/products/firestore) - Scalable NoSQL cloud database
