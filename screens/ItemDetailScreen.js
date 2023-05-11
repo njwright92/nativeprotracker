@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry } from '../actions/addEntry';
 import { deleteEntry } from '../actions/deleteEntry';
 import { editEntry } from '../actions/editEntry';
 import EditEntryForm from '../components/EditEntryForm';
 import moment from 'moment';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
 import { logEvent } from '@firebase/analytics';
+
 
 const ItemDetailScreen = ({ route }) => {
     logEvent;
@@ -25,7 +28,7 @@ const ItemDetailScreen = ({ route }) => {
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
     const [quantity, setQuantity] = useState('');
-    const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/YYYY'));
+    const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/yyyy'));
     const [editingEntryId, setEditingEntryId] = useState(null);
 
     useEffect(() => {
@@ -45,14 +48,14 @@ const ItemDetailScreen = ({ route }) => {
         setQuantity(text);
     };
 
-    const handleDateChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
+    const handleDateChange = (selectedDate) => {
         setShowDatePicker(Platform.OS === 'ios');
-        setDate(currentDate);
-        const formattedDate = moment(selectedDate).format('MM/DD/YYYY');
+        setDate(selectedDate);
+        const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
         setButtonTitle(formattedDate);
-        console.log('on Date Change', currentDate, event, date);
+        console.log('on Date Change', selectedDate);
     };
+
 
     const handleAddEntry = () => {
         dispatch(addEntry(itemParam.id, quantity, date));
@@ -74,9 +77,9 @@ const ItemDetailScreen = ({ route }) => {
         let formattedDate = '';
 
         if (date && typeof date.toDate === 'function') { // Firestore Timestamp
-            formattedDate = moment(date.toDate()).format('MM/DD/YYYY');
+            formattedDate = moment(date.toDate()).format('MM/DD/yyyy');
         } else if (date instanceof Date) { // JavaScript Date object
-            formattedDate = moment(date).format('MM/DD/YYYY');
+            formattedDate = moment(date).format('MM/DD/yyyy');
         } else if (typeof date === 'string') { // Date as a string
             formattedDate = date;
         } else {
@@ -181,11 +184,10 @@ const ItemDetailScreen = ({ route }) => {
                     }</Text>
                 </TouchableOpacity>
                 {showDatePicker && (
-                    <DateTimePicker
-                        value={date}
-                        mode="date"
-                        display="default"
+                    <DatePicker
+                        selected={date}
                         onChange={handleDateChange}
+                        dateFormat="MM/dd/yyyy"
                     />
                 )}
                 <TouchableOpacity
