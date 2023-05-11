@@ -54,7 +54,7 @@ npm run deploy
 
 - [Expo](https://expo.dev/) - Cross-platform framework for mobile app development
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- {React-Native](https://reactnative.dev/) - A framework for building native mobile apps using React.
+- [React-Native](https://reactnative.dev/) - A framework for building native mobile apps using React.
 - [Redux](https://redux.js.org/) - State management library
 - [Firebase](https://firebase.google.com/) - Backend services for authentication and real-time database
 - [Firestore](https://firebase.google.com/products/firestore) - Scalable NoSQL cloud database
