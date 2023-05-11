@@ -2,6 +2,7 @@ node_modules/
 web-build/
 .expo/
 dist/
+.firebaserc
 npm-debug.*
 *.jks
 *.p8

@@ -10,7 +10,7 @@
     "web": "expo start --web",
     "predeploy": "export NODE_ENV=production && npx expo export:web",
     "deploy": "gh-pages -d web-build",
-    "predeploy-firebase": "export NODE_ENV=production && npx expo build:web",
+    "predeploy-firebase": "export NODE_ENV=production && npx expo export:web",
     "deploy-firebase": "firebase deploy"
   },
   "dependencies": {
