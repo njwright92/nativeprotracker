@@ -13,6 +13,8 @@ npm-debug.*
 firebaseConfig.js
 getGpt3Completion.js
 index.js
+firebase,rules
+firebase.indexes.json
 
 # macOS
 .DS_Store

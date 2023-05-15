@@ -40,14 +40,14 @@ const AddItemForm = () => {
                 touched,
             }) => (
                 <View style={styles.container}>
-                    <Text style={styles.textInputTitle}>Add Product</Text>
+                    <Text style={styles.textInputTitle}>Add Product/Item by name</Text>
                     <View style={styles.textInputContainer}>
                         <TextInput
                             style={styles.textInput}
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
-                            placeholder="Product name"
+                            placeholder="whatever you want.."
                         />
                     </View>
                     {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}

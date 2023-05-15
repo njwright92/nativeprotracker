@@ -14,8 +14,8 @@ const AboutScreen = () => {
     return (
         <View style={styles.container}>
             <View style={styles.aboutSection}>
-                <Text style={styles.heading}>About</Text>
-                <Text style={styles.aboutText}>This production tracking system allows you to easily manage products on a dynamic list. Add entries for date and quantity for each product individually. Also you can view the production over time on weekly, monthly and yearly line charts.</Text>
+                <Text style={styles.heading}>About & Info</Text>
+                <Text style={styles.aboutText}>Discover the power of our production tracking system, designed to simplify your management tasks. With our dynamic list, you can seamlessly add entries for date and quantity for each product individually. Furthermore, view your production trends over time with our weekly, monthly, and yearly line charts. The beauty of this app? It's designed to replace spreadsheets for businesses, making tracking easier not just for large corporations, but also for individual artists. Mastering this app will streamline your processes and make your tracking tasks a breeze.</Text>
             </View>
             <View style={styles.contactSection}>
                 <Text style={styles.heading}>Support/Contact
