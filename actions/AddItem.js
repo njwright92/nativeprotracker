@@ -16,7 +16,7 @@ export const addItem = (item) => {
 
         try {
             const docRef = await addDoc(collection(db, "items"), newItem);
-            console.log('addItem', newItem);
+
 
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -26,13 +26,13 @@ export const addItem = (item) => {
                     payload: itemData,
                 });
 
-                // listen for updates to the 'items' collection
+
                 onSnapshot(collection(db, "items"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
                             const newItemData = { ...change.doc.data(), id: change.doc.id };
                             console.log('New item added: ', newItemData);
-                            // you can dispatch an action here if you want to update your app's state
+
                         }
                     });
                 }, (error) => {

@@ -17,7 +17,7 @@ export const addEntry = (itemId, quantity, date) => {
 
         try {
             const docRef = await addDoc(collection(db, "items", itemId, "entries"), newEntry);
-            console.log('addEntry', newEntry);
+            
 
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {

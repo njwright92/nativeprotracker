@@ -13,10 +13,10 @@ const AddItemForm = () => {
     });
 
     const onSubmit = async (values, { resetForm }) => {
-        console.log('onSubmit', values, validationSchema.cast(values));
+
 
         let item = validationSchema.cast(values);
-        console.log('addItem', item);
+
         await dispatch(addItem(item));
         resetForm();
     };

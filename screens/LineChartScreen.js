@@ -33,13 +33,11 @@ const LineChartScreen = ({ route }) => {
                 );
                 const entriesSnapshot = await getDocs(entriesQuery);
                 const entries = entriesSnapshot.docs.map((doc) => doc.data());
-                console.log('All Entries:', entries);
+
                 const weekly = entries.slice(-7);
                 const monthly = entries.slice(-30);
                 const yearly = entries.slice(-270);
-                console.log('Weekly Entries:', weekly);
-                console.log('Monthly Entries:', monthly);
-                console.log('Yearly Entries:', yearly);
+
                 setWeeklyEntries(weekly);
                 setMonthlyEntries(monthly);
                 setYearlyEntries(yearly);

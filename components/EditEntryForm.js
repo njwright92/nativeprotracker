@@ -8,8 +8,7 @@ const EditEntryForm = ({ entry, onCancel }) => {
     const [quantity, setQuantity] = useState(entry ? entry.quantity : '');
 
     const handleUpdateEntry = () => {
-        console.log('Entry object:', entry);
-        console.log('Updating entry...', entry.itemId, entry.id, quantity);
+        
         if (entry) {
             dispatch(editEntry(entry.itemId, entry.id, { quantity: quantity }));
         }

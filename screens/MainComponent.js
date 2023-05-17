@@ -34,7 +34,7 @@ const screenOptions = ({ navigation }) => ({
                     const auth = getAuth();
                     signOut(auth)
                         .then(() => {
-                            console.log('User signed out successfully');
+                            
                             navigation.navigate('Login');
                         })
                         .catch((error) => {

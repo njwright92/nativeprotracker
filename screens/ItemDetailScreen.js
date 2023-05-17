@@ -18,7 +18,7 @@ import { logEvent } from '@firebase/analytics';
 
 const ItemDetailScreen = ({ route }) => {
     logEvent;
-    console.log('item: ', item);
+    
     const navigation = useNavigation();
     const { item: itemParam } = route.params;
     const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const ItemDetailScreen = ({ route }) => {
         setDate(selectedDate);
         const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
         setButtonTitle(formattedDate);
-        console.log('on Date Change', selectedDate);
+        
     };
 
 
@@ -73,7 +73,7 @@ const ItemDetailScreen = ({ route }) => {
 
     const renderEntry = ({ item: entry }) => {
         const { date, quantity } = entry;
-        console.log(`Type of date: ${typeof date}, value: ${date}`);
+        
         let formattedDate = '';
 
         if (date && typeof date.toDate === 'function') { // Firestore Timestamp

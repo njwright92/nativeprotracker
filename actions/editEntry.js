@@ -13,7 +13,7 @@ export const editEntry = (itemId, entryId, quantity) => {
                 entryId
             );
             const entryDoc = await getDoc(entryRef);
-            console.log(entryDoc, entryRef);
+           
 
             await setDoc(entryRef, {
                 ...entryDoc.data(),
@@ -21,7 +21,7 @@ export const editEntry = (itemId, entryId, quantity) => {
             });
 
             const updatedEntryDoc = await getDoc(entryRef);
-            console.log(updatedEntryDoc);
+            
 
             dispatch({
                 type: EDIT_ENTRY,
