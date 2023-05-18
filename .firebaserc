@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "\"prod\"": "nativetracker-382720",
+    "default": "nativetracker-382720"
+  },
+  "targets": {},
+  "etags": {}
+}

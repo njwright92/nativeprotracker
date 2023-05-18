@@ -1,5 +1,5 @@
-# Use the official Node.js image as the base image
-FROM node:14-alpine
+# Use the official Node.js image with the corresponding version
+FROM node:16.13.2-alpine
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -20,4 +20,4 @@ RUN npx expo export:web
 EXPOSE 19006
 
 # Set the command to start your Expo application
-CMD ["npm", "start"]
+CMD ["npm", "web"]
