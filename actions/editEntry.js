@@ -1,4 +1,4 @@
-import { EDIT_ENTRY } from './types';
+import { EDIT_ENTRY, ENTRY_ACTION_FAILED } from './types';
 import { setDoc, doc, getDoc, collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
@@ -39,6 +39,7 @@ export const editEntry = (itemId, entryId, quantity) => {
             });
         } catch (error) {
             console.error('Error updating document: ', error);
+            dispatch({ type: ENTRY_ACTION_FAILED, payload: 'Entry action failed!' })
             if (error.code === "not-found") {
                 console.log("Document not found");
             }

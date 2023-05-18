@@ -1,4 +1,4 @@
-import { ADD_ENTRY } from './types';
+import { ADD_ENTRY, ENTRY_ACTION_FAILED } from './types';
 import { onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
@@ -17,7 +17,7 @@ export const addEntry = (itemId, quantity, date) => {
 
         try {
             const docRef = await addDoc(collection(db, "items", itemId, "entries"), newEntry);
-            
+
 
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
@@ -42,6 +42,7 @@ export const addEntry = (itemId, quantity, date) => {
             }
         } catch (error) {
             console.log('Error adding document: ', error);
+            dispatch({ type: ENTRY_ACTION_FAILED, payload: 'Entry action failed!' })
         }
     };
 };

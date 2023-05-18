@@ -1,4 +1,4 @@
-import { UPDATE_ITEM } from './types';
+import { UPDATE_ITEM, ITEM_ACTION_FAILED } from './types';
 import { updateDoc, doc, onSnapshot, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 
@@ -32,6 +32,7 @@ export const updateItem = (item) => {
             });
         } catch (error) {
             console.error('Error updating document: ', error);
+            dispatch({ type: ITEM_ACTION_FAILED, payload: 'Item action failed!' })
         }
     };
 };

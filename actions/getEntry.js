@@ -1,6 +1,7 @@
 import { collectionGroup, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
+import { ENTRY_ACTION_FAILED } from './types';
 
 export const getAllEntriesByCurrentUser = async (itemId, onEntriesUpdate) => {
     const auth = getAuth();
@@ -30,6 +31,7 @@ export const getAllEntriesByCurrentUser = async (itemId, onEntriesUpdate) => {
         onEntriesUpdate(updatedEntries);
     }, (error) => {
         console.log('Error getting entries collection updates: ', error);
+        dispatch({ type: ENTRY_ACTION_FAILED, payload: 'Entry action failed!' })
     });
 
     // Return the unsubscribe function to clean up the listener when needed

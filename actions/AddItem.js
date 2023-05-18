@@ -1,4 +1,4 @@
-import { ADD_ITEM } from './types';
+import { ADD_ITEM, ITEM_ACTION_FAILED } from './types';
 import { onSnapshot, addDoc, collection, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
@@ -41,6 +41,7 @@ export const addItem = (item) => {
             }
         } catch (error) {
             console.log('Error adding document: ', error);
+            dispatch({ type: ITEM_ACTION_FAILED, payload: 'Item action failed!' })
         }
     };
 };

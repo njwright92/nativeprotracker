@@ -20,4 +20,4 @@ RUN npx expo export:web
 EXPOSE 19006
 
 # Set the command to start your Expo application
-CMD ["npm", "web"]
+CMD ["npm", "start"]

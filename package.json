@@ -1,5 +1,5 @@
 {
-  "homepage": "https://nativeprotracker.com",
+  "homepage": "https://nativeprotracker.com/",
   "name": "native-pro-tracker",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
@@ -11,7 +11,8 @@
     "predeploy": "export NODE_ENV=production && npx expo export:web",
     "deploy": "gh-pages -d web-build",
     "predeploy-firebase": "export NODE_ENV=production && npx expo export:web",
-    "deploy-firebase": "firebase deploy"
+    "deploy-firebase": "firebase deploy",
+    "predeploy-gke": "docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest"
   },
   "dependencies": {
     "@babel/generator": "^7.20.7",
