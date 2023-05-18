@@ -1,106 +1,47 @@
-import {
-    ADD_ITEM,
-    DELETE_ITEM,
-    UPDATE_ITEM,
-    ADD_ENTRY,
-    DELETE_ENTRY,
-    EDIT_ENTRY,
-    ITEM_ACTION_FAILED,
-    ENTRY_ACTION_FAILED
-} from '../actions/types';
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY, EDIT_ENTRY } from '../actions/types';
 
-const initialState = {
-    items: [],
-    error: null
-};
+const initialState = [];
 
 const itemsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_ITEM:
-            return {
-                ...state,
-                items: [...state.items, action.payload],
-                error: null
-            };
 
+            return [...state, action.payload];
         case DELETE_ITEM:
-            return {
-                ...state,
-                items: state.items.filter((item) => item.id !== action.payload.id),
-                error: null
-            };
 
+            return state.filter((item) => item.id !== action.payload.id);
         case UPDATE_ITEM:
-            return {
-                ...state,
-                items: state.items.map((item) =>
-                    item.id === action.payload.id ? { ...item, ...action.payload } : item
-                ),
-                error: null
-            };
 
+            return state.map((item) =>
+                item.id === action.payload.id ? { ...item, ...action.payload } : item
+            );
         case ADD_ENTRY:
-            const { itemId, quantity, date } = action.payload;
-            const addItem = state.items.find((item) => item.id === itemId);
-            if (addItem) {
-                addItem.entries.push({ id: entryId, quantity, date });
-                return {
-                    ...state,
-                    error: null
-                };
-            }
-            // Set error message if item is not found
-            return {
-                ...state,
-                error: 'Item not found'
-            };
 
+            const { itemId, quantity, date } = action.payload;
+            const item = state.find((item) => item.id === itemId);
+            if (item) {
+                item.entries.push({ id: entryId, quantity, date });
+            }
+            return [...state];
         case DELETE_ENTRY:
+
             const { itemId: deleteItemId, entryId } = action.payload;
-            const deleteItem = state.items.find((item) => item.id === deleteItemId);
+            const deleteItem = state.find((item) => item.id === deleteItemId);
             if (deleteItem) {
                 deleteItem.entries = deleteItem.entries.filter((entry) => entry.id !== entryId);
-                return {
-                    ...state,
-                    error: null
-                };
             }
-            // Set error message if item is not found
-            return {
-                ...state,
-                error: 'Item not found'
-            };
-
+            return [...state];
         case EDIT_ENTRY:
+
             const { itemId: editItemId, entryId: editEntryId, quantity: editQuantity } = action.payload;
-            const editItem = state.items.find((item) => item.id === editItemId);
+            const editItem = state.find((item) => item.id === editItemId);
             if (editItem) {
                 const editEntry = editItem.entries.find((entry) => entry.id === editEntryId);
                 if (editEntry) {
                     editEntry.quantity = editQuantity;
-                    return {
-                        ...state,
-                        error: null
-                    };
                 }
             }
-            // Set error message if item or entry is not found
-            return {
-                ...state,
-                error: 'Item or entry not found'
-            };
-
-        case ITEM_ACTION_FAILED:
-            return {
-                ...state,
-                error: action.payload
-            };
-
-        case ENTRY_ACTION_FAILED:
-            return {
-                ...state,
-                error: action.payload
-            };
+            return [...state];
 
         default:
             return state;
@@ -108,4 +49,3 @@ const itemsReducer = (state = initialState, action) => {
 };
 
 export default itemsReducer;
-
