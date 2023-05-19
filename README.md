@@ -1,5 +1,7 @@
 # Native Pro Tracker
 
+It gives me immense pleasure to announce that, despite still being in its beta stage, my product now offers full scalability and is live-synchronized with Google Cloud. This achievement has been accomplished by employing Firebase for hosting, coupled with Firestore DB and Auth for secure and robust data handling. The deployment has been expertly executed via a Google Cloud Kubernetes cluster, guaranteeing top-tier performance. As the sole proprietor of the domain, acquired through Namecheap, I stand committed to providing a reliable and sophisticated solution for any and all users.
+
 <p>
   <img src="./assets/img/gptLogo.png" width="30" height="30" alt="ChatGPT Logo">
 </p>
