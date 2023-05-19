@@ -1,19 +1,40 @@
+# Ignore node_modules
+
 node_modules/
+
+# Ignore build directories
+
 web-build/
-.expo/
 dist/
+
+# Ignore Expo specific files
+
+.expo/
+
+# Ignore npm debug logs
+
 npm-debug.*
+
+# Ignore specific file extensions
+
 *.jks
 *.p8
 *.p12
 *.key
 *.mobileprovision
+.cache
+
+# Ignore files with specific prefixes/suffixes
+
 *.orig.*
+
+# Ignore Firebase specific files
+
+.firebase/
 firebaseConfig.js
-getGpt3Completion.js
-index.js
-firebase,rules
+firebase.rules
 firebase.indexes.json
 
-# macOS
+# macOS specific files to ignore
+
 .DS_Store

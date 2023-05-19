@@ -1,35 +1,49 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
   "hosting": {
-    "public": "public",
+    "public": "web-build",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
-  },
-  "emulators": {
-    "auth": {
-      "port": 9099
-    },
-    "firestore": {
-      "port": 8080
-    },
-    "database": {
-      "port": 9000
-    },
+    ],
+    "cleanUrls": true,
+    "headers": [
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "destination": "https://34.168.249.112/$1",
+        "run": {
+          "serviceId": "fire-tracker1",
+          "region": "us-west1"
+        }
+      },
+      {
+        "source": "/**",
+        "destination": "/index.html"
+      }
+    ],
+
+    "appAssociation": "AUTO",
     "hosting": {
-      "port": 5000
+      "site": "nativetracker-382720"
     },
-    "ui": {
-      "enabled": true
-    },
-    "singleProjectMode": true
+    "customDomains": [
+      {
+        "domain": "nativeprotracker.com"
+      },
+      {
+        "domain": "www.nativeprotracker.com"
+      }
+    ]
   }
 }

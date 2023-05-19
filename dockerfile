@@ -1,5 +1,5 @@
 # Use the official Node.js image with the corresponding version
-FROM node:16.13.2-alpine
+FROM node:16.13.2
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the Expo project
-RUN npx expo export:web
+RUN export NODE_ENV=production && npx expo export:web
 
 # Expose the port used by your Expo application (e.g., 19006 for Metro Bundler)
 EXPOSE 19006

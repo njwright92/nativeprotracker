@@ -1,6 +1,5 @@
 import { useState, useEffect, Suspense } from 'react';
 import { ActivityIndicator } from 'react-native';
-import 'react-native-get-random-values';
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from './components/SplashScreen';
