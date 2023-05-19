@@ -6,7 +6,7 @@ It gives me immense pleasure to announce that, despite still being in its beta s
   <img src="./assets/img/gptLogo.png" width="30" height="30" alt="ChatGPT Logo">
 </p>
 
-[![Website Status](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://www.nativeprotracker.com/)
+[![Website Status](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://nativeprotracker.com/)
 
 Native Pro Tracker is a powerful and user-friendly full-stack mobile app built with Expo-React Native, Redux, Firebase, and Firestore. The app is designed to provide a seamless experience for tracking and managing various tasks and activities, with a focus on tracking products, items, or anything else by name entered by the user, date, and quantity.
 
@@ -43,13 +43,6 @@ npm install
 3. Start the development server:
 
 npm start
-
-## Deployment
-
-To deploy your app to GitHub Pages, run the following commands:
-
-npm run predeploy
-npm run deploy
 
 
 ## Built With
