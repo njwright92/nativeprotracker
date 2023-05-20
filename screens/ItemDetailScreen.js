@@ -18,7 +18,7 @@ import { logEvent } from '@firebase/analytics';
 
 const ItemDetailScreen = ({ route }) => {
     logEvent;
-    
+
     const navigation = useNavigation();
     const { item: itemParam } = route.params;
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const ItemDetailScreen = ({ route }) => {
         const unsubscribe = getAllEntriesByCurrentUser(itemParam.id, handleEntriesUpdate);
 
         return () => {
-            unsubscribe; // Clean up the listener when the component unmounts
+            unsubscribe;
         };
     }, [itemParam.id]);
 
@@ -53,7 +53,7 @@ const ItemDetailScreen = ({ route }) => {
         setDate(selectedDate);
         const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
         setButtonTitle(formattedDate);
-        
+
     };
 
 
@@ -73,17 +73,16 @@ const ItemDetailScreen = ({ route }) => {
 
     const renderEntry = ({ item: entry }) => {
         const { date, quantity } = entry;
-        
+
         let formattedDate = '';
 
-        if (date && typeof date.toDate === 'function') { // Firestore Timestamp
+        if (date && typeof date.toDate === 'function') {
             formattedDate = moment(date.toDate()).format('MM/DD/yyyy');
-        } else if (date instanceof Date) { // JavaScript Date object
+        } else if (date instanceof Date) {
             formattedDate = moment(date).format('MM/DD/yyyy');
-        } else if (typeof date === 'string') { // Date as a string
-            formattedDate = date;
+        } else if (typeof date === 'string') {
         } else {
-            formattedDate = 'N/A'; // Default value if date is not defined or not recognized
+            formattedDate = 'N/A';
         }
 
         const renderRightActions = (progress, dragX) => {
@@ -155,13 +154,9 @@ const ItemDetailScreen = ({ route }) => {
                 </View>
             </TouchableOpacity>
             <ScrollView style={styles.inputContainer}>
-                <Text style={styles.title}>{itemParam.name}
-                </Text>
-                <Text style={{
-                    fontStyle: 'italic',
-                    borderBottomWidth: 2,
-                    borderBottomColor: 'black'
-                }}>ID: {itemParam.id}
+                <Text style={styles.title}>{itemParam.name}</Text>
+                <Text style={{ fontStyle: 'italic', borderBottomWidth: 2, borderBottomColor: 'black' }}>
+                    ID: {itemParam.id}
                 </Text>
                 <TextInput
                     style={styles.input}
@@ -220,7 +215,8 @@ const ItemDetailScreen = ({ route }) => {
 
             <View style={styles.listContainer}>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: 'black' }}>
-                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>Product Entries
+                    <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
+                        Product Entries
                     </Text>
                 </View>
 
@@ -251,8 +247,11 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
     },
+    scrollContent: {
+        flexGrow: 1,
+    },
     listContainer: {
-        flex: 1,
+        height: 222,
         padding: 16,
         marginTop: 12,
     },

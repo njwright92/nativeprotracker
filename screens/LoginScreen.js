@@ -66,108 +66,111 @@ const LoginTab = ({ navigation }) => {
     }, []);
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.noticeText}>
-                Important Notice: Registration is free and no user data is collected
-            </Text>
-            <Input
-                placeholder="Email"
-                leftIcon={
-                    <Ionicons
-                        name="mail"
-                        size={24}
-                        color="black"
-                        style={styles.icon}
-                    />
-                }
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-                containerStyle={styles.formInput}
-                leftIconContainerStyle={styles.formIcon}
-            />
-            <Input
-                placeholder="Password"
-                leftIcon={
-                    <Ionicons
-                        name="key"
-                        size={24}
-                        color="black"
-                        style={styles.icon}
-                    />
-                }
-                onChangeText={(text) => setPassword(text)}
-                value={password}
-                secureTextEntry={true}
-                containerStyle={styles.formInput}
-                leftIconContainerStyle={styles.formIcon}
-            />
-            <View>
-                <Button
-                    onPress={() => handleLogin()}
-                    title="Login"
-                    icon={
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+            <View style={styles.container}>
+                <Text style={styles.noticeText}>
+                    Important Notice: Registration is free and no user data is collected
+                </Text>
+                <Input
+                    placeholder="Email"
+                    leftIcon={
                         <Ionicons
-                            name="log-in-outline"
-                            size={24}
-                            color="white"
-                            style={styles.icon}
-                        />
-                    }
-                    buttonStyle={{ backgroundColor: '#5637DD' }}
-                />
-            </View>
-            <View>
-                <Button
-                    onPress={() => handleResetPassword()}
-                    title="Reset Password"
-                    type="clear"
-                    icon={
-                        <Ionicons
-                            name="lock-closed-outline"
-                            size={24}
-                            color="red"
-                            style={styles.icon}
-                        />
-                    }
-                    titleStyle={{ color: 'red' }}
-                />
-            </View>
-            <View>
-                <Button
-                    onPress={() => navigation.navigate('Register')}
-                    title="Register"
-                    type="clear"
-                    icon={
-                        <Ionicons
-                            name="person-add-outline"
+                            name="mail"
                             size={24}
                             color="black"
                             style={styles.icon}
                         />
                     }
-                    titleStyle={{ color: 'green', fontWeight: 'bold' }}
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                    containerStyle={styles.formInput}
+                    leftIconContainerStyle={styles.formIcon}
                 />
-            </View>
-
-            <View style={{ justifyContent: 'space-between' }}>
-                <Text style={{ margin: 10, fontWeight: 'bold' }}>Here are a couple examples of what you can do with this app after you register:</Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                    <Image
-                        source={require('../assets/img/exChart.png')}
-                        style={{ width: 150, height: 150, margin: 10 }}
+                <Input
+                    placeholder="Password"
+                    leftIcon={
+                        <Ionicons
+                            name="key"
+                            size={24}
+                            color="black"
+                            style={styles.icon}
+                        />
+                    }
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                    secureTextEntry={true}
+                    containerStyle={styles.formInput}
+                    leftIconContainerStyle={styles.formIcon}
+                />
+                <View>
+                    <Button
+                        onPress={() => handleLogin()}
+                        title="Login"
+                        icon={
+                            <Ionicons
+                                name="log-in-outline"
+                                size={24}
+                                color="white"
+                                style={styles.icon}
+                            />
+                        }
+                        buttonStyle={{ backgroundColor: '#5637DD' }}
                     />
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Line Chart</Text>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                    <Image
-                        source={require('../assets/img/exlist.png')}
-                        style={{ width: 270, height: 100, margin: 10 }}
+                <View>
+                    <Button
+                        onPress={() => handleResetPassword()}
+                        title="Reset Password"
+                        type="clear"
+                        icon={
+                            <Ionicons
+                                name="lock-closed-outline"
+                                size={24}
+                                color="red"
+                                style={styles.icon}
+                            />
+                        }
+                        titleStyle={{ color: 'red' }}
                     />
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Dynamic List</Text>
+                </View>
+                <View>
+                    <Button
+                        onPress={() => navigation.navigate('Register')}
+                        title="Register"
+                        type="clear"
+                        icon={
+                            <Ionicons
+                                name="person-add-outline"
+                                size={24}
+                                color="black"
+                                style={styles.icon}
+                            />
+                        }
+                        titleStyle={{ color: 'green', fontWeight: 'bold' }}
+                    />
+                </View>
+
+                <View >
+                    <Text style={{ margin: 10, fontWeight: 'bold' }}>
+                        Here are a couple examples of what you can do with this app after you register:
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                        <Text style={{ margin: 10, fontWeight: 'bold' }}>Business</Text>
+                        <Image
+                            source={require('../assets/img/exChart.png')}
+                            style={{ width: 150, height: 150, margin: 10 }}
+                        />
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                        <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
+                        <Image
+                            source={require('../assets/img/items2.png')}
+                            style={{ width: 150, height: 150, margin: 10 }}
+                        />
+                    </View>
                 </View>
             </View>
-
-        </View>
+        </ScrollView>
 
     );
 };
@@ -209,7 +212,7 @@ const RegisterTab = ({ navigation }) => {
     };
 
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.noticeText}>
                     Important Notice: Registration is free and no user data is collected
@@ -261,7 +264,7 @@ const RegisterTab = ({ navigation }) => {
                     />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
+                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
                     <Image
                         source={require('../assets/img/items2.png')}
                         style={{ width: 150, height: 150, margin: 10 }}
@@ -321,17 +324,23 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
+    scrollViewContent: {
+        flexGrow: 1,
+        paddingBottom: 20, // Add padding to the bottom to prevent content from being cut off
+    },
     container: {
         justifyContent: 'center',
         margin: 10,
     },
     noticeText: {
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 20,
         textAlign: 'center',
-        color: 'orange',
+        color: '#FFA500', // Orange color
         marginBottom: 10,
+        backgroundColor: '#f2f2f2', // Light gray background color
     },
+
 });
 
 export default LoginScreen;
