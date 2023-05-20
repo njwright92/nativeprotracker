@@ -7,7 +7,6 @@ import LoginScreen from './LoginScreen';
 import ItemDetailScreen from './ItemDetailScreen';
 import AddItemScreen from './AddItemScreen';
 import LineChartScreen from './LineChartScreen';
-import { Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { getAuth, signOut } from "firebase/auth";
@@ -22,19 +21,13 @@ const screenOptions = ({ navigation }) => ({
         fontSize: 28,
     },
     headerRight: () => (
-        <Image
-            source={require('../assets/img/block.jpg')}
-            style={{ width: 30, height: 30, marginLeft: 10 }}
-        />
-    ),
-    headerLeft: () => (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Pressable
                 onPress={() => {
                     const auth = getAuth();
                     signOut(auth)
                         .then(() => {
-                            
+
                             navigation.navigate('Login');
                         })
                         .catch((error) => {
@@ -43,7 +36,7 @@ const screenOptions = ({ navigation }) => ({
                 }}
                 style={{ marginLeft: 2, marginRight: 5 }}
             >
-                <Text style={{ color: 'red', fontSize: 12, fontWeight: 'bold' }}>
+                <Text style={{ color: 'red', fontSize: 14, fontWeight: 'bold' }}>
                     <Ionicons
                         name="exit-outline"
                         size={20}
@@ -53,11 +46,30 @@ const screenOptions = ({ navigation }) => ({
             </Pressable>
         </View>
     ),
+    headerLeft: () => (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Pressable
+                onPress={() => {
+                    navigation.navigate('Home');
+                }}
+                style={{ marginRight: 10 }}
+            >
+                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold', marginRight: 5 }}>
+                    <Ionicons
+                        name="home-outline"
+                        size={20}
+                        color="white"
+                    /> Home
+                </Text>
+            </Pressable>
+        </View>
+    ),
 });
 
 
 const LoginNavigator = () => {
     const Stack = createStackNavigator();
+
     return (
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Screen
@@ -66,11 +78,12 @@ const LoginNavigator = () => {
                 options={({ route }) => ({
                     title: route.name
                 })}
-
             />
         </Stack.Navigator>
     );
 };
+
+export { LoginNavigator };
 
 const AddItemNavigator = () => {
     const Stack = createStackNavigator();

@@ -40,15 +40,6 @@ const LoginTab = ({ navigation }) => {
 
     };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                navigation.navigate('Main');
-            }
-        });
-
-        return unsubscribe;
-    }, []);
 
     const handleResetPassword = () => {
         sendPasswordResetEmail(auth, email)
@@ -63,8 +54,22 @@ const LoginTab = ({ navigation }) => {
             });
     };
 
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                navigation.navigate('Main');
+            }
+        });
+
+        return unsubscribe;
+    }, []);
+
     return (
         <View style={styles.container}>
+            <Text style={styles.noticeText}>
+                Important Notice: Registration is free and no user data is collected
+            </Text>
             <Input
                 placeholder="Email"
                 leftIcon={
@@ -184,7 +189,6 @@ const RegisterTab = ({ navigation }) => {
             return;
         }
 
-
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
@@ -207,11 +211,13 @@ const RegisterTab = ({ navigation }) => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <Text style={styles.noticeText}>
+                    Important Notice: Registration is free and no user data is collected
+                </Text>
+
                 <Input
                     placeholder='Email'
-                    leftIcon={<Ionicons name='mail'
-                        size={24}
-                        color='black' />}
+                    leftIcon={<Ionicons name='mail' size={24} color='black' />}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     containerStyle={styles.formInput}
@@ -219,9 +225,7 @@ const RegisterTab = ({ navigation }) => {
                 />
                 <Input
                     placeholder='Password'
-                    leftIcon={<Ionicons name='key'
-                        size={24}
-                        color='black' />}
+                    leftIcon={<Ionicons name='key' size={24} color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     secureTextEntry={true}
@@ -245,25 +249,27 @@ const RegisterTab = ({ navigation }) => {
                 </View>
             </View>
 
-            <View style={{ justifyContent: 'space-between' }}>
-                <Text style={{ margin: 10, fontWeight: 'bold' }}>Here are a couple examples of what you can do with this app after you register:</Text>
+            <View >
+                <Text style={{ margin: 10, fontWeight: 'bold' }}>
+                    Here are a couple examples of what you can do with this app after you register:
+                </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Business</Text>
                     <Image
                         source={require('../assets/img/exChart.png')}
                         style={{ width: 150, height: 150, margin: 10 }}
                     />
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Line Chart</Text>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
+                <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
                     <Image
-                        source={require('../assets/img/exlist.png')}
-                        style={{ width: 270, height: 100, margin: 10 }}
+                        source={require('../assets/img/items2.png')}
+                        style={{ width: 150, height: 150, margin: 10 }}
                     />
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Example Dynamic List</Text>
                 </View>
             </View>
-
         </ScrollView>
+
     );
 };
 
@@ -319,7 +325,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         margin: 10,
     },
-
+    noticeText: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        textAlign: 'center',
+        color: 'orange',
+        marginBottom: 10,
+    },
 });
 
 export default LoginScreen;

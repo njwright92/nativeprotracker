@@ -27,7 +27,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Suspense fallback={<ActivityIndicator />}>
-          <stack.Navigator initialRouteName="Login">
+          <stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
             <stack.Screen name="Login" component={LoginScreen} />
             <stack.Screen name="Main" component={Main} />
           </stack.Navigator>
