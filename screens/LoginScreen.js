@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, Dimensions } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +12,8 @@ import {
 }
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
+
+const windowWidth = Dimensions.get('window').width;
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -39,6 +41,7 @@ const LoginTab = ({ navigation }) => {
             });
 
     };
+
 
 
     const handleResetPassword = () => {
@@ -69,7 +72,7 @@ const LoginTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.noticeText}>
-                    Important Notice: Registration is free and no user data is collected
+                    Important! Registration is free and no user data is collected!
                 </Text>
                 <Input
                     placeholder="Email"
@@ -152,20 +155,31 @@ const LoginTab = ({ navigation }) => {
 
                 <View >
                     <Text style={{ margin: 10, fontWeight: 'bold' }}>
-                        Here are a couple examples of what you can do with this app after you register:
+                        - Here are a couple examples of what you can do with this app after you register.
                     </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                        <Text style={{ margin: 10, fontWeight: 'bold' }}>Business</Text>
+                    <Text style={{ margin: 5, fontWeight: 'bold' }}>
+                        - Full About and info are on the next screen.
+                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                        <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
                         <Image
                             source={require('../assets/img/exChart.png')}
-                            style={{ width: 150, height: 150, margin: 10 }}
+                            style={styles.image}
+                        />
+                        <Image
+                            source={require('../assets/img/exlist.png')}
+                            style={[styles.image, { width: 270, height: 100 }]}
                         />
                     </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                        <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                        <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
                         <Image
-                            source={require('../assets/img/items2.png')}
-                            style={{ width: 150, height: 150, margin: 10 }}
+                            source={require('../assets/img/items6.jpg')}
+                            style={styles.image}
+                        />
+                        <Image
+                            source={require('../assets/img/entries3.jpg')}
+                            style={styles.image}
                         />
                     </View>
                 </View>
@@ -215,7 +229,7 @@ const RegisterTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.noticeText}>
-                    Important Notice: Registration is free and no user data is collected
+                    Important! Registration is free and no user data is collected!
                 </Text>
 
                 <Input
@@ -254,20 +268,31 @@ const RegisterTab = ({ navigation }) => {
 
             <View >
                 <Text style={{ margin: 10, fontWeight: 'bold' }}>
-                    Here are a couple examples of what you can do with this app after you register:
+                    - Here are a couple examples of what you can do with this app after you register.
                 </Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Business</Text>
+                <Text style={{ margin: 5, fontWeight: 'bold' }}>
+                    - Full About and info are on the next screen.
+                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
                     <Image
                         source={require('../assets/img/exChart.png')}
-                        style={{ width: 150, height: 150, margin: 10 }}
+                        style={styles.image}
+                    />
+                    <Image
+                        source={require('../assets/img/exlist.png')}
+                        style={[styles.image, { width: 270, height: 100 }]}
                     />
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>Personal</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
                     <Image
-                        source={require('../assets/img/items2.png')}
-                        style={{ width: 150, height: 150, margin: 10 }}
+                        source={require('../assets/img/items6.jpg')}
+                        style={styles.image}
+                    />
+                    <Image
+                        source={require('../assets/img/entries3.jpg')}
+                        style={styles.image}
                     />
                 </View>
             </View>
@@ -326,21 +351,28 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
-        paddingBottom: 20, // Add padding to the bottom to prevent content from being cut off
+        paddingBottom: 20, 
     },
     container: {
+        flexDirection: windowWidth > 768 ? 'row' : 'column',
         justifyContent: 'center',
+        alignItems: 'center',
         margin: 10,
+        marginRight: 2,
     },
     noticeText: {
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
-        color: '#FFA500', // Orange color
+        color: '#FFA500', 
         marginBottom: 10,
-        backgroundColor: '#f2f2f2', // Light gray background color
+        backgroundColor: 'black'
     },
-
+    image: {
+        width: 150,
+        height: 150,
+        margin: 2,
+    },
 });
 
 export default LoginScreen;

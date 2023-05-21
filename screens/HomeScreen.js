@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate('AddItemStack')}
             />
 
-            <Text style={styles.cardDescription}>
+            <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: '3' }}>
                 Click to view products page, manage all your products with ease swipe left to delete right to edit.
             </Text>
             <View>
