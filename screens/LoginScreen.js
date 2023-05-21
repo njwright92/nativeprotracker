@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,7 +13,7 @@ import {
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
 
-const windowWidth = Dimensions.get('window').width;
+
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -74,31 +74,18 @@ const LoginTab = ({ navigation }) => {
                 <Text style={styles.noticeText}>
                     Important! Registration is free and no user data is collected!
                 </Text>
+
                 <Input
-                    placeholder="Email"
-                    leftIcon={
-                        <Ionicons
-                            name="mail"
-                            size={24}
-                            color="black"
-                            style={styles.icon}
-                        />
-                    }
+                    placeholder='Email'
+                    leftIcon={<Ionicons name='mail' size={24} color='black' />}
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                     containerStyle={styles.formInput}
                     leftIconContainerStyle={styles.formIcon}
                 />
                 <Input
-                    placeholder="Password"
-                    leftIcon={
-                        <Ionicons
-                            name="key"
-                            size={24}
-                            color="black"
-                            style={styles.icon}
-                        />
-                    }
+                    placeholder='Password'
+                    leftIcon={<Ionicons name='key' size={24} color='black' />}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     secureTextEntry={true}
@@ -106,7 +93,7 @@ const LoginTab = ({ navigation }) => {
                     leftIconContainerStyle={styles.formIcon}
                 />
                 <View>
-                    <Button
+                <Button
                         onPress={() => handleLogin()}
                         title="Login"
                         icon={
@@ -120,68 +107,36 @@ const LoginTab = ({ navigation }) => {
                         buttonStyle={{ backgroundColor: '#5637DD' }}
                     />
                 </View>
-                <View>
-                    <Button
-                        onPress={() => handleResetPassword()}
-                        title="Reset Password"
-                        type="clear"
-                        icon={
-                            <Ionicons
-                                name="lock-closed-outline"
-                                size={24}
-                                color="red"
-                                style={styles.icon}
-                            />
-                        }
-                        titleStyle={{ color: 'red' }}
-                    />
-                </View>
-                <View>
-                    <Button
-                        onPress={() => navigation.navigate('Register')}
-                        title="Register"
-                        type="clear"
-                        icon={
-                            <Ionicons
-                                name="person-add-outline"
-                                size={24}
-                                color="black"
-                                style={styles.icon}
-                            />
-                        }
-                        titleStyle={{ color: 'green', fontWeight: 'bold' }}
-                    />
-                </View>
+            </View>
 
-                <View >
-                    <Text style={{ margin: 10, fontWeight: 'bold' }}>
-                        - Here are a couple examples of what you can do with this app after you register.
-                    </Text>
-                    <Text style={{ margin: 5, fontWeight: 'bold' }}>
-                        - Full About and info are on the next screen.
-                    </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                        <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
-                        <Image
-                            source={require('../assets/img/exChart.png')}
-                            style={styles.image}
-                        />
-                        <Image
-                            source={require('../assets/img/exlist.png')}
-                            style={[styles.image, { width: 270, height: 100 }]}
-                        />
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                        <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
-                        <Image
-                            source={require('../assets/img/items6.jpg')}
-                            style={styles.image}
-                        />
-                        <Image
-                            source={require('../assets/img/entries3.jpg')}
-                            style={styles.image}
-                        />
-                    </View>
+            <View >
+                <Text style={{ margin: 10, fontWeight: 'bold' }}>
+                    - Here are a couple examples of what you can do with this app after you register.
+                </Text>
+                <Text style={{ margin: 5, fontWeight: 'bold' }}>
+                    - Full About and info are on the next screen.
+                </Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
+                    <Image
+                        source={require('../assets/img/exChart.png')}
+                        style={styles.image}
+                    />
+                    <Image
+                        source={require('../assets/img/exlist.png')}
+                        style={[styles.image, { width: 270, height: 100 }]}
+                    />
+                </View>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
+                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
+                    <Image
+                        source={require('../assets/img/items6.jpg')}
+                        style={styles.image}
+                    />
+                    <Image
+                        source={require('../assets/img/entries3.jpg')}
+                        style={styles.image}
+                    />
                 </View>
             </View>
         </ScrollView>
@@ -351,20 +306,23 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
-        paddingBottom: 20, 
+        paddingBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     container: {
-        flexDirection: windowWidth > 768 ? 'row' : 'column',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
         marginRight: 2,
+        maxWidth: '700px'
     },
     noticeText: {
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
-        color: '#FFA500', 
+        color: '#FFA500',
         marginBottom: 10,
         backgroundColor: 'black'
     },
