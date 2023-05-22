@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Build the Expo project
-RUN export NODE_ENV=production && npx expo export:web
+RUN NODE_ENV=production npx expo export:web
 
 # Expose the port used by your Expo application (e.g., 19006 for Metro Bundler)
 EXPOSE 19006

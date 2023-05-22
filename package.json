@@ -1,4 +1,3 @@
-
 {
   "homepage": "https://nativeprotracker.com/",
   "name": "native-pro-tracker",
@@ -9,7 +8,7 @@
     "android": "eas build -p android",
     "ios": "eas build -p ios",
     "web": "expo start --web",
-    "predeploy-firebase": "export NODE_ENV=production && npx expo export:web",
+    "predeploy-firebase": "NODE_ENV=production npx expo export:web",
     "deploy-firebase": "firebase deploy --only hosting",
     "predeploy-gke": "docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest"
   },
@@ -63,8 +62,7 @@
     "yup": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "babel-plugin-transform-remove-console": "^6.9.4"
+    "@babel/core": "^7.12.9"
   },
   "private": true
 }
