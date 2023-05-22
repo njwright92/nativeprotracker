@@ -72,7 +72,7 @@ const LoginTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.noticeText}>
-                    Important! Registration is free and no user data is collected!
+                    Important! Registration is free!
                 </Text>
 
                 <Input
@@ -93,7 +93,7 @@ const LoginTab = ({ navigation }) => {
                     leftIconContainerStyle={styles.formIcon}
                 />
                 <View>
-                <Button
+                    <Button
                         onPress={() => handleLogin()}
                         title="Login"
                         icon={
@@ -109,26 +109,26 @@ const LoginTab = ({ navigation }) => {
                 </View>
             </View>
 
-            <View >
-                <Text style={{ margin: 10, fontWeight: 'bold' }}>
+            <View style={styles.container}>
+                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
                 </Text>
-                <Text style={{ margin: 5, fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
+                    <Text style={styles.text}>Business</Text>
                     <Image
                         source={require('../assets/img/exChart.png')}
                         style={styles.image}
                     />
                     <Image
                         source={require('../assets/img/exlist.png')}
-                        style={[styles.image, { width: 270, height: 100 }]}
+                        style={[styles.image, { width: 198, height: 70 }]}
                     />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
+                    <Text style={styles.text}>Personal</Text>
                     <Image
                         source={require('../assets/img/items6.jpg')}
                         style={styles.image}
@@ -184,7 +184,7 @@ const RegisterTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.noticeText}>
-                    Important! Registration is free and no user data is collected!
+                    Important! Registration is free!
                 </Text>
 
                 <Input
@@ -221,26 +221,26 @@ const RegisterTab = ({ navigation }) => {
                 </View>
             </View>
 
-            <View >
-                <Text style={{ margin: 10, fontWeight: 'bold' }}>
+            <View style={styles.container} >
+                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
                 </Text>
-                <Text style={{ margin: 5, fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Business</Text>
+                    <Text style={styles.text}>Business</Text>
                     <Image
                         source={require('../assets/img/exChart.png')}
                         style={styles.image}
                     />
                     <Image
                         source={require('../assets/img/exlist.png')}
-                        style={[styles.image, { width: 270, height: 100 }]}
+                        style={[styles.image, {}]}
                     />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={{ margin: 7, fontWeight: 'bold', alignItems: 'center' }}>Personal</Text>
+                    <Text style={styles.text}>Personal</Text>
                     <Image
                         source={require('../assets/img/items6.jpg')}
                         style={styles.image}
@@ -309,27 +309,34 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#F5F5DC',
+        maxWidth: '1000',
     },
     container: {
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 10,
-        marginRight: 2,
-        maxWidth: '700px'
+        marginTop: 10,
+        marginBottom: 10,
+        maxWidth: '1000'
     },
     noticeText: {
         fontWeight: 'bold',
         fontSize: 20,
         textAlign: 'center',
         color: '#FFA500',
-        marginBottom: 10,
+        marginBottom: 15,
         backgroundColor: 'black'
     },
     image: {
-        width: 150,
-        height: 150,
-        margin: 2,
+        height: 95,
+        width: 95,
+        marginRight: 2,
+    },
+    text: {
+        margin: 7,
+        fontWeight: 'bold',
+        alignItems: 'center',
+        borderTopWidth: 2,
+        borderTopColor: 'black',
     },
 });
 

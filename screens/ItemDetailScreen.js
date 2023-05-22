@@ -23,7 +23,7 @@ const ItemDetailScreen = ({ route }) => {
     const { item: itemParam } = route.params;
     const dispatch = useDispatch();
     const items = useSelector((state) => state.items);
-    const item = items.find((item) => item.id === itemParam.id); //Updated to match the item by ID
+    const item = items.find((item) => item.id === itemParam.id);
     const [entries, setEntries] = useState([]);
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
@@ -142,17 +142,30 @@ const ItemDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
-                onPress={() => navigation.goBack()}
-            >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Ionicons name="chevron-back" size={24} color='#fff' />
-                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-                        Back
-                    </Text>
-                </View>
-            </TouchableOpacity>
+
+            <View style={styles.backButtonContainer}>
+                <TouchableOpacity
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? '#fff' : 'transparent',
+                            borderRadius: 20,
+                            padding: 16,
+                            width: '85%',
+                            marginTop: 10,
+                            alignSelf: 'flex-start',
+                            alignItems: 'flex-start',
+                        },
+                    ]}
+                    onPress={() => navigation.goBack()}
+                >
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Ionicons name="chevron-back" size={28} color='white' />
+                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
+                            Back
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
             <ScrollView style={styles.inputContainer}>
                 <Text style={styles.title}>{itemParam.name}</Text>
                 <Text style={{ fontStyle: 'italic', borderBottomWidth: 2, borderBottomColor: 'black' }}>
@@ -362,6 +375,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 22,
+    },
+    backButtonContainer: {
+        width: '100%',
+        alignItems: 'flex-start',
+        paddingHorizontal: 16,
+        marginTop: 10,
     },
 });
 

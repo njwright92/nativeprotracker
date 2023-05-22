@@ -18,7 +18,7 @@ export const getAllItemsByCurrentUser = async () => {
             });
         });
 
-        const sortedItems = items.sort((a, b) => a.name.localeCompare(b.name));
+        const sortedItems = items.sort((a, b) => b.timestamp - a.timestamp);
 
         return sortedItems;
     } catch (error) {

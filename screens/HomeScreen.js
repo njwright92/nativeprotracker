@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
                 title="Products"
                 buttonStyle={{
                     backgroundColor: '#2196F3',
-                    shadowColor: '#000',
+                    shadowColor: 'black',
                     shadowOffset: {
                         width: 0,
                         height: 4,
@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate('AddItemStack')}
             />
 
-            <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: '3' }}>
+            <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: '10' }}>
                 Click to view products page, manage all your products with ease swipe left to delete right to edit.
             </Text>
             <View>

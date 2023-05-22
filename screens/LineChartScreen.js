@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 import { Ionicons } from '@expo/vector-icons';
-import { collectionGroup, where, getDocs, query } from 'firebase/firestore';
+import { collectionGroup, where, getDocs, query, orderBy } from 'firebase/firestore';
 import moment from 'moment';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
@@ -29,7 +29,8 @@ const LineChartScreen = ({ route }) => {
                 const entriesQuery = query(
                     collectionGroup(db, 'entries'),
                     where('uid', '==', currentUser.uid),
-                    where('itemId', '==', itemId)
+                    where('itemId', '==', itemId),
+                    orderBy('date', 'desc')
                 );
                 const entriesSnapshot = await getDocs(entriesQuery);
                 const entries = entriesSnapshot.docs.map((doc) => doc.data());
@@ -62,12 +63,23 @@ const LineChartScreen = ({ route }) => {
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    style={({ pressed }) => [{ backgroundColor: pressed ? 'black' : 'darkSlateGray', borderRadius: 20, padding: 16, width: '85%', marginTop: 20, alignSelf: 'center' }]}
+                    style={({ pressed }) => [
+                        {
+                            backgroundColor: pressed ? '#fff' : 'transparent',
+                            borderRadius: 20,
+                            padding: 16,
+                            width: '85%',
+                            marginTop: 10,
+                            alignSelf: 'flex-start',
+                            alignItems: 'flex-start',
+                        },
+                    ]}
                     onPress={() => navigation.goBack()}
                 >
+
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={28} color='black' />
-                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 24 }}>
+                        <Ionicons name="chevron-back" size={28} color='white' />
+                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
                     </View>
