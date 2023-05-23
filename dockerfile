@@ -17,7 +17,7 @@ COPY . .
 ENV NODE_ENV production
 
 # Build the Expo project
-RUN expo export:web
+RUN npx expo export:web
 
 # Expose the port used by your Expo application (e.g., 19006 for Metro Bundler)
 EXPOSE 19006

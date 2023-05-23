@@ -1,6 +1,8 @@
 # Native Pro Tracker
 
-It gives me immense pleasure to announce that, despite still being in its beta stage, my product now offers full scalability and is live-synchronized with Google Cloud. This achievement has been accomplished by employing Firebase for hosting, coupled with Firestore DB and Auth for secure and robust data handling. The deployment has been expertly executed via a Google Cloud Kubernetes cluster, guaranteeing top-tier performance. As the sole proprietor of the domain, acquired through Namecheap, I stand committed to providing a reliable and sophisticated solution for any and all users.
+### "My Pitch"
+
+I'm thrilled to introduce Native Pro Tracker, my innovative, scalable mobile app set to revolutionize task and product management. Capitalizing on the power of Google Cloud, Firebase, and Firestore DB, I've created an app that offers real-time data handling and top-notch security. My solution is hosted on Firebase and served via a Google Kubernetes cluster, delivering high-performance user experiences across a range of devices. I've acquired the domain through Namecheap, reinforcing my commitment to reliability and user satisfaction. Still in its beta stage but brimming with potential, I'm on a mission to redefine intuitive, full-stack task tracking for today's mobile world.
 
 <p>
   <img src="./assets/img/gptLogo.png" width="30" height="30" alt="ChatGPT Logo">
@@ -8,19 +10,21 @@ It gives me immense pleasure to announce that, despite still being in its beta s
 
 [![Website Status](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://nativeprotracker.com/)
 
-Native Pro Tracker is a powerful and user-friendly full-stack mobile app built with Expo-React Native, Redux, Firebase, and Firestore. The app is designed to provide a seamless experience for tracking and managing various tasks and activities, with a focus on tracking products, items, or anything else by name entered by the user, date, and quantity.
 
-With its full-stack CRUD functionality, users can effortlessly create new products, view existing ones, update their details, and delete them if needed. The responsive design ensures compatibility with a wide range of devices, including phones, tablets, laptops, and computers, making it an ideal choice for individuals who need to stay organized on the go.
+Presenting Native Pro Tracker, a technologically sophisticated, yet user-friendly full-stack mobile application. This powerful tool, developed using an intricate blend of Expo-React Native, Redux, Firebase, and Firestore, excels in tracking and managing a plethora of tasks and activities. The primary focus lies on product tracking, allowing users to record items via custom naming, date, and quantity.
 
-Whether you're keeping track of inventory, monitoring daily tasks, or managing personal projects, Native Pro Tracker offers a versatile and accessible solution for all your tracking needs.
+Harnessing the potential of full-stack CRUD operations, the app facilitates the effortless creation of new products, providing the ability to view, update, and delete existing entries as required. Leveraging a responsive design architecture, compatibility is ensured across an array of devices, from smartphones and tablets to laptops and desktops. The accessibility and flexibility it offers make it an ideal companion for those seeking a streamlined solution to stay organized in our fast-paced world.
+
+Whether it's managing your inventory, overseeing daily tasks, or coordinating personal projects, Native Pro Tracker stands as a versatile and readily accessible platform catering to a multitude of tracking needs. It exemplifies a perfect blend of advanced technology made simple, reminiscent of the ingenuity seen in Apple developments.
 
 
 ## Features
 
 - Custom domain with Namecheap.
-- Backend server hosted on GCP Firebase/Firestore.
-- Frontend built with Expo-React Native and Redux.
+- Backend hosted with Firebase.
 - Real-time database and authentication with Firebase.
+- Frontend built with Expo-React Native and Redux. 
+- Frontend hosted by google GKE cluster with a Docker Img.
 - Responsive design for mobile and web platforms.
 - Data visualization with React Native Chart Kit.
 - Dynamic list for adding, editing, and deleting products with quantity and date entries.
@@ -37,12 +41,11 @@ git clone https://github.com/njwright92/nativeprotracker.git
 
 2. Install dependencies:
 
-cd native-pro-tracker
 npm install
 
 3. Start the development server:
 
-npm start
+npm run start
 
 
 ## Built With
@@ -59,16 +62,16 @@ npm start
 
 A full list of dependencies can be found in the `package.json` file. Some of the key dependencies include:
 
-- `@reduxjs/toolkit`
 - `expo`
 - `firebase`
 - `formik`
-- `react-navigation`
--`react-native-community`
+- `react`
+- `react-native-community`
 - `react-native-elements`
 - `react-native-vector-icons`
-- `react-redux`
-- `redux-persist`
+- `react-navigation`
+- `redux`
+- `reduxjs/toolkit`
 - `yup`
 
 
