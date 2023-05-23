@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable, View, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
-import AboutScreen from './AboutScreen';
 import LoginScreen from './LoginScreen';
 import ItemDetailScreen from './ItemDetailScreen';
 import AddItemScreen from './AddItemScreen';
@@ -130,24 +129,6 @@ const HomeNavigator = () => {
     );
 }
 
-const AboutNavigator = () => {
-    const Stack = createStackNavigator();
-    return (
-        <Stack.Navigator
-            initialRouteName='Contact'
-            screenOptions={screenOptions}
-            options={{ title: "ProTracker" }}
-        >
-            <Stack.Screen
-                name='Contact'
-                component={AboutScreen}
-                options={({ route }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route) || 'support'
-                })}
-            />
-        </Stack.Navigator>
-    );
-};
 
 const Main = () => {
     const Stack = createStackNavigator();
@@ -155,7 +136,6 @@ const Main = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='Home' component={HomeNavigator} />
             <Stack.Screen name='AddItem' component={AddItemNavigator} />
-            <Stack.Screen name='Contact' component={AboutNavigator} />
         </Stack.Navigator>
     );
 };

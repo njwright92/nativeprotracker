@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, Text, ScrollView, View, Pressable } from 'react-native';
 import AboutScreen from './AboutScreen';
 
 const HomeScreen = ({ navigation }) => {
@@ -10,39 +9,16 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>
                 Production Tracking
             </Text>
-
-            <Button
-                title="Products"
-                buttonStyle={{
-                    backgroundColor: '#2196F3',
-                    shadowColor: 'black',
-                    shadowOffset: {
-                        width: 0,
-                        height: 4,
-                    },
-                    shadowOpacity: 0.3,
-                    shadowRadius: 4,
-                    elevation: 8,
-                    borderRadius: 4,
-                    width: 'auto',
-                    alignSelf: 'center',
-                    justifyContent: 'center',
-                    paddingHorizontal: 12,
-                    borderWidth: 3,
-                    borderColor: '#2196F3',
-                }}
-                titleStyle={{
-                    color: '#FFFFFF',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    fontSize: 22,
-                    textTransform: 'uppercase',
-                }}
-                onPress={() => navigation.navigate('AddItemStack')}
-            />
-
-            <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: '10' }}>
-                Click to view products page, manage all your products with ease swipe left to delete right to edit.
+            <View style={styles.buttonContainer}>
+                <Pressable
+                    style={styles.button}
+                    onPress={() => navigation.navigate('AddItemStack')}
+                >
+                    <Text style={styles.buttonText}>Products</Text>
+                </Pressable>
+            </View>
+            <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: 10 }}>
+                Click to view the products page and manage all your products with ease. Swipe left to delete, and swipe right to edit.
             </Text>
             <View>
                 <AboutScreen />
@@ -57,41 +33,48 @@ const styles = StyleSheet.create({
         backgroundColor: '#778899',
         paddingHorizontal: 20,
         paddingTop: 30,
-        alignSelf: 'center',
-        alignContent: 'center'
     },
     text: {
         textAlign: 'center',
         color: 'black',
         fontSize: 28,
         fontWeight: 'bold',
-        marginBottom: 20
+        marginBottom: 20,
+    },
+    buttonContainer: {
+        alignItems: 'center',
     },
     card: {
         backgroundColor: '#FFFFF0',
         borderRadius: 1,
         padding: 20,
-        marginBottom: 15
+        marginBottom: 15,
     },
     cardTitle: {
         textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 10
+        marginBottom: 10,
     },
     cardDescription: {
         fontSize: 18,
         color: '#333333',
         padding: 4,
         textAlign: 'center',
-        color: 'black'
+        color: 'black',
     },
-    buttonContainer: {
-        borderRadius: 4,
-        paddingVertical: 12,
-        paddingHorizontal: 24,
-        borderWidth: 2,
-        borderColor: 'black',
+    button: {
+        padding: 10,
+        backgroundColor: '#2196F3',
+        alignSelf: 'center',
+        width: '40%',
+    },
+    buttonText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: 20,
+        textTransform: 'uppercase',
+        textAlign: 'center',
     },
 });
 

@@ -8,7 +8,7 @@ import LoginScreen from './screens/LoginScreen';
 import store from './store';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const stack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,10 +27,10 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Suspense fallback={<ActivityIndicator />}>
-          <stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
-            <stack.Screen name="Login" component={LoginScreen} />
-            <stack.Screen name="Main" component={Main} />
-          </stack.Navigator>
+          <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Main" component={Main} />
+          </Stack.Navigator>
         </Suspense>
       </NavigationContainer>
     </Provider>

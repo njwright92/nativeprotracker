@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView } from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import { View, StyleSheet, Image, Text, ScrollView, TextInput } from 'react-native';
+import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import {
@@ -12,8 +12,6 @@ import {
 }
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
-
-
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -30,7 +28,7 @@ const LoginTab = ({ navigation }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-                logEvent;
+                logEvent();
                 navigation.navigate('Main');
             })
             .catch((error) => {
@@ -41,8 +39,6 @@ const LoginTab = ({ navigation }) => {
             });
 
     };
-
-
 
     const handleResetPassword = () => {
         sendPasswordResetEmail(auth, email)
@@ -75,23 +71,27 @@ const LoginTab = ({ navigation }) => {
                     Important! Registration is free!
                 </Text>
 
-                <Input
-                    placeholder='Email'
-                    leftIcon={<Ionicons name='mail' size={24} color='black' />}
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
-                <Input
-                    placeholder='Password'
-                    leftIcon={<Ionicons name='key' size={24} color='black' />}
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    secureTextEntry={true}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
+                <View style={styles.formInput}>
+                    <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Email'
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                    />
+                </View>
+
+                <View style={styles.formInput}>
+                    <Ionicons name='key' size={24} color='black' style={styles.formIcon} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Password'
+                        onChangeText={(text) => setPassword(text)}
+                        value={password}
+                        secureTextEntry={true}
+                    />
+                </View>
+
                 <View>
                     <Button
                         onPress={() => handleLogin()}
@@ -107,13 +107,20 @@ const LoginTab = ({ navigation }) => {
                         buttonStyle={{ backgroundColor: '#5637DD' }}
                     />
                 </View>
+                <View style={{ marginTop: 7 }}>
+                    <Text
+                        onPress={() => handleResetPassword()}
+                        style={styles.resetPasswordLink}
+                    >
+                        Reset Password
+                    </Text>
+                </View>
             </View>
-
             <View style={styles.container}>
-                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
                 </Text>
-                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
@@ -176,7 +183,7 @@ const RegisterTab = ({ navigation }) => {
                     console.log(errorCode, errorMessage);
                 }
             });
-        logEvent;
+        logEvent();
         navigation.navigate('Main');
     };
 
@@ -186,24 +193,26 @@ const RegisterTab = ({ navigation }) => {
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
+                <View style={styles.formInput}>
+                    <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Email'
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
+                    />
+                </View>
 
-                <Input
-                    placeholder='Email'
-                    leftIcon={<Ionicons name='mail' size={24} color='black' />}
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
-                <Input
-                    placeholder='Password'
-                    leftIcon={<Ionicons name='key' size={24} color='black' />}
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
-                    secureTextEntry={true}
-                    containerStyle={styles.formInput}
-                    leftIconContainerStyle={styles.formIcon}
-                />
+                <View style={styles.formInput}>
+                    <Ionicons name='key' size={24} color='black' style={styles.formIcon} />
+                    <TextInput
+                        style={styles.textInput}
+                        placeholder='Password'
+                        onChangeText={(text) => setPassword(text)}
+                        value={password}
+                        secureTextEntry={true}
+                    />
+                </View>
                 <View>
                     <Button
                         onPress={() => handleRegister()}
@@ -222,10 +231,10 @@ const RegisterTab = ({ navigation }) => {
             </View>
 
             <View style={styles.container} >
-                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
                 </Text>
-                <Text style={{ marginTop: 5, marginBottom: '5', fontWeight: 'bold' }}>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
@@ -310,13 +319,24 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F5F5DC',
-        maxWidth: '1000',
+
+    },
+    formInput: {
+        flexDirection: 'row',
+        borderColor: 'gray',
+        borderWidth: 1,
+        paddingLeft: 10,
+        alignItems: 'center',
+        marginBottom: 7
+    },
+    formIcon: {
+        marginRight: 10,
+    },
+    textInput: {
+        flex: 1,
     },
     container: {
-        flexDirection: 'column',
-        marginTop: 10,
-        marginBottom: 10,
-        maxWidth: '1000'
+        marginVertical: 10
     },
     noticeText: {
         fontWeight: 'bold',
@@ -337,6 +357,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderTopWidth: 2,
         borderTopColor: 'black',
+    },
+    resetPasswordLink: {
+        color: 'red',
+        fontSize: 16,
+        textDecorationLine: 'underline',
+        textAlign: 'center',
     },
 });
 

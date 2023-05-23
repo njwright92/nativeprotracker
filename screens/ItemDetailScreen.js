@@ -1,23 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
-import { Platform } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry } from '../actions/addEntry';
 import { deleteEntry } from '../actions/deleteEntry';
 import { editEntry } from '../actions/editEntry';
 import EditEntryForm from '../components/EditEntryForm';
 import moment from 'moment';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
-import { logEvent } from '@firebase/analytics';
-
+import { Platform } from 'react-native';
 
 const ItemDetailScreen = ({ route }) => {
-    logEvent;
 
     const navigation = useNavigation();
     const { item: itemParam } = route.params;
@@ -25,11 +21,12 @@ const ItemDetailScreen = ({ route }) => {
     const items = useSelector((state) => state.items);
     const item = items.find((item) => item.id === itemParam.id);
     const [entries, setEntries] = useState([]);
-    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [showDateTimePicker, setShowDateTimePicker] = useState(false);
     const [date, setDate] = useState(new Date());
     const [quantity, setQuantity] = useState('');
     const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/yyyy'));
     const [editingEntryId, setEditingEntryId] = useState(null);
+
 
     useEffect(() => {
         const handleEntriesUpdate = (updatedEntries) => {
@@ -48,14 +45,15 @@ const ItemDetailScreen = ({ route }) => {
         setQuantity(text);
     };
 
-    const handleDateChange = (selectedDate) => {
-        setShowDatePicker(Platform.OS === 'ios');
-        setDate(selectedDate);
-        const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
-        setButtonTitle(formattedDate);
+    const handleDateChange = (event, selectedDate) => {
+        setShowDateTimePicker(false);
 
+        if (selectedDate) {
+            const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
+            setDate(selectedDate);
+            setButtonTitle(formattedDate);
+        }
     };
-
 
     const handleAddEntry = () => {
         dispatch(addEntry(itemParam.id, quantity, date));
@@ -167,6 +165,9 @@ const ItemDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.inputContainer}>
+                {Platform.OS === 'web' && (
+                    <Text style={styles.webMessage}>Ability to change date available in mobile app!</Text>
+                )}
                 <Text style={styles.title}>{itemParam.name}</Text>
                 <Text style={{ fontStyle: 'italic', borderBottomWidth: 2, borderBottomColor: 'black' }}>
                     ID: {itemParam.id}
@@ -186,14 +187,14 @@ const ItemDetailScreen = ({ route }) => {
                         alignSelf: 'center',
                         width: '80%'
                     }}
-                    onPress={() => setShowDatePicker(true)}
+                    onPress={() => setShowDateTimePicker(true)}
                 >
                     <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center', fontSize: 18 }}>{buttonTitle
                     }</Text>
                 </TouchableOpacity>
-                {showDatePicker && (
-                    <DatePicker
-                        selected={date}
+                {showDateTimePicker && (
+                    <DateTimePicker
+                        value={date}
                         onChange={handleDateChange}
                         dateFormat="MM/dd/yyyy"
                     />
@@ -227,6 +228,7 @@ const ItemDetailScreen = ({ route }) => {
             </ScrollView>
 
             <View style={styles.listContainer}>
+                <View style={styles.listContainer}></View>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: 'black' }}>
                     <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
                         Product Entries
@@ -264,9 +266,9 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     listContainer: {
-        height: 222,
-        padding: 16,
-        marginTop: 12,
+        flex: 1,
+        padding: 5,
+        marginTop: 5,
     },
     title: {
         fontSize: 28,
@@ -285,6 +287,7 @@ const styles = StyleSheet.create({
     },
     entriesContainer: {
         flexGrow: 1,
+        marginBottom: 12,
     },
     entryContainer: {
         flexDirection: 'row',
@@ -343,7 +346,7 @@ const styles = StyleSheet.create({
         height: '75%',
     },
     card: {
-        marginTop: 24,
+        marginTop: 16,
         backgroundColor: 'black',
         borderRadius: 10,
         width: '90%',
@@ -381,6 +384,12 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingHorizontal: 16,
         marginTop: 10,
+    },
+    webMessage: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#FFA500',
     },
 });
 

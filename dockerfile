@@ -13,6 +13,9 @@ RUN npm install
 # Copy the entire project directory to the working directory
 COPY . .
 
+# Set Node.js environment to production
+ENV NODE_ENV production
+
 # Build the Expo project
 RUN expo export:web
 
