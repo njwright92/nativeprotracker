@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, TextInput } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,16 +12,18 @@ import {
 }
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
+import GoogleSignInButton from '../ReactGoogleSignIn';
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const auth = getAuth();
 
     const handleLogin = () => {
         if (!email || !password) {
-            setError('Please enter a valid email and password');
+            Alert.alert('Login error', 'Incorrect username or password.');
             return;
         }
         signInWithEmailAndPassword(auth, email, password)
@@ -32,12 +34,12 @@ const LoginTab = ({ navigation }) => {
                 navigation.navigate('Main');
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                setError(errorMessage);
-                console.log(errorCode, errorMessage);
+                if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                    setError('Incorrect username or password');
+                } else {
+                    setError('An error occurred during login');
+                }
             });
-
     };
 
     const handleResetPassword = () => {
@@ -49,10 +51,16 @@ const LoginTab = ({ navigation }) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
-                alert(errorMessage);
+
+                if (errorCode === 'auth/invalid-email') {
+                    setError('Please enter a valid email address.');
+                } else if (errorCode === 'auth/user-not-found') {
+                    setError('User with the provided email address does not exist.');
+                } else {
+                    setError(errorMessage);
+                }
             });
     };
-
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -80,7 +88,9 @@ const LoginTab = ({ navigation }) => {
                         value={email}
                     />
                 </View>
-
+                {error ? (
+                    <Text style={styles.errorText}>{error}</Text>
+                ) : null}
                 <View style={styles.formInput}>
                     <Ionicons name='key' size={24} color='black' style={styles.formIcon} />
                     <TextInput
@@ -107,6 +117,11 @@ const LoginTab = ({ navigation }) => {
                         buttonStyle={{ backgroundColor: '#5637DD' }}
                     />
                 </View>
+                <View style={{ marginTop: 5 }}>
+
+                    <GoogleSignInButton />
+                </View>
+
                 <View style={{ marginTop: 7 }}>
                     <Text
                         onPress={() => handleResetPassword()}
@@ -154,17 +169,21 @@ const LoginTab = ({ navigation }) => {
 const RegisterTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const auth = getAuth();
 
     const handleRegister = () => {
         if (!/^\S+@\S+\.\S+$/.test(email)) {
-            alert('Please enter a valid email address');
+            setError('Please enter a valid email address');
             return;
-        } const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])([A-Za-z\d@$!%*?&^(){}[\]:;<>,.~`_+-=|\\\/]){7,}$/;
+        }
 
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])([A-Za-z\d@$!%*?&^(){}[\]:;<>,.~`_+-=|\\\/]){7,}$/;
         if (!passwordRegex.test(password)) {
-            alert('Password must be at least 7 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)');
+            setError(
+                'Password must be at least 7 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)'
+            );
             return;
         }
 
@@ -172,19 +191,19 @@ const RegisterTab = ({ navigation }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
+                logEvent();
+                navigation.navigate('Main');
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
                 if (errorCode === 'auth/email-already-in-use') {
-                    alert('Email address is already in use');
+                    setError('Email address is already in use');
                 } else {
-                    console.log(errorCode, errorMessage);
+                    setError('An error occurred during registration');
                 }
             });
-        logEvent();
-        navigation.navigate('Main');
     };
 
     return (
@@ -229,6 +248,10 @@ const RegisterTab = ({ navigation }) => {
                     />
                 </View>
             </View>
+
+            {error ? (
+                <Text style={styles.errorText}>{error}</Text>
+            ) : null}
 
             <View style={styles.container} >
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
@@ -363,6 +386,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textDecorationLine: 'underline',
         textAlign: 'center',
+    },
+    errorText: {
+        fontSize: 16,
+        color: 'red',
+        marginBottom: 10,
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
 });
 
