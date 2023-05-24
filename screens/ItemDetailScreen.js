@@ -201,7 +201,7 @@ const ItemDetailScreen = ({ route }) => {
                 )}
                 <TouchableOpacity
                     style={{
-                        backgroundColor: '#8BC34A',
+                        backgroundColor: '#28a745',
                         padding: 10,
                         borderRadius: 5,
                         marginVertical: 3,

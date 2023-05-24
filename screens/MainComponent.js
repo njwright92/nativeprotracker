@@ -28,9 +28,6 @@ const screenOptions = ({ navigation }) => ({
                         .then(() => {
 
                             navigation.navigate('Login');
-                        })
-                        .catch((error) => {
-                            console.log('Error signing out: ', error);
                         });
                 }}
                 style={{ marginLeft: 2, marginRight: 5 }}

@@ -1,7 +1,8 @@
-import { ADD_ITEM, ITEM_ACTION_FAILED } from './types';
+import { ADD_ITEM } from './types';
 import { onSnapshot, addDoc, collection, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
+import { Alert } from 'react-native';
 
 export const addItem = (item) => {
     return async (dispatch) => {
@@ -26,6 +27,7 @@ export const addItem = (item) => {
                     payload: itemData,
                 });
 
+                Alert.alert('Success', 'Item added successfully!');
 
                 onSnapshot(collection(db, "items"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
@@ -40,8 +42,9 @@ export const addItem = (item) => {
                 });
             }
         } catch (error) {
-            console.log('Error adding document: ', error);
-            dispatch({ type: ITEM_ACTION_FAILED, payload: 'Item action failed!' })
+
+
+            Alert.alert('failed', 'Item not added!');
         }
     };
 };

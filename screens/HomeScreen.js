@@ -65,14 +65,14 @@ const styles = StyleSheet.create({
     },
     button: {
         padding: 10,
-        backgroundColor: '#2196F3',
+        backgroundColor: '#007BFF',
         alignSelf: 'center',
-        width: '40%',
+        width: '35%',
     },
     buttonText: {
         color: '#FFFFFF',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 16,
         textTransform: 'uppercase',
         textAlign: 'center',
     },

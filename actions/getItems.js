@@ -1,7 +1,7 @@
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
-import { ITEM_ACTION_FAILED } from './types';
+
 
 export const getAllItemsByCurrentUser = async () => {
     try {
@@ -22,10 +22,6 @@ export const getAllItemsByCurrentUser = async () => {
 
         return sortedItems;
     } catch (error) {
-        dispatch({
-            type: ITEM_ACTION_FAILED,
-            payload: 'Failed to get items',
-        });
         throw error;
     }
 };

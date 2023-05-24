@@ -1,4 +1,4 @@
-import { DELETE_ENTRY, ENTRY_ACTION_FAILED } from './types';
+import { DELETE_ENTRY } from './types';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
@@ -20,7 +20,7 @@ export const deleteEntry = (itemId, entryId) => {
             });
         } catch (error) {
             console.error('Error deleting entry: ', error);
-            dispatch({ type: ENTRY_ACTION_FAILED, payload: 'Entry action failed!' })
+
         }
     };
 };

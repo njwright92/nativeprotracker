@@ -1,4 +1,4 @@
-import { ADD_ENTRY, ENTRY_ACTION_FAILED } from './types';
+import { ADD_ENTRY } from './types';
 import { onSnapshot, addDoc, collection, getDoc } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from "firebase/auth";
@@ -27,13 +27,12 @@ export const addEntry = (itemId, quantity, date) => {
                     payload: entryData,
                 });
 
-                // listen for updates to the 'entries' collection of this item
                 onSnapshot(collection(db, "items", itemId, "entries"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
                             const newEntryData = { ...change.doc.data(), id: change.doc.id };
                             console.log('New entry added: ', newEntryData);
-                            // you can dispatch an action here if you want to update your app's state
+
                         }
                     });
                 }, (error) => {
@@ -41,8 +40,8 @@ export const addEntry = (itemId, quantity, date) => {
                 });
             }
         } catch (error) {
-            console.log('Error adding document: ', error);
-            dispatch({ type: ENTRY_ACTION_FAILED, payload: 'Entry action failed!' })
+
+
         }
     };
 };

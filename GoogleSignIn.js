@@ -1,5 +1,5 @@
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import { auth, provider } from "./firebaseConfig";
 
 const handleGoogleSignIn = () => {

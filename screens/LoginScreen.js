@@ -3,21 +3,13 @@ import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert } from 'rea
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail,
-    onAuthStateChanged
-}
-    from "firebase/auth";
-import { logEvent } from '@firebase/analytics';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "firebase/auth";
 import { GoogleSignInButton } from '../GoogleSignIn';
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [error, setError] = useState(null);
 
     const auth = getAuth();
 
@@ -30,7 +22,6 @@ const LoginTab = ({ navigation }) => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-                logEvent();
                 navigation.navigate('Main');
             })
             .catch((error) => {
@@ -42,23 +33,24 @@ const LoginTab = ({ navigation }) => {
             });
     };
 
-
     const handleResetPassword = () => {
+        if (!email) {
+            setError('Please enter your email address.');
+            return;
+        }
+
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                alert('Password reset email sent. Please check your inbox.');
+                Alert.alert('Password Reset', 'Password reset email sent. Please check your inbox.');
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-
                 if (errorCode === 'auth/invalid-email') {
                     setError('Please enter a valid email address.');
                 } else if (errorCode === 'auth/user-not-found') {
                     setError('User with the provided email address does not exist.');
                 } else {
-                    setError(errorMessage = "no rauthorized email");
+                    setError('An error occurred while sending the password reset email.');
                 }
             });
     };
@@ -225,7 +217,9 @@ const RegisterTab = ({ navigation }) => {
                         value={email}
                     />
                 </View>
-
+                {error ? (
+                    <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
+                ) : null}
                 <View style={styles.formInput}>
                     <Ionicons name='key' size={24} color='black' style={styles.formIcon} />
                     <TextInput
