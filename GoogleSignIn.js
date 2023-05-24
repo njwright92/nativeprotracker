@@ -1,32 +1,61 @@
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
-import { Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { TouchableOpacity, View, Text, Image, StyleSheet } from 'react-native';
+import { auth, provider } from "./firebaseConfig";
 
-export const handleGoogleSignIn = async () => {
-    const navigation = useNavigation();
-
-    try {
-        await GoogleSignin.hasPlayServices();
-        const { user } = await GoogleSignin.signIn();
-        console.log(user); // Do something with the user info, such as storing it in state or passing it to another component/function
-        navigation.navigate('Main');
-    } catch (error) {
-        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-            // Handle sign-in cancellation
-        } else if (error.code === statusCodes.IN_PROGRESS) {
-            // Handle sign-in already in progress
-        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            // Handle Play Services not available or outdated
-        } else {
-            // Handle other errors
-        }
-    }
+const handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
 };
 
-export const MobileGoogleSignInButton = () => {
+export const GoogleSignInButton = () => {
     return (
-        <Button onPress={handleGoogleSignIn} title="Sign In with Google (Mobile)" />
+        <TouchableOpacity style={styles.button} onPress={handleGoogleSignIn}>
+            <Image source={require('./assets/img/google.png')} style={styles.image} />
+            <Text style={styles.text}>Sign In with Google</Text>
+        </TouchableOpacity>
     );
 };
 
-
+const styles = StyleSheet.create({
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    image: {
+        width: 20,
+        height: 20,
+        marginRight: 10,
+    },
+    text: {
+        color: '#757575',
+        fontWeight: 'bold',
+    },
+});

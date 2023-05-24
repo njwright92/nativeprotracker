@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert, Platform } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,7 +12,8 @@ import {
 }
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
-import GoogleSignInButton from '../ReactGoogleSignIn';
+import { GoogleSignInButton } from '../GoogleSignIn';
+
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -41,11 +42,7 @@ const LoginTab = ({ navigation }) => {
             });
     };
 
-    const renderGoogleSignInButton = () => {
-        if (Platform.OS === 'web') {
-            return <GoogleSignInButton />;
-        }
-    };
+
     const handleResetPassword = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
@@ -79,6 +76,10 @@ const LoginTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
+                <Text style={{ fontWeight: 'bold', fontSize: 28, color: '#00008b' }}>ProTracker </Text>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
+                    - Full About and info are on the next screen.
+                </Text>
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
@@ -118,14 +119,11 @@ const LoginTab = ({ navigation }) => {
                                 style={styles.icon}
                             />
                         }
-                        buttonStyle={{ backgroundColor: '#5637DD' }}
+                        buttonStyle={{ backgroundColor: '#007BFF' }}
                     />
                 </View>
-                <View style={{ marginTop: 5 }}>
 
-                    {renderGoogleSignInButton()}
-
-                </View>
+                <GoogleSignInButton />
 
                 <View style={{ marginTop: 7 }}>
                     <Text
@@ -139,9 +137,6 @@ const LoginTab = ({ navigation }) => {
             <View style={styles.container}>
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
-                </Text>
-                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
-                    - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Business</Text>
@@ -214,6 +209,10 @@ const RegisterTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
+                <Text style={{ fontWeight: 'bold', fontSize: 28, color: '#00008b' }}>ProTracker </Text>
+                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
+                    - Full About and info are on the next screen.
+                </Text>
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
@@ -249,21 +248,17 @@ const RegisterTab = ({ navigation }) => {
                                 size={24}
                             />
                         }
-                        buttonStyle={{ backgroundColor: '#5637DD' }}
+                        buttonStyle={{ backgroundColor: '#28a745' }}
                     />
                 </View>
+                <GoogleSignInButton />
             </View>
-
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
-
             <View style={styles.container} >
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
-                </Text>
-                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
-                    - Full About and info are on the next screen.
                 </Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Business</Text>
@@ -297,8 +292,8 @@ const Tab = createBottomTabNavigator();
 
 const LoginScreen = () => {
     const tabBarOptions = {
-        activeBackgroundColor: 'darkslategray',
-        inactiveBackgroundColor: 'lightslategray',
+        activeBackgroundColor: '#007BFF',
+        inactiveBackgroundColor: '#28a745',
         activeTintColor: '#fff',
         inactiveTintColor: '#fff',
         labelStyle: { fontSize: 16 },
@@ -347,7 +342,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F5F5DC',
-        maxWidth: 700
     },
     formInput: {
         flexDirection: 'row',
@@ -365,7 +359,10 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container: {
-        marginVertical: 10,
+        flex: 1,
+        alignItems: 'center',
+        justify: 'center',
+        maxWidth: 700
     },
     noticeText: {
         fontWeight: 'bold',
@@ -378,7 +375,8 @@ const styles = StyleSheet.create({
     image: {
         height: 95,
         width: 95,
-        marginRight: 2,
+        marginRight: 2.5,
+        marginTop: 7
     },
     text: {
         margin: 7,
@@ -396,7 +394,6 @@ const styles = StyleSheet.create({
     errorText: {
         fontSize: 16,
         color: 'red',
-        marginBottom: 10,
         textAlign: 'center',
         fontWeight: 'bold'
     },
