@@ -1,11 +1,15 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export const handleGoogleSignIn = async () => {
+    const navigation = useNavigation();
+
     try {
         await GoogleSignin.hasPlayServices();
-        const userInfo = await GoogleSignin.signIn();
-        console.log(userInfo); // Do something with the user info, such as storing it in state or passing it to another component/function
+        const { user } = await GoogleSignin.signIn();
+        console.log(user); // Do something with the user info, such as storing it in state or passing it to another component/function
+        navigation.navigate('Main');
     } catch (error) {
         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
             // Handle sign-in cancellation

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -13,7 +13,6 @@ import {
     from "firebase/auth";
 import { logEvent } from '@firebase/analytics';
 import GoogleSignInButton from '../ReactGoogleSignIn';
-
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -42,6 +41,11 @@ const LoginTab = ({ navigation }) => {
             });
     };
 
+    const renderGoogleSignInButton = () => {
+        if (Platform.OS === 'web') {
+            return <GoogleSignInButton />;
+        }
+    };
     const handleResetPassword = () => {
         sendPasswordResetEmail(auth, email)
             .then(() => {
@@ -57,7 +61,7 @@ const LoginTab = ({ navigation }) => {
                 } else if (errorCode === 'auth/user-not-found') {
                     setError('User with the provided email address does not exist.');
                 } else {
-                    setError(errorMessage);
+                    setError(errorMessage = "no rauthorized email");
                 }
             });
     };
@@ -89,7 +93,7 @@ const LoginTab = ({ navigation }) => {
                     />
                 </View>
                 {error ? (
-                    <Text style={styles.errorText}>{error}</Text>
+                    <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
                 ) : null}
                 <View style={styles.formInput}>
                     <Ionicons name='key' size={24} color='black' style={styles.formIcon} />
@@ -119,7 +123,8 @@ const LoginTab = ({ navigation }) => {
                 </View>
                 <View style={{ marginTop: 5 }}>
 
-                    <GoogleSignInButton />
+                    {renderGoogleSignInButton()}
+
                 </View>
 
                 <View style={{ marginTop: 7 }}>
@@ -250,7 +255,7 @@ const RegisterTab = ({ navigation }) => {
             </View>
 
             {error ? (
-                <Text style={styles.errorText}>{error}</Text>
+                <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
 
             <View style={styles.container} >
@@ -268,7 +273,7 @@ const RegisterTab = ({ navigation }) => {
                     />
                     <Image
                         source={require('../assets/img/exlist.png')}
-                        style={[styles.image, {}]}
+                        style={[styles.image, { width: 198, height: 70 }]}
                     />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
@@ -342,7 +347,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F5F5DC',
-
+        maxWidth: 700
     },
     formInput: {
         flexDirection: 'row',
@@ -351,6 +356,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         alignItems: 'center',
         marginBottom: 7
+
     },
     formIcon: {
         marginRight: 10,
@@ -359,7 +365,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container: {
-        marginVertical: 10
+        marginVertical: 10,
     },
     noticeText: {
         fontWeight: 'bold',
