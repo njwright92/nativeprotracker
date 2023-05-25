@@ -9,8 +9,8 @@
     "ios": "eas build -p ios",
     "web": "expo start --web",
     "predeploy": "expo export:web",
-    "deploy-firebase": "npm run predeploy && firebase deploy --only hosting",
-    "predeploy-gke": "docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest"
+    "deploy-google": "npm run predeploy && firebase deploy --only hosting && docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest",
+    
   },
   "dependencies": {
     "@babel/generator": "^7.20.7",
