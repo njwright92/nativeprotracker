@@ -117,7 +117,7 @@ const LoginTab = ({ navigation }) => {
 
                 <GoogleSignInButton />
 
-                <View style={{ marginTop: 7 }}>
+                <View style={{ marginTop: 5 }}>
                     <Text
                         onPress={() => handleResetPassword()}
                         style={styles.resetPasswordLink}
@@ -208,7 +208,7 @@ const RegisterTab = ({ navigation }) => {
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
-                <Text style={styles.noticeText2}>Simple email/password registration - no verification needed. Or sign in with Google.</Text>
+                <Text style={styles.noticeText2}>Simple email/password registration, no verification needed, Or sign in with Google.</Text>
                 <View style={styles.formInput}>
                     <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
                     <TextInput
@@ -250,7 +250,7 @@ const RegisterTab = ({ navigation }) => {
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
-             <GoogleSignInButton />
+            <GoogleSignInButton />
             <View style={styles.container} >
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
@@ -364,15 +364,14 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         color: '#FFA500',
-        marginBottom: 12,
+        marginBottom: 5,
         backgroundColor: 'black'
     },
     noticeText2: {
-        fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
         color: 'black',
-        marginBottom: 10,
+        marginBottom: 7,
     },
     image: {
         height: 95,
