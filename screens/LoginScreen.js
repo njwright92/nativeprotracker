@@ -246,11 +246,11 @@ const RegisterTab = ({ navigation }) => {
                         buttonStyle={{ backgroundColor: '#28a745' }}
                     />
                 </View>
-                <GoogleSignInButton />
             </View>
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
+             <GoogleSignInButton />
             <View style={styles.container} >
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Here are a couple examples of what you can do with this app after you register.
