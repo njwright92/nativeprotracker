@@ -1,13 +1,12 @@
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
-
 
 export const getAllItemsByCurrentUser = async () => {
     try {
         const currentUser = getAuth().currentUser;
         const itemsRef = collection(db, 'items');
-        const q = query(itemsRef, where('uid', '==', currentUser.uid));
+        const q = query(itemsRef, where('uid', '==', currentUser.uid), orderBy('timestamp', 'desc'));
         const querySnapshot = await getDocs(q);
 
         const items = [];
@@ -18,9 +17,7 @@ export const getAllItemsByCurrentUser = async () => {
             });
         });
 
-        const sortedItems = items.sort((a, b) => b.timestamp - a.timestamp);
-
-        return sortedItems;
+        return items;
     } catch (error) {
         throw error;
     }

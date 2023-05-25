@@ -166,11 +166,11 @@ const ItemDetailScreen = ({ route }) => {
             </View>
             <ScrollView style={styles.inputContainer}>
                 {Platform.OS === 'web' && (
-                    <Text style={styles.webMessage}>Ability to change date available in mobile app!</Text>
+                    <Text style={styles.webMessage}>Ability to change date available in mobile app! & non numbers in quantity work but will mess up Line charts!</Text>
                 )}
                 <Text style={styles.title}>{itemParam.name}</Text>
-                <Text style={{ fontStyle: 'italic', borderBottomWidth: 2, borderBottomColor: 'black' }}>
-                    ID: {itemParam.id}
+                <Text style={styles.textDate}>
+                    Entries sorted by date newest first.
                 </Text>
                 <TextInput
                     style={styles.input}
@@ -387,10 +387,17 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     webMessage: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#FFA500',
+    },
+    textDate: {
+        color: 'black',
+        textAlign: 'center',
+        fontStyle: 'italic',
+        fontSize: 16,
+        textDecorationLine: 'underline',
     },
 });
 

@@ -59,6 +59,7 @@ const AddItemScreen = () => {
                 </View>
             )}
             <View style={styles.listContainer}>
+                <Text style={styles.text}>Items sorted by most recently added</Text>
                 <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
             <Pressable
@@ -98,6 +99,13 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingHorizontal: 16,
         marginTop: 10,
+    },
+    text: {
+        color: 'black',
+        textAlign: 'center',
+        fontStyle: 'italic',
+        fontSize: 16,
+        textDecorationLine: 'underline',
     },
 });
 

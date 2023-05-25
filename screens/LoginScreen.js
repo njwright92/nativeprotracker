@@ -68,7 +68,7 @@ const LoginTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
-                <Text style={{ fontWeight: 'bold', fontSize: 28, color: '#00008b' }}>ProTracker </Text>
+                <Text style={{ fontWeight: 'bold', fontSize: 30, color: '#00008b' }}>ProTracker </Text>
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
@@ -208,6 +208,7 @@ const RegisterTab = ({ navigation }) => {
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
+                <Text style={styles.noticeText2}>Simple email/password registration - no verification needed. Or sign in with Google.</Text>
                 <View style={styles.formInput}>
                     <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
                     <TextInput
@@ -363,8 +364,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         color: '#FFA500',
-        marginBottom: 15,
+        marginBottom: 12,
         backgroundColor: 'black'
+    },
+    noticeText2: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        textAlign: 'center',
+        color: 'black',
+        marginBottom: 10,
     },
     image: {
         height: 95,
