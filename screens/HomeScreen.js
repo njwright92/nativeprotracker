@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View, Pressable } from 'react-native';
+import { StyleSheet, Text, ScrollView, View, Pressable, Image } from 'react-native';
 import AboutScreen from './AboutScreen';
 
 const HomeScreen = ({ navigation }) => {
@@ -8,6 +8,14 @@ const HomeScreen = ({ navigation }) => {
         <ScrollView style={styles.container}>
             <Text style={styles.text}>
                 Production Tracking
+                <Image
+                    source={require('../assets/img/appLogo.jpg')}
+                    style={{
+                        width: 80, // Set the width and height of the logo as per your requirement
+                        height: 50,
+                        marginLeft: 10,
+                    }}
+                />
             </Text>
             <View style={styles.buttonContainer}>
                 <Pressable
@@ -15,6 +23,7 @@ const HomeScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate('AddItemStack')}
                 >
                     <Text style={styles.buttonText}>Products</Text>
+
                 </Pressable>
             </View>
             <Text style={{ ...styles.cardDescription, backgroundColor: 'white', marginTop: 10 }}>

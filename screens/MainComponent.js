@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, View, Text } from 'react-native';
+import { Pressable, View, Text, Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './HomeScreen';
 import LoginScreen from './LoginScreen';
@@ -56,6 +56,14 @@ const screenOptions = ({ navigation }) => ({
                         size={20}
                         color="white"
                     /> Home
+                    <Image
+                    source={require('../assets/img/appLogo.jpg')}
+                    style={{
+                        width: 61, // Set the width and height of the logo as per your requirement
+                        height: 35,
+                        marginLeft: 200,
+                    }}
+                />
                 </Text>
             </Pressable>
         </View>
@@ -92,13 +100,13 @@ const AddItemNavigator = () => {
             <Stack.Screen name='Product Detail'
                 component={ItemDetailScreen}
                 options={({ route, }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Add Product'
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Product Entries'
                 })}
             />
             <Stack.Screen name="LineChart"
                 component={LineChartScreen}
                 options={({ route }) => ({
-                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Charts'
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Line Chart Screen'
                 })}
             />
         </Stack.Navigator>

@@ -11,7 +11,6 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { getAllEntriesByCurrentUser } from '../actions/getEntry';
-import { Platform } from 'react-native';
 
 const ItemDetailScreen = ({ route }) => {
 
@@ -165,9 +164,6 @@ const ItemDetailScreen = ({ route }) => {
                 </TouchableOpacity>
             </View>
             <ScrollView style={styles.inputContainer}>
-                {Platform.OS === 'web' && (
-                    <Text style={styles.webMessage}>Ability to change date available in mobile app! & non numbers in quantity work but will mess up Line charts!</Text>
-                )}
                 <Text style={styles.title}>{itemParam.name}</Text>
                 <Text style={styles.textDate}>
                     Entries sorted by date newest first.

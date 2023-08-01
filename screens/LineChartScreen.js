@@ -21,6 +21,14 @@ const LineChartScreen = ({ route }) => {
     const auth = getAuth();
     const currentUser = auth.currentUser;
 
+    const sanitizeQuantity = (entry) => {
+        return {
+            ...entry,
+            quantity: Number(entry.quantity.replace(/[^0-9]/g, '')),
+        };
+    };
+
+
     useEffect(() => {
         const fetchEntries = async () => {
             try {
@@ -33,9 +41,9 @@ const LineChartScreen = ({ route }) => {
                 const entriesSnapshot = await getDocs(entriesQuery);
                 const entries = entriesSnapshot.docs.map((doc) => doc.data());
 
-                const weekly = entries.slice(-7);
-                const monthly = entries.slice(-30);
-                const yearly = entries.slice(-270);
+                const weekly = entries.slice(-7).map(sanitizeQuantity);
+                const monthly = entries.slice(-30).map(sanitizeQuantity);
+                const yearly = entries.slice(-270).map(sanitizeQuantity);
 
                 setWeeklyEntries(weekly);
                 setMonthlyEntries(monthly);
