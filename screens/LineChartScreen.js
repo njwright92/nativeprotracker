@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 import { Ionicons } from '@expo/vector-icons';
@@ -90,6 +90,7 @@ const LineChartScreen = ({ route }) => {
                         </Text>
                     </View>
                 </TouchableOpacity>
+                
                 <Text style={styles.title}>No data to display.</Text>
             </View>
         );

@@ -160,6 +160,14 @@ const ItemDetailScreen = ({ route }) => {
                         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
+                        <Image
+                    source={require('../assets/img/appLogo.jpg')}
+                    style={{
+                        width: 61, // Set the width and height of the logo as per your requirement
+                        height: 35,
+                        marginLeft: 20,
+                    }}
+                />
                     </View>
                 </TouchableOpacity>
             </View>

@@ -7,7 +7,7 @@ const SplashScreen = () => {
         <View style={styles.viewStyles}>
             <Image source={require('../assets/img/appLogo.jpg')} style={styles.imageStyles} />
             <Text style={styles.textStyles}>
-                Welcome to ProTracker
+                Welcome to ProTracker!
             </Text>
         </View>
     );
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     imageStyles: {
-        width: 800,
-        height: 500
+        width: 400,
+        height: 150
     }
 });
 

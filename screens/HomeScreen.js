@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
                     style={{
                         width: 80, // Set the width and height of the logo as per your requirement
                         height: 50,
-                        marginLeft: 10,
+                        marginLeft: 20,
                     }}
                 />
             </Text>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
@@ -49,6 +49,14 @@ const AddItemScreen = () => {
                         <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
+                        <Image
+                            source={require('../assets/img/appLogo.jpg')}
+                            style={{
+                                width: 61, // Set the width and height of the logo as per your requirement
+                                height: 35,
+                                marginLeft: 20,
+                            }}
+                        />
                     </View>
                 </TouchableOpacity>
             </View>

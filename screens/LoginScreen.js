@@ -69,6 +69,14 @@ const LoginTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={{ fontWeight: 'bold', fontSize: 30, color: '#00008b' }}>ProTracker </Text>
+                <Image
+                    source={require('../assets/img/appLogo.jpg')}
+                    style={{
+                        width: 61, // Set the width and height of the logo as per your requirement
+                        height: 35,
+                        marginLeft: 20,
+                    }}
+                />
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>

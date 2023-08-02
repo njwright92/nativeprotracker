@@ -56,14 +56,6 @@ const screenOptions = ({ navigation }) => ({
                         size={20}
                         color="white"
                     /> Home
-                    <Image
-                    source={require('../assets/img/appLogo.jpg')}
-                    style={{
-                        width: 61, // Set the width and height of the logo as per your requirement
-                        height: 35,
-                        marginLeft: 200,
-                    }}
-                />
                 </Text>
             </Pressable>
         </View>
