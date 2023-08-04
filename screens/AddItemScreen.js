@@ -45,18 +45,11 @@ const AddItemScreen = () => {
                     onPress={() => navigation.goBack()}
                 >
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={28} color='white' />
-                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
+                        <Ionicons name="chevron-back" size={28} color='black' />
+                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
-                        <Image
-                            source={require('../assets/img/appLogo.jpg')}
-                            style={{
-                                width: 61, // Set the width and height of the logo as per your requirement
-                                height: 35,
-                                marginLeft: 20,
-                            }}
-                        />
+                        
                     </View>
                 </TouchableOpacity>
             </View>
@@ -71,10 +64,10 @@ const AddItemScreen = () => {
                 <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
             <Pressable
-                style={({ pressed }) => [{ backgroundColor: pressed ? '#0D47A1' : '#0A3D6E', borderRadius: 20, padding: 16, width: '85%', alignItems: 'center', marginTop: 10, }]}
+                style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)', borderRadius: 20, padding: 16, width: '85%', alignItems: 'center', marginTop: 10, }]}
                 onPress={() => setShouldShowForm(!shouldShowForm)}
             >
-                <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
+                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 18 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
             </Pressable>
         </View>
     );
@@ -83,24 +76,27 @@ const AddItemScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#778899',
+        backgroundColor: '#E5BA95',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
     },
     formContainer: {
-        backgroundColor: 'white',
-        borderColor: 'black',
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
         borderWidth: 2,
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
-        width: '90%',
+        width: '100%'
     },
     listContainer: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: '#D79578',
         alignSelf: 'stretch',
+        borderRadius: 10,
+        padding: 10,
+
     },
     backButtonContainer: {
         width: '100%',

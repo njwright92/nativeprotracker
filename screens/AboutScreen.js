@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Button, Icon } from 'react-native-elements';
 import * as MailComposer from 'expo-mail-composer';
 
@@ -23,26 +23,22 @@ const AboutScreen = () => {
                 <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to send an email with the details, clickable link below.
                 </Text>
                 <View style={{ width: '100%', alignItems: 'center', marginVertical: 10 }}>
-                    <Button
-                        title='Send Email'
-                        buttonStyle={{
-                            backgroundColor: 'rgba(0, 0, 255, 0.5)',
-                            margin: 10,
-                            borderWidth: 0.5,
-                            borderColor: 'black'
-                        }}
+                    <Pressable
+                      style={styles.button}
                         icon={
                             <Icon
                                 name='envelope-o'
                                 type='font-awesome'
-                                color='#fff'
+                                color='black'
                                 iconStyle={{ marginRight: 7 }}
                             />
                         }
                         onPress={() => sendMail()}
-                    />
-                </View>
+                    >
+                    <Text style={styles.buttonText}>Send Email</Text>
 
+                    </Pressable>
+                </View>
             </View>
         </View>
     );
@@ -51,9 +47,9 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#778899',
-        paddingHorizontal: 20,
+        backgroundColor: '#E5BA95',
         paddingVertical: 30,
+        borderRadius: 10
     },
     heading: {
         fontSize: 29,
@@ -62,11 +58,12 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     aboutSection: {
-        backgroundColor: '#D3D3D3',
-        borderColor: 'black',
-        borderWidth: 1,
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
+        borderWidth: 2,
         marginBottom: 30,
-        padding: 10
+        padding: 10,
+        borderRadius: 10
     },
     aboutText: {
         fontSize: 16,
@@ -76,12 +73,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     contactSection: {
-        borderTopWidth: 1,
-        borderTopColor: 'black',
-        paddingTop: 30,
-        backgroundColor: '#F5DEB3',
-        borderColor: 'black',
+        padding: 10,
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
         borderWidth: 2,
+        borderRadius: 10
     },
     contactText: {
         fontSize: 16,
@@ -89,6 +85,20 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    button: {
+        padding: 10,
+        backgroundColor: 'rgb(106, 163, 137)',
+        alignSelf: 'center',
+        width: '30%',
+        borderRadius: 10,
+    },
+    buttonText: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 14,
+        textTransform: 'uppercase',
+        textAlign: 'center',
     },
 });
 

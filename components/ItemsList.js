@@ -106,7 +106,7 @@ const ItemsList = () => {
             <Pressable
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? '#8BC34A' : '#00cc66',
+                  backgroundColor: pressed ? 'rgb(106, 163, 137)' : 'rgb(106, 163, 137)',
                 },
                 styles.button,
               ]}
@@ -138,34 +138,33 @@ const ItemsList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFF0',
+    backgroundColor: '#F9FCF3',
     alignItems: 'stretch',
-    justifyContent: 'center',
-    paddingHorizontal: 20
+    justifyContent: 'space-between',
   },
   item: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 10,
+    paddingHorizontal: 25,
     borderBottomWidth: 2,
-    borderBottomColor: 'black',
+    borderBottomColor: '#D79578',
     minHeight: 40
   },
   itemName: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    
   },
   button: {
     padding: 10,
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: 'black',
-    marginLeft: 10,
+    borderRadius: 10,
+    marginLeft: 20,
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold'
   },
@@ -173,6 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     alignSelf: 'center',
     marginTop: 50,
+    borderRadius: 10
   },
   deleteContainer: {
     backgroundColor: 'red',
@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 80,
     height: '100%',
+    borderRadius: 10
   },
   deleteButton: {
     backgroundColor: 'red',
@@ -187,30 +188,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 80,
     height: '100%',
+    borderRadius: 10
   },
   deleteText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
   },
   updateButton: {
-    backgroundColor: 'blue',
+    backgroundColor: 'rgb(137, 168, 234)',
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,
     height: '100%',
+    borderRadius: 10
   },
   updateText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
   },
   updateContainer: {
-    backgroundColor: 'blue',
+    backgroundColor: 'rgb(137, 168, 234)',
     justifyContent: 'center',
     alignItems: 'center',
     width: 80,
     height: '100%',
+    borderRadius: 10
   },
 });
 

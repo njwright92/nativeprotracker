@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
@@ -52,12 +52,18 @@ const AddItemForm = () => {
                     </View>
                     {errors.name && touched.name && <Text style={styles.errorText}>{errors.name}</Text>}
 
-                    <Button
-                        color='blue'
+                    <Pressable
+                        style={{
+                            backgroundColor: 'rgb(137, 168, 234)',
+                            paddingVertical: 10,
+                            paddingHorizontal: 20,
+                            borderRadius: 5,
+                        }}
                         onPress={handleSubmit}
-                        title="Submit"
-                        accessibilityLabel='Tap me to submit an item'
-                    />
+                        accessibilityLabel="Tap me to submit an item"
+                    >
+                        <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold' }}>Submit</Text>
+                    </Pressable>
                 </View>
             )}
         </Formik>
@@ -66,12 +72,13 @@ const AddItemForm = () => {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#F9FCF3'
     },
     textInputContainer: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 10,
-        borderColor: 'black',
+        borderColor: '#D79578',
         marginBottom: 10,
         marginTop: 10,
         alignItems: 'center'

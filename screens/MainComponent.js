@@ -12,8 +12,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 
 const screenOptions = ({ navigation }) => ({
-    headerTintColor: '#fff',
-    headerStyle: { backgroundColor: 'darkslategray' },
+    headerStyle: { backgroundColor: '#D79578' },
     headerTitleAlign: 'center',
     headerTitleStyle: {
         fontWeight: 'bold',
@@ -32,7 +31,7 @@ const screenOptions = ({ navigation }) => ({
                 }}
                 style={{ marginLeft: 2, marginRight: 5 }}
             >
-                <Text style={{ color: 'red', fontSize: 14, fontWeight: 'bold' }}>
+                <Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', marginRight: 5 }}>
                     <Ionicons
                         name="exit-outline"
                         size={20}
@@ -50,14 +49,22 @@ const screenOptions = ({ navigation }) => ({
                 }}
                 style={{ marginRight: 10 }}
             >
-                <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold', marginRight: 5 }}>
+                <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold', marginLeft: 5 }}>
                     <Ionicons
                         name="home-outline"
                         size={20}
-                        color="white"
+                        color="black"
                     /> Home
                 </Text>
             </Pressable>
+            <Image
+                source={require('../assets/img/pro.jpg')}
+                style={{
+                    width: 50,
+                    height: 20,
+                    borderRadius: 10
+                }}
+            />
         </View>
     ),
 });

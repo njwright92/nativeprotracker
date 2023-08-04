@@ -144,7 +144,7 @@ const ItemDetailScreen = ({ route }) => {
                 <TouchableOpacity
                     style={({ pressed }) => [
                         {
-                            backgroundColor: pressed ? '#fff' : 'transparent',
+                            backgroundColor: pressed ? 'black' : 'black',
                             borderRadius: 20,
                             padding: 16,
                             width: '85%',
@@ -153,21 +153,12 @@ const ItemDetailScreen = ({ route }) => {
                             alignItems: 'flex-start',
                         },
                     ]}
-                    onPress={() => navigation.goBack()}
-                >
+                    onPress={() => navigation.goBack()} >
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={28} color='white' />
-                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
+                        <Ionicons name="chevron-back" size={28} color='black' />
+                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
-                        <Image
-                    source={require('../assets/img/appLogo.jpg')}
-                    style={{
-                        width: 61, // Set the width and height of the logo as per your requirement
-                        height: 35,
-                        marginLeft: 20,
-                    }}
-                />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -185,15 +176,14 @@ const ItemDetailScreen = ({ route }) => {
                 />
                 <TouchableOpacity
                     style={{
-                        backgroundColor: '#5637DD',
+                        backgroundColor: 'rgb(137, 168, 234)',
                         borderRadius: 10,
                         padding: 10,
                         alignSelf: 'center',
-                        width: '80%'
                     }}
                     onPress={() => setShowDateTimePicker(true)}
                 >
-                    <Text style={{ fontWeight: 'bold', color: 'white', textAlign: 'center', fontSize: 18 }}>{buttonTitle
+                    <Text style={{ fontWeight: 'bold', color: 'black', textAlign: 'center', fontSize: 18 }}>{buttonTitle
                     }</Text>
                 </TouchableOpacity>
                 {showDateTimePicker && (
@@ -205,15 +195,15 @@ const ItemDetailScreen = ({ route }) => {
                 )}
                 <TouchableOpacity
                     style={{
-                        backgroundColor: '#28a745',
+                        backgroundColor: 'rgb(106, 163, 137)',
                         padding: 10,
-                        borderRadius: 5,
+                        borderRadius: 10,
                         marginVertical: 3,
                     }}
                     onPress={handleAddEntry}
                     disabled={!quantity}
                 >
-                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>Add Entry</Text>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>Add Entry</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
@@ -233,7 +223,7 @@ const ItemDetailScreen = ({ route }) => {
 
             <View style={styles.listContainer}>
                 <View style={styles.listContainer}></View>
-                <View style={{ borderBottomWidth: 2, borderBottomColor: 'black' }}>
+                <View style={{ borderBottomWidth: 2, borderBottomColor: '#D79578' }}>
                     <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
                         Product Entries
                     </Text>
@@ -259,12 +249,13 @@ const ItemDetailScreen = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#778899',
+        backgroundColor: '#E5BA95',
         alignItems: 'center'
     },
     inputContainer: {
         flex: 1,
         padding: 10,
+        borderRadius: 10,
     },
     scrollContent: {
         flexGrow: 1,
@@ -273,6 +264,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 5,
         marginTop: 5,
+        borderRadius: 10,
     },
     title: {
         fontSize: 28,
@@ -292,6 +284,7 @@ const styles = StyleSheet.create({
     entriesContainer: {
         flexGrow: 1,
         marginBottom: 12,
+        borderRadius: 10,
     },
     entryContainer: {
         flexDirection: 'row',
@@ -300,7 +293,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'black',
         marginVertical: 5,
-        borderRadius: 4,
+        borderRadius: 10,
         backgroundColor: '#F7F7F7',
     },
     entryText: {
@@ -317,6 +310,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 70,
         height: '75%',
+        borderRadius: 10,
     },
     deleteButton: {
         backgroundColor: 'red',
@@ -324,26 +318,29 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 70,
         height: '75%',
+        borderRadius: 10,
     },
     deleteText: {
-        color: 'white',
+        color: 'black',
         fontSize: 17,
         fontWeight: 'bold',
     },
     updateButton: {
-        backgroundColor: 'blue',
+        backgroundColor: 'rgb(137, 168, 234)',
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
         height: '75%',
+        borderRadius: 10,
     },
     updateText: {
-        color: 'white',
+        color: 'black',
         fontSize: 17,
         fontWeight: 'bold',
     },
     updateContainer: {
-        backgroundColor: 'blue',
+        backgroundColor: 'rgb(137, 168, 234)',
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
         width: 70,
@@ -377,9 +374,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 16,
         backgroundColor: 'rgba(0,0,0,0.7)',
+        borderRadius: 10,
     },
     text: {
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 22,

@@ -68,13 +68,12 @@ const LoginTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
-                <Text style={{ fontWeight: 'bold', fontSize: 30, color: '#00008b' }}>ProTracker </Text>
                 <Image
-                    source={require('../assets/img/appLogo.jpg')}
+                    source={require('../assets/img/Branding.jpg')}
                     style={{
-                        width: 61, // Set the width and height of the logo as per your requirement
-                        height: 35,
-                        marginLeft: 20,
+                        width: 240,
+                        height: 95,
+                        borderRadius: 10
                     }}
                 />
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
@@ -119,13 +118,14 @@ const LoginTab = ({ navigation }) => {
                                 style={styles.icon}
                             />
                         }
-                        buttonStyle={{ backgroundColor: '#007BFF' }}
+                        buttonStyle={{ backgroundColor: 'rgb(137, 168, 234)' }}
                     />
+
                 </View>
 
                 <GoogleSignInButton />
 
-                <View style={{ marginTop: 5 }}>
+                <View style={{ marginTop: 1 }}>
                     <Text
                         onPress={() => handleResetPassword()}
                         style={styles.resetPasswordLink}
@@ -209,14 +209,20 @@ const RegisterTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
-                <Text style={{ fontWeight: 'bold', fontSize: 28, color: '#00008b' }}>ProTracker </Text>
+                <Image
+                    source={require('../assets/img/Branding.jpg')}
+                    style={{
+                        width: 240,
+                        height: 100,
+                        borderRadius: 10
+                    }}
+                />
                 <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
                     - Full About and info are on the next screen.
                 </Text>
                 <Text style={styles.noticeText}>
                     Important! Registration is free!
                 </Text>
-                <Text style={styles.noticeText2}>Simple email/password registration, no verification needed, Or sign in with Google.</Text>
                 <View style={styles.formInput}>
                     <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
                     <TextInput
@@ -251,7 +257,7 @@ const RegisterTab = ({ navigation }) => {
                                 size={24}
                             />
                         }
-                        buttonStyle={{ backgroundColor: '#28a745' }}
+                        buttonStyle={{ backgroundColor: 'rgb(106, 163, 137)' }}
                     />
                 </View>
             </View>
@@ -295,8 +301,8 @@ const Tab = createBottomTabNavigator();
 
 const LoginScreen = () => {
     const tabBarOptions = {
-        activeBackgroundColor: '#007BFF',
-        inactiveBackgroundColor: '#28a745',
+        activeBackgroundColor: 'rgb(137, 168, 234)',
+        inactiveBackgroundColor: 'rgb(106, 163, 137)',
         activeTintColor: '#fff',
         inactiveTintColor: '#fff',
         labelStyle: { fontSize: 16 },
@@ -338,28 +344,30 @@ const LoginScreen = () => {
     );
 };
 
+
 const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
-        paddingBottom: 20,
+        paddingBottom: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#F5F5DC',
+        backgroundColor: '#E5BA95',
     },
     formInput: {
         flexDirection: 'row',
-        borderColor: 'gray',
-        borderWidth: 1,
-        paddingLeft: 10,
+        borderColor: '#D79578',
+        borderWidth: 2,
+        borderRadius: 10,
         alignItems: 'center',
-        marginBottom: 7
-
+        marginBottom: 7,
+        backgroundColor: 'white'
     },
     formIcon: {
         marginRight: 10,
     },
     textInput: {
         flex: 1,
+        color: 'black',
     },
     container: {
         flex: 1,
@@ -385,7 +393,8 @@ const styles = StyleSheet.create({
         height: 95,
         width: 95,
         marginRight: 2.5,
-        marginTop: 7
+        marginTop: 7,
+        borderRadius: 10
     },
     text: {
         margin: 7,

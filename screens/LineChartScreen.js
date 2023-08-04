@@ -71,7 +71,7 @@ const LineChartScreen = ({ route }) => {
                 <TouchableOpacity
                     style={({ pressed }) => [
                         {
-                            backgroundColor: pressed ? '#fff' : 'transparent',
+                            backgroundColor: pressed ? 'black' : 'black',
                             borderRadius: 20,
                             padding: 16,
                             width: '85%',
@@ -84,8 +84,8 @@ const LineChartScreen = ({ route }) => {
                 >
 
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={28} color='white' />
-                        <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 24 }}>
+                        <Ionicons name="chevron-back" size={28} color='black' />
+                        <Text style={{ color: 'white', fontWeight: 'black', fontSize: 24 }}>
                             Back
                         </Text>
                     </View>
@@ -147,12 +147,12 @@ const LineChartScreen = ({ route }) => {
         <ScrollView contentContainerstyle={styles.scroll}>
             <ScrollView style={styles.scrollContent}>
                 <TouchableOpacity
-                    style={({ pressed }) => [{ backgroundColor: pressed ? '#fff' : 'transparent', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
+                    style={({ pressed }) => [{ backgroundColor: pressed ? 'black' : 'black', borderRadius: 20, padding: 16, width: '85%', marginTop: 10, alignSelf: 'flex-start' }]}
                     onPress={() => navigation.goBack()}
                 >
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={24} color='#fff' />
-                        <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+                        <Ionicons name="chevron-back" size={24} color='black' />
+                        <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 18 }}>
                             Back
                         </Text>
                     </View>
@@ -162,26 +162,26 @@ const LineChartScreen = ({ route }) => {
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#333333'
+                    color: 'black'
                 }}>Weekly</Text>
                 <LineChart
                     data={weeklyData}
                     width={ScreenWidth}
                     height={275}
                     chartConfig={{
-                        backgroundColor: '#f8f8f8',
-                        backgroundGradientFrom: '#f8f8f8',
-                        backgroundGradientTo: '#dcdcdc',
+                        backgroundColor: '#F9FCF3',
+                        backgroundGradientFrom: '#F9FCF3',
+                        backgroundGradientTo: '#F9FCF3',
                         decimalPlaces: 0,
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                        yAxisLabel: 'Quantity',
+                        labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,                       
+                         yAxisLabel: 'Quantity',
                         xAxisLabel: 'Date',
                     }}
                     bezier
                     style={{
                         marginVertical: 8,
-                        borderRadius: 16,
+                        borderRadius: 10,
                     }}
                     withInnerLines={true}
                     withOuterLines={false}
@@ -190,21 +190,22 @@ const LineChartScreen = ({ route }) => {
                     withVerticalLabels={true}
                     withHorizontalLabels={true}
                 />
-                <Text style={styles.id}>ID: {itemId}</Text>
+                
+
                 <Text style={{
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#333333'
+                    color: 'black'
                 }}>Monthly</Text>
                 <LineChart
                     data={monthlyData}
                     width={ScreenWidth}
                     height={275}
                     chartConfig={{
-                        backgroundColor: '#f8f8f8',
-                        backgroundGradientFrom: '#f8f8f8',
-                        backgroundGradientTo: '#dcdcdc',
+                         backgroundColor: '#F9FCF3',
+                        backgroundGradientFrom: '#F9FCF3',
+                        backgroundGradientTo: '#F9FCF3',
                         decimalPlaces: 0,
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -214,7 +215,7 @@ const LineChartScreen = ({ route }) => {
                     bezier
                     style={{
                         marginVertical: 8,
-                        borderRadius: 16,
+                        borderRadius: 10,
                     }}
                     withInnerLines={true}
                     withOuterLines={true}
@@ -223,21 +224,22 @@ const LineChartScreen = ({ route }) => {
                     withVerticalLabels={true}
                     withHorizontalLabels={true}
                 />
-                <Text style={styles.id}>ID: {itemId}</Text>
+                
+
                 <Text style={{
                     fontSize: 24,
                     fontWeight: 'bold',
                     textAlign: 'center',
-                    color: '#333333'
+                    color: 'black'
                 }}>Yearly</Text>
                 <LineChart
                     data={yearlyData}
                     width={ScreenWidth}
                     height={275}
                     chartConfig={{
-                        backgroundColor: '#f8f8f8',
-                        backgroundGradientFrom: '#f8f8f8',
-                        backgroundGradientTo: '#dcdcdc',
+                         backgroundColor: '#F9FCF3',
+                        backgroundGradientFrom: '#F9FCF3',
+                        backgroundGradientTo: '#F9FCF3',
                         decimalPlaces: 0,
                         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                         labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -247,7 +249,7 @@ const LineChartScreen = ({ route }) => {
                     bezier
                     style={{
                         marginVertical: 8,
-                        borderRadius: 16,
+                        borderRadius: 10,
                     }}
                     withInnerLines={true}
                     withOuterLines={true}
@@ -256,7 +258,6 @@ const LineChartScreen = ({ route }) => {
                     withVerticalLabels={true}
                     withHorizontalLabels={true}
                 />
-                <Text style={styles.id}>ID: {itemId}</Text>
             </ScrollView>
         </ScrollView>
     );
@@ -268,7 +269,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     scrollContent: {
-        backgroundColor: '#778899',
+        backgroundColor: '#E5BA95',
         padding: 1,
     },
     title: {
@@ -277,10 +278,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'black'
     },
-    id: {
-        color: '#dcdcdc',
-        textAlign: 'right'
-    },
+
 });
 
 export default LineChartScreen;
