@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'black',
         borderRadius: 10,
-        width: '30%',
+        width: '32%',
         alignSelf: 'center',
         overflow: 'hidden',
         shadowColor: 'rgba(0, 0, 0, 0.5)',
@@ -389,9 +389,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     textContainer: {
-        marginTop: 10,
-        paddingHorizontal: 20,
-        paddingVertical: 16,
         backgroundColor: 'rgba(0,0,0,0.7)',
         borderRadius: 10,
     },
@@ -399,7 +396,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: 22,
+        fontSize: 18,
     },
     backButtonContainer: {
         width: '100%',

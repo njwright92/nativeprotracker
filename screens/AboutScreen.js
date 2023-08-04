@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import * as MailComposer from 'expo-mail-composer';
 
 const AboutScreen = () => {
@@ -22,7 +22,7 @@ const AboutScreen = () => {
                 </Text>
                 <Text style={styles.contactText}>If you have any issues with the site, or if you have any questions or suggestions, feel free to send an email with the details, clickable link below.
                 </Text>
-                <View style={{ width: '100%', alignItems: 'center', marginVertical: 10 }}>
+                <View>
                     <Pressable
                       style={styles.button}
                         icon={
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     button: {
+        marginTop: 5,
         padding: 10,
         backgroundColor: 'rgb(106, 163, 137)',
         alignSelf: 'center',

@@ -40,7 +40,7 @@ const AddItemScreen = () => {
                             marginTop: 10,
                             alignSelf: 'flex-start',
                             alignItems: 'flex-start',
-                            
+
                         },
                     ]}
                     onPress={() => navigation.goBack()}
@@ -50,7 +50,7 @@ const AddItemScreen = () => {
                         <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 24 }}>
                             Back
                         </Text>
-                        
+
                     </View>
                 </TouchableOpacity>
             </View>
@@ -65,18 +65,23 @@ const AddItemScreen = () => {
                 <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
             <Pressable
-                style={({ pressed }) => [{ 
-                    backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)', 
-                borderRadius: 10, padding: 16, width: '30%', 
-                alignItems: 'center', 
-                marginTop: 10,
-                shadowColor: 'rgba(0, 0, 0, 0.5)',
-                shadowOffset: { width: 2, height: 2 },
-                shadowOpacity: 1,
-                shadowRadius: 2, }]}
+                style={({ pressed }) => [{
+                    backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)',
+                    borderRadius: 10,
+                    padding: 10,
+                    width: '32%',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    alignItems: 'center',
+                    marginTop: 10,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    shadowOffset: { width: 2, height: 2 },
+                    shadowOpacity: 1,
+                    shadowRadius: 2,
+                }]}
                 onPress={() => setShouldShowForm(!shouldShowForm)}
             >
-                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 18 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
+                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 16 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
             </Pressable>
         </View>
     );
