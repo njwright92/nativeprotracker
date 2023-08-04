@@ -146,12 +146,12 @@ const LoginTab = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Personal</Text>
                     <Image
-                        source={require('../assets/img/items6.jpg')}
-                        style={styles.image}
+                        source={require('../assets/img/Items2.PNG')}
+                        style={[styles.image, { width: 100, height: 150 }]}
                     />
                     <Image
-                        source={require('../assets/img/entries3.jpg')}
-                        style={styles.image}
+                        source={require('../assets/img/Entries2.PNG')}
+                        style={[styles.image, { width: 100, height: 150 }]}
                     />
                 </View>
             </View>
@@ -277,12 +277,12 @@ const RegisterTab = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Personal</Text>
                     <Image
-                        source={require('../assets/img/items6.jpg')}
-                        style={styles.image}
+                        source={require('../assets/img/Items2.PNG')}
+                        style={[styles.image, { width: 100, height: 150 }]}
                     />
                     <Image
-                        source={require('../assets/img/entries3.jpg')}
-                        style={styles.image}
+                        source={require('../assets/img/Entries2.PNG')}
+                        style={[styles.image, { width: 100, height: 150 }]}
                     />
                 </View>
             </View>
@@ -387,9 +387,10 @@ const styles = StyleSheet.create({
     image: {
         height: 95,
         width: 95,
-        marginRight: 2.5,
-        marginTop: 7,
-        borderRadius: 10
+        margin: 3,
+        borderRadius: 10,
+        borderColor: 'black', 
+        borderWidth: 2
     },
     text: {
         margin: 7,
