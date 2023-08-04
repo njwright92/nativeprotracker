@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, TouchableOpacity, Text, Pressable, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../components/AddItemForm';
 import ItemsList from '../components/ItemsList';
@@ -64,7 +64,7 @@ const AddItemScreen = () => {
                 <ItemsList onUpdateItem={handleUpdateItem} onDeleteItem={handleDeleteItem} />
             </View>
             <Pressable
-                style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)', borderRadius: 20, padding: 16, width: '85%', alignItems: 'center', marginTop: 10, }]}
+                style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)', borderRadius: 10, padding: 16, width: '30%', alignItems: 'center', marginTop: 10, }]}
                 onPress={() => setShouldShowForm(!shouldShowForm)}
             >
                 <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 18 }}>{shouldShowForm ? 'Hide Form' : 'Show Form'}</Text>
@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#D79578',
         alignSelf: 'stretch',
         borderRadius: 10,
-        padding: 10,
+        borderColor: '#D79578',
+        borderWidth: 2,
 
     },
     backButtonContainer: {
