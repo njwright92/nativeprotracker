@@ -32,7 +32,7 @@ const EditEntryForm = ({ entry, onCancel }) => {
             </View>
             <View style={styles.buttonContainer}>
                 <Button
-                    color="#556B2F"
+                    color="rgb(137, 168, 234)"
                     title="Submit"
                     onPress={handleUpdateEntry}
                 />
@@ -48,8 +48,8 @@ const EditEntryForm = ({ entry, onCancel }) => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
-        borderColor: 'blue',
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
         borderWidth: 2,
         padding: 20,
         borderRadius: 10,
@@ -68,14 +68,19 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        borderColor: 'black',
-        borderWidth: 1,
-        borderRadius: 5,
+        borderColor: '#D79578',
+        borderWidth: 2,
+        borderRadius: 10,
         padding: 10,
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
+        borderRadius: 10,
     },
     errorText: {
         color: 'red',

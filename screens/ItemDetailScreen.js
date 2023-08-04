@@ -179,6 +179,10 @@ const ItemDetailScreen = ({ route }) => {
                         borderRadius: 10,
                         padding: 10,
                         alignSelf: 'center',
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        shadowOffset: { width: 2, height: 2 },
+                        shadowOpacity: 1,
+                        shadowRadius: 2,
                     }}
                     onPress={() => setShowDateTimePicker(true)}
                 >
@@ -198,6 +202,10 @@ const ItemDetailScreen = ({ route }) => {
                         padding: 10,
                         borderRadius: 10,
                         marginVertical: 3,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        shadowOffset: { width: 2, height: 2 },
+                        shadowOpacity: 1,
+                        shadowRadius: 2,
                     }}
                     onPress={handleAddEntry}
                     disabled={!quantity}
@@ -226,20 +234,20 @@ const ItemDetailScreen = ({ route }) => {
                     contentContainerStyle={styles.entriesContainer}
                 />
             </View>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black', textAlign: 'center', marginTop: 5 }}>Select below to view Line Charts</Text>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black', textAlign: 'center', marginTop: 5, marginBottom: 5 }}>Select below to view Line Charts and download data "CSV or PDF"</Text>
             <TouchableOpacity
-                    style={styles.card}
-                    onPress={() => {
-                        navigation.navigate('LineChart', { itemId: itemParam.id, name: itemParam.name });
-                    }}
-                >
-                    <View style={styles.imageContainer}>
-                        <Image source={require('../assets/img/chart.png')} style={styles.image} />
-                    </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.text}>Line Chart</Text>
-                    </View>
-                </TouchableOpacity>
+                style={styles.card}
+                onPress={() => {
+                    navigation.navigate('LineChart', { itemId: itemParam.id, name: itemParam.name });
+                }}
+            >
+                <View style={styles.imageContainer}>
+                    <Image source={require('../assets/img/chart.png')} style={styles.image} />
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.text}>Line Chart</Text>
+                </View>
+            </TouchableOpacity>
         </View>
 
     );
@@ -250,7 +258,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#E5BA95',
         alignItems: 'center',
-        
+
     },
     inputContainer: {
         borderRadius: 10,
@@ -318,6 +326,10 @@ const styles = StyleSheet.create({
         width: 70,
         height: '75%',
         borderRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
     },
     deleteText: {
         color: 'black',
@@ -331,6 +343,10 @@ const styles = StyleSheet.create({
         width: 70,
         height: '75%',
         borderRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
     },
     updateText: {
         color: 'black',
@@ -353,6 +369,10 @@ const styles = StyleSheet.create({
         width: '30%',
         alignSelf: 'center',
         overflow: 'hidden',
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
     },
     imageContainer: {
         position: 'absolute',

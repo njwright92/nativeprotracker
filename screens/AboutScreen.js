@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         width: '30%',
         borderRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
     },
     buttonText: {
         color: 'black',

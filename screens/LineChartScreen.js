@@ -8,6 +8,10 @@ import { collectionGroup, where, getDocs, query, orderBy } from 'firebase/firest
 import moment from 'moment';
 import { db } from '../firebaseConfig';
 import { getAuth } from 'firebase/auth';
+import { CSVLink } from 'react-csv';
+import PDFDocument from '../features/PDFDocument';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+
 
 
 const LineChartScreen = ({ route }) => {
@@ -19,6 +23,38 @@ const LineChartScreen = ({ route }) => {
     const [loading, setLoading] = useState(true);
     const auth = getAuth();
     const currentUser = auth.currentUser;
+
+    const csvWeeklyData = weeklyEntries.map((entry) => ({
+        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Quantity: entry.quantity,
+    }));
+
+    const csvMonthlyData = monthlyEntries.map((entry) => ({
+        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Quantity: entry.quantity,
+    }));
+
+    const csvYearlyData = yearlyEntries.map((entry) => ({
+        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Quantity: entry.quantity,
+    }));
+
+    const pdfWeeklyData = {
+        title: name,
+        data: weeklyEntries,
+    };
+
+    const pdfMonthlyData = {
+        title: name,
+        data: monthlyEntries,
+    };
+
+    const pdfYearlyData = {
+        title: name,
+        data: yearlyEntries,
+    };
+
+
 
     const sanitizeQuantity = (entry) => {
         return {
@@ -146,46 +182,61 @@ const LineChartScreen = ({ route }) => {
             </Text>
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    borderRadius: 10,
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download CSV
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <CSVLink data={csvWeeklyData} filename={'weekly_data.csv'}>
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        borderRadius: 10,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download CSV
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </CSVLink>
                 </View>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderRadius: 10,
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download PDF
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <PDFDownloadLink
+                        document={<PDFDocument data={pdfWeeklyData} />}
+                        fileName="weekly_data.pdf"
+                    >
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderRadius: 10,
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download PDF
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </PDFDownloadLink>
                 </View>
             </View>
 
@@ -224,46 +275,61 @@ const LineChartScreen = ({ route }) => {
             }}>Monthly</Text>
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    borderRadius: 10,
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download CSV
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <CSVLink data={csvMonthlyData} filename={'monthly_data.csv'}>
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        borderRadius: 10,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download CSV
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </CSVLink>
                 </View>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderRadius: 10,
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download PDF
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <PDFDownloadLink
+                        document={<PDFDocument data={pdfMonthlyData} />}
+                        fileName="monthly_data.pdf"
+                    >
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderRadius: 10,
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download PDF
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </PDFDownloadLink>
                 </View>
             </View>
             <LineChart
@@ -303,46 +369,61 @@ const LineChartScreen = ({ route }) => {
             </Text>
             <View style={{ flex: 1, flexDirection: 'row' }}>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    borderRadius: 10,
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download CSV
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <CSVLink data={csvYearlyData} filename={'yearly_data.csv'}>
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        borderRadius: 10,
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download CSV
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </CSVLink>
                 </View>
                 <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-                    <Pressable>
-                        {({ pressed }) => (
-                            <View
-                                style={{
-                                    backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
-                                    borderRadius: 10,
-                                    borderWidth: 2,
-                                    borderColor: '#D79578',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                <Ionicons name="md-cloud-download" size={16} color="black" />
-                                <Text style={{ color: 'black', textAlign: 'center', }}>
-                                    Download PDF
-                                </Text>
-                            </View>
-                        )}
-                    </Pressable>
+                    <PDFDownloadLink
+                        document={<PDFDocument data={pdfYearlyData} />}
+                        fileName="yearly_data.pdf"
+                    >
+                        <Pressable>
+                            {({ pressed }) => (
+                                <View
+                                    style={{
+                                        backgroundColor: pressed ? '#F9FCF3' : '#F9FCF3',
+                                        borderRadius: 10,
+                                        borderWidth: 2,
+                                        borderColor: '#D79578',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                                        shadowOffset: { width: 2, height: 2 },
+                                        shadowOpacity: 1,
+                                        shadowRadius: 2,
+                                    }}
+                                >
+                                    <Ionicons name="md-cloud-download" size={16} color="black" />
+                                    <Text style={{ color: 'black', textAlign: 'center', }}>
+                                        Download PDF
+                                    </Text>
+                                </View>
+                            )}
+                        </Pressable>
+                    </PDFDownloadLink>
                 </View>
             </View>
             <LineChart

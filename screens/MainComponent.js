@@ -32,7 +32,14 @@ const screenOptions = ({ navigation }) => ({
                             navigation.navigate('Login');
                         });
                 }}
-                style={{ marginLeft: 2, marginRight: 5 }}
+                style={{
+                    marginRight: 5,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    shadowOffset: { width: 2, height: 2 },
+                    shadowOpacity: 1,
+                    shadowRadius: 2,
+                    borderRadius: 10
+                }}
             >
                 <Text style={{ color: 'red', fontSize: 16, fontWeight: 'bold', marginRight: 5 }}>
                     <Ionicons
@@ -45,12 +52,14 @@ const screenOptions = ({ navigation }) => ({
         </View>
     ),
     headerLeft: () => (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
             <Pressable
                 onPress={() => {
                     navigation.navigate('Home');
                 }}
-                style={{ marginRight: 10 }}
+                style={{
+                    marginRight: 10,
+                }}
             >
                 <Image
                     source={require('../assets/img/pro.jpg')}
@@ -58,10 +67,24 @@ const screenOptions = ({ navigation }) => ({
                         width: 52,
                         height: 20,
                         borderRadius: 10,
-                        marginLeft: 25
+                        marginLeft: 25,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        shadowOffset: { width: 2, height: 2 },
+                        shadowOpacity: 1,
+                        shadowRadius: 2,
                     }}
                 />
-                <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold', marginLeft: 5 }}>
+                <Text style={{
+                    color: 'black',
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    marginLeft: 5,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)',
+                    shadowOffset: { width: 2, height: 2 },
+                    shadowOpacity: 1,
+                    shadowRadius: 2,
+                    borderRadius: 10
+                }}>
                     <Ionicons
                         name="home-outline"
                         size={20}

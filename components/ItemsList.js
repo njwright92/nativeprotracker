@@ -156,12 +156,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    
+
   },
   button: {
     padding: 10,
     borderRadius: 10,
     marginLeft: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   buttonText: {
     color: 'black',
@@ -188,7 +192,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 80,
     height: '100%',
-    borderRadius: 10
+    borderRadius: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   deleteText: {
     color: 'black',
@@ -201,7 +209,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 80,
     height: '100%',
-    borderRadius: 10
+    borderRadius: 10,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
   updateText: {
     color: 'black',
