@@ -17,6 +17,9 @@ const screenOptions = ({ navigation }) => ({
     headerTitleStyle: {
         fontWeight: 'bold',
         fontSize: 28,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     headerRight: () => (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -49,6 +52,15 @@ const screenOptions = ({ navigation }) => ({
                 }}
                 style={{ marginRight: 10 }}
             >
+                <Image
+                    source={require('../assets/img/pro.jpg')}
+                    style={{
+                        width: 52,
+                        height: 20,
+                        borderRadius: 10,
+                        marginLeft: 25
+                    }}
+                />
                 <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold', marginLeft: 5 }}>
                     <Ionicons
                         name="home-outline"
@@ -56,15 +68,9 @@ const screenOptions = ({ navigation }) => ({
                         color="black"
                     /> Home
                 </Text>
+
             </Pressable>
-            <Image
-                source={require('../assets/img/pro.jpg')}
-                style={{
-                    width: 50,
-                    height: 20,
-                    borderRadius: 10
-                }}
-            />
+
         </View>
     ),
 });

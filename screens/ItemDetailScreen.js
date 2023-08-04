@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEntry } from '../actions/addEntry';
 import { deleteEntry } from '../actions/deleteEntry';
@@ -139,7 +139,6 @@ const ItemDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
-
             <View style={styles.backButtonContainer}>
                 <TouchableOpacity
                     style={({ pressed }) => [
@@ -162,7 +161,7 @@ const ItemDetailScreen = ({ route }) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <ScrollView style={styles.inputContainer}>
+            <View style={styles.inputContainer}>
                 <Text style={styles.title}>{itemParam.name}</Text>
                 <Text style={styles.textDate}>
                     Entries sorted by date newest first.
@@ -206,23 +205,9 @@ const ItemDetailScreen = ({ route }) => {
                     <Text style={{ fontSize: 22, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>Add Entry</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={styles.card}
-                    onPress={() => {
-                        navigation.navigate('LineChart', { itemId: itemParam.id, name: itemParam.name });
-                    }}
-                >
-                    <View style={styles.imageContainer}>
-                        <Image source={require('../assets/img/chart.png')} style={styles.image} />
-                    </View>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.text}>Line Chart</Text>
-                    </View>
-                </TouchableOpacity>
-            </ScrollView>
+            </View>
 
             <View style={styles.listContainer}>
-                <View style={styles.listContainer}></View>
                 <View style={{ borderBottomWidth: 2, borderBottomColor: '#D79578' }}>
                     <Text style={{ fontSize: 28, fontWeight: 'bold', color: 'black', textAlign: 'center' }}>
                         Product Entries
@@ -241,6 +226,20 @@ const ItemDetailScreen = ({ route }) => {
                     contentContainerStyle={styles.entriesContainer}
                 />
             </View>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black', textAlign: 'center', marginTop: 5 }}>Select below to view Line Charts</Text>
+            <TouchableOpacity
+                    style={styles.card}
+                    onPress={() => {
+                        navigation.navigate('LineChart', { itemId: itemParam.id, name: itemParam.name });
+                    }}
+                >
+                    <View style={styles.imageContainer}>
+                        <Image source={require('../assets/img/chart.png')} style={styles.image} />
+                    </View>
+                    <View style={styles.textContainer}>
+                        <Text style={styles.text}>Line Chart</Text>
+                    </View>
+                </TouchableOpacity>
         </View>
 
     );
@@ -250,17 +249,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E5BA95',
-        alignItems: 'center'
+        alignItems: 'center',
+        
     },
     inputContainer: {
-        flex: 1,
-        padding: 10,
         borderRadius: 10,
     },
-    scrollContent: {
-        flexGrow: 1,
-    },
     listContainer: {
+        width: '75%',
         flex: 1,
         padding: 5,
         marginTop: 5,
@@ -271,15 +267,18 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 16,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     input: {
         borderWidth: 2,
-        borderColor: 'black',
-        borderRadius: 4,
+        borderColor: '#D79578',
+        borderRadius: 10,
         padding: 5,
         marginVertical: 5,
         width: '100%',
-        backgroundColor: '#fff',
+        backgroundColor: '#F9FCF3',
     },
     entriesContainer: {
         flexGrow: 1,
@@ -291,7 +290,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
         borderWidth: 2,
-        borderColor: 'black',
+        borderColor: '#D79578',
         marginVertical: 5,
         borderRadius: 10,
         backgroundColor: '#F7F7F7',
@@ -347,11 +346,11 @@ const styles = StyleSheet.create({
         height: '75%',
     },
     card: {
-        marginTop: 20,
+        marginBottom: 10,
         paddingTop: 10,
         backgroundColor: 'black',
         borderRadius: 10,
-        width: '90%',
+        width: '75%',
         alignSelf: 'center',
         overflow: 'hidden',
     },
@@ -370,14 +369,14 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     textContainer: {
-        marginTop: 24,
+        marginTop: 10,
         paddingHorizontal: 20,
         paddingVertical: 16,
         backgroundColor: 'rgba(0,0,0,0.7)',
         borderRadius: 10,
     },
     text: {
-        color: 'black',
+        color: 'white',
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 22,
@@ -387,12 +386,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         paddingHorizontal: 16,
         marginTop: 10,
-    },
-    webMessage: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#FFA500',
     },
     textDate: {
         color: 'black',

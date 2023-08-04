@@ -55,7 +55,10 @@ const styles = StyleSheet.create({
         fontSize: 29,
         fontWeight: 'bold',
         marginBottom: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     aboutSection: {
         backgroundColor: '#F9FCF3',

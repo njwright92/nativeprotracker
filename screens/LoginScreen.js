@@ -76,12 +76,6 @@ const LoginTab = ({ navigation }) => {
                         borderRadius: 10
                     }}
                 />
-                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
-                    - Full About and info are on the next screen.
-                </Text>
-                <Text style={styles.noticeText}>
-                    Important! Registration is free!
-                </Text>
 
                 <View style={styles.formInput}>
                     <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
@@ -106,7 +100,7 @@ const LoginTab = ({ navigation }) => {
                     />
                 </View>
 
-                <View>
+                <View style={{ marginBottom: 2 }}>
                     <Button
                         onPress={() => handleLogin()}
                         title="Login"
@@ -125,7 +119,7 @@ const LoginTab = ({ navigation }) => {
 
                 <GoogleSignInButton />
 
-                <View style={{ marginTop: 1 }}>
+                <View style={{ marginTop: 2 }}>
                     <Text
                         onPress={() => handleResetPassword()}
                         style={styles.resetPasswordLink}
@@ -359,7 +353,8 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
         alignItems: 'center',
-        marginBottom: 7,
+        marginTop: 5,
+        marginBottom: 5,
         backgroundColor: 'white'
     },
     formIcon: {

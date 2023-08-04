@@ -21,14 +21,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#E5BA95'
     },
     textStyles: {
+        alignItems: 'center',
+        justifyContent: 'center',
         color: '#black',
         fontSize: 45,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        margin: 10,
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 2,
     },
     imageStyles: {
+        alignItems: 'center',
+        justifyContent: 'center',
         width: 400,
         height: 150,
-        borderRadius: 10
+        borderRadius: 10,
+        margin: 10
     }
 });
 

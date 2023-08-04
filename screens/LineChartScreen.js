@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { ScreenWidth } from 'react-native-elements/dist/helpers';
 import { Ionicons } from '@expo/vector-icons';
@@ -68,28 +68,6 @@ const LineChartScreen = ({ route }) => {
     if (!Array.isArray(weeklyEntries) || weeklyEntries.length === 0) {
         return (
             <View style={styles.container}>
-                <TouchableOpacity
-                    style={({ pressed }) => [
-                        {
-                            backgroundColor: pressed ? 'black' : 'black',
-                            borderRadius: 20,
-                            padding: 16,
-                            width: '85%',
-                            marginTop: 10,
-                            alignSelf: 'flex-start',
-                            alignItems: 'flex-start',
-                        },
-                    ]}
-                    onPress={() => navigation.goBack()}
-                >
-
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Ionicons name="chevron-back" size={28} color='black' />
-                        <Text style={{ color: 'white', fontWeight: 'black', fontSize: 24 }}>
-                            Back
-                        </Text>
-                    </View>
-                </TouchableOpacity>
                 
                 <Text style={styles.title}>No data to display.</Text>
             </View>
