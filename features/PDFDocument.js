@@ -18,7 +18,7 @@ const PDFDocument = ({ data }) => {
           {data.data.map((entry) => (
             <View style={styles.tableRow} key={entry.date}>
               <Text style={styles.tableCell}>
-                {moment(entry.date).format('YYYY-MM-DD')}
+              {moment(entry.date.toDate()).format('MM/DD/YYYY')}
               </Text>
               <Text style={styles.tableCell}>{entry.quantity}</Text>
             </View>

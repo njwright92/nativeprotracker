@@ -25,17 +25,17 @@ const LineChartScreen = ({ route }) => {
     const currentUser = auth.currentUser;
 
     const csvWeeklyData = weeklyEntries.map((entry) => ({
-        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Date: moment(entry.date.toDate()).format('MM/DD/YYYY'),
         Quantity: entry.quantity,
     }));
 
     const csvMonthlyData = monthlyEntries.map((entry) => ({
-        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Date: moment(entry.date.toDate()).format('MM/DD/YYYY'),
         Quantity: entry.quantity,
     }));
 
     const csvYearlyData = yearlyEntries.map((entry) => ({
-        Date: moment(entry.date).format('YYYY-MM-DD'),
+        Date: moment(entry.date.toDate()).format('MM/DD/YYYY'),
         Quantity: entry.quantity,
     }));
 
