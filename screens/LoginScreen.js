@@ -146,11 +146,11 @@ const LoginTab = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Personal</Text>
                     <Image
-                        source={require('../assets/img/Items2.PNG')}
+                        source={require('../assets/img/Items2.png')}
                         style={[styles.image, { width: 100, height: 150 }]}
                     />
                     <Image
-                        source={require('../assets/img/Entries2.PNG')}
+                        source={require('../assets/img/Entries2.png')}
                         style={[styles.image, { width: 100, height: 150 }]}
                     />
                 </View>
@@ -277,11 +277,11 @@ const RegisterTab = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
                     <Text style={styles.text}>Personal</Text>
                     <Image
-                        source={require('../assets/img/Items2.PNG')}
+                        source={require('../assets/img/Items2.png')}
                         style={[styles.image, { width: 100, height: 150 }]}
                     />
                     <Image
-                        source={require('../assets/img/Entries2.PNG')}
+                        source={require('../assets/img/Entries2.png')}
                         style={[styles.image, { width: 100, height: 150 }]}
                     />
                 </View>
