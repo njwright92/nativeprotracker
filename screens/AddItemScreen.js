@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#D79578',
         borderWidth: 2,
-
     },
     backButtonContainer: {
         width: '100%',

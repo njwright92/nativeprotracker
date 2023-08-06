@@ -6,7 +6,7 @@ import { deleteEntry } from '../actions/deleteEntry';
 import { editEntry } from '../actions/editEntry';
 import EditEntryForm from '../components/EditEntryForm';
 import moment from 'moment';
-import DateTimePicker from '@react-native-community/datetimepicker';
+
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
@@ -20,7 +20,7 @@ const ItemDetailScreen = ({ route }) => {
     const items = useSelector((state) => state.items);
     const item = items.find((item) => item.id === itemParam.id);
     const [entries, setEntries] = useState([]);
-    const [showDateTimePicker, setShowDateTimePicker] = useState(false);
+
     const [date, setDate] = useState(new Date());
     const [quantity, setQuantity] = useState('');
     const [buttonTitle, setButtonTitle] = useState(moment(date).format('MM/DD/yyyy'));
@@ -44,14 +44,17 @@ const ItemDetailScreen = ({ route }) => {
         setQuantity(text);
     };
 
-    const handleDateChange = (event, selectedDate) => {
-        setShowDateTimePicker(false);
 
-        if (selectedDate) {
-            const formattedDate = moment(selectedDate).format('MM/DD/yyyy');
-            setDate(selectedDate);
-            setButtonTitle(formattedDate);
+    const handleDateInputChange = (text) => {
+        // Convert the user's input to a Date object
+        const inputDate = moment(text, 'MM/DD/yyyy').toDate();
+        // Check if the conversion is valid
+        if (!isNaN(inputDate)) {
+            // Update the date state
+            setDate(inputDate);
         }
+        // Always update the buttonTitle to show the user's input
+        setButtonTitle(text);
     };
 
     const handleAddEntry = () => {
@@ -164,7 +167,7 @@ const ItemDetailScreen = ({ route }) => {
             <View style={styles.inputContainer}>
                 <Text style={styles.title}>{itemParam.name}</Text>
                 <Text style={styles.textDate}>
-                    Entries sorted by date newest first.
+                    Entries sorted by most recenet date.
                 </Text>
                 <TextInput
                     style={styles.input}
@@ -173,29 +176,12 @@ const ItemDetailScreen = ({ route }) => {
                     placeholder="Quantity"
                     keyboardType="numeric"
                 />
-                <TouchableOpacity
-                    style={{
-                        backgroundColor: 'rgb(137, 168, 234)',
-                        borderRadius: 10,
-                        padding: 10,
-                        alignSelf: 'center',
-                        shadowColor: 'rgba(0, 0, 0, 0.5)',
-                        shadowOffset: { width: 2, height: 2 },
-                        shadowOpacity: 1,
-                        shadowRadius: 2,
-                    }}
-                    onPress={() => setShowDateTimePicker(true)}
-                >
-                    <Text style={{ fontWeight: 'bold', color: 'black', textAlign: 'center', fontSize: 18 }}>{buttonTitle
-                    }</Text>
-                </TouchableOpacity>
-                {showDateTimePicker && (
-                    <DateTimePicker
-                        value={date}
-                        onChange={handleDateChange}
-                        dateFormat="MM/dd/yyyy"
-                    />
-                )}
+                <TextInput
+                    style={styles.input}
+                    value={buttonTitle}
+                    placeholder="YYYY-MM-DD"
+                    onChangeText={handleDateInputChange}
+                />
                 <TouchableOpacity
                     style={{
                         backgroundColor: 'rgb(106, 163, 137)',
@@ -305,7 +291,7 @@ const styles = StyleSheet.create({
     },
     entryText: {
         marginTop: 1,
-        marginHorizontal: 20,
+        marginHorizontal: 30,
         fontSize: 20,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -323,8 +309,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 70,
-        height: '75%',
+        width: 80,
+        height: '100%',
         borderRadius: 10,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
         shadowOffset: { width: 2, height: 2 },
@@ -340,8 +326,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(137, 168, 234)',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 70,
-        height: '75%',
+        width: 80,
+        height: '100%',
         borderRadius: 10,
         shadowColor: 'rgba(0, 0, 0, 0.5)',
         shadowOffset: { width: 2, height: 2 },
