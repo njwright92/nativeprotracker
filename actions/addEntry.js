@@ -30,8 +30,8 @@ export const addEntry = (itemId, quantity, date) => {
                 onSnapshot(collection(db, "items", itemId, "entries"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
-                            const newEntryData = { ...change.doc.data(), id: change.doc.id };
-                            console.log('New entry added: ', newEntryData);
+                            
+                            
 
                         }
                     });

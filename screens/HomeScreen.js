@@ -17,9 +17,11 @@ const HomeScreen = ({ navigation }) => {
                     <Text style={styles.buttonText}>Products</Text>
                 </Pressable>
             </View>
-            <Text style={{ ...styles.cardDescription, backgroundColor: '#F9FCF3', marginTop: 10 }}>
-                Click button above to view the products page and manage all your products with ease. Swipe left to delete, and swipe right to edit.
-            </Text>
+            <View style={styles.cardDescription}>
+                <Text style={styles.cardText}>
+                    Click button above to view the products page and manage all your products with ease. Swipe left to delete, and swipe right to edit.
+                </Text>
+            </View>
             <View>
                 <AboutScreen />
             </View>
@@ -47,16 +49,19 @@ const styles = StyleSheet.create({
         textShadowRadius: 2,
     },
     cardDescription: {
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
+        borderWidth: 2,
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 10
+    },
+    cardText: {
         fontSize: 16,
         lineHeight: 24,
         color: 'black',
         fontWeight: 'bold',
-        textAlign: 'center',
-        padding: 10,
-        textAlign: 'center',
-        borderRadius: 10,
-        borderColor: '#D79578',
-        borderWidth: 2,
+        textAlign: 'center'
     },
     button: {
         padding: 10,
