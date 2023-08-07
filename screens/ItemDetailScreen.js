@@ -6,7 +6,6 @@ import { deleteEntry } from '../actions/deleteEntry';
 import { editEntry } from '../actions/editEntry';
 import EditEntryForm from '../components/EditEntryForm';
 import moment from 'moment';
-
 import { Swipeable } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';

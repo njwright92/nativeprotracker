@@ -9,7 +9,7 @@ import LineChartScreen from './LineChartScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { getAuth, signOut } from "firebase/auth";
-
+import AddNoteScreen from './AddNoteScreen';
 
 const screenOptions = ({ navigation }) => ({
     headerStyle: { backgroundColor: '#D79578' },
@@ -131,6 +131,12 @@ const AddItemNavigator = () => {
                     headerTitle: getFocusedRouteNameFromRoute(route) || 'Product Entries'
                 })}
             />
+            <Stack.Screen name='Product Note'
+                component={AddNoteScreen}
+                options={({ route, }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Product Note'
+                })}
+            />
             <Stack.Screen name="LineChart"
                 component={LineChartScreen}
                 options={({ route }) => ({
@@ -166,21 +172,21 @@ const HomeNavigator = () => {
 const Main = () => {
     const Stack = createStackNavigator();
     const auth = getAuth();
-  
+
     const isLoggedIn = !!auth.currentUser;
-  
+
     return (
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {isLoggedIn ? (
-          <>
-            <Stack.Screen name='Home' component={HomeNavigator} />
-            <Stack.Screen name='AddItem' component={AddItemNavigator} />
-          </>
-        ) : (
-          <Stack.Screen name='Login' component={LoginScreen} />
-        )}
-      </Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {isLoggedIn ? (
+                <>
+                    <Stack.Screen name='Home' component={HomeNavigator} />
+                    <Stack.Screen name='AddItem' component={AddItemNavigator} />
+                </>
+            ) : (
+                <Stack.Screen name='Login' component={LoginScreen} />
+            )}
+        </Stack.Navigator>
     );
-  };
-  
-  export default Main;
+};
+
+export default Main;

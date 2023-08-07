@@ -102,20 +102,36 @@ const ItemsList = () => {
           renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, item)}
         >
           <View style={styles.item}>
-            <Text style={styles.itemName}>{item.name}</Text>
-            <Pressable
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed ? 'rgb(106, 163, 137)' : 'rgb(106, 163, 137)',
-                },
-                styles.button,
-              ]}
-              onPress={() => {
-                navigation.navigate('Product Detail', { item });
-              }}
-            >
-              <Text style={styles.buttonText}>Add Entry</Text>
-            </Pressable>
+            <Text style={styles.itemName}>{item.name}
+            </Text>
+            <View style={styles.buttonContainer}>
+              <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? 'rgb(106, 163, 137)' : 'rgb(106, 163, 137)',
+                  },
+                  styles.button,
+                ]}
+                onPress={() => {
+                  navigation.navigate('Product Detail', { item });
+                }}
+              >
+                <Text style={styles.buttonText}>Add Entry</Text>
+              </Pressable>
+              <Pressable
+                style={({ pressed }) => [
+                  {
+                    backgroundColor: pressed ? 'rgb(137, 168, 234)' : 'rgb(137, 168, 234)',
+                  },
+                  styles.button,
+                ]}
+                onPress={() => {
+                  navigation.navigate('Product Note', { item });
+                }}
+              >
+                <Text style={styles.buttonText}>Add Note</Text>
+              </Pressable>
+            </View>
           </View>
         </Swipeable>
       );
@@ -151,12 +167,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderBottomColor: '#D79578',
     minHeight: 40
+
   },
   itemName: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
 
+  },
+  buttonContainer: {
+    flexDirection: 'row',
   },
   button: {
     padding: 10,

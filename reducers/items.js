@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY, EDIT_ENTRY } from '../actions/types';
+import { ADD_ITEM, DELETE_ITEM, UPDATE_ITEM, ADD_ENTRY, DELETE_ENTRY, EDIT_ENTRY, ADD_NOTE } from '../actions/types';
 
 const initialState = [];
 
@@ -40,6 +40,16 @@ const itemsReducer = (state = initialState, action) => {
                 if (editEntry) {
                     editEntry.quantity = editQuantity;
                 }
+            }
+            return [...state];
+        case ADD_NOTE:
+            const { itemId: noteItemId, note } = action.payload;
+            const noteItem = state.find((item) => item.id === noteItemId);
+            if (noteItem) {
+                const noteId = Date.now().toString(); // Generate a unique ID for the note
+                noteItem.notes.push({ id: noteId, note });
+                console.log(`Added note "${note}" to item with ID ${noteItemId}.`);
+                console.log('Updated item:', noteItem);
             }
             return [...state];
 
