@@ -300,9 +300,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 70,
-        height: '75%',
-        borderRadius: 10,
+        width: 80,
+        height: '100%',
+        borderRadius: 10
     },
     deleteButton: {
         backgroundColor: 'red',
@@ -340,11 +340,11 @@ const styles = StyleSheet.create({
     },
     updateContainer: {
         backgroundColor: 'rgb(137, 168, 234)',
-        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 70,
-        height: '75%',
+        width: 80,
+        height: '100%',
+        borderRadius: 10
     },
     card: {
         marginBottom: 10,

@@ -5,11 +5,12 @@ import { editNote } from '../actions/editNote';
 
 const EditNoteForm = ({ note, onCancel }) => {
     const dispatch = useDispatch();
-    const [editedNote, setEditedNote] = useState(note ? note.note : '');
+    const [editedNote, setEditedNote] = useState(note && note.note !== undefined ? note.note : '');
+
 
     const handleUpdateNote = () => {
         if (note) {
-            dispatch(editNote(note.item_id, note.id, { note: editedNote }));
+            dispatch(editNote(note.itemId, note.id, { note: editedNote }));
         }
         onCancel();
     };
@@ -23,19 +24,19 @@ const EditNoteForm = ({ note, onCancel }) => {
                     style={styles.input}
                     value={editedNote}
                     onChangeText={(text) => setEditedNote(text)}
+                    multiline={true}
                 />
-                {editedNote.trim().length === 0 && (
-                    <Text style={styles.errorText}>Note is required</Text>
-                )}
+
             </View>
             <View style={styles.buttonContainer}>
                 <Button
                     color="rgb(137, 168, 234)"
                     title="Submit"
                     onPress={handleUpdateNote}
+
                 />
                 <Button
-                    color="maroon"
+                    color="red"
                     title="Cancel"
                     onPress={onCancel}
                 />
@@ -74,10 +75,6 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 1,
-        shadowRadius: 2,
         borderRadius: 10,
     },
     errorText: {

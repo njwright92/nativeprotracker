@@ -20,8 +20,7 @@ export const editEntry = (itemId, entryId, quantity) => {
                 quantity: quantity.quantity || []
             });
 
-            const updatedEntryDoc = await getDoc(entryRef);
-
+            
 
             dispatch({
                 type: EDIT_ENTRY,

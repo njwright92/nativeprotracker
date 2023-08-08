@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import { Swipeable } from 'react-native-gesture-handler';
+import EditNoteForm from '../components/editNoteForm';
 
 
 const AddNoteScreen = ({ route }) => {
@@ -18,6 +19,9 @@ const AddNoteScreen = ({ route }) => {
     const item = items.find((item) => item.id === itemParam.id);
     const [note, setNote] = useState('');
     const [notesList, setNotesList] = useState([]);
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
+    const [noteToEdit, setNoteToEdit] = useState(null);
+
 
     useEffect(() => {
         const notesRef = collection(db, 'items', itemParam.id, 'notes');
@@ -47,13 +51,46 @@ const AddNoteScreen = ({ route }) => {
 
 
     const handleAddNote = () => {
-        console.log(`Added note "${note}" `);
+        
         dispatch(addNote(itemParam.id, note));
         setNote('');
     };
 
+    const openEditModal = (item) => {
+        setNoteToEdit(item);
+        setIsEditModalVisible(true);
+    };
+
+    const closeEditModal = () => {
+        setIsEditModalVisible(false);
+        setNoteToEdit(null);
+    };
+
+
+
     const renderNote = ({ item }) => {
         const { note, id } = item;
+
+        const renderLeftActions = (progress, dragX, noteId) => {
+            const trans = dragX.interpolate({
+                inputRange: [0, 50, 100],
+                outputRange: [0, -20, -100],
+            });
+
+            const onPressEdit = () => {
+                
+                openEditModal({ ...item, itemId: itemParam.id });
+            };
+
+            return (
+                <View style={styles.editContainer}>
+                    <TouchableOpacity style={styles.editButton} onPress={onPressEdit}>
+                        <Text style={styles.editText}>Edit</Text>
+                    </TouchableOpacity>
+                </View>
+            );
+        };
+
 
         const renderRightActions = (progress, dragX, noteId) => {
             const trans = dragX.interpolate({
@@ -78,6 +115,7 @@ const AddNoteScreen = ({ route }) => {
         return (
             <Swipeable
                 renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, id)}
+                renderLeftActions={(progress, dragX) => renderLeftActions(progress, dragX, id)}
                 key={id}
             >
                 <View style={styles.entryContainer}>
@@ -111,13 +149,17 @@ const AddNoteScreen = ({ route }) => {
                     </View>
                 </TouchableOpacity>
             </View>
-            <View style={styles.inputContainer}>
+            <View>
                 <Text style={styles.title}>{itemParam.name}</Text>
+                {isEditModalVisible && (
+                    <EditNoteForm note={noteToEdit} onCancel={closeEditModal} />
+                )}
                 <TextInput
                     style={styles.input}
                     placeholder="Enter your note here"
                     value={note}
                     onChangeText={setNote}
+                    multiline={true}
                 />
                 <View style={styles.button}>
                     <Pressable onPress={handleAddNote}>
@@ -131,6 +173,7 @@ const AddNoteScreen = ({ route }) => {
                     data={notesList}
                     keyExtractor={(item) => item.id}
                     renderItem={renderNote}
+                    ListEmptyComponent={<Text style={styles.entryText}>No notes added yet</Text>}
                 />
             </View>
         </View>
@@ -141,14 +184,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E5BA95',
+        padding: 10,
         alignItems: 'center',
     },
-    inputContainer: {
-        borderRadius: 10,
-    },
+
     listContainer: {
         width: '100%',
-        flex: 1,
         padding: 10,
         marginTop: 5,
         borderRadius: 10,
@@ -168,8 +209,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
         marginVertical: 5,
-        width: '100%',
         backgroundColor: '#F9FCF3',
+        minHeight: 100,
+        maxHeight: 200
     },
     button: {
         alignItems: 'center',
@@ -241,6 +283,31 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
     },
     deleteText: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    editContainer: {
+        backgroundColor: 'rgb(137, 168, 234)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: '100%',
+        borderRadius: 10
+    },
+    editButton: {
+        backgroundColor: 'rgb(137, 168, 234)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
+        height: '100%',
+        borderRadius: 10,
+        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
+    },
+    editText: {
         color: 'black',
         fontSize: 16,
         fontWeight: 'bold',
