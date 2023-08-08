@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { editNote } from '../actions/editNote';
 
@@ -29,18 +29,27 @@ const EditNoteForm = ({ note, onCancel }) => {
 
             </View>
             <View style={styles.buttonContainer}>
-                <Button
-                    color="rgb(137, 168, 234)"
-                    title="Submit"
+                <Pressable
+                    style={({ pressed }) => [
+                        styles.buttonBase,
+                        { backgroundColor: pressed ? 'rgba(137, 168, 234)' : 'rgb(137, 168, 234)' }
+                    ]}
                     onPress={handleUpdateNote}
+                >
+                    <Text style={styles.buttonText}>Submit</Text>
+                </Pressable>
 
-                />
-                <Button
-                    color="red"
-                    title="Cancel"
+                <Pressable
+                    style={({ pressed }) => [
+                        styles.buttonBase,
+                        { backgroundColor: pressed ? 'red' : 'red' }
+                    ]}
                     onPress={onCancel}
-                />
+                >
+                    <Text style={styles.buttonText}>Cancel</Text>
+                </Pressable>
             </View>
+
         </View>
     );
 };
@@ -71,11 +80,24 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 10,
         padding: 10,
+        minHeight: 100,
+        maxHeight: 200
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderRadius: 10,
+    },
+    buttonBase: {
+        padding: 10,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+    },
+    buttonText: {
+        color: 'black',
+        fontSize: 16,
     },
     errorText: {
         color: 'red',

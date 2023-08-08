@@ -21,6 +21,8 @@ const AddNoteScreen = ({ route }) => {
     const [notesList, setNotesList] = useState([]);
     const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [noteToEdit, setNoteToEdit] = useState(null);
+    const [isAdding, setIsAdding] = useState(true);
+
 
 
     useEffect(() => {
@@ -51,20 +53,23 @@ const AddNoteScreen = ({ route }) => {
 
 
     const handleAddNote = () => {
-        
+
         dispatch(addNote(itemParam.id, note));
         setNote('');
     };
 
     const openEditModal = (item) => {
+        setIsAdding(false);
         setNoteToEdit(item);
         setIsEditModalVisible(true);
     };
 
     const closeEditModal = () => {
+        setIsAdding(true)
         setIsEditModalVisible(false);
         setNoteToEdit(null);
     };
+
 
 
 
@@ -78,7 +83,7 @@ const AddNoteScreen = ({ route }) => {
             });
 
             const onPressEdit = () => {
-                
+
                 openEditModal({ ...item, itemId: itemParam.id });
             };
 
@@ -151,21 +156,29 @@ const AddNoteScreen = ({ route }) => {
             </View>
             <View>
                 <Text style={styles.title}>{itemParam.name}</Text>
+
                 {isEditModalVisible && (
                     <EditNoteForm note={noteToEdit} onCancel={closeEditModal} />
                 )}
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter your note here"
-                    value={note}
-                    onChangeText={setNote}
-                    multiline={true}
-                />
-                <View style={styles.button}>
-                    <Pressable onPress={handleAddNote}>
-                        <Text style={styles.buttonText}>Add Note</Text>
-                    </Pressable>
-                </View>
+
+                {isAdding && (
+                    <>
+                        <View style={styles.noteInputContainer}>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Enter your note here"
+                                value={note}
+                                onChangeText={setNote}
+                                multiline={true}
+                            />
+                            <View style={styles.button}>
+                                <Pressable onPress={handleAddNote}>
+                                    <Text style={styles.buttonText}>Add Note</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </>
+                )}
             </View>
             <View style={styles.listContainer}>
                 <Text style={styles.notesTitle}>Notes:</Text>
@@ -203,11 +216,21 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 2, height: 2 },
         textShadowRadius: 2,
     },
+    noteInputContainer: {
+        backgroundColor: '#F9FCF3',
+        borderColor: '#D79578',
+        borderWidth: 2,
+        padding: 20,
+        borderRadius: 10,
+        marginTop: 10,
+        marginBottom: 10,
+        alignItems: 'center',
+    },
     input: {
         borderWidth: 2,
         borderColor: '#D79578',
         borderRadius: 10,
-        padding: 5,
+        padding: 10,
         marginVertical: 5,
         backgroundColor: '#F9FCF3',
         minHeight: 100,
