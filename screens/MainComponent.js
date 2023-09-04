@@ -162,16 +162,29 @@ const HomeNavigator = () => {
     );
 }
 
-
 const Main = () => {
     const Stack = createStackNavigator();
+    const auth = getAuth();
+    const isLoggedIn = !!auth.currentUser;
+  
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {isLoggedIn ? (
+          <>
             <Stack.Screen name='Home' component={HomeNavigator} />
             <Stack.Screen name='AddItem' component={AddItemNavigator} />
-        </Stack.Navigator>
+          </>
+        ) : (
+          <Stack.Screen name='Login' component={LoginScreen} />
+        )}
+      </Stack.Navigator>
     );
-};
+  };
+  
+  export default Main;
 
-
-export default Main;
+  
+  
+  
+  
+  
