@@ -68,6 +68,8 @@ const LoginTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
+                <Text style={styles.titleText}>Login</Text>
+
                 <Image
                     source={require('../assets/img/Branding.jpg')}
                     style={{
@@ -119,41 +121,6 @@ const LoginTab = ({ navigation }) => {
 
                 <GoogleSignInButton />
 
-                <View style={{ marginTop: 2 }}>
-                    <Text
-                        onPress={() => handleResetPassword()}
-                        style={styles.resetPasswordLink}
-                    >
-                        Reset Password
-                    </Text>
-                </View>
-            </View>
-            <View style={styles.container}>
-                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
-                    - Here are a couple examples of what you can do with this app after you register.
-                </Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={styles.text}>Business</Text>
-                    <Image
-                        source={require('../assets/img/exChart.png')}
-                        style={styles.image}
-                    />
-                    <Image
-                        source={require('../assets/img/exlist.png')}
-                        style={[styles.image, { width: 198, height: 70 }]}
-                    />
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={styles.text}>Personal</Text>
-                    <Image
-                        source={require('../assets/img/Items2.png')}
-                        style={[styles.image, { width: 100, height: 150 }]}
-                    />
-                    <Image
-                        source={require('../assets/img/Entries2.png')}
-                        style={[styles.image, { width: 100, height: 150 }]}
-                    />
-                </View>
             </View>
         </ScrollView>
 
@@ -203,6 +170,8 @@ const RegisterTab = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
+                <Text style={styles.titleText}>Register</Text>
+
                 <Image
                     source={require('../assets/img/Branding.jpg')}
                     style={{
@@ -254,38 +223,14 @@ const RegisterTab = ({ navigation }) => {
                         buttonStyle={{ backgroundColor: 'rgb(106, 163, 137)' }}
                     />
                 </View>
+                <GoogleSignInButton />
             </View>
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
-            <GoogleSignInButton />
-            <View style={styles.container} >
-                <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: 'bold' }}>
-                    - Here are a couple examples of what you can do with this app after you register.
-                </Text>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={styles.text}>Business</Text>
-                    <Image
-                        source={require('../assets/img/exChart.png')}
-                        style={styles.image}
-                    />
-                    <Image
-                        source={require('../assets/img/exlist.png')}
-                        style={[styles.image, { width: 198, height: 70 }]}
-                    />
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 2 }}>
-                    <Text style={styles.text}>Personal</Text>
-                    <Image
-                        source={require('../assets/img/Items2.png')}
-                        style={[styles.image, { width: 100, height: 150 }]}
-                    />
-                    <Image
-                        source={require('../assets/img/Entries2.png')}
-                        style={[styles.image, { width: 100, height: 150 }]}
-                    />
-                </View>
-            </View>
+
+
+
         </ScrollView>
 
     );
@@ -355,7 +300,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 5,
         marginBottom: 5,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+    },
+    titleText: {
+        fontSize: 36,
+        fontWeight: 'bold',
+        marginBottom: 20,
     },
     formIcon: {
         marginRight: 10,
@@ -367,8 +317,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justify: 'center',
-        maxWidth: 700
+        justifyContent: 'center',
     },
     noticeText: {
         fontWeight: 'bold',
@@ -383,14 +332,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'black',
         marginBottom: 7,
-    },
-    image: {
-        height: 95,
-        width: 95,
-        margin: 3,
-        borderRadius: 10,
-        borderColor: 'black', 
-        borderWidth: 2
     },
     text: {
         margin: 7,
@@ -412,5 +353,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 });
+
 
 export default LoginScreen;
