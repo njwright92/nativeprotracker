@@ -4,3 +4,6 @@ export const DELETE_ITEM = 'DELETE_ITEM';
 export const ADD_ENTRY = 'ADD_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 export const EDIT_ENTRY = 'EDIT_ENTRY';
+export const ADD_NOTE = 'ADD_NOTE';
+export const DELETE_NOTE = 'DELETE_NOTE';
+export const EDIT_NOTE = 'EDIT_NOTE';

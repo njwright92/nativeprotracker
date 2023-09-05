@@ -37,7 +37,7 @@ const EditEntryForm = ({ entry, onCancel }) => {
                     onPress={handleUpdateEntry}
                 />
                 <Button
-                    color="maroon"
+                    color="red"
                     title="Cancel"
                     onPress={onCancel}
                 />

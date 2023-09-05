@@ -9,7 +9,7 @@ import LineChartScreen from './LineChartScreen';
 import { Ionicons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { getAuth, signOut } from "firebase/auth";
-
+import AddNoteScreen from './AddNoteScreen';
 
 const screenOptions = ({ navigation }) => ({
     headerStyle: { backgroundColor: '#D79578' },
@@ -129,6 +129,12 @@ const AddItemNavigator = () => {
                 component={ItemDetailScreen}
                 options={({ route, }) => ({
                     headerTitle: getFocusedRouteNameFromRoute(route) || 'Product Entries'
+                })}
+            />
+            <Stack.Screen name='Product Note'
+                component={AddNoteScreen}
+                options={({ route, }) => ({
+                    headerTitle: getFocusedRouteNameFromRoute(route) || 'Product Note'
                 })}
             />
             <Stack.Screen name="LineChart"
