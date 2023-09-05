@@ -6,7 +6,8 @@ import {
     Text,
     ScrollView,
     TextInput,
-    Alert
+    Alert,
+    Pressable
 } from 'react-native';
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -136,27 +137,16 @@ const LoginTab = ({ navigation }) => {
                 </View>
                 <GoogleSignInButton />
                 <View style={{ marginVertical: 5 }}>
-                    <Button
+                    <Pressable
                         onPress={() => handleResetPassword()}
-                        title="Reset Password"
-                        icon={
-                            <Ionicons
-                                name="refresh-outline"
-                                size={24}
-                                color="white"
-                                style={styles.icon}
-                            />
-                        }
-                        buttonStyle={{
-                            backgroundColor: 'rgb(255, 51, 51)',
-                            padding: 10,
-                            borderRadius: 10,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)',
-                            shadowOffset: { width: 1, height: 2 },
-                            shadowOpacity: 1,
-                            shadowRadius: 2,
-                        }}
-                    />
+                        style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Ionicons
+                            name="refresh-outline"
+                            size={24}
+                            color="rgb(255, 51, 51)" />
+                        <Text style={{ color: 'rgb(255, 51, 51)', marginLeft: 5 }}>Reset Password
+                        </Text>
+                    </Pressable>
                 </View>
             </View>
         </ScrollView>
@@ -343,6 +333,13 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: 'bold',
         marginBottom: 20,
+        color: 'black',
+        fontSize: 36,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textShadowColor: 'rgba(0, 0, 0, 0.5)',
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 3,
     },
     formIcon: {
         marginRight: 10,
