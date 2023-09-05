@@ -1,16 +1,29 @@
 import { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, Text, ScrollView, TextInput, Alert } from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Image,
+    Text,
+    ScrollView,
+    TextInput,
+    Alert
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged } from "firebase/auth";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged
+} from "firebase/auth";
 import { GoogleSignInButton } from '../GoogleSignIn';
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-
     const auth = getAuth();
 
     const handleLogin = () => {
@@ -61,7 +74,6 @@ const LoginTab = ({ navigation }) => {
                 navigation.navigate('Main');
             }
         });
-
         return unsubscribe;
     }, []);
 
@@ -69,7 +81,6 @@ const LoginTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.titleText}>Login</Text>
-
                 <Image
                     source={require('../assets/img/Branding.jpg')}
                     style={{
@@ -78,7 +89,6 @@ const LoginTab = ({ navigation }) => {
                         borderRadius: 10
                     }}
                 />
-
                 <View style={styles.formInput}>
                     <Ionicons name='mail' size={24} color='black' style={styles.formIcon} />
                     <TextInput
@@ -101,8 +111,7 @@ const LoginTab = ({ navigation }) => {
                         secureTextEntry={true}
                     />
                 </View>
-
-                <View style={{ marginBottom: 2 }}>
+                <View style={{ marginBottom: 5 }}>
                     <Button
                         onPress={() => handleLogin()}
                         title="Login"
@@ -114,13 +123,41 @@ const LoginTab = ({ navigation }) => {
                                 style={styles.icon}
                             />
                         }
-                        buttonStyle={{ backgroundColor: 'rgb(137, 168, 234)' }}
+                        buttonStyle={{
+                            backgroundColor: 'rgb(137, 168, 234)',
+                            padding: 10,
+                            borderRadius: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowOffset: { width: 1, height: 2 },
+                            shadowOpacity: 1,
+                            shadowRadius: 2,
+                        }}
                     />
-
                 </View>
-
                 <GoogleSignInButton />
-
+                <View style={{ marginVertical: 5 }}>
+                    <Button
+                        onPress={() => handleResetPassword()}
+                        title="Reset Password"
+                        icon={
+                            <Ionicons
+                                name="refresh-outline"
+                                size={24}
+                                color="white"
+                                style={styles.icon}
+                            />
+                        }
+                        buttonStyle={{
+                            backgroundColor: 'rgb(255, 51, 51)',
+                            padding: 10,
+                            borderRadius: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowOffset: { width: 1, height: 2 },
+                            shadowOpacity: 1,
+                            shadowRadius: 2,
+                        }}
+                    />
+                </View>
             </View>
         </ScrollView>
 
@@ -131,7 +168,6 @@ const RegisterTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-
     const auth = getAuth();
 
     const handleRegister = () => {
@@ -171,7 +207,6 @@ const RegisterTab = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
             <View style={styles.container}>
                 <Text style={styles.titleText}>Register</Text>
-
                 <Image
                     source={require('../assets/img/Branding.jpg')}
                     style={{
@@ -208,7 +243,7 @@ const RegisterTab = ({ navigation }) => {
                         secureTextEntry={true}
                     />
                 </View>
-                <View>
+                <View style={{ marginVertical: 5 }}>
                     <Button
                         onPress={() => handleRegister()}
                         title='Register'
@@ -220,7 +255,15 @@ const RegisterTab = ({ navigation }) => {
                                 size={24}
                             />
                         }
-                        buttonStyle={{ backgroundColor: 'rgb(106, 163, 137)' }}
+                        buttonStyle={{
+                            backgroundColor: 'rgb(106, 163, 137)',
+                            padding: 10,
+                            borderRadius: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)',
+                            shadowOffset: { width: 1, height: 2 },
+                            shadowOpacity: 1,
+                            shadowRadius: 2,
+                        }}
                     />
                 </View>
                 <GoogleSignInButton />
@@ -228,11 +271,7 @@ const RegisterTab = ({ navigation }) => {
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>
             ) : null}
-
-
-
         </ScrollView>
-
     );
 };
 
@@ -283,11 +322,9 @@ const LoginScreen = () => {
     );
 };
 
-
 const styles = StyleSheet.create({
     scrollViewContent: {
         flexGrow: 1,
-        paddingBottom: 10,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#E5BA95',
@@ -351,8 +388,7 @@ const styles = StyleSheet.create({
         color: 'red',
         textAlign: 'center',
         fontWeight: 'bold'
-    },
+    }
 });
-
 
 export default LoginScreen;
