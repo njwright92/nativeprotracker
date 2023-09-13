@@ -29,7 +29,7 @@ const LoginTab = ({ navigation }) => {
 
     const handleLogin = () => {
         if (!email || !password) {
-            Alert.alert('Login error', 'Incorrect username or password.');
+            window.alert('Login error', 'Incorrect username or password.');
             return;
         }
         signInWithEmailAndPassword(auth, email, password)
@@ -55,7 +55,7 @@ const LoginTab = ({ navigation }) => {
 
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                Alert.alert('Password Reset', 'Password reset email sent. Please check your inbox.');
+                window.alert('Password Reset', 'Password reset email sent. Please check your inbox.');
             })
             .catch((error) => {
                 const errorCode = error.code;
