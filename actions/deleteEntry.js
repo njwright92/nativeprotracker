@@ -18,9 +18,10 @@ export const deleteEntry = (itemId, entryId) => {
                     uid: user.uid
                 },
             });
+           window.alert('Success', 'Entry deleted successfully!'); 
         } catch (error) {
             console.error('Error deleting entry: ', error);
-
+            
         }
     };
 };

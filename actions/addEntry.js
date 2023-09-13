@@ -27,6 +27,8 @@ export const addEntry = (itemId, quantity, date) => {
                     payload: entryData,
                 });
 
+                window.alert('Success', 'Entry added successfully!');
+
                 onSnapshot(collection(db, "items", itemId, "entries"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
@@ -40,8 +42,7 @@ export const addEntry = (itemId, quantity, date) => {
                 });
             }
         } catch (error) {
-
-
+            window.alert('failed', 'Entry not added!');
         }
     };
 };

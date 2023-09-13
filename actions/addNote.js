@@ -25,6 +25,8 @@ export const addNote = (itemId, note) => {
                     payload: noteData,
                 });
 
+                window.alert('Success', 'Note added successfully!');
+
                 onSnapshot(collection(db, "items", itemId, "notes"), (snapshot) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
@@ -37,7 +39,7 @@ export const addNote = (itemId, note) => {
                 });
             }
         } catch (error) {
-            // Handle the error if needed
+            window.alert('failed', 'Note not added!');
         }
     };
 };

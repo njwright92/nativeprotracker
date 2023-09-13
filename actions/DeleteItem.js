@@ -25,6 +25,8 @@ export const deleteItem = (id) => {
                     payload: { id }
                 });
 
+                window.alert('Success', 'Item deleted successfully!');
+
                 onSnapshot(doc(itemRef), () => {
 
                 });
@@ -33,7 +35,7 @@ export const deleteItem = (id) => {
             }
         } catch (error) {
             console.error('Error deleting document: ', error);
-
+            
         }
     };
 };
