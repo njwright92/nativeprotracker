@@ -31,7 +31,7 @@ export const editEntry = (itemId, entryId, quantity) => {
                     uid: user.uid
                 },
             });
-
+            window.alert('Success', 'Entry edited successfully!');
             onSnapshot(entryRef, (doc) => {
                 const updatedEntry = { ...doc.data(), id: doc.id };
                 console.log('editEntry snapshot', updatedEntry);

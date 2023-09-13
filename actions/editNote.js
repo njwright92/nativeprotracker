@@ -28,6 +28,7 @@ export const editNote = (itemId, noteId, newNoteContent) => {
         },
       });
 
+      window.alert('Success', 'Noted Edited successfully!');
       onSnapshot(noteRef, (doc) => {
         const updatedNote = { ...doc.data(), id: doc.id };
         console.log('editNote snapshot', updatedNote);

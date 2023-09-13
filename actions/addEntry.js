@@ -33,7 +33,6 @@ export const addEntry = (itemId, quantity, date) => {
                     snapshot.docChanges().forEach((change) => {
                         if (change.type === "added") {
                             
-                            
 
                         }
                     });

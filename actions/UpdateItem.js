@@ -23,6 +23,7 @@ export const updateItem = (item) => {
                 },
             });
 
+            window.alert('Success', 'Item edited successfully!');
             onSnapshot(itemRef, (doc) => {
                 const updatedItem = doc.data();
                 dispatch({

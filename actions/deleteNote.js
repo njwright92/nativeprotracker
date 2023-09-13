@@ -17,6 +17,8 @@ export const deleteNote = (itemId, noteId) => {
           uid: user.uid,
         },
       });
+      window.alert('Success', 'Note deleted successfully!');
+
     } catch (error) {
       console.error('Error deleting note: ', error);
     }
