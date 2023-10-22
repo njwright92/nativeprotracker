@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import {
+    useState,
+    useEffect
+} from 'react';
 import {
     View,
     StyleSheet,
@@ -6,7 +9,6 @@ import {
     Text,
     ScrollView,
     TextInput,
-    Alert,
     Pressable
 } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -20,6 +22,7 @@ import {
     onAuthStateChanged
 } from "firebase/auth";
 import { GoogleSignInButton } from '../GoogleSignIn';
+import { GoogleSignUpButton } from '../GoogleSignUp';
 
 const LoginTab = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -29,13 +32,11 @@ const LoginTab = ({ navigation }) => {
 
     const handleLogin = () => {
         if (!email || !password) {
-            window.alert('Login error', 'Incorrect username or password.');
+            window.alert('Incorrect username or password.');
             return;
         }
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
+            .then(() => {
                 navigation.navigate('Main');
             })
             .catch((error) => {
@@ -55,7 +56,7 @@ const LoginTab = ({ navigation }) => {
 
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                window.alert('Password Reset', 'Password reset email sent. Please check your inbox.');
+                window.alert('Password reset email sent. Please check your inbox.');
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -256,7 +257,7 @@ const RegisterTab = ({ navigation }) => {
                         }}
                     />
                 </View>
-                <GoogleSignInButton />
+                <GoogleSignUpButton />
             </View>
             {error ? (
                 <Text style={[styles.errorText, { color: 'red' }]}>{error}</Text>

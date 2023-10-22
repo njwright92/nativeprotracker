@@ -18,11 +18,11 @@ const handleGoogleSignIn = () => {
         });
 };
 
-export const GoogleSignInButton = () => {
+export const GoogleSignUpButton = () => {
     return (
         <TouchableOpacity style={styles.button} onPress={handleGoogleSignIn}>
             <Image source={require('./assets/img/google.png')} style={styles.image} />
-            <Text style={styles.text}>Sign In with Google</Text>
+            <Text style={styles.text}>Sign Up with Google</Text>
         </TouchableOpacity>
     );
 };
