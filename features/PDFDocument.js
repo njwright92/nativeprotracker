@@ -1,9 +1,28 @@
-// PDFDocument.js
-import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import moment from 'moment';
+import React from "react";
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import moment from "moment";
 
 const PDFDocument = ({ data }) => {
+  const renderTableHeader = () => {
+    return (
+      <View style={styles.tableRow}>
+        <Text style={styles.tableHeader}>Date</Text>
+        <Text style={styles.tableHeader}>Quantity</Text>
+      </View>
+    );
+  };
+
+  const renderTableRow = (entry) => {
+    return (
+      <View style={styles.tableRow} key={entry.date}>
+        <Text style={styles.tableCell}>
+          {moment(entry.date.toDate()).format("MM/DD/YYYY")}
+        </Text>
+        <Text style={styles.tableCell}>{entry.quantity}</Text>
+      </View>
+    );
+  };
+
   return (
     <Document>
       <Page style={styles.page}>
@@ -11,18 +30,8 @@ const PDFDocument = ({ data }) => {
           <Text style={styles.title}>{data.title}</Text>
         </View>
         <View style={styles.table}>
-          <View style={styles.tableRow}>
-            <Text style={styles.tableHeader}>Date</Text>
-            <Text style={styles.tableHeader}>Quantity</Text>
-          </View>
-          {data.data.map((entry) => (
-            <View style={styles.tableRow} key={entry.date}>
-              <Text style={styles.tableCell}>
-              {moment(entry.date.toDate()).format('MM/DD/YYYY')}
-              </Text>
-              <Text style={styles.tableCell}>{entry.quantity}</Text>
-            </View>
-          ))}
+          {renderTableHeader()}
+          {data.data.map(renderTableRow)}
         </View>
       </Page>
     </Document>
@@ -38,28 +47,28 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   table: {
-    display: 'table',
-    width: '100%',
+    display: "table",
+    width: "100%",
   },
   tableRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   tableHeader: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     padding: 5,
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     flex: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
   tableCell: {
     padding: 5,
     fontSize: 12,
     flex: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 

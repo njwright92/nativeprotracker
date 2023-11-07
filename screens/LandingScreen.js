@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet, Image, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+const LandingPage = () => {
+    const navigation = useNavigation();
 
-const LandingPage = ({ navigation }) => {
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.viewStyles}>

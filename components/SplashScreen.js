@@ -1,31 +1,31 @@
-import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
 
 const SplashScreen = () => {
-
-    return (
-        <View style={styles.viewStyles}>
-            <Image source={require('../assets/img/Branding.jpg')} style={styles.imageStyles} />
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require("../assets/img/Branding.jpg")}
+        style={styles.image}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    viewStyles: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#E5BA95'
-    },
-
-    imageStyles: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 400,
-        height: 200,
-        borderRadius: 10,
-
-    }
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#E5BA95",
+  },
+  image: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 400,
+    height: 200,
+    borderRadius: 10,
+  },
 });
 
 export default SplashScreen;

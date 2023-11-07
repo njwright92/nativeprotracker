@@ -2,20 +2,18 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import { auth, provider } from "./firebaseConfig";
 
-const handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider)
-        .then((result) => {
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            const user = result.user;
-
-        }).catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            const email = error.customData.email;
-            const credential = GoogleAuthProvider.credentialFromError(error);
-
-        });
+const handleGoogleSignIn = async () => {
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+    } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+    }
 };
 
 export const GoogleSignUpButton = () => {
