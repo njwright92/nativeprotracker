@@ -87,6 +87,7 @@ const LoginTab = ({ navigation }) => {
             height: 95,
             borderRadius: 10,
           }}
+          load="lazy"
         />
         <View style={styles.formInput}>
           <Ionicons
@@ -217,6 +218,7 @@ const RegisterTab = ({ navigation }) => {
             height: 100,
             borderRadius: 10,
           }}
+          load="lazy"
         />
         <Text style={{ marginTop: 5, marginBottom: 5, fontWeight: "bold" }}>
           - Full About and info are on the next screen.

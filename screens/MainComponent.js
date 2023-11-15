@@ -69,6 +69,7 @@ const screenOptions = ({ navigation }) => ({
             shadowOpacity: 1,
             shadowRadius: 2,
           }}
+          load="lazy"
         />
         <Text
           style={{

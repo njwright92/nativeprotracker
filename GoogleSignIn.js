@@ -19,7 +19,11 @@ const handleGoogleSignIn = async () => {
 export const GoogleSignInButton = () => {
   return (
     <TouchableOpacity style={styles.button} onPress={handleGoogleSignIn}>
-      <Image source={require("./assets/img/google.png")} style={styles.image} />
+      <Image
+        source={require("./assets/img/google.png")}
+        style={styles.image}
+        load="lazy"
+      />
       <Text style={styles.text}>Sign In with Google</Text>
     </TouchableOpacity>
   );

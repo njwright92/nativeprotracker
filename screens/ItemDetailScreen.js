@@ -269,6 +269,7 @@ const ItemDetailScreen = ({ route }) => {
           <Image
             source={require("../assets/img/chart.png")}
             style={styles.image}
+            load="lazy"
           />
         </View>
         <View style={styles.textContainer}>

@@ -7,6 +7,7 @@ const SplashScreen = () => {
       <Image
         source={require("../assets/img/Branding.jpg")}
         style={styles.image}
+        load="lazy"
       />
     </View>
   );
