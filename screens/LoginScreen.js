@@ -178,10 +178,10 @@ const RegisterTab = ({ navigation }) => {
     }
 
     const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])([A-Za-z\d@$!%*?&^(){}[\]:;<>,.~`_+-=|\\\/]){7,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^(){}[\]:;<>,.~`_+=|\\\/-])[A-Za-z\d@$!%*?&^(){}[\]:;<>,.~`_+=|\\\/-]{7,}$/;
     if (!passwordRegex.test(password)) {
       setError(
-        "Password must be at least 7 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*?&)"
+        "Password must be at least 7 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character. Allowed special characters are: @$!%*?&^(){}[]:;<>,.~`_+=|\\/-"
       );
       return;
     }
