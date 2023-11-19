@@ -27,6 +27,10 @@ const LoginTab = ({ navigation }) => {
   const [error, setError] = useState(null);
   const auth = getAuth();
 
+  const handleBack = () => {
+    navigation.navigate("Landing"); // Navigate back to the Landing page
+  };
+
   const handleLogin = async () => {
     if (!email || !password) {
       window.alert("Incorrect username or password.");
@@ -79,6 +83,40 @@ const LoginTab = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
+        <Pressable
+          onPress={handleBack}
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? "#F9FCF3" : "#F9FCF3",
+              borderRadius: 10,
+              paddingVertical: 5,
+              paddingHorizontal: 5,
+              marginBottom: 10,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              shadowColor: "rgba(0, 0, 0, 0.5)",
+              shadowOffset: { width: 1, height: 2 },
+              shadowOpacity: 1,
+              shadowRadius: 2,
+            },
+          ]}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Ionicons name="chevron-back" size={28} color="black" />
+            <Text
+              style={{
+                color: "#D79578",
+                fontWeight: "bold",
+                fontSize: 16,
+                marginLeft: 10,
+              }}
+            >
+              Back to Landing
+            </Text>
+          </View>
+        </Pressable>
+
         <Text style={styles.titleText}>Login</Text>
         <Image
           source={require("../assets/img/Branding.jpg")}
