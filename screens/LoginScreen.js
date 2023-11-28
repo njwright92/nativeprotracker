@@ -139,6 +139,7 @@ const LoginTab = ({ navigation }) => {
             placeholder="Email"
             onChangeText={(text) => setEmail(text)}
             value={email}
+            autoComplete="off"
           />
         </View>
         {error ? (
@@ -157,6 +158,7 @@ const LoginTab = ({ navigation }) => {
             onChangeText={(text) => setPassword(text)}
             value={password}
             secureTextEntry={true}
+            autoComplete="off"
           />
         </View>
         <View style={{ marginBottom: 5 }}>
@@ -274,6 +276,7 @@ const RegisterTab = ({ navigation }) => {
             placeholder="Email"
             onChangeText={(text) => setEmail(text)}
             value={email}
+            autoComplete="off"
           />
         </View>
         {error ? (
@@ -292,6 +295,7 @@ const RegisterTab = ({ navigation }) => {
             onChangeText={(text) => setPassword(text)}
             value={password}
             secureTextEntry={true}
+            autoComplete="off"
           />
         </View>
         <View style={{ marginVertical: 5 }}>
