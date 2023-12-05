@@ -9,7 +9,7 @@
     "ios": "eas build -p ios",
     "web": "expo start --web",
     "predeploy": "expo export:web",
-    "deploy-fb": "firebase deploy --only hosting",
+    "deploy-fb": "firebase deploy",
     "push-gke": "docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest"
   },
   "dependencies": {

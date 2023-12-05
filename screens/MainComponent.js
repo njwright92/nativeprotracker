@@ -39,13 +39,13 @@ const screenOptions = ({ navigation }) => ({
       >
         <Text
           style={{
-            color: "#D8000C",
+            color: "black",
             fontSize: 16,
             fontWeight: "bold",
             marginRight: 5,
           }}
         >
-          <Ionicons name="exit-outline" size={20} color="#D8000C" />
+          <Ionicons name="exit-outline" size={20} color="black" />
           Logout
         </Text>
       </Pressable>
