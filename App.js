@@ -1,16 +1,18 @@
-import React, { Suspense, useState, useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import React, { Suspense, useState, useEffect, lazy } from "react"; // Make sure to import `lazy` here
+import { ActivityIndicator, View } from "react-native";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
-import LandingPage from "./screens/LandingScreen";
-import Main from "./screens/MainComponent";
-import LoginScreen from "./screens/LoginScreen";
 import store from "./store";
 import { createStackNavigator } from "@react-navigation/stack";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Stack = createStackNavigator();
 const auth = getAuth();
+
+// Lazy load each screen
+const LandingPage = lazy(() => import("./screens/LandingScreen"));
+const Main = lazy(() => import("./screens/MainComponent"));
+const LoginScreen = lazy(() => import("./screens/LoginScreen"));
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,7 +29,13 @@ const App = () => {
   }, []);
 
   if (loading) {
-    return <ActivityIndicator />; // Show loading indicator while waiting for auth state
+    // Show loading indicator while waiting for auth state
+    // Wrap ActivityIndicator with a View to take full screen
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
   return (
@@ -41,6 +49,7 @@ const App = () => {
             <Stack.Screen name="Landing" component={LandingPage} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Main" component={Main} />
+            {/* Add other screens here */}
           </Stack.Navigator>
         </Suspense>
       </NavigationContainer>

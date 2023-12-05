@@ -9,7 +9,7 @@
     "ios": "eas build -p ios",
     "web": "expo start --web",
     "predeploy": "expo export:web",
-    "deploy-fb": "npm run predeploy && firebase deploy --only hosting",
+    "deploy-fb": "firebase deploy --only hosting",
     "push-gke": "docker build -t gcr.io/nativetracker-382720/nginx-3:latest . && docker push gcr.io/nativetracker-382720/nginx-3:latest"
   },
   "dependencies": {
@@ -21,7 +21,6 @@
     "@react-navigation/bottom-tabs": "5.11.15",
     "@react-navigation/native": "5.9.8",
     "@react-navigation/stack": "5.14.9",
-    "@react-pdf/renderer": "^3.1.12",
     "@reduxjs/toolkit": "^1.8.6",
     "expo": "^49.0.7",
     "expo-asset": "~8.9.1",

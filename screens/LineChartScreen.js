@@ -22,8 +22,6 @@ import moment from "moment";
 import { db } from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
 import { CSVLink } from "react-csv";
-import PDFDocument from "../features/PDFDocument";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 
 const LineChartScreen = ({ route }) => {
   const { itemId, name } = route.params;
@@ -49,21 +47,6 @@ const LineChartScreen = ({ route }) => {
     Date: moment(entry.date.toDate()).format("MM/DD/YYYY"),
     Quantity: entry.quantity,
   }));
-
-  const pdfWeeklyData = {
-    title: name,
-    data: weeklyEntries,
-  };
-
-  const pdfMonthlyData = {
-    title: name,
-    data: monthlyEntries,
-  };
-
-  const pdfYearlyData = {
-    title: name,
-    data: yearlyEntries,
-  };
 
   const sanitizeQuantity = (entry) => {
     return {
@@ -228,36 +211,6 @@ const LineChartScreen = ({ route }) => {
             </Pressable>
           </CSVLink>
         </View>
-        <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-          <PDFDownloadLink
-            document={<PDFDocument data={pdfWeeklyData} />}
-            fileName="weekly_data.pdf"
-          >
-            <Pressable>
-              {({ pressed }) => (
-                <View
-                  style={{
-                    backgroundColor: pressed ? "#F9FCF3" : "#F9FCF3",
-                    borderRadius: 10,
-                    borderWidth: 2,
-                    borderColor: "#D79578",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    shadowColor: "rgba(0, 0, 0, 0.5)",
-                    shadowOffset: { width: 2, height: 2 },
-                    shadowOpacity: 1,
-                    shadowRadius: 2,
-                  }}
-                >
-                  <Ionicons name="md-cloud-download" size={16} color="black" />
-                  <Text style={{ color: "black", textAlign: "center" }}>
-                    Download PDF
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-          </PDFDownloadLink>
-        </View>
       </View>
 
       <LineChart
@@ -324,36 +277,6 @@ const LineChartScreen = ({ route }) => {
             </Pressable>
           </CSVLink>
         </View>
-        <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-          <PDFDownloadLink
-            document={<PDFDocument data={pdfMonthlyData} />}
-            fileName="monthly_data.pdf"
-          >
-            <Pressable>
-              {({ pressed }) => (
-                <View
-                  style={{
-                    backgroundColor: pressed ? "#F9FCF3" : "#F9FCF3",
-                    borderRadius: 10,
-                    borderWidth: 2,
-                    borderColor: "#D79578",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    shadowColor: "rgba(0, 0, 0, 0.5)",
-                    shadowOffset: { width: 2, height: 2 },
-                    shadowOpacity: 1,
-                    shadowRadius: 2,
-                  }}
-                >
-                  <Ionicons name="md-cloud-download" size={16} color="black" />
-                  <Text style={{ color: "black", textAlign: "center" }}>
-                    Download PDF
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-          </PDFDownloadLink>
-        </View>
       </View>
       <LineChart
         data={monthlyData}
@@ -419,36 +342,6 @@ const LineChartScreen = ({ route }) => {
               )}
             </Pressable>
           </CSVLink>
-        </View>
-        <View style={{ flex: 0.25, paddingHorizontal: 8 }}>
-          <PDFDownloadLink
-            document={<PDFDocument data={pdfYearlyData} />}
-            fileName="yearly_data.pdf"
-          >
-            <Pressable>
-              {({ pressed }) => (
-                <View
-                  style={{
-                    backgroundColor: pressed ? "#F9FCF3" : "#F9FCF3",
-                    borderRadius: 10,
-                    borderWidth: 2,
-                    borderColor: "#D79578",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    shadowColor: "rgba(0, 0, 0, 0.5)",
-                    shadowOffset: { width: 2, height: 2 },
-                    shadowOpacity: 1,
-                    shadowRadius: 2,
-                  }}
-                >
-                  <Ionicons name="md-cloud-download" size={16} color="black" />
-                  <Text style={{ color: "black", textAlign: "center" }}>
-                    Download PDF
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-          </PDFDownloadLink>
         </View>
       </View>
       <LineChart

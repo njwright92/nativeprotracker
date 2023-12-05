@@ -1,5 +1,5 @@
 import React from "react";
-import { Pressable, View, Text, Image } from "react-native";
+import { Pressable, View, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "./HomeScreen";
 import LoginScreen from "./LoginScreen";
@@ -39,13 +39,13 @@ const screenOptions = ({ navigation }) => ({
       >
         <Text
           style={{
-            color: "red",
+            color: "#D8000C",
             fontSize: 16,
             fontWeight: "bold",
             marginRight: 5,
           }}
         >
-          <Ionicons name="exit-outline" size={20} color="red" />
+          <Ionicons name="exit-outline" size={20} color="#D8000C" />
           Logout
         </Text>
       </Pressable>
@@ -57,20 +57,6 @@ const screenOptions = ({ navigation }) => ({
         onPress={() => navigation.navigate("Home")}
         style={{ marginRight: 10 }}
       >
-        <Image
-          source={require("../assets/img/pro.jpg")}
-          style={{
-            width: 52,
-            height: 20,
-            borderRadius: 10,
-            marginLeft: 25,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-            shadowOffset: { width: 2, height: 2 },
-            shadowOpacity: 1,
-            shadowRadius: 2,
-          }}
-          load="lazy"
-        />
         <Text
           style={{
             color: "black",
